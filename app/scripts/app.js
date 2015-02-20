@@ -1,13 +1,10 @@
-'use strict';
+angular.module('evoconApp', ['ngRoute','ui.grid','ui.grid.selection','ngResource']).config(function ($routeProvider)
+{
+  'use strict';
 
-
-angular.module('evoconApp', ['ngCookies', 'ngResource', 'ngRoute']).config(function ($routeProvider)
-  {
-    $routeProvider.when('/', {
-        templateUrl: 'views/comments.tpl.html', controller: 'commentsController as comments'
-      }).when('/about', {
-        templateUrl: 'views/about.html', controller: 'AboutCtrl'
-      }).otherwise({
-        redirectTo: '/'
-      });
+  $routeProvider.when('/', {
+    templateUrl: 'views/comments.tpl.html', controller: 'commentsController as commentsController'
+  }).otherwise({
+    redirectTo: '/'
   });
+});
