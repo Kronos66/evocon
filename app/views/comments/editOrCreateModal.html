@@ -1,0 +1,38 @@
+<div>
+  <div class="modal-header"></div>
+  <form class="form-horizontal" role="form">
+    <div class="modal-body">
+      <div class="form-group">
+        <label for="name">Name:</label>
+        <input id="name" ng-model="modal.row.name">
+      </div>
+      <div class="form-group">
+        <label for="group">Group:</label>
+        <input id="group" ng-model="modal.row.group">
+      </div>
+      <div class="form-group">
+        <label for="category">Category:</label>
+        <select id="category" ng-model="modal.row.category">
+          <option value=""></option>
+          <option value="Pause">Pause</option>
+          <option value="Standby">Standby</option>
+          <option value="Setup">Setup</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="color">Color:</label>
+        <input id="color" ng-model="modal.row.color">
+      </div>
+    </div>
+    <div class="modal-footer">
+      <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-7 text-left">
+          <button class="btn btn-success pull-left" ng-click="$close(modal.row)"><span class="glyphicon glyphicon-ok"></span>OK</button>
+          <button class="btn btn-danger pull-left" ng-click="$dismiss()"><span class="glyphicon glyphicon-remove"></span> Cancel
+          </button>
+        </div>
+        <div class="col-sm-3"></div>
+      </div>
+    </div>
+  </form>
+</div>
