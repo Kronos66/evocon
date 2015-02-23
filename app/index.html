@@ -1,93 +1,109 @@
-<!doctype html>
-<html class="no-js">
+<!DOCTYPE html><!--[if lt IE 7]>
+<html lang="en" ng-app="evoReports" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]--><!--[if IE 7]>
+<html lang="en" ng-app="evoReports" class="no-js lt-ie9 lt-ie8"> <![endif]--><!--[if IE 8]>
+<html lang="en" ng-app="evoReports" class="no-js lt-ie9"> <![endif]--><!--[if gt IE 8]><!-->
+<html lang="en" ng-app="evoReports" class="no-js"> <!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title></title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Evocon reports</title>
   <meta name="description" content="">
-  <meta name="viewport" content="width=device-width">
-  <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
-  <!-- build:css(.) styles/vendor.css -->
-  <!-- bower:css -->
-  <link rel="stylesheet" href="/bower_components/select2/select2.css" />
-  <link rel="stylesheet" href="/bower_components/ngQuickDate/dist/ng-quick-date.css" />
-  <link rel="stylesheet" href="/bower_components/ngQuickDate/dist/ng-quick-date-default-theme.css" />
-  <link rel="stylesheet" href="/bower_components/angular-ui-grid/ui-grid.css" />
-  <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.css" />
-  <!-- endbower -->
-  <!-- endbuild -->
-  <!-- build:css(.tmp) styles/main.css -->
-  <link rel="stylesheet" href="styles/main.css">
-  <!-- endbuild -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" type="text/css" href="css/_styles_screen.css" media="screen, projection" title="Evocon"/>
+  <link rel="stylesheet" href="/bower_components/select2/select2.css"/>
+  <link rel="stylesheet" href="/bower_components/ngQuickDate/dist/ng-quick-date.css"/>
+  <link rel="stylesheet" href="/bower_components/ngQuickDate/dist/ng-quick-date-default-theme.css"/>
+  <link rel="stylesheet" href="/bower_components/angular-ui-grid/ui-grid.css"/>
+  <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.css"/>
+  <link rel="stylesheet" href="css/app.css"/>
+  <link rel="stylesheet" href="css/main.css">
+
 </head>
-<body ng-app="evoconApp">
+<body>
+<header>
+  <div class="topBar">
+    <div class="container clear">
+      <!--<div class="logo">-->
+      <!--<a href="http://www.evocon.com">Evocon</a>-->
+      <!--</div>-->
+      <nav ng-controller="NavBarCtrl">
+        <ul>
+          <li ui-sref-active="active"><a ui-sref="dashboard.metrics">Dashboard</a></li>
+          <li ui-sref-active="active"><a ui-sref="test">Statistics</a></li>
+          <!--li ui-sref-active="active"><a ui-sref="reports">Reports</a></li-->
+          <li ui-sref-active="active"><a ui-sref="comments">Comments <span class="label red" ng-bind="navBarCounters.comments"></span></a></li>
+          <li ui-sref-active="active"><a ui-sref="products.list">Products <span class="label blue" ng-bind="navBarCounters.products"></span></a></li>
+          <li ui-sref-active="active"><a ui-sref="improvements.list">Improvements <span class="label green" ng-bind="navBarCounters.improvements"></span></a>
+          </li>
+        </ul>
+      </nav>
+      <a href="#/comments" ui-sref="settings" class="settings"></a>
+      <a href ng-click="toggleFullscreen()" class="fullscreen"></a>
+
+    </div>
+  </div>
+  <section data-ui-view="subBar"></section>
+
+
+</header>
+<div>
+  <div  ng-view=""></div>
+</div>
+
 <!--[if lt IE 7]>
 <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your
   experience.</p>
 <![endif]-->
+<div ui-view class="content fullHeight">
 
-<!-- Add your site or application content here -->
-<div class="header">
-  <div class="navbar navbar-default" role="navigation">
-    <div class="container">
-      <div class="navbar-header">
-
-        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#js-navbar-collapse">
-          <span class="sr-only">Toggle navigation</span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </button>
-
-        <a class="navbar-brand" href="#/">evocon</a>
-      </div>
-
-      <div class="collapse navbar-collapse" id="js-navbar-collapse">
-
-        <ul class="nav navbar-nav">
-          <li class="active"><a href="#/">Home</a></li>
-        </ul>
-      </div>
-    </div>
+</div>
+<footer ng-hide="hideFooter" class="animate-hide">
+  <div class="container">
+    <span>Evocon Efficiency 2014</span>
+    <nav>
+      <ul>
+        <li><a href="#">Knowledge base</a></li>
+        <li><a href="#">Tutorials</a></li>
+        <li><a href="#">Feedback</a></li>
+      </ul>
+    </nav>
   </div>
-</div>
-<admin-menu></admin-menu>
-<div class="container" ng-controller="appCtrl as app">
-  <div ng-view=""></div>
-</div>
-<!-- build:js(.) scripts/vendor.js -->
+</footer>
+
+!-- build:js(.) scripts/vendor.js -->
 <!-- bower:js -->
-<script src="/bower_components/jquery/dist/jquery.js"></script>
-<script src="/bower_components/angular/angular.js"></script>
-<script src="/bower_components/angular-animate/angular-animate.js"></script>
-<script src="/bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
-<script src="/bower_components/angular-cookies/angular-cookies.js"></script>
-<script src="/bower_components/angular-mocks/angular-mocks.js"></script>
-<script src="/bower_components/angular-resource/angular-resource.js"></script>
-<script src="/bower_components/angular-modal-service/dst/angular-modal-service.js"></script>
-<script src="/bower_components/angular-route/angular-route.js"></script>
-<script src="/bower_components/angular-translate/angular-translate.js"></script>
-<script src="/bower_components/angular-translate-loader-url/angular-translate-loader-url.js"></script>
-<script src="/bower_components/angular-ui-router/release/angular-ui-router.js"></script>
-<script src="/bower_components/select2/select2.js"></script>
-<script src="/bower_components/angular-ui-select2/src/select2.js"></script>
-<script src="/bower_components/moment/moment.js"></script>
-<script src="/bower_components/mousetrap/mousetrap.js"></script>
-<script src="/bower_components/ngQuickDate/dist/ng-quick-date.js"></script>
-<script src="/bower_components/angular-ui-grid/ui-grid.js"></script>
-<script src="/bower_components/bootstrap/dist/js/bootstrap.js"></script>
+<script src="bower_components/jquery/dist/jquery.js"></script>
+<script src="bower_components/angular/angular.js"></script>
+<script src="bower_components/angular-animate/angular-animate.js"></script>
+<script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+<script src="bower_components/angular-cookies/angular-cookies.js"></script>
+<script src="bower_components/angular-mocks/angular-mocks.js"></script>
+<script src="bower_components/angular-resource/angular-resource.js"></script>
+<script src="bower_components/angular-modal-service/dst/angular-modal-service.js"></script>
+<script src="bower_components/angular-route/angular-route.js"></script>
+<script src="bower_components/angular-translate/angular-translate.js"></script>
+<script src="bower_components/angular-translate-loader-url/angular-translate-loader-url.js"></script>
+<script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+<script src="bower_components/select2/select2.js"></script>
+<script src="bower_components/angular-ui-select2/src/select2.js"></script>
+<script src="bower_components/moment/moment.js"></script>
+<script src="bower_components/mousetrap/mousetrap.js"></script>
+<script src="bower_components/ngQuickDate/dist/ng-quick-date.js"></script>
+<script src="bower_components/angular-ui-grid/ui-grid.js"></script>
+<script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
 <!-- endbower -->
 <!-- endbuild -->
 
 <!-- build:js({.tmp,app}) scripts/scripts.js -->
-<script src="scripts/backendMock.js"></script>
+<script src="backendMock.js"></script>
 <script src="/bower_components/angular-mocks/angular-mocks.js"></script>
-<script src="scripts/app.js"></script>
-<script src="scripts/app.config.js"></script>
-<script src="scripts/controllers/appCtrl.js"></script>
-<script src="scripts/controllers/comments/modal.controller.js"></script>
-<script src="scripts/controllers/comments/comments.controller.js"></script>
-<script src="scripts/services/DAO/commentsDAO.js"></script>
-<script src="scripts/directives/menu.js"></script>
+<script src="app.js"></script>
+<script src="app.config.js"></script>
+<script src="NavBarController.js"></script>
+<script src="admin/scripts/controllers/comments/modal.controller.js"></script>
+<script src="admin/scripts/controllers/comments/comments.controller.js"></script>
+<script src="admin/scripts/services/DAO/commentsDAO.js"></script>
+<script src="admin/scripts/directives/menu.js"></script>
 <!-- endbuild -->
 </body>
 </html>

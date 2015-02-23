@@ -1,0 +1,35 @@
+<div class="container adminContent">
+
+  <admin-menu></admin-menu>
+
+  <div class="form-group">
+    <div class="col-lg-10">
+      Delay types
+    </div>
+    <button class="button center" ng-click="commentsController.mergeComments()">Merge</button>
+    <button class="button center" ng-click="commentsController.addRow()">Add</button>
+  </div>
+  <table class="table table-bordered">
+    <thead>
+    <tr>
+      <td>Name</td>
+      <td>Group</td>
+      <td>Category</td>
+      <td>Color</td>
+      <td>Actions</td>
+    </tr>
+    </thead>
+    <tbody>
+    <tr ng-repeat="comment in commentsController.comments" ng-click="commentsController.select(comment)" ng-class="commentsController.toMerge">
+      <td>{{comment.name}}</td>
+      <td>{{comment.group}}</td>
+      <td>{{comment.category}}</td>
+      <td>{{comment.color}}</td>
+      <td>
+        <a class="btn btn-default" ng-click="commentsController.editRow(comment)">Edit</a>
+        <a class="btn btn-danger" ng-click="commentsController.deleteRow(comment.id)">Delete</a>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>

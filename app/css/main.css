@@ -1,0 +1,58 @@
+.gridStyle {
+  border: 1px solid rgb(212, 212, 212);
+  width: 400px;
+  height: 300px
+}
+
+#adminMenu {
+  color: inherit;
+  text-decoration: none;
+  background-color: #adadad;
+  height: 100vh;
+  position: fixed;
+  right: -185px;
+  padding-left: 60px;
+  padding-right: 60px;
+  margin-top: -40px;
+  -webkit-transition: right 600ms;
+  -moz-transition: right 600ms;
+  -o-transition: right 600ms;
+  transition: right 600ms;
+}
+
+#adminMenu:hover {
+  right: 0;
+}
+
+.modal {
+  display: none;
+  position: fixed;
+  left: 15%;
+  top: 25px;
+  padding: 25px;
+  border: none;
+  background-color: transparent;
+  width: 70%;
+  height: 80%;
+  z-index: 100;
+  overflow-y: scroll;
+}
+
+.modal-body {
+  position: relative;
+  padding: 50px;
+}
+
+.commentsMenu {
+  margin-top: 95px;
+}
+
+.adminContent {
+  padding-top: 85px;
+}
+.firstSelected{
+  background-color: #ff0000;
+}
+.otherSelected{
+  background-color: #808080;
+}
