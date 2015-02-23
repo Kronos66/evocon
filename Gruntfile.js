@@ -31,19 +31,19 @@ module.exports = function (grunt)
       bower: {
         files: ['bower.json'], tasks: ['wiredep']
       }, js: {
-        files: ['<%= yeoman.app %>/scripts/{,*/}*.js'], tasks: [], options: {
+        files: ['<%= yeoman.app %>/**/*.js'], tasks: [], options: {
           livereload: '<%= connect.options.livereload %>'
         }
       }, jsTest: {
-        files: ['test/spec/{,*/}*.js'], tasks: ['newer:jshint:test', 'karma']
+        files: ['test/spec/**/*.js'], tasks: ['newer:jshint:test', 'karma']
       }, styles: {
-        files: ['<%= yeoman.app %>/styles/{,*/}*.css'], tasks: ['newer:copy:styles', 'autoprefixer']
+        files: ['<%= yeoman.app %>/css/**/*.css'], tasks: ['newer:copy:styles', 'autoprefixer']
       }, gruntfile: {
         files: ['Gruntfile.js']
       }, livereload: {
         options: {
           livereload: '<%= connect.options.livereload %>'
-        }, files: ['<%= yeoman.app %>/{,*/}*.html', '.tmp/styles/{,*/}*.css', '<%= yeoman.app %>/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}']
+        }, files: ['<%= yeoman.app %>/**/*.html', '.tmp/styles/{,*/}*.css', '<%= yeoman.app %>/images/**/*.{png,jpg,jpeg,gif,webp,svg}']
       }
     },
 
@@ -51,10 +51,9 @@ module.exports = function (grunt)
     connect: {
       options: {
         port: 9000, // Change this to '0.0.0.0' to access the server from outside.
-        hostname: 'localhost', livereload: 35729
-      }, proxies: [{
-                     port: 3000, context: '/api', host: 'localhost', changeOrigin: true
-                   }],
+        hostname: 'localhost',
+        livereload: 35729
+      },
 
       livereload: {
         options: {
@@ -157,7 +156,7 @@ module.exports = function (grunt)
                   dest: '<%= yeoman.dist %>'
                 }]
       }, styles: {
-        expand: true, cwd: '<%= yeoman.app %>/styles', dest: '.tmp/styles/', src: '{,*/}*.css'
+        expand: true, cwd: '<%= yeoman.app %>/css', dest: '.tmp/styles/', src: '{,*/}*.css'
       }
     },
 
