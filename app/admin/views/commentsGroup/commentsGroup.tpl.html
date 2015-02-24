@@ -6,16 +6,16 @@
         <div class="col-lg-7">
             <h3>Comments groups</h3>
         </div>
-        <button class="button center" ng-click="groupController.addRow()">New comment group</button>
-        <button class="button center" ng-click="groupController.newComments()">New comment</button>
+        <button class="button center" ng-click="groupController.addRow()">{{'ADD.GroupComment'|translate}}</button>
+        <button class="button center" ng-click="groupController.newComments()">{{'ADD.Comment'|translate}}</button>
     </div>
     <table class="statsTable">
         <thead>
         <tr>
-            <td>Name</td>
-            <td>Comment ordering</td>
-            <td>Color</td>
-            <td>Actions</td>
+            <td>{{'NAME'|translate}}</td>
+            <td>{{'COMMENT.ORDERING'|translate}}</td>
+            <td>{{'COLOR'|translate}}</td>
+            <td>{{'ACTIONS'|translate}}</td>
         </tr>
         </thead>
         <tbody>
@@ -26,14 +26,14 @@
             <td ng-click="groupController.selectGroup(commentGroup.id)">{{commentGroup.color}}</td>
             <td class="actions">
                 <span class="buttonActions">
-                    <a class="button link" ng-click="groupController.editRow(commentGroup)">Edit</a>
-                    <a class="button link" ng-click="groupController.deleteRow(commentGroup.id)">Delete</a>
+                    <a class="button link" ng-click="groupController.editRow(commentGroup)">{{'EDIT'|translate}}</a>
+                    <a class="button link" ng-click="groupController.deleteRow(commentGroup.id)">{{'DELETE'|translate}}</a>
                 </span>
             </td>
         </tr>
         </tbody>
     </table>
     <pagination class="pull-right pagination-sm" ng-model="groupController.currentPage" total-items="groupController.resultCount"
-                         items-per-page="groupController.listFilter.size" max-size="10" boundary-links="true" previous-text="Previous" next-text="Next"
-                         first-text="First" last-text="Last"></pagination>
+                items-per-page="groupController.listFilter.size" max-size="10" boundary-links="true" previous-text="{{'PREVIOUS'|translate}}"
+                next-text="{{'NEXT'|translate}}" first-text="{{'FIRST'|translate}}" last-text="{{'LAST'|translate}}"></pagination>
 </div>

@@ -6,19 +6,19 @@
         <div class="col-lg-7">
             <h3>Comments</h3>
         </div>
-        <button class="button center" ng-click="commentsController.mergeComments()">Merge</button>
-        <button class="button center" ng-click="commentsController.addRow()">New comment</button>
-        <button class="button center" ng-click="commentsController.newGroup()">New comment group</button>
+        <button class="button center" ng-click="commentsController.mergeComments()">{{"MERGE"|translate}}</button>
+        <button class="button center" ng-click="commentsController.addRow()">{{"ADD.Comment"|translate}}</button>
+        <button class="button center" ng-click="commentsController.newGroup()">{{"ADD.GroupComment"|translate}}</button>
     </div>
     <table class="statsTable">
         <thead>
         <tr>
-            <td><label for="select">Select</label></td>
-            <td>Name</td>
-            <td>Group</td>
-            <td>Category</td>
-            <td>Color</td>
-            <td>Actions</td>
+            <td><label for="select">{{'SELECT'|translate}}</label></td>
+            <td>{{'NAME'|translate}}</td>
+            <td>{{'GROUP'|translate}}</td>
+            <td>{{'CATEGORY'|translate}}</td>
+            <td>{{'COLOR'|translate}}</td>
+            <td>{{'ACTIONS'|translate}}</td>
         </tr>
         </thead>
         <tbody>
@@ -31,14 +31,14 @@
             <td>{{comment.color}}</td>
             <td class="actions">
         <span class="buttonActions">
-          <a class="button link" ng-click="commentsController.editRow(comment)">edit</a>
-          <a class="button link" ng-click="commentsController.deleteRow(comment.id)">delete</a>
+          <a class="button link" ng-click="commentsController.editRow(comment)">{{"EDIT"|translate}}</a>
+          <a class="button link" ng-click="commentsController.deleteRow(comment.id)">{{"DELETE"|translate}}</a>
         </span>
             </td>
         </tr>
         </tbody>
     </table>
     <pagination class="pull-right pagination-sm" ng-model="commentsController.currentPage" total-items="commentsController.resultCount"
-                items-per-page="commentsController.listFilter.size" max-size="10" boundary-links="true" previous-text="Previous" next-text="Next"
-                first-text="First" last-text="Last"></pagination>
+                items-per-page="commentsController.listFilter.size" max-size="10" boundary-links="true" previous-text="{{'PREVIOUS'|translate}}"
+                next-text="{{'NEXT'|translate}}" first-text="{{'FIRST'|translate}}" last-text="{{'LAST'|translate}}"></pagination>
 </div>

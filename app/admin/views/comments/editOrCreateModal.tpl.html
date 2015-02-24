@@ -3,38 +3,43 @@
     <form class="form-horizontal" role="form">
         <div class="modal-body">
             <div class="form-group">
-                <label for="name">Name:</label>
+                <label for="name">{{'NAME'|translate}}:</label>
                 <input id="name" ng-model="modal.row.name">
             </div>
             <div class="form-group">
-                <label for="group">Group:</label>
+                <label for="group">{{'GROUP'|translate}}:</label>
                 <select id="group" ui-select2="modal.select2Options" data-ng-model="modal.row.groupId" data-placeholder="Choose category">
                     <option ng-selected="modal.selectCategory(category.id)" ng-repeat="category in modal.category" value="{{category.id}}">{{category.name}}
                     </option>
                 </select>
             </div>
             <div class="form-group">
-                <label for="category">Category:</label>
+                <label for="category">{{'CATEGORY'|translate}}:</label>
                 <select id="category" data-ng-model="modal.row.commentsGroup">
-                    <option value="pause">Pause</option>
-                    <option value="standby">Standby</option>
-                    <option value="setup">Setup</option>
+                    <option value="pause">{{'PAUSE'|translate}}</option>
+                    <option value="standby">{{'STANDBY'|translate}}</option>
+                    <option value="setup">{{'SETUP'|translate}}</option>
                 </select>
             </div>
             <div class="form-group">
-                <label for="color">Color:</label>
+                <label for="color">{{'COLOR'|translate}}:</label>
                 <input id="color" ng-model="modal.row.color">
             </div>
             <div class="form-group">
                 <input id="isNegative" type="checkbox" ng-model="modal.row.isNegative">
-                <label for="isNegative">Negative</label>
+                <label for="isNegative">{{'NEGATIVE'|translate}}</label>
             </div>
         </div>
         <div class="modal-footer">
             <div class="form-group">
                 <div class="col-sm-offset-2 col-sm-7 text-left">
-                    <button class="btn btn-success pull-left" ng-click="$close(modal.row)"><span class="glyphicon glyphicon-ok"></span>Save</button>
-                    <button class="btn btn-danger pull-left" ng-click="$dismiss()"><span class="glyphicon glyphicon-remove"></span> Cancel
+                    <button class="btn btn-success pull-left" ng-click="$close(modal.row)">
+                        <span class="glyphicon glyphicon-ok"></span>
+                        {{'SAVE'|translate}}
+                    </button>
+                    <button class="btn btn-danger pull-left" ng-click="$dismiss()">
+                        <span class="glyphicon glyphicon-remove"></span>
+                        {{'CANCEL'|translate}}
                     </button>
                 </div>
                 <div class="col-sm-3"></div>
