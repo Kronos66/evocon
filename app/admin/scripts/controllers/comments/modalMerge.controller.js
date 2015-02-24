@@ -1,10 +1,10 @@
 (function ()
 {
-  'use strict';
-  function modalMergeController(row)
-  {
+    'use strict';
+    function modalMergeController(row)
+    {
 
-  }
+    }
 
-  angular.module('evoReports').controller('modalMergeController', ['row',modalMergeController]);
+    angular.module('evoReports').controller('modalMergeController', ['row', modalMergeController]);
 })();

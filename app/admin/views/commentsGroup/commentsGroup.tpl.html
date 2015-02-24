@@ -1,0 +1,39 @@
+<div class="container adminContent">
+
+    <admin-menu></admin-menu>
+
+    <div class="form-group">
+        <div class="col-lg-7">
+            <h3>Comments groups</h3>
+        </div>
+        <button class="button center" ng-click="groupController.addRow()">New comment group</button>
+        <button class="button center" ng-click="groupController.newComments()">New comment</button>
+    </div>
+    <table class="statsTable">
+        <thead>
+        <tr>
+            <td>Name</td>
+            <td>Comment ordering</td>
+            <td>Color</td>
+            <td>Actions</td>
+        </tr>
+        </thead>
+        <tbody>
+        <tr class="data" ng-class="{selected:groupController.checkSelected(commentGroup.id)}"
+            ng-repeat="commentGroup in groupController.commentsGroup |startFrom:(groupController.currentPage-1)*groupController.listFilter.size | limitTo: groupController.listFilter.size">
+            <td ng-click="groupController.selectGroup(commentGroup.id)">{{commentGroup.name}}</td>
+            <td ng-click="groupController.selectGroup(commentGroup.id)">{{commentGroup.ordering}}</td>
+            <td ng-click="groupController.selectGroup(commentGroup.id)">{{commentGroup.color}}</td>
+            <td class="actions">
+                <span class="buttonActions">
+                    <a class="button link" ng-click="groupController.editRow(commentGroup)">Edit</a>
+                    <a class="button link" ng-click="groupController.deleteRow(commentGroup.id)">Delete</a>
+                </span>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <pagination class="pull-right pagination-sm" ng-model="groupController.currentPage" total-items="groupController.resultCount"
+                         items-per-page="groupController.listFilter.size" max-size="10" boundary-links="true" previous-text="Previous" next-text="Next"
+                         first-text="First" last-text="Last"></pagination>
+</div>

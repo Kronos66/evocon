@@ -1,13 +1,12 @@
 (function ()
 {
     'use strict';
-    function CommentsDAO($resource)
+    function commentsGroupDAO($resource)
     {
-        var api = $resource('/rest/v1/comments/:id', {id: '@id'}, {
-            query: {isArray: true, method: 'GET'},
-            update: {method: 'PUT'},
-            merge: {method: 'PUT'}
+        var api = $resource('/rest/v1/commentgroups/:id/:comments', {id: '@id'}, {
+            query: {isArray: true, method: 'GET'}, update: {method: 'PUT'}, get: {isArray: false, method: 'GET'}
         });
+
         return {
             query: function ()
             {
@@ -15,8 +14,11 @@
             },
             save: function (data)
             {
-                console.log(data);
                 return api.save(data).$promise;
+            },
+            get: function (id)
+            {
+                return api.get({id:id}).$promise;
             },
             update: function (data)
             {
@@ -26,12 +28,12 @@
             {
                 return api.remove({id: id}).$promise;
             },
-            merge: function (data)
+            getComments: function (id)
             {
-                return api.merge(data).$promise;
+                return api.query({id: id, comments: 'comments'}).$promise;
             }
         };
     }
 
-    angular.module('evoReports').factory('CommentsDAO', ['$resource', CommentsDAO]);
+    angular.module('evoReports').service('CommentsGroupDAO', ['$resource', commentsGroupDAO]);
 })();

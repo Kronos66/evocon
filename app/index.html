@@ -4,70 +4,71 @@
 <html lang="en" ng-app="evoReports" class="no-js lt-ie9"> <![endif]--><!--[if gt IE 8]><!-->
 <html lang="en" ng-app="evoReports" class="no-js"> <!--<![endif]-->
 <head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Evocon reports</title>
-  <meta name="description" content="">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" type="text/css" href="css/_styles_screen.css" media="screen, projection" title="Evocon"/>
-  <link rel="stylesheet" href="/bower_components/select2/select2.css"/>
-  <link rel="stylesheet" href="/bower_components/ngQuickDate/dist/ng-quick-date.css"/>
-  <link rel="stylesheet" href="/bower_components/ngQuickDate/dist/ng-quick-date-default-theme.css"/>
-  <link rel="stylesheet" href="/bower_components/angular-ui-grid/ui-grid.css"/>
-  <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.css"/>
-  <link rel="stylesheet" href="css/app.css"/>
-  <link rel="stylesheet" href="css/main.css">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Evocon reports</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="css/_styles_screen.css" media="screen, projection" title="Evocon"/>
+    <link rel="stylesheet" href="/bower_components/select2/select2.css"/>
+    <link rel="stylesheet" href="/bower_components/ngQuickDate/dist/ng-quick-date.css"/>
+    <link rel="stylesheet" href="/bower_components/ngQuickDate/dist/ng-quick-date-default-theme.css"/>
+    <link rel="stylesheet" href="/bower_components/angular-ui-grid/ui-grid.css"/>
+    <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.css"/>
+    <link rel="stylesheet" href="css/app.css"/>
+    <link rel="stylesheet" href="css/main.css">
 
 </head>
 <body>
 <header>
-  <div class="topBar">
-    <div class="container clear">
-      <!--<div class="logo">-->
-      <!--<a href="http://www.evocon.com">Evocon</a>-->
-      <!--</div>-->
-      <nav ng-controller="NavBarCtrl">
-        <ul>
-          <li ui-sref-active="active"><a ui-sref="dashboard.metrics">Dashboard</a></li>
-          <li ui-sref-active="active"><a ui-sref="test">Statistics</a></li>
-          <!--li ui-sref-active="active"><a ui-sref="reports">Reports</a></li-->
-          <li ui-sref-active="active"><a ui-sref="comments">Comments <span class="label red" ng-bind="navBarCounters.comments"></span></a></li>
-          <li ui-sref-active="active"><a ui-sref="products.list">Products <span class="label blue" ng-bind="navBarCounters.products"></span></a></li>
-          <li ui-sref-active="active"><a ui-sref="improvements.list">Improvements <span class="label green" ng-bind="navBarCounters.improvements"></span></a>
-          </li>
-        </ul>
-      </nav>
-      <a href="#/comments" ui-sref="settings" class="settings"></a>
-      <a href ng-click="toggleFullscreen()" class="fullscreen"></a>
+    <div class="topBar">
+        <div class="container clear">
+            <!--<div class="logo">-->
+            <!--<a href="http://www.evocon.com">Evocon</a>-->
+            <!--</div>-->
+            <nav ng-controller="NavBarCtrl">
+                <ul>
+                    <li ui-sref-active="active"><a ui-sref="dashboard.metrics">Dashboard</a></li>
+                    <li ui-sref-active="active"><a ui-sref="test">Statistics</a></li>
+                    <!--li ui-sref-active="active"><a ui-sref="reports">Reports</a></li-->
+                    <li ui-sref-active="active"><a ui-sref="comments">Comments <span class="label red" ng-bind="navBarCounters.comments"></span></a></li>
+                    <li ui-sref-active="active"><a ui-sref="products.list">Products <span class="label blue" ng-bind="navBarCounters.products"></span></a></li>
+                    <li ui-sref-active="active"><a ui-sref="improvements.list">Improvements <span class="label green"
+                                                                                                  ng-bind="navBarCounters.improvements"></span></a>
+                    </li>
+                </ul>
+            </nav>
+            <a href="#/comments" ui-sref="settings" class="settings"></a>
+            <a href ng-click="toggleFullscreen()" class="fullscreen"></a>
 
+        </div>
     </div>
-  </div>
-  <section data-ui-view="subBar"></section>
+    <section data-ui-view="subBar"></section>
 
 
 </header>
 <div>
-  <div ng-view=""></div>
+    <div ng-view=""></div>
 </div>
 
 <!--[if lt IE 7]>
 <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your
-  experience.</p>
+    experience.</p>
 <![endif]-->
 <div ui-view class="content fullHeight">
 
 </div>
 <footer ng-hide="hideFooter" class="animate-hide">
-  <div class="container">
-    <span>Evocon Efficiency 2014</span>
-    <nav>
-      <ul>
-        <li><a href="#">Knowledge base</a></li>
-        <li><a href="#">Tutorials</a></li>
-        <li><a href="#">Feedback</a></li>
-      </ul>
-    </nav>
-  </div>
+    <div class="container">
+        <span>Evocon Efficiency 2014</span>
+        <nav>
+            <ul>
+                <li><a href="#">Knowledge base</a></li>
+                <li><a href="#">Tutorials</a></li>
+                <li><a href="#">Feedback</a></li>
+            </ul>
+        </nav>
+    </div>
 </footer>
 
 !-- build:js(.) scripts/vendor.js -->
@@ -97,16 +98,20 @@
 <!-- build:js({.tmp,app}) scripts/scripts.js -->
 <script src="backendMock.js"></script>
 <script src="/bower_components/angular-mocks/angular-mocks.js"></script>
-<script src="app.js"></script>
 <script src="app.config.js"></script>
+<script src="app.js"></script>
 <script src="NavBarController.js"></script>
 <script src="admin/scripts/controllers/commentsGroup/commentsGroup.controller.js"></script>
-<script src="admin/scripts/controllers/comments/modalMerge.controller.js"></script>
-<script src="admin/scripts/controllers/comments/modal.controller.js"></script>
+<script src="admin/scripts/controllers/commentsGroup/modalGroupComments.controller.js"></script>
 <script src="admin/scripts/controllers/comments/comments.controller.js"></script>
+<script src="admin/scripts/controllers/comments/modalComments.controller.js"></script>
+<script src="admin/scripts/controllers/comments/modalMerge.controller.js"></script>
+<script src="admin/scripts/services/paginationSupport.js"></script>
+<script src="admin/scripts/services/asyncQueue.js"></script>
 <script src="admin/scripts/services/DAO/commentsDAO.js"></script>
 <script src="admin/scripts/services/DAO/commentsGroupDAO.js"></script>
 <script src="admin/scripts/directives/menu.js"></script>
+<script src="admin/scripts/filters/startFrom.js"></script>
 <!-- endbuild -->
 </body>
 </html>
