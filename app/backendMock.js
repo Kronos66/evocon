@@ -5,13 +5,18 @@ function setupBackendMock($httpBackend)
 
   var sequence = 1;
   var comments = [{
-                    id: sequence++, name: 'Broken', group: 'Technical', category: 'Productive', select: false
+                    id: sequence++, name: 'Broken', groupId: 1, category: 'Productive', color: 'Pause'
                   }, {
-                    id: sequence++, name: 'Adam', group: 'Technical', category: 'Productive', select: true
+                    id: sequence++, name: 'Adam', groupId: 2, category: 'Productive', color: 'Pause'
                   }, {
-                    id: sequence++, name: 'Cat', group: 'Technical', category: 'Productive', select: false
+                    id: sequence++, name: 'Cat', groupId: 1, category: 'Productive', color: 'Pause'
                   }];
-
+  var sequenceGroup = 1;
+  var commentsGroup = [{
+                         id: sequenceGroup++, name: 'first', order: 'now', color: 'yellow'
+                       }, {
+                         id: sequenceGroup++, name: 'second', order: 'now', color: 'yellow'
+                       }];
   $httpBackend.whenGET('/rest/v1/comments').respond(function ()
   {
     return [200, comments];
@@ -58,6 +63,10 @@ function setupBackendMock($httpBackend)
     } else {
       return [404];
     }
+  });
+  $httpBackend.whenPUT(/\/rest\/v1\/comments$/).respond(function (method, url, jsonParams)
+  {
+    return [200];
   });
 
 

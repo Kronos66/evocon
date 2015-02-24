@@ -50,9 +50,16 @@
 .adminContent {
   padding-top: 85px;
 }
-.firstSelected{
-  background-color: #ff0000;
+.actions{
+  width: 1%;
 }
-.otherSelected{
-  background-color: #808080;
+.buttonActions{
+  display:block;
+  width: 250px;
+}
+.selected td{
+  background-color: #B3C112;
+}
+.firstSelected{
+ background-color: #d9534f!important;
 }

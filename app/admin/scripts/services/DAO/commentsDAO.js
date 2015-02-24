@@ -5,7 +5,7 @@
   {
     var api = $resource('/rest/v1/comments/:id', {id: '@id'}, {
       'query': {isArray: true, method: 'GET'},
-      update: {method: 'PUT'}
+      update: {method: 'PUT'},merge:{method:'PUT'}
     });
     return {
       query: function ()
@@ -23,6 +23,10 @@
       remove: function (id)
       {
         return api.remove({id:id}).$promise;
+      },
+      merge: function (data)
+      {
+        return api.merge(data).$promise;
       }
     };
   }

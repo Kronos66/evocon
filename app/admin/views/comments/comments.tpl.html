@@ -3,13 +3,14 @@
   <admin-menu></admin-menu>
 
   <div class="form-group">
-    <div class="col-lg-10">
-      Delay types
+    <div class="col-lg-7">
+      <h3>Comments</h3>
     </div>
     <button class="button center" ng-click="commentsController.mergeComments()">Merge</button>
-    <button class="button center" ng-click="commentsController.addRow()">Add</button>
+    <button class="button center" ng-click="commentsController.addRow()">New comment</button>
+    <button class="button center" ng-click="commentsController.newGroup()">New comment group</button>
   </div>
-  <table class="table table-bordered">
+  <table class="statsTable">
     <thead>
     <tr>
       <td>Name</td>
@@ -20,14 +21,16 @@
     </tr>
     </thead>
     <tbody>
-    <tr ng-repeat="comment in commentsController.comments" ng-click="commentsController.select(comment)" ng-class="commentsController.toMerge">
+    <tr class="data" ng-repeat="comment in commentsController.comments">
       <td>{{comment.name}}</td>
       <td>{{comment.group}}</td>
       <td>{{comment.category}}</td>
       <td>{{comment.color}}</td>
-      <td>
-        <a class="btn btn-default" ng-click="commentsController.editRow(comment)">Edit</a>
-        <a class="btn btn-danger" ng-click="commentsController.deleteRow(comment.id)">Delete</a>
+      <td class="actions">
+        <span class="buttonActions">
+          <a class="button" ng-click="commentsController.editRow(comment)">Edit</a>
+          <a class="button" ng-click="commentsController.deleteRow(comment.id)">Delete</a>
+        </span>
       </td>
     </tr>
     </tbody>

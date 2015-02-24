@@ -1,24 +1,31 @@
 (function ()
 {
   'use strict';
-  function CommentsController(CommentsDAO, $modal)
+  function CommentsController(CommentsDAO, $modal,CommentsGroupDAO)
   {
     var ctrl = this;
-    var selected=[];
-    this.toMerge='';
+
     function refresh()
     {
       CommentsDAO.query().then(function (result)
       {
         ctrl.comments = result;
       });
+      CommentsGroupDAO.query().then(function (result)
+      {
+        ctrl.commentsGroup=result;
+      });
     }
 
+    this.newGroup = function ()
+    {
+
+    };
     this.addRow = function ()
     {
       var row = {};
       var modalInstance = $modal.open({
-        templateUrl: 'admin/views/comments/editOrCreateModal.html', controller: 'modalController', controllerAs: 'modal', resolve: {
+        templateUrl: 'admin/views/comments/editOrCreateModal.tpl.html',backdrop:'static',keyboard:false, controller: 'modalController', controllerAs: 'modal', resolve: {
           row: function ()
           {
             return row;
@@ -30,7 +37,7 @@
     this.editRow = function (row)
     {
       var modalInstance = $modal.open({
-        templateUrl: 'admin/views/comments/editOrCreateModal.html', controller: 'modalController', controllerAs: 'modal', resolve: {
+        templateUrl: 'admin/views/comments/editOrCreateModal.tpl.html',backdrop:'static',keyboard:false, controller: 'modalController', controllerAs: 'modal', resolve: {
           row: function ()
           {
             return row;
@@ -44,27 +51,40 @@
     {
       CommentsDAO.remove(id).then(refresh);
     };
-    this.select= function (item)
-    {
-      var indexOf=selected.indexOf(item);
-      if(-1===indexOf){
-        selected.push(item);
-      }else{
-        selected.splice(indexOf,1);
-      }
-      if(1===selected.length){
-        ctrl.toMerge='firstSelected';
-      }else{
-        ctrl.toMerge='otherSelected';
-      }
-    };
+    //this.select = function (item)
+    //{
+    //  var indexOf = selected.indexOf(item);
+    //  if (-1 === indexOf) {
+    //    item.selected = true;
+    //    selected.push(item);
+    //    if (2 <= selected.length) {
+    //      ctrl.enableMerge = false;
+    //    }
+    //  } else {
+    //    selected.splice(indexOf, 1);
+    //    item.selected = false;
+    //    if (2 > selected.length) {
+    //      ctrl.enableMerge = true;
+    //    }
+    //  }
+    //};
+
     this.mergeComments = function ()
     {
-      console.log(selected);
+      var row = {};
+      var modalInstance = $modal.open({
+        templateUrl: 'admin/views/comments/mergeModal.tpl.html',backdrop:'static',keyboard:false, size: 'lg', controller: 'modalMergeController', controllerAs: 'modal', resolve: {
+          row: function ()
+          {
+            return row;
+          }
+        }
+      });
+      modalInstance.result.then(CommentsDAO.save).then(refresh);
     };
     refresh();
   }
 
 
-  angular.module('evoReports').controller('commentsController', ['CommentsDAO', '$modal', CommentsController]);
+  angular.module('evoReports').controller('commentsController', ['CommentsDAO', '$modal','CommentsGroupDAO', CommentsController]);
 })();
