@@ -49,6 +49,55 @@ function setupBackendMock($httpBackend)
                          }, {
                              id: sequenceGroup++, name: 'second', ordering: 10, color: 'yellow'
                          }];
+
+
+    var sequenceProduct = 0;
+    var products = [
+        {id: sequenceProduct++, name: 'Product ' + sequenceProduct, barcode: 'BarCode', enabled: true, groupId: 0},
+        {id: sequenceProduct++, name: 'Product ' + sequenceProduct, barcode: 'BarCode', enabled: true, groupId: 0},
+        {id: sequenceProduct++, name: 'Product ' + sequenceProduct, barcode: 'BarCode', enabled: true, groupId: 0},
+        {id: sequenceProduct++, name: 'Product ' + sequenceProduct, barcode: 'BarCode', enabled: true, groupId: 0},
+        {id: sequenceProduct++, name: 'Product ' + sequenceProduct, barcode: 'BarCode', enabled: true, groupId: 0},
+        {id: sequenceProduct++, name: 'Product ' + sequenceProduct, barcode: 'BarCode', enabled: true, groupId: 0},
+        {id: sequenceProduct++, name: 'Product ' + sequenceProduct, barcode: 'BarCode', enabled: true, groupId: 0},
+        {id: sequenceProduct++, name: 'Product ' + sequenceProduct, barcode: 'BarCode', enabled: true, groupId: 0},
+        {id: sequenceProduct++, name: 'Product ' + sequenceProduct, barcode: 'BarCode', enabled: true, groupId: 0},
+        {id: sequenceProduct++, name: 'Product ' + sequenceProduct, barcode: 'BarCode', enabled: true, groupId: 0},
+        {id: sequenceProduct++, name: 'Product ' + sequenceProduct, barcode: 'BarCode', enabled: true, groupId: 0},
+        {id: sequenceProduct++, name: 'Product ' + sequenceProduct, barcode: 'BarCode', enabled: true, groupId: 0},
+        {id: sequenceProduct++, name: 'Product ' + sequenceProduct, barcode: 'BarCode', enabled: true, groupId: 0},
+        {id: sequenceProduct++, name: 'Product ' + sequenceProduct, barcode: 'BarCode', enabled: true, groupId: 0},
+        {id: sequenceProduct++, name: 'Product ' + sequenceProduct, barcode: 'BarCode', enabled: true, groupId: 0},
+        {id: sequenceProduct++, name: 'Product ' + sequenceProduct, barcode: 'BarCode', enabled: true, groupId: 0},
+        {id: sequenceProduct++, name: 'Product ' + sequenceProduct, barcode: 'BarCode', enabled: true, groupId: 0},
+        {id: sequenceProduct++, name: 'Product ' + sequenceProduct, barcode: 'BarCode', enabled: true, groupId: 0},
+        {id: sequenceProduct++, name: 'Product ' + sequenceProduct, barcode: 'BarCode', enabled: true, groupId: 0},
+        {id: sequenceProduct++, name: 'Product ' + sequenceProduct, barcode: 'BarCode', enabled: true, groupId: 0},
+        {id: sequenceProduct++, name: 'Product ' + sequenceProduct, barcode: 'BarCode', enabled: true, groupId: 0},
+        {id: sequenceProduct++, name: 'Product ' + sequenceProduct, barcode: 'BarCode', enabled: true, groupId: 0},
+        {id: sequenceProduct++, name: 'Product ' + sequenceProduct, barcode: 'BarCode', enabled: true, groupId: 0},
+        {id: sequenceProduct++, name: 'Product ' + sequenceProduct, barcode: 'BarCode', enabled: true, groupId: 0},
+        {id: sequenceProduct++, name: 'Product ' + sequenceProduct, barcode: 'BarCode', enabled: true, groupId: 0},
+        {id: sequenceProduct++, name: 'Product ' + sequenceProduct, barcode: 'BarCode', enabled: true, groupId: 0},
+        {id: sequenceProduct++, name: 'Product ' + sequenceProduct, barcode: 'BarCode', enabled: true, groupId: 0}
+    ];
+
+    var sequenceProductGroup = 0;
+    var productsGroup = [
+        {id: sequenceProductGroup++, name: 'Group ' + sequenceProductGroup},
+        {id: sequenceProductGroup++, name: 'Group ' + sequenceProductGroup},
+        {id: sequenceProductGroup++, name: 'Group ' + sequenceProductGroup},
+        {id: sequenceProductGroup++, name: 'Group ' + sequenceProductGroup},
+        {id: sequenceProductGroup++, name: 'Group ' + sequenceProductGroup},
+        {id: sequenceProductGroup++, name: 'Group ' + sequenceProductGroup},
+        {id: sequenceProductGroup++, name: 'Group ' + sequenceProductGroup},
+        {id: sequenceProductGroup++, name: 'Group ' + sequenceProductGroup},
+        {id: sequenceProductGroup++, name: 'Group ' + sequenceProductGroup},
+        {id: sequenceProductGroup++, name: 'Group ' + sequenceProductGroup},
+        {id: sequenceProductGroup++, name: 'Group ' + sequenceProductGroup},
+        {id: sequenceProductGroup++, name: 'Group ' + sequenceProductGroup}
+    ];
+
     $httpBackend.whenGET('/rest/v1/comments').respond(function ()
     {
         return [200, comments];
@@ -111,6 +160,16 @@ function setupBackendMock($httpBackend)
         var match = /\/rest\/v1\/commentgroups\/(\d+)$/.exec(url);
         return [200, commentsGroup[match[1]-1]];
 
+    });
+
+    $httpBackend.whenGET('/rest/v1/products').respond(function ()
+    {
+        return [200, products];
+    });
+
+    $httpBackend.whenGET('/rest/v1/productgroups').respond(function ()
+    {
+        return [200, productsGroup];
     });
 
     $httpBackend.whenGET(/.*\.html/).passThrough();

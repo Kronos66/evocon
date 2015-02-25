@@ -1,0 +1,58 @@
+<div>
+    <div class="modal-header"></div>
+    <form class="form-horizontal" role="form">
+        <div class="modal-body">
+            <div class="form-group">
+                <label for="name" class="col-md-2 control-label">{{ 'NAME' | translate }}:</label>
+
+                <div class="col-md-10">
+                    <input type="text" id="name" ng-model="modal.row.name">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="barcode" class="col-md-2 control-label">{{ 'BARCODE' | translate }}:</label>
+
+                <div class="col-md-10">
+                    <input type="text" id="barcode" ng-model="modal.row.barcode">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox" ng-model="modal.row.enable"> {{ 'ENABLE' | translate }}
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="group" class="col-md-2 control-label">{{'GROUP'|translate}}:</label>
+                <div class="col-md-10">
+                    <select id="group" data-ui-select2="modal.select2Options" data-ng-model="modal.row.groupId" data-placeholder="Choose category">
+                        <option ng-selected="modal.selectCategory(category.id)" ng-repeat="category in modal.category" value="{{ category.id }}">{{
+                            category.name }}
+                        </option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal-footer">
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10 text-left">
+                    <button class="btn btn-success pull-left" ng-click="$close(modal.row)">
+                        <span class="glyphicon glyphicon-ok"></span>
+                        {{'SAVE'|translate}}
+                    </button>
+                    <button class="btn btn-danger pull-left" ng-click="$dismiss()">
+                        <span class="glyphicon glyphicon-remove"></span>
+                        {{'CANCEL'|translate}}
+                    </button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

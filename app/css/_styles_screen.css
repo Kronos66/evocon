@@ -1584,7 +1584,7 @@ div.tabs > ul.group-lines > li {
 HEADER .subBar NAV UL LI.active A SPAN {
     margin-right: -10px;
 }
-//mgr ngclick link
+
 HEADER .subBar NAV UL DIV:hover {
     color: #444;
     cursor:pointer;
