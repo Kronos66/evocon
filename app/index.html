@@ -15,6 +15,7 @@
     <link rel="stylesheet" href="/bower_components/ngQuickDate/dist/ng-quick-date-default-theme.css"/>
     <link rel="stylesheet" href="/bower_components/angular-ui-grid/ui-grid.css"/>
     <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.css"/>
+    <link rel="stylesheet" href="/bower_components/spectrum/spectrum.css">
     <link rel="stylesheet" href="css/app.css"/>
     <link rel="stylesheet" href="css/main.css">
 
@@ -92,24 +93,30 @@
 <script src="bower_components/ngQuickDate/dist/ng-quick-date.js"></script>
 <script src="bower_components/angular-ui-grid/ui-grid.js"></script>
 <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
+<script src="bower_components/spectrum/spectrum.js"></script>
+<script src="bower_components/angular-spectrum-colorpicker/dist/angular-spectrum-colorpicker.min.js"></script>
 <!-- endbower -->
+<script src="/bower_components/angular-mocks/angular-mocks.js"></script>
 <!-- endbuild -->
 
 <!-- build:js({.tmp,app}) scripts/scripts.js -->
 <script src="backendMock.js"></script>
-<script src="/bower_components/angular-mocks/angular-mocks.js"></script>
 <script src="app.config.js"></script>
 <script src="app.js"></script>
 <script src="NavBarController.js"></script>
 <script src="admin/scripts/controllers/commentsGroup/commentsGroup.controller.js"></script>
 <script src="admin/scripts/controllers/commentsGroup/modalGroupComments.controller.js"></script>
 <script src="admin/scripts/controllers/comments/comments.controller.js"></script>
+<script src="admin/scripts/controllers/defects/defects.controller.js"></script>
+<script src="admin/scripts/controllers/defects/modalDefects.controller.js"></script>
 <script src="admin/scripts/controllers/comments/modalComments.controller.js"></script>
 <script src="admin/scripts/controllers/comments/modalMerge.controller.js"></script>
 <script src="admin/scripts/services/paginationSupport.js"></script>
 <script src="admin/scripts/services/asyncQueue.js"></script>
 <script src="admin/scripts/services/DAO/commentsDAO.js"></script>
 <script src="admin/scripts/services/DAO/commentsGroupDAO.js"></script>
+<script src="admin/scripts/services/DAO/defectsDAO.js"></script>
+<script src="admin/scripts/services/DAO/defectsGroupDAO.js"></script>
 <script src="admin/scripts/directives/menu.js"></script>
 <script src="admin/scripts/filters/startFrom.js"></script>
 <!-- endbuild -->

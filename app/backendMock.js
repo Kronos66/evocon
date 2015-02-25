@@ -106,6 +106,10 @@ function setupBackendMock($httpBackend)
     {
         return [200, commentsGroup];
     });
+    $httpBackend.whenGET('/rest/v1/defects').respond(function ()
+    {
+       return [200,[{id:2, name:'FirstDefect',groupId:2,createdDate:new Date().getTime()}]];
+    });
     $httpBackend.whenGET(/\/rest\/v1\/commentgroups\/(\d+)$/).respond(function (method, url, jsonParams)
     {
         var match = /\/rest\/v1\/commentgroups\/(\d+)$/.exec(url);
