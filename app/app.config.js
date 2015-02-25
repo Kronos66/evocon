@@ -1,8 +1,16 @@
 (function ()
 {
     'use strict';
-    angular.module('evoReports', ['ngRoute', 'ngResource', 'ui.bootstrap', 'ui.select2', 'pascalprecht.translate','angularSpectrumColorpicker'])
-            .config(function ($provide,$translateProvider,$routeProvider,paginationSupportProvider)
+    var module = angular.module('evoReports', ['ngRoute',
+                                               'ngResource',
+                                               'ui.bootstrap',
+                                               'ui.select2',
+                                               'pascalprecht.translate',
+                                               'angularSpectrumColorpicker',
+                                               'ui.grid',
+                                               'ui.grid.selection',
+                                               'ui.grid.pagination']);
+    module.config(function ($provide, $translateProvider, $routeProvider, paginationSupportProvider)
     {
         paginationSupportProvider.setDefaultConfig({maxResultsProperty: 'size', firstResultProperty: 'from'});
 
@@ -23,20 +31,20 @@
             controller: 'ProductsGroupController as groupCtrl'
         }).otherwise({
             templateUrl: 'admin/views/commentsGroup/commentsGroup.tpl.html', controller: 'commentsGroupController as groupController'
-        }).when('/defects',{
+        }).when('/defects', {
             templateUrl: 'admin/views/defects/defects.tpl.html', controller: 'defectsController as defectsCtrl'
-    }).otherwise({
+        }).otherwise({
             redirectTo: '/'
         });
 
         $translateProvider.preferredLanguage('en');
         $translateProvider.translations('en', {
             'merge': 'Merge',
-            'mergeComments':'Merge comments:',
+            'mergeComments': 'Merge comments:',
             'addComment': 'New comment',
             'addGroupComment': 'New comment group',
-            'addDefect':'Add defect',
-            'addGroupDefect':'Add group defect',
+            'addDefect': 'Add defect',
+            'addGroupDefect': 'Add group defect',
             'select': 'Select',
             'name': 'Name',
             'group': 'Group',
@@ -58,11 +66,11 @@
             'pause': 'Pause',
             'standby': 'Standby',
             'setup': 'Setup',
-            'defects':'Defects',
-            'description':'Description',
-            'controls':'Controls',
-            'stations':'Stations',
-            'orderIndex':'Order index'
+            'defects': 'Defects',
+            'description': 'Description',
+            'controls': 'Controls',
+            'stations': 'Stations',
+            'orderIndex': 'Order index'
         });
     });
 

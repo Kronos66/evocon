@@ -2,12 +2,18 @@
     <div class="modal-header"></div>
     <form class="form-horizontal" role="form">
         <div class="modal-body">
+            <div class="gridStyle" ui-grid="modal.gridOptions" ui-grid-selection ui-grid-pagination>
 
+            </div>
+            <div class="confirm">
+                <input id="confirm" type="checkbox" ng-model="confirm">
+                <label for="confirm">Are you sure to merge this comments??</label>
+            </div>
         </div>
         <div class="modal-footer">
             <div class="form-group">
                 <div class="col-sm-offset-2 col-sm-7 text-left">
-                    <button class="btn btn-success pull-left" ng-click="$close(modal.merge)">
+                    <button ng-disabled="!confirm" class="btn btn-success pull-left" ng-click="$close(modal.merge)">
                         <span class="glyphicon glyphicon-ok"></span>
                         {{'save'|translate}}
                     </button>
