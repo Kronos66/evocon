@@ -1,90 +1,96 @@
 <div class="container adminContent">
     <section class="with-table">
-        <div class="col-xs-12 section-row">
-            <h1 class="title">Tytuł sekcji za pomoca h1 + class title</h1>
-            <div class="buttons">
-                <button class="button center">Merge</button>
-                <button class="button center">New comment</button>
-                <button class="button center">New comment group</button>
+        <div class="row section-row">
+            <div class="col-xs-12">
+                <h1 class="title">Tytuł sekcji h1 + class title</h1>
+                <div class="buttons">
+                    <button class="button center">Merge</button>
+                    <button class="button center">New comment</button>
+                    <button class="button center">New comment group</button>
+                </div>
             </div>
         </div>
 
-        <div class="col-xs-12 section-row">
-            <table class="statsTable">
-                <thead>
-                    <tr>
-                        <th><label for="select">Select</label></th>
-                        <th class="highlighted">Name</th>
-                        <th>Group</th>
-                        <th>Category</th>
-                        <th>Color</th>
-                        <th>Actions</th>
+        <div class="row section-row">
+            <div class="col-xs-12">
+                <table class="statsTable">
+                    <thead>
+                        <tr>
+                            <th><label for="select">Select</label></th>
+                            <th class="highlighted">Name</th>
+                            <th>Group</th>
+                            <th>Category</th>
+                            <th>Color</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    <tr class="data">
+                        <td><input id="select" type="checkbox" ng-model="comment.select"></td>
+                        <td>content</td>
+                        <td>content</td>
+                        <td>content</td>
+                        <td>content</td>
+                        <td class="actions">
+                            <span class="buttonActions">
+                              <a class="button link">edit</a>
+                              <a class="button link">delete</a>
+                            </span>
+                        </td>
                     </tr>
-                </thead>
-                <tbody>
-                <tr class="data">
-                    <td><input id="select" type="checkbox" ng-model="comment.select"></td>
-                    <td>content</td>
-                    <td>content</td>
-                    <td>content</td>
-                    <td>content</td>
-                    <td class="actions">
-                        <span class="buttonActions">
-                          <a class="button link">edit</a>
-                          <a class="button link">delete</a>
-                        </span>
-                    </td>
-                </tr>
-                </tbody>
-            </table>
-            <pagination class="pull-right pagination-sm" ng-model="commentsController.currentPage" total-items="commentsController.resultCount"
-                        items-per-page="commentsController.listFilter.size" max-size="10" boundary-links="true" previous-text="Previous" next-text="Next"
-                        first-text="First" last-text="Last"></pagination>
+                    </tbody>
+                </table>
+                <pagination class="pull-right pagination-sm" ng-model="commentsController.currentPage" total-items="commentsController.resultCount"
+                            items-per-page="commentsController.listFilter.size" max-size="10" boundary-links="true" previous-text="Previous" next-text="Next"
+                            first-text="First" last-text="Last"></pagination>
+            </div>
         </div>
     </section>
 
     <section>
-        <div class="col-xs-12 section-row">
-            <h2 class="title">sub tytul h2 + class title</h2>
-        </div>
-    </section>
-
-    <section>
-        <div class="col-xs-12 section-row">
-            <h2 class="title">sub tytul h2 + class title</h2>
-            <select class="long">
-                <option>4</option>
-                <option>4</option>
-            </select>
-        </div>
-        <div class="col-xs-12 section-row">
-            <div class="col-xs-6">
-                <p class="label-for">Name</p>
-                <input class="long" type="text" />
-            </div>
-            <div class="col-xs-6">
-                <p class="label-for">Country</p>
+        <div class="row section-row">
+            <div class="col-xs-12">
+                <h2 class="title">sub tytul h2 + class title</h2>
                 <select class="long">
-                    <option>Poland</option>
-                    <option>Pakistan</option>
+                    <option>4</option>
+                    <option>4</option>
                 </select>
             </div>
         </div>
-        <div class="col-xs-12 section-row">
-            <div class="col-xs-6">
-                <p class="label-for">Country</p>
-                <select class="long">
-                    <option>Poland</option>
-                    <option>Pakistan</option>
-                </select>
-            </div>
-            <div class="col-xs-6">
-                <p class="label-for">barcode</p>
-                <input class="long" type="number" />
+        <div class="row section-row">
+            <div class="col-xs-12">
+                <div class="col-xs-6">
+                    <p class="label-for">Name</p>
+                    <input class="long" type="text" />
+                </div>
+                <div class="col-xs-6">
+                    <p class="label-for">Country</p>
+                    <select class="long">
+                        <option>Poland</option>
+                        <option>Pakistan</option>
+                    </select>
+                </div>
             </div>
         </div>
-        <div class="col-xs-12 section-row text-center">
-            <span class="button button-submit">save</span>
+        <div class="row section-row">
+            <div class="col-xs-12">
+                <div class="col-xs-6">
+                    <p class="label-for">Country</p>
+                    <select class="long">
+                        <option>Poland</option>
+                        <option>Pakistan</option>
+                    </select>
+                </div>
+                <div class="col-xs-6">
+                    <p class="label-for">barcode</p>
+                    <input class="long" type="number" />
+                </div>
+            </div>
+        </div>
+        <div class="row section-row">
+            <div class="col-xs-12 text-center">
+                <span class="button button-submit">save</span>
+            </div>
         </div>
     </section>
 </div>
