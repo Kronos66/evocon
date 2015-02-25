@@ -88,25 +88,40 @@
 
 
 
-section, .section-row
+.modal-body input, .modal-body select
+{
+    border: 1px solid #999 !important;
+    padding: 0 6px;
+    height: 40px;
+    border-radius: 8px;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-size: 18px;
+    color: #888;
+    background-color: inherit !important;
+}
+
+
+
+.adminContent section, .adminContent .section-row
 {
     position: relative;
     margin-bottom: 40px;
 }
 
-section
+.adminContent section
 {
+    padding-top: 50px;
+    padding-bottom: 30px;
     border-bottom: 1px solid #111;
     overflow: hidden;
 }
 
-section.with-table
+.adminContent section.no-bordered
 {
-    margin-bottom: 60px;
     border-bottom: none;
 }
 
-.title
+.adminContent .title
 {
     margin: 0;
     padding: 0 30px 0 0;
@@ -114,7 +129,7 @@ section.with-table
     float: left;
 }
 
-.buttons
+.adminContent .buttons
 {
     display: inline;
     float: right;
@@ -126,33 +141,36 @@ section.with-table
 
 
 
-tr
+.adminContent tr
 {
     border-bottom: 1px solid #111;
 }
 
-.statsTable th, .statsTable td
+.adminContent .statsTable th, .adminContent .statsTable td
 {
     border: none;
 }
 
-.statsTable th:not( :last-child )
+.adminContent .statsTable th:not( :last-child )
 {
     border-right: 1px solid #fff;
 }
 
-.statsTable label
+.adminContent table.statsTable label
 {
     color: inherit;
+    margin: 0;
+    min-width: initial;
+    line-height: 1;
 }
 
-.statsTable .highlighted
+.adminContent .statsTable .highlighted
 {
     background: #bdbdb0;
     color: #fff;
 }
 
-.statsTable .buttonActions a
+.adminContent .statsTable .buttonActions a
 {
     text-transform: none;
 }
@@ -166,74 +184,90 @@ tr
 */
 
 
-input[ type=checkbox ], input[ type=radio ]
+.adminContent input[ type=checkbox ], .adminContent input[ type=radio ]
 {
+    margin: 0 20px 0 0;
     width: 20px;
     height: 20px;
 }
 
-input[ type=number ], input[ type=text ], select
+.adminContent input[ type=number ], .adminContent input[ type=text ], .adminContent select
 {
     border: 1px solid #999 !important;
-    padding: 6px;
+    padding: 0 6px;
     height: 40px;
     border-radius: 8px;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
     font-size: 18px;
-    font-weight: normal;
     color: #888;
 }
 
-label.select-label:after
+.adminContent label
 {
-    content: "\25BC";
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    cursor: pointer;
+    margin: 0 0 20px 0;
+    min-width: 220px;
+    line-height: 1.6;
 }
 
-select
+.adminContent select
+{
+    width: 100px;
+    background-color: inherit !important;
+}
+
+.adminContent input[ number ], input[ type=text ]
 {
     width: 80px;
-    -webkit-appearance:none;
-    appearance:none;
-    cursor:pointer;
 }
 
-input[ number ], input[ type=text ]
+.adminContent input.long, select.long
 {
-    width: 60px;
-    -webkit-appearance:none;
-    appearance:none;
-}
-input[ number ]::-webkit-outer-spin-button,
-input[ number ]::-webkit-inner-spin-button {
-    display: none;
-    -webkit-appearance: none;
-    margin: 0;
+    width: 100%;
+    max-width: 340px;
 }
 
-input.long, select.long
+.adminContent .inline-input-text
 {
-    width: 340px;
+    display: inline;
+    margin-left: 30px;
+    color: #bbb;
+    font-weight: bold;
+    font-size: 24px;
+    line-height: 1.7;
 }
 
-.label-for
+.adminContent .label-above
 {
+    display:block;
     line-height: 40px;
     color: #111;
     font-weight: bold;
     font-size: 16px;
 }
 
-.button
+.adminContent .button
 {
     cursor: pointer;
 }
 
-.button-submit
+.adminContent .button-submit
 {
     margin-top: 40px;
+}
+
+.time-inputs input:first-child
+{
+    width: 50px;
+}
+
+.time-inputs select:nth-child( 2 )
+{
+    width: 70px;
+}
+
+.time-inputs select:nth-child( 3 )
+{
+    width: 140px;
 }
 
 
