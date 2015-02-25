@@ -64,7 +64,7 @@
 }
 
 .adminContent {
-    padding-top: 140px;
+    padding-top: 100px;
 }
 
 .actions {
@@ -85,6 +85,40 @@
 }
 
 
+
+
+
+section, .section-row
+{
+    position: relative;
+    margin-bottom: 40px;
+}
+
+section
+{
+    border-bottom: 1px solid #111;
+    overflow: hidden;
+}
+
+section.with-table
+{
+    margin-bottom: 60px;
+    border-bottom: none;
+}
+
+.title
+{
+    margin: 0;
+    padding: 0 30px 0 0;
+    display: inline;
+    float: left;
+}
+
+.buttons
+{
+    display: inline;
+    float: right;
+}
 
 /*
  - - - - TABLES - - - -
@@ -112,7 +146,7 @@ tr
     color: inherit;
 }
 
-.statsTable .name
+.statsTable .highlighted
 {
     background: #bdbdb0;
     color: #fff;
@@ -123,25 +157,30 @@ tr
     text-transform: none;
 }
 
-.statsTable
 
 
 
 
+/*
+ - - - - INPUTS - - - -
+*/
 
 
-.label-for
+input[ type=checkbox ], input[ type=radio ]
 {
-    line-height: 40px;
-    color: #111;
-    font-weight: bold;
-    font-size: 16px;
+    width: 20px;
+    height: 20px;
 }
 
-label.select-label
+input[ type=number ], input[ type=text ], select
 {
-    position: relative;
-    color: #999;
+    border: 1px solid #999 !important;
+    padding: 6px;
+    height: 40px;
+    border-radius: 8px;
+    font-size: 18px;
+    font-weight: normal;
+    color: #888;
 }
 
 label.select-label:after
@@ -153,18 +192,7 @@ label.select-label:after
     cursor: pointer;
 }
 
-.input
-{
-    padding: 6px;
-    height: 40px;
-    border: 1px solid #999 !important;
-    border-radius: 8px;
-    font-size: 18px !important;
-    font-weight: normal;
-    color: #888;
-}
-
-#num-of-markers
+select
 {
     width: 80px;
     -webkit-appearance:none;
@@ -172,19 +200,41 @@ label.select-label:after
     cursor:pointer;
 }
 
-#num-of-seconds
+input[ number ], input[ type=text ]
 {
     width: 60px;
     -webkit-appearance:none;
     appearance:none;
 }
-#num-of-seconds::-webkit-outer-spin-button,
-#num-of-seconds::-webkit-inner-spin-button {
+input[ number ]::-webkit-outer-spin-button,
+input[ number ]::-webkit-inner-spin-button {
     display: none;
     -webkit-appearance: none;
-    margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+    margin: 0;
 }
 
+input.long, select.long
+{
+    width: 340px;
+}
+
+.label-for
+{
+    line-height: 40px;
+    color: #111;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+.button
+{
+    cursor: pointer;
+}
+
+.button-submit
+{
+    margin-top: 40px;
+}
 
 
 footer
