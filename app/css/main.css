@@ -276,6 +276,7 @@
 {
     border: 1px solid #999 !important;
     padding: 0 6px;
+    width: 100%;
     height: 40px;
     border-radius: 8px;
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
@@ -292,11 +293,15 @@
 
 .adminContent select
 {
-    width: 100px;
     background-color: inherit !important;
 }
 
-.adminContent input[ type=number ], input[ type=text ]
+.adminContent select.short
+{
+    width: 100px;
+}
+
+.adminContent input[ type=number ].short, input[ type=text ].short
 {
     width: 80px;
 }
@@ -306,9 +311,8 @@
     width: 100% !important;
 }
 
-.adminContent input.long, select.long
+.adminContent input.long, .adminContent select.long
 {
-    width: 100%;
     max-width: 340px;
 }
 
