@@ -274,9 +274,14 @@
     background-color: inherit !important;
 }
 
-.adminContent input[ number ], input[ type=text ]
+.adminContent input[ type=number ], input[ type=text ]
 {
     width: 80px;
+}
+
+.select2-search input
+{
+    width: 100% !important;
 }
 
 .adminContent input.long, select.long
