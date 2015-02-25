@@ -12,6 +12,10 @@
                 .on( 'mouseleave', function() {
                     $( 'body > .content' ).removeClass( 'content-narrow' );
                 } );
+
+                elem.find( 'ul' ).on( 'click', function() {
+                    $( 'body > .content' ).removeClass( 'content-narrow' );
+                } );
             }
         };
     });
