@@ -1,21 +1,17 @@
 (function ()
 {
     'use strict';
-    var module = angular.module('evoReports',
-            ['ngRoute', 'ngResource', 'ui.bootstrap', 'ui.select2', 'pascalprecht.translate', 'ui.grid', 'ui.grid.selection',
-             'ui.grid.pagination']);
-
-    module.config(function ($provide, $translateProvider, $routeProvider, paginationSupportProvider)
+    angular.module('evoReports', ['ngRoute', 'ngResource', 'ui.bootstrap', 'ui.select2', 'pascalprecht.translate','angularSpectrumColorpicker'])
+            .config(function ($provide,$translateProvider,$routeProvider,paginationSupportProvider)
     {
         paginationSupportProvider.setDefaultConfig({maxResultsProperty: 'size', firstResultProperty: 'from'});
 
+
         $provide.decorator('$httpBackend', angular.mock.e2e.$httpBackendDecorator);
         $routeProvider.when('/', {
-            templateUrl: 'admin/views/empty.html',
-            controller: 'commentsController as commentsController'
+            templateUrl: 'admin/views/empty.html', controller: 'commentsController as commentsController'
         }).when('/comments', {
-            templateUrl: 'admin/views/comments/comments.tpl.html',
-            controller: 'commentsController as commentsController'
+            templateUrl: 'admin/views/comments/comments.tpl.html', controller: 'commentsController as commentsController'
         }).when('/commentsgroup', {
             templateUrl: 'admin/views/commentsGroup/commentsGroup.tpl.html',
             controller: 'commentsGroupController as groupController'
@@ -26,35 +22,47 @@
             templateUrl: 'admin/views/productsGroup/productsGroup.tpl.html',
             controller: 'ProductsGroupController as groupCtrl'
         }).otherwise({
+            templateUrl: 'admin/views/commentsGroup/commentsGroup.tpl.html', controller: 'commentsGroupController as groupController'
+        }).when('/defects',{
+            templateUrl: 'admin/views/defects/defects.tpl.html', controller: 'defectsController as defectsCtrl'
+    }).otherwise({
             redirectTo: '/'
         });
 
         $translateProvider.preferredLanguage('en');
         $translateProvider.translations('en', {
-            'MERGE': 'Merge',
-            'ADD.Comment': 'New comment',
-            'ADD.GroupComment': 'New comment group',
-            'SELECT': 'Select',
-            'NAME': 'Name',
-            'GROUP': 'Group',
-            'CATEGORY': 'Category',
-            'COLOR': 'Color',
-            'ACTIONS': 'Actions',
-            'EDIT': 'Edit',
-            'DELETE': 'Delete',
-            'PREVIOUS': 'Previous',
-            'NEXT': 'Next',
-            'FIRST': 'First',
-            'LAST': 'Last',
-            'NEGATIVE': 'Negative',
-            'SAVE': 'Save',
-            'CANCEL': 'Cancel',
-            'COMMENT.ORDERING': 'Comment ordering',
-            'COMMENTS': 'Comments',
-            'GROUP.COMMENTS': 'Group comments',
-            'PAUSE': 'Pause',
-            'STANDBY': 'Standby',
-            'SETUP': 'Setup'
+            'merge': 'Merge',
+            'mergeComments':'Merge comments:',
+            'addComment': 'New comment',
+            'addGroupComment': 'New comment group',
+            'addDefect':'Add defect',
+            'addGroupDefect':'Add group defect',
+            'select': 'Select',
+            'name': 'Name',
+            'group': 'Group',
+            'category': 'Category',
+            'color': 'Color',
+            'actions': 'Actions',
+            'edit': 'Edit',
+            'delete': 'Delete',
+            'previous': 'Previous',
+            'next': 'Next',
+            'first': 'First',
+            'last': 'Last',
+            'negative': 'Negative',
+            'save': 'Save',
+            'cancel': 'Cancel',
+            'commentOrdering': 'Comment ordering',
+            'comments': 'Comments',
+            'groupComments': 'Group comments',
+            'pause': 'Pause',
+            'standby': 'Standby',
+            'setup': 'Setup',
+            'defects':'Defects',
+            'description':'Description',
+            'controls':'Controls',
+            'stations':'Stations',
+            'orderIndex':'Order index'
         });
     });
 

@@ -1,9 +1,10 @@
 (function ()
 {
     'use strict';
-    function CommentsDAO($resource)
+
+    function defectsDAO($resource)
     {
-        var api = $resource('/rest/v1/comments/:id', {id: '@id'}, {
+        var api = $resource('/rest/v1/defects/:id', {id: '@id'}, {
             query: {isArray: true, method: 'GET'},
             update: {method: 'PUT'},
             merge: {method: 'PUT'}
@@ -32,5 +33,5 @@
         };
     }
 
-    angular.module('evoReports').factory('CommentsDAO', ['$resource', CommentsDAO]);
+    angular.module('evoReports').service('DefectsDAO', ['$resource', defectsDAO]);
 })();

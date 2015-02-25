@@ -1,22 +1,20 @@
 (function ()
 {
     'use strict';
-    function CommentsController($modal, CommentsDAO, CommentsGroupDAO, paginationSupport)
-    {
+    function DefectsController($modal,DefectsDAO,DefectsGroupDAO,paginationSupport){
         var ctrl = this;
         this.filter = {query: null, size: 10};
         this.listFilter = {size: 10};
         this.currentPage = 1;
         var refresh = paginationSupport(ctrl.filter, function (callback)
         {
-            CommentsDAO.query().then(function (result)
+            DefectsDAO.query().then(function (result)
             {
-                ctrl.comments = result;
+                ctrl.defects = result;
                 ctrl.resultCount = result.length;
                 callback(result.length);
             });
         });
-
         this.newGroup = function ()
         {
             var row = {};
@@ -34,16 +32,20 @@
                 }
             });
 
-            modalInstance.result.then(CommentsGroupDAO.save).then(refresh);
+            modalInstance.result.then(DefectsGroupDAO.save).then(refresh);
+        };
+        this.deleteRow = function (id)
+        {
+            DefectsDAO.remove(id).then(refresh);
         };
         this.addRow = function ()
         {
             var row = {};
             var modalInstance = $modal.open({
-                templateUrl: 'admin/views/comments/editOrCreateModal.tpl.html',
+                templateUrl: 'admin/views/defects/editOrCreateModal.tpl.html',
                 backdrop: 'static',
                 keyboard: false,
-                controller: 'modalCommentsController',
+                controller: 'modalDefectsController',
                 controllerAs: 'modal',
                 resolve: {
                     row: function ()
@@ -52,15 +54,15 @@
                     }
                 }
             });
-            modalInstance.result.then(CommentsDAO.save).then(refresh);
+            modalInstance.result.then(DefectsDAO.save).then(refresh);
         };
         this.editRow = function (row)
         {
             var modalInstance = $modal.open({
-                templateUrl: 'admin/views/comments/editOrCreateModal.tpl.html',
+                templateUrl: 'admin/views/defects/editOrCreateModal.tpl.html',
                 backdrop: 'static',
                 keyboard: false,
-                controller: 'modalCommentsController',
+                controller: 'modalDefectsController',
                 controllerAs: 'modal',
                 resolve: {
                     row: function ()
@@ -73,29 +75,14 @@
             modalInstance.result.then(function (result)
             {
                 result.groupComments = result.groupComments.id;
-                CommentsDAO.update(result);
+                DefectsDAO.update(result);
             }).then(refresh);
         };
-        this.deleteRow = function (id)
+        this.stationRow= function (id)
         {
-            CommentsDAO.remove(id).then(refresh);
-        };
 
-        this.mergeComments = function ()
-        {
-            var modalInstance = $modal.open({
-                templateUrl: 'admin/views/comments/mergeModal.tpl.html',
-                backdrop: 'static',
-                keyboard: false,
-                size: 'lg',
-                controller: 'modalMergeController',
-                controllerAs: 'modal'
-            });
-            modalInstance.result.then(CommentsDAO.merge).then(refresh);
         };
         refresh();
     }
-
-
-    angular.module('evoReports').controller('commentsController', ['$modal', 'CommentsDAO', 'CommentsGroupDAO', 'paginationSupport', CommentsController]);
+    angular.module('evoReports').controller('defectsController',['$modal','DefectsDAO','DefectsGroupDAO','paginationSupport',DefectsController]);
 })();

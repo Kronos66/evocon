@@ -1,39 +1,44 @@
 <div class="container adminContent">
 
     <admin-menu></admin-menu>
+    <section class="no-bordered">
+        <div class="row section-row">
+            <div class="col-xs-12">
+                <h1 class="title">{{'groupComments'|translate}}</h1>
 
-    <div class="form-group">
-        <div class="col-lg-7">
-            <h3>Comments groups</h3>
+                <div class="buttons">
+                    <button class="button center" ng-click="groupController.addRow()">{{'addGroupComment'|translate}}</button>
+                    <button class="button center" ng-click="groupController.newComments()">{{'addComment'|translate}}</button>
+                </div>
+            </div>
         </div>
-        <button class="button center" ng-click="groupController.addRow()">{{'ADD.GroupComment'|translate}}</button>
-        <button class="button center" ng-click="groupController.newComments()">{{'ADD.Comment'|translate}}</button>
-    </div>
-    <table class="statsTable">
-        <thead>
-        <tr>
-            <td>{{'NAME'|translate}}</td>
-            <td>{{'COMMENT.ORDERING'|translate}}</td>
-            <td>{{'COLOR'|translate}}</td>
-            <td>{{'ACTIONS'|translate}}</td>
-        </tr>
-        </thead>
-        <tbody>
-        <tr class="data" ng-class="{selected:groupController.checkSelected(commentGroup.id)}"
-            ng-repeat="commentGroup in groupController.commentsGroup |startFrom:(groupController.currentPage-1)*groupController.listFilter.size | limitTo: groupController.listFilter.size">
-            <td ng-click="groupController.selectGroup(commentGroup.id)">{{commentGroup.name}}</td>
-            <td ng-click="groupController.selectGroup(commentGroup.id)">{{commentGroup.ordering}}</td>
-            <td ng-click="groupController.selectGroup(commentGroup.id)">{{commentGroup.color}}</td>
-            <td class="actions">
+
+        <table class="statsTable">
+            <thead>
+            <tr>
+                <th class="highlighted">{{'name'|translate}}</th>
+                <th>{{'commentOrdering'|translate}}</th>
+                <th>{{'color'|translate}}</th>
+                <th>{{'actions'|translate}}</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr class="data" ng-class="{selected:groupController.checkSelected(commentGroup.id)}"
+                ng-repeat="commentGroup in groupController.commentsGroup |startFrom:(groupController.currentPage-1)*groupController.listFilter.size | limitTo: groupController.listFilter.size">
+                <td ng-click="groupController.selectGroup(commentGroup.id)">{{commentGroup.name}}</td>
+                <td ng-click="groupController.selectGroup(commentGroup.id)">{{commentGroup.ordering}}</td>
+                <td ng-click="groupController.selectGroup(commentGroup.id)">{{commentGroup.color}}</td>
+                <td class="actions">
                 <span class="buttonActions">
-                    <a class="button link" ng-click="groupController.editRow(commentGroup)">{{'EDIT'|translate}}</a>
-                    <a class="button link" ng-click="groupController.deleteRow(commentGroup.id)">{{'DELETE'|translate}}</a>
+                    <a class="button link" ng-click="groupController.editRow(commentGroup)">{{'edit'|translate}}</a>
+                    <a class="button link" ng-click="groupController.deleteRow(commentGroup.id)">{{'delete'|translate}}</a>
                 </span>
-            </td>
-        </tr>
-        </tbody>
-    </table>
-    <pagination class="pull-right pagination-sm" ng-model="groupController.currentPage" total-items="groupController.resultCount"
-                items-per-page="groupController.listFilter.size" max-size="10" boundary-links="true" previous-text="{{'PREVIOUS'|translate}}"
-                next-text="{{'NEXT'|translate}}" first-text="{{'FIRST'|translate}}" last-text="{{'LAST'|translate}}"></pagination>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <pagination class="pull-right pagination-sm" ng-model="groupController.currentPage" total-items="groupController.resultCount"
+                    items-per-page="groupController.listFilter.size" max-size="10" boundary-links="true" previous-text="{{'previous'|translate}}"
+                    next-text="{{'next'|translate}}" first-text="{{'first'|translate}}" last-text="{{'last'|translate}}"></pagination>
+    </section>
 </div>
