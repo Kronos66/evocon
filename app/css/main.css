@@ -19,48 +19,9 @@
     height: 300px
 }
 
-#adminMenu {
-    color: inherit;
-    text-decoration: none;
-    background-color: #dedfcf;
-    height: 100vh;
-    position: fixed;
-    top: 0;
-    right: -185px;
-    padding-left: 60px;
-    padding-right: 60px;
-    -webkit-transition: right 600ms;
-    -moz-transition: right 600ms;
-    -o-transition: right 600ms;
-    transition: right 600ms;
-    z-index: 9;
-}
-
-#adminMenu:hover {
-    right: 0;
-}
-
-.modal {
-    display: none;
-    position: fixed;
-    left: 15%;
-    top: 25px;
-    padding: 25px;
-    border: none;
-    background-color: transparent;
-    width: 70%;
-    height: 80%;
-    z-index: 100;
-    overflow-y: scroll;
-}
-
 .modal-body {
     position: relative;
     padding: 50px;
-}
-
-.commentsMenu {
-    margin-top: 95px;
 }
 
 .adminContent {
@@ -88,25 +49,138 @@
 
 
 
-section, .section-row
+
+/*
+ - - - - - MENU - - - -
+ */
+
+
+
+#adminMenu
+{
+    background-color: #dedfcf;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    right: -220px;
+    padding-right: 20px;
+    -webkit-transition: right 600ms;
+    -moz-transition: right 600ms;
+    -o-transition: right 600ms;
+    transition: right 600ms;
+    z-index: 9;
+}
+
+#adminMenu:hover
+{
+    right: 0;
+}
+
+#adminMenu .commentsMenu
+{
+    position: relative;
+    margin-top: 80px;
+    height: calc( 100vh - 80px - 90px );
+    width: 200px;
+    overflow-y: scroll;
+    float: left;
+}
+
+#adminMenu .menu-title
+{
+    position: relative;
+    top: 30%;
+    margin: 0 5px;
+    width: 30px;
+    float: left;
+    font-size: 28px;
+    text-align: center;
+    opacity: 1;
+    -webkit-transition: opacity 600ms;
+    -moz-transition: opacity 600ms;
+    -o-transition: opacity 600ms;
+    transition: opacity 600ms;
+}
+
+#adminMenu:hover .menu-title
+{
+    opacity: 0;
+}
+
+
+#adminMenu .commentsMenu ul a
+{
+    font-weight: bold;
+    color: #111;
+}
+
+#adminMenu .commentsMenu > ul .submenu
+{
+    color: #999;
+    margin-bottom: 20px;
+}
+
+#adminMenu .commentsMenu ul.submenu a
+{
+    display: block;
+    margin-bottom: 0;
+    color: #999;
+    cursor: pointer;
+}
+
+
+
+
+/*
+ - - - - - MODAL - - - -
+ */
+
+.modal {
+    display: none;
+    position: fixed;
+    padding-top: 80px;
+    border: none;
+    background-color: rgba( 0, 0, 0, 0.7 );
+    width: 100%;
+    height: 100%;
+    z-index: 100;
+    overflow-y: hidden;
+}
+
+.modal-body input, .modal-body select
+{
+    border: 1px solid #999 !important;
+    padding: 0 6px;
+    height: 40px;
+    border-radius: 8px;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-size: 18px;
+    color: #888;
+    background-color: inherit !important;
+}
+
+
+
+.adminContent section, .adminContent .section-row
 {
     position: relative;
     margin-bottom: 40px;
 }
 
-section
+.adminContent section
 {
+    padding-top: 50px;
+    padding-bottom: 30px;
     border-bottom: 1px solid #111;
     overflow: hidden;
 }
 
-section.with-table
+.adminContent section.no-bordered
 {
-    margin-bottom: 60px;
     border-bottom: none;
 }
 
-.title
+.adminContent .title
 {
     margin: 0;
     padding: 0 30px 0 0;
@@ -114,7 +188,7 @@ section.with-table
     float: left;
 }
 
-.buttons
+.adminContent .buttons
 {
     display: inline;
     float: right;
@@ -126,33 +200,36 @@ section.with-table
 
 
 
-tr
+.adminContent tr
 {
     border-bottom: 1px solid #111;
 }
 
-.statsTable th, .statsTable td
+.adminContent .statsTable th, .adminContent .statsTable td
 {
     border: none;
 }
 
-.statsTable th:not( :last-child )
+.adminContent .statsTable th:not( :last-child )
 {
     border-right: 1px solid #fff;
 }
 
-.statsTable label
+.adminContent table.statsTable label
 {
     color: inherit;
+    margin: 0;
+    min-width: initial;
+    line-height: 1;
 }
 
-.statsTable .highlighted
+.adminContent .statsTable .highlighted
 {
     background: #bdbdb0;
     color: #fff;
 }
 
-.statsTable .buttonActions a
+.adminContent .statsTable .buttonActions a
 {
     text-transform: none;
 }
@@ -166,74 +243,95 @@ tr
 */
 
 
-input[ type=checkbox ], input[ type=radio ]
+.adminContent input[ type=checkbox ], .adminContent input[ type=radio ]
 {
+    margin: 0 20px 0 0;
     width: 20px;
     height: 20px;
 }
 
-input[ type=number ], input[ type=text ], select
+.adminContent input[ type=number ], .adminContent input[ type=text ], .adminContent select
 {
     border: 1px solid #999 !important;
-    padding: 6px;
+    padding: 0 6px;
     height: 40px;
     border-radius: 8px;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
     font-size: 18px;
-    font-weight: normal;
     color: #888;
 }
 
-label.select-label:after
+.adminContent label
 {
-    content: "\25BC";
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    cursor: pointer;
+    margin: 0 0 20px 0;
+    min-width: 220px;
+    line-height: 1.6;
 }
 
-select
+.adminContent select
+{
+    width: 100px;
+    background-color: inherit !important;
+}
+
+.adminContent input[ type=number ], input[ type=text ]
 {
     width: 80px;
-    -webkit-appearance:none;
-    appearance:none;
-    cursor:pointer;
 }
 
-input[ number ], input[ type=text ]
+.select2-search input
 {
-    width: 60px;
-    -webkit-appearance:none;
-    appearance:none;
-}
-input[ number ]::-webkit-outer-spin-button,
-input[ number ]::-webkit-inner-spin-button {
-    display: none;
-    -webkit-appearance: none;
-    margin: 0;
+    width: 100% !important;
 }
 
-input.long, select.long
+.adminContent input.long, select.long
 {
-    width: 340px;
+    width: 100%;
+    max-width: 340px;
 }
 
-.label-for
+.adminContent .inline-input-text
 {
+    display: inline;
+    margin-left: 30px;
+    color: #bbb;
+    font-weight: bold;
+    font-size: 24px;
+    line-height: 1.7;
+}
+
+.adminContent .label-above
+{
+    display:block;
     line-height: 40px;
     color: #111;
     font-weight: bold;
     font-size: 16px;
 }
 
-.button
+.adminContent .button
 {
     cursor: pointer;
 }
 
-.button-submit
+.adminContent .button-submit
 {
     margin-top: 40px;
+}
+
+.time-inputs input:first-child
+{
+    width: 50px;
+}
+
+.time-inputs select:nth-child( 2 )
+{
+    width: 70px;
+}
+
+.time-inputs select:nth-child( 3 )
+{
+    width: 140px;
 }
 
 
