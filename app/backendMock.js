@@ -97,7 +97,16 @@ function setupBackendMock($httpBackend)
         {id: sequenceProductGroup++, name: 'Group ' + sequenceProductGroup},
         {id: sequenceProductGroup++, name: 'Group ' + sequenceProductGroup}
     ];
-
+    var lineViewSettings = {
+        colormode: 1,
+        normalMarker: 100,
+        slowMarker: 75,
+        extraSlowMarker: 25,
+        stoppageMarker: 0,
+        effLowLimit: 50,
+        effMediumLimit: 75,
+        effHighLimit: 100
+    };
     $httpBackend.whenGET('/rest/v1/comments').respond(function ()
     {
         return [200, comments];
@@ -145,13 +154,13 @@ function setupBackendMock($httpBackend)
             return [404];
         }
     });
-    $httpBackend.whenPUT(/\/rest\/v1\/comments$/).respond(function (method, url, jsonParams)
+    $httpBackend.whenPUT(/\/rest\/v1\/comments$/).respond(function ()
     {
         return [200];
     });
 
 
-    $httpBackend.whenGET('/rest/v1/commentgroups').respond(function (method, url)
+    $httpBackend.whenGET('/rest/v1/commentgroups').respond(function ()
     {
         return [200, commentsGroup];
     });
@@ -159,13 +168,13 @@ function setupBackendMock($httpBackend)
     {
         return [200, [{id: 2, name: 'FirstDefect', groupId: 2, createdDate: new Date().getTime()}]];
     });
-    $httpBackend.whenGET(/\/rest\/v1\/commentgroups\/(\d+)$/).respond(function (method, url, jsonParams)
+    $httpBackend.whenGET(/\/rest\/v1\/commentgroups\/(\d+)$/).respond(function (method, url)
     {
         var match = /\/rest\/v1\/commentgroups\/(\d+)$/.exec(url);
         return [200, commentsGroup[match[1] - 1]];
 
     });
-    $httpBackend.whenGET(/rest\/v1\/commentgroups\/(\d+)\/comments/).respond(function (method,url)
+    $httpBackend.whenGET(/rest\/v1\/commentgroups\/(\d+)\/comments/).respond(function ()
     {
         return [200, []];
     });
@@ -179,6 +188,15 @@ function setupBackendMock($httpBackend)
     {
         return [200, productsGroup];
     });
+
+    $httpBackend.whenPUT( '/rest/v1/lineviewsettings' ).respond( function( method, url, json ) {
+        lineViewSettings = JSON.parse( json );
+        return [ 200 ];
+    } );
+    $httpBackend.whenGET( '/rest/v1/lineviewsettings' ).respond( function() {
+        return [ 200, lineViewSettings ];
+    } );
+
 
     $httpBackend.whenGET(/.*\.html/).passThrough();
     $httpBackend.whenGET(/\/rest\/v1\?|\/.*/).passThrough();

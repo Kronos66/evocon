@@ -1,0 +1,149 @@
+<div class="container adminContent">
+    <admin-menu></admin-menu>
+    <section>
+        <div class="row section-row">
+            <div class="col-xs-12">
+                <h1 class="title">Production / Line view settings</h1>
+            </div>
+        </div>
+        <div class="row section-row">
+            <div class="col-xs-12">
+                <h2 class="title">Line view color mode</h2>
+            </div>
+        </div>
+        <div class="row section-row">
+            <div class="col-xs-12 colors">
+                <input name="color-mode" id="simple" class="radio" type="radio" ng-model="PC.settings.colormode" value="0">
+                <label for="simple">
+                    <span class="color-square green"></span>
+                    <span class="color-square yellow"></span>
+                    <span class="color-square red"></span>
+                    Simple
+                </label>
+                <input name="color-mode" id="detailed" class="radio" type="radio" ng-model="PC.settings.colormode" value="1">
+                <label for="detailed">
+                    <span class="color-square green"></span>
+                    <span class="color-square yellow"></span>
+                    <span class="color-square orange"></span>
+                    <span class="color-square red"></span>
+                    <span class="color-square purple"></span>
+                    <span class="color-square grey"></span>
+                    <span class="color-square blue"></span>
+                    Detailed
+                </label>
+            </div>
+        </div>
+    </section>
+    <section>
+        <div class="row section-row">
+            <div class="col-xs-12">
+                <h2 class="title">Production speed marker limits</h2>
+            </div>
+        </div>
+        <div class="row section-row">
+            <div class="col-xs-12">
+                <div class="range-bar">
+                    <div class="part">
+                        <div class="bar light-green">
+                            <p>TOO FAST</p>
+                        </div>
+                    </div>
+                    <div class="part">
+                        <div class="bar green">
+                            <p>NORMAL</p>
+                        </div>
+                        <div class="values">
+                            <input type="number" ng-model="PC.settings.normalMarker" />
+                        </div>
+                    </div>
+                    <div class="part">
+                        <div class="bar yellow">
+                            <p>SLOW</p>
+                        </div>
+                        <div class="values">
+                            <input type="number" ng-model="PC.settings.slowMarker" />
+                        </div>
+                    </div>
+                    <div class="part">
+                        <div class="bar orange">
+                            <p>TOO SLOW</p>
+                        </div>
+                        <div class="values">
+                            <input type="number" ng-model="PC.settings.extraSlowMarker" />
+                            <span class="pull-right">%</span>
+                            <input type="number" class="pull-right" ng-model="PC.settings.stoppageMarker" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section>
+        <div class="row section-row">
+            <div class="col-xs-12">
+                <h2 class="title">Production EFF marker</h2>
+            </div>
+        </div>
+        <div class="row section-row">
+            <div class="col-xs-12">
+                <div class="range-bar">
+                    <div class="part">
+                        <div class="bar">
+                            <div class="mascot">
+                                <div class="image">
+                                    <div class="img"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="values">0</div>
+                    </div>
+                    <div class="part">
+                        <div class="bar">
+                            <div class="mascot">
+                                <div class="image">
+                                    <div class="img"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="values">
+                            <input type="number" ng-model="PC.settings.effLowLimit" />
+                        </div>
+                    </div>
+                    <div class="part">
+                        <div class="bar">
+                            <div class="mascot">
+                                <div class="image">
+                                    <div class="img"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="values">
+                            <input type="number" ng-model="PC.settings.effMediumLimit" />
+                        </div>
+                    </div>
+                    <div class="part">
+                        <div class="bar">
+                            <div class="mascot">
+                                <div class="image">
+                                    <div class="img"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="values">
+                            <input type="number" ng-model="PC.settings.effHighLimit" />
+                            %
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="no-bordered">
+        <div class="row section-row">
+            <div class="col-xs-12 text-center">
+                <span class="button button-submit">save</span>
+            </div>
+        </div>
+    </section>
+
+</div>

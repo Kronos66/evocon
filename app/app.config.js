@@ -27,10 +27,10 @@
         }).when('/productsgroup', {
             templateUrl: 'admin/views/productsGroup/productsGroup.tpl.html',
             controller: 'ProductsGroupController as groupCtrl'
-        }).otherwise({
-            templateUrl: 'admin/views/commentsGroup/commentsGroup.tpl.html', controller: 'commentsGroupController as groupController'
         }).when('/defects', {
             templateUrl: 'admin/views/defects/defects.tpl.html', controller: 'defectsController as defectsCtrl'
+        }).when('/production', {
+            templateUrl: 'admin/views/production/production.tpl.html', controller: 'productionController as PC'
         }).otherwise({
             redirectTo: '/'
         });
