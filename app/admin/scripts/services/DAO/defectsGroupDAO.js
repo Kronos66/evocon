@@ -4,7 +4,7 @@
 
     function defectsGroupDAO($resource)
     {
-        var api = $resource('/rest/v1/defectgroups/:id', {id: '@id'}, {
+        var api = $resource('/rest/v1/defectsgroups/:id', {id: '@id'}, {
             query: {isArray: true, method: 'GET'}, update: {method: 'PUT'}, get: {isArray: false, method: 'GET'}
         });
 

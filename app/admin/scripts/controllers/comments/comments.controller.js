@@ -4,9 +4,6 @@
     function CommentsController($modal, CommentsDAO, CommentsGroupDAO)
     {
         var ctrl = this;
-        this.filter = {query: null, size: 10};
-        this.listFilter = {size: 10};
-        this.currentPage = 1;
         var refresh = function ()
         {
             CommentsDAO.query().then(function (result)
@@ -14,7 +11,8 @@
                 ctrl.comments = result;
             });
         };
-        var actionsTemplate = '<a class="button link" ng-click="grid.appScope.commentsController.editRow(row.entity)">{{\'edit\'|translate}}</a>\n<a class="button link" ng-click="grid.appScope.commentsController.deleteRow(row.entity.id)">{{\'delete\'|translate}}</a>';
+        var actionsTemplate = '<a class="button link" ng-click="grid.appScope.commentsController.editRow(row.entity)">{{\'edit\'|translate}}</a>' +
+                '<a class="button link" ng-click="grid.appScope.commentsController.deleteRow(row.entity.id)">{{\'delete\'|translate}}</a>';
 
         this.gridOptions = {
             enableRowHashing: false,
@@ -41,7 +39,7 @@
                 templateUrl: 'admin/views/commentsGroup/editOrCreateModal.tpl.html',
                 backdrop: 'static',
                 keyboard: false,
-                controller: 'modalGroupCommentsController',
+                controller: 'addGroup',
                 controllerAs: 'modal',
                 resolve: {
                     row: function ()
@@ -50,7 +48,6 @@
                     }
                 }
             });
-
             modalInstance.result.then(CommentsGroupDAO.save).then(refresh);
         };
         this.addRow = function ()
@@ -87,11 +84,7 @@
                 }
             });
 
-            modalInstance.result.then(function (result)
-            {
-                console.log(result);
-                CommentsDAO.update(result);
-            }).then(refresh);
+            modalInstance.result.then(CommentsDAO.update).then(refresh);
         };
         this.deleteRow = function (id)
         {
@@ -105,7 +98,7 @@
                 backdrop: 'static',
                 keyboard: false,
                 size: 'lg',
-                controller: 'modalMergeController',
+                controller: 'modalMergeCommentsController',
                 controllerAs: 'modal'
             });
             modalInstance.result.then(CommentsDAO.merge).then(refresh);

@@ -10,10 +10,8 @@
                                                'ui.grid',
                                                'ui.grid.selection',
                                                'ui.grid.pagination']);
-    module.config(function ($provide, $translateProvider, $routeProvider, paginationSupportProvider)
+    module.config(function ($provide, $translateProvider, $routeProvider)
     {
-        paginationSupportProvider.setDefaultConfig({maxResultsProperty: 'size', firstResultProperty: 'from'});
-
 
         $provide.decorator('$httpBackend', angular.mock.e2e.$httpBackendDecorator);
         $routeProvider.when('/', {

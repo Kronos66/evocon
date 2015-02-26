@@ -4,9 +4,6 @@
     function CommentsGroupController($modal, $scope, CommentsDAO, CommentsGroupDAO)
     {
         var ctrl = this;
-        this.filter = {query: null, size: 10};
-        this.listFilter = {size: 10};
-        this.currentPage = 1;
         var selectedGroup;
         var refresh = function ()
         {
@@ -15,7 +12,10 @@
                 ctrl.commentsGroup = result;
             });
         };
-        var actionsTemplate = '<a class="button link" ng-click="$event.stopPropagation();grid.appScope.groupController.editRow(row.entity)">{{\'edit\'|translate}}</a>\n<a class="button link" ng-click="$event.stopPropagation();grid.appScope.groupController.deleteRow(row.entity.id)">{{\'delete\'|translate}}</a>';
+        var actionsTemplate = '<a class="button link" ng-click="$event.stopPropagation();grid.appScope.groupController.editRow(row.entity)">' +
+                '{{\'edit\'|translate}}</a>' +
+                '<a class="button link" ng-click="$event.stopPropagation();grid.appScope.groupController.deleteRow(row.entity.id)">' +
+                '{{\'delete\'|translate}}</a>';
         this.gridOptions = {
             enableRowHeaderSelection: false,
             enableRowSelection: true,
@@ -43,7 +43,6 @@
                     selectedGroup = row.entity.id;
                     CommentsGroupDAO.getComments(row.entity.id).then(function (result)
                     {
-                        console.log('work');
                         ctrl.visibled = true;
                         ctrl.commentsInGroup = result;
                     });
@@ -51,11 +50,12 @@
                     ctrl.visibled = false;
                     selectedGroup = '';
                 }
-                console.log(ctrl.visibled);
             });
         };
         this.gridOptions2 = {
-            data: 'groupController.commentsInGroup', paginationPageSizes: [10, 20, 30], paginationPageSize: 10
+            data: 'groupController.commentsInGroup',
+            paginationPageSizes: [10, 20, 30],
+            paginationPageSize: 10
         };
 
         this.editRow = function (row)
@@ -64,12 +64,12 @@
                 templateUrl: 'admin/views/commentsGroup/editOrCreateModal.tpl.html',
                 backdrop: 'static',
                 keyboard: false,
-                controller: 'modalGroupCommentsController',
+                controller: 'addGroup',
                 controllerAs: 'modal',
                 resolve: {
                     row: function ()
                     {
-                        return row;
+                        return angular.extend({},row);
                     }
                 }
             });
@@ -82,7 +82,7 @@
                 templateUrl: 'admin/views/commentsGroup/editOrCreateModal.tpl.html',
                 backdrop: 'static',
                 keyboard: false,
-                controller: 'modalGroupCommentsController',
+                controller: 'addGroup',
                 controllerAs: 'modal',
                 resolve: {
                     row: function ()
@@ -93,18 +93,6 @@
             });
 
             modalInstance.result.then(CommentsGroupDAO.save).then(refresh);
-        };
-        this.selectGroup = function (id)
-        {
-            if (selectedGroup !== id) {
-                selectedGroup = id;
-            } else {
-                selectedGroup = '';
-            }
-        };
-        this.checkSelected = function (id)
-        {
-            return selectedGroup === id;
         };
         this.newComments = function ()
         {

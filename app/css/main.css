@@ -17,7 +17,8 @@
     border: 1px solid rgb(212, 212, 212);
     width: 101%;
     max-width: 800px;
-    height: 300px
+    height: 101%;
+    max-height: 300px;
 }
 
 .confirm {

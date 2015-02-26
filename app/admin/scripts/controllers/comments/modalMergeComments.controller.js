@@ -43,5 +43,5 @@
 
     }
 
-    angular.module('evoReports').controller('modalMergeController', ['$scope', 'CommentsDAO', ModalMergeController]);
+    angular.module('evoReports').controller('modalMergeCommentsController', ['$scope', 'CommentsDAO', ModalMergeController]);
 })();

@@ -18,7 +18,8 @@ module.exports = function (grunt)
     var appConfig = {
         app: require('./bower.json').appPath || 'app', dist: 'dist'
     };
-
+    require('grunt-connect-proxy');
+    grunt.loadNpmTasks('grunt-connect-proxy');
     // Define the configuration for all the tasks
     grunt.initConfig({
 
@@ -50,8 +51,23 @@ module.exports = function (grunt)
         connect: {
             options: {
                 port: 9000, // Change this to '0.0.0.0' to access the server from outside.
-                hostname: 'localhost', livereload: 35729
+                hostname: '*',
+                livereload: 35729
             },
+            proxies: [
+                {
+                    context: ['/EvoconReportingServer'],
+                    host: 'ec2-54-171-253-111.eu-west-1.compute.amazonaws.com',
+                    port: 9080,
+                    changeOrigin:true,
+                    https: false,
+                    headers: {
+                        'Authorization': 'Token token',
+                        'host': 'ec2-54-171-253-111.eu-west-1.compute.amazonaws.com',
+                        'Content-Type':'application/json'
+                    }
+                }
+            ],
 
             livereload: {
                 options: {
@@ -59,7 +75,8 @@ module.exports = function (grunt)
                     {
                         return [connect.static('.tmp'),
                                 connect().use('/bower_components', connect.static('./bower_components')),
-                                connect.static(appConfig.app)];
+                                connect.static(appConfig.app),
+                                require('grunt-connect-proxy/lib/utils').proxyRequest];
                     }
                 }
             }, test: {
@@ -177,7 +194,7 @@ module.exports = function (grunt)
         if (target === 'dist') {
             return grunt.task.run(['build', 'connect:dist:keepalive', 'configureProxies:server']);
         }
-        grunt.task.run(['clean:server', 'wiredep', 'concurrent:server', 'autoprefixer', 'connect:livereload', 'watch']);
+        grunt.task.run(['clean:server', 'wiredep', 'concurrent:server','configureProxies:server','autoprefixer', 'connect:livereload', 'watch']);
     });
 
     grunt.registerTask('server', 'DEPRECATED TASK. Use the "serve" task instead', function (target)

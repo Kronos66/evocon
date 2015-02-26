@@ -165,7 +165,7 @@ function setupBackendMock($httpBackend)
         return [200, commentsGroup[match[1] - 1]];
 
     });
-    $httpBackend.whenGET(/rest\/v1\/commentgroups\/(\d+)\/comments/).respond(function ()
+    $httpBackend.whenGET(/rest\/v1\/commentgroups\/(\d+)\/comments/).respond(function (method,url)
     {
         return [200, []];
     });

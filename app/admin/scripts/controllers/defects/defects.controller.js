@@ -3,7 +3,9 @@
     'use strict';
     function DefectsController($modal, DefectsDAO, DefectsGroupDAO)
     {
-        var actionsTemplate = '<a class="button link" ng-click="grid.appScope.defectsCtrl.editRow(row.entity)">{{\'edit\'|translate}}</a>\n<a class="button link" ng-click="grid.appScope.defectsCtrl.deleteRow(row.entity.id)">{{\'delete\'|translate}}</a>\n<a class="button link" ng-click="grid.appScope.defectsCtrl.stationRow(row.entity.id)">{{\'stations\'|translate}}</a>';
+        var actionsTemplate = '<a class="button link" ng-click="grid.appScope.defectsCtrl.editRow(row.entity)">{{\'edit\'|translate}}</a>' +
+                '<a class="button link" ng-click="grid.appScope.defectsCtrl.deleteRow(row.entity.id)">{{\'delete\'|translate}}</a>' +
+                '<a class="button link" ng-click="grid.appScope.defectsCtrl.stationRow(row.entity.id)">{{\'stations\'|translate}}</a>';
         var ctrl = this;
         var refresh = function ()
         {
@@ -27,7 +29,7 @@
                          }, {
                              field: 'color', displayName: 'Color'
                          }, {
-                            width:280, minWidth: 300, displayName: 'Actions', field: 'remove', cellTemplate: actionsTemplate
+                             width: 280, minWidth: 300, displayName: 'Actions', field: 'remove', cellTemplate: actionsTemplate
                          }]
         };
         this.newGroup = function ()
@@ -37,7 +39,7 @@
                 templateUrl: 'admin/views/commentsGroup/editOrCreateModal.tpl.html',
                 backdrop: 'static',
                 keyboard: false,
-                controller: 'modalGroupCommentsController',
+                controller: 'addGroup',
                 controllerAs: 'modal',
                 resolve: {
                     row: function ()
@@ -89,9 +91,20 @@
 
             modalInstance.result.then(function (result)
             {
-                result.groupComments = result.groupComments.id;
                 DefectsDAO.update(result);
             }).then(refresh);
+        };
+        this.mergeDefects = function ()
+        {
+            var modalInstance = $modal.open({
+                size:'lg',
+                templateUrl: 'admin/views/defects/mergeModal.tpl.html',
+                backdrop: 'static',
+                keyboard: false,
+                controller: 'modalMergeDefectsDefects',
+                controllerAs: 'modal'
+            });
+            modalInstance.result.then(DefectsDAO.merge).then(refresh);
         };
         this.stationRow = function ()
         {
