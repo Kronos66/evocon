@@ -4,8 +4,10 @@
 
     function defectsGroupDAO($resource)
     {
-        var api = $resource('/rest/v1/defectsgroups/:id', {id: '@id'}, {
-            query: {isArray: true, method: 'GET'}, update: {method: 'PUT'}, get: {isArray: false, method: 'GET'}
+        var api = $resource('/EvoconReportingServer/rest/v1/defectgroups/:id/:defects', {id: '@id'}, {
+            query: {isArray: true, method: 'GET'},
+            update: {method: 'PUT'},
+            get: {isArray: false, method: 'GET'}
         });
 
         return {
@@ -28,6 +30,10 @@
             remove: function (id)
             {
                 return api.remove({id: id}).$promise;
+            },
+            getDefects: function (id)
+            {
+                return api.query({id: id, defects: 'defects'}).$promise;
             }
         };
     }

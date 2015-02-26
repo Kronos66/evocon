@@ -201,5 +201,7 @@ function setupBackendMock($httpBackend)
     $httpBackend.whenGET(/.*\.html/).passThrough();
     $httpBackend.whenGET(/\/rest\/v1\?|\/.*/).passThrough();
     $httpBackend.whenPOST(/\/rest\/v1\?|\/.*/).passThrough();
+    $httpBackend.whenPUT(/\/rest\/v1\?|\/.*/).passThrough();
+    $httpBackend.whenDELETE(/\/rest\/v1\?|\/.*/).passThrough();
 }
 

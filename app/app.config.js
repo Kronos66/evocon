@@ -9,7 +9,8 @@
                                                'angularSpectrumColorpicker',
                                                'ui.grid',
                                                'ui.grid.selection',
-                                               'ui.grid.pagination']);
+                                               'ui.grid.pagination',
+                                               'angularMoment']);
     module.config(function ($provide, $translateProvider, $routeProvider)
     {
 
@@ -19,18 +20,19 @@
         }).when('/comments', {
             templateUrl: 'admin/views/comments/comments.tpl.html', controller: 'commentsController as commentsController'
         }).when('/commentsgroup', {
-            templateUrl: 'admin/views/commentsGroup/commentsGroup.tpl.html',
-            controller: 'commentsGroupController as groupController'
+            templateUrl: 'admin/views/commentsGroup/commentsGroup.tpl.html', controller: 'commentsGroupController as groupCtrl'
         }).when('/products', {
-            templateUrl: 'admin/views/products/products.tpl.html',
-            controller: 'ProductsController as productsCtrl'
+            templateUrl: 'admin/views/products/products.tpl.html', controller: 'ProductsController as productsCtrl'
         }).when('/productsgroup', {
-            templateUrl: 'admin/views/productsGroup/productsGroup.tpl.html',
-            controller: 'ProductsGroupController as groupCtrl'
+            templateUrl: 'admin/views/productsGroup/productsGroup.tpl.html', controller: 'ProductsGroupController as groupCtrl'
         }).when('/defects', {
             templateUrl: 'admin/views/defects/defects.tpl.html', controller: 'defectsController as defectsCtrl'
+        }).when('/defectsgroup', {
+            templateUrl: 'admin/views/defectsGroup/defectsGroup.tpl.html', controller: 'defectsGroupController as groupCtrl'
         }).when('/production', {
             templateUrl: 'admin/views/production/production.tpl.html', controller: 'productionController as PC'
+        }).when('/calendar', {
+            templateUrl: 'admin/views/calendar/calendar.tpl.html', controller: 'calendarController as calendarController'
         }).otherwise({
             redirectTo: '/'
         });
@@ -68,7 +70,9 @@
             'description': 'Description',
             'controls': 'Controls',
             'stations': 'Stations',
-            'orderIndex': 'Order index'
+            'orderIndex': 'Order index',
+            'defectsGroup': 'Defects group',
+            'calendar':'Calendar'
         });
     });
 

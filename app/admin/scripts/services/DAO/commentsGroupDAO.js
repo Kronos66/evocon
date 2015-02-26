@@ -4,7 +4,9 @@
     function commentsGroupDAO($resource)
     {
         var api = $resource('/rest/v1/commentgroups/:id/:comments', {id: '@id'}, {
-            query: {isArray: true, method: 'GET'}, update: {method: 'PUT'}, get: {isArray: false, method: 'GET'}
+            query: {isArray: true, method: 'GET'},
+            update: {method: 'PUT'},
+            get: {isArray: false, method: 'GET'}
         });
 
         return {

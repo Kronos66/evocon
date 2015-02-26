@@ -4,7 +4,7 @@
 
     function ProductsGroupDAO($resource)
     {
-        var api = $resource('/rest/v1/productgroups/:id/:action', {id: '@id'}, {
+        var api = $resource('/EvoconReportingServer/rest/v1/productgroups/:id/:action', {id: '@id'}, {
             query: {isArray: true, method: 'GET'},
             get: {isArray: false, method: 'GET'},
             update: {method: 'PUT'},

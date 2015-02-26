@@ -5,7 +5,7 @@
     function defectsDAO($resource)
     {
         var api = $resource('/EvoconReportingServer/rest/v1/defects/:id', {id: '@id'}, {
-            query: {isArray: true, method: 'GET', headers:{authorization:'Token token'}},
+            query: {isArray: true, method: 'GET'},
             update: {method: 'PUT'},
             merge: {method: 'PUT'}
         });
