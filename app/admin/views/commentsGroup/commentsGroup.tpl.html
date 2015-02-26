@@ -12,33 +12,43 @@
                 </div>
             </div>
         </div>
-
-        <table class="statsTable">
-            <thead>
-            <tr>
-                <th class="highlighted">{{'name'|translate}}</th>
-                <th>{{'commentOrdering'|translate}}</th>
-                <th>{{'color'|translate}}</th>
-                <th>{{'actions'|translate}}</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr class="data" ng-class="{selected:groupController.checkSelected(commentGroup.id)}"
-                ng-repeat="commentGroup in groupController.commentsGroup |startFrom:(groupController.currentPage-1)*groupController.listFilter.size | limitTo: groupController.listFilter.size">
-                <td ng-click="groupController.selectGroup(commentGroup.id)">{{commentGroup.name}}</td>
-                <td ng-click="groupController.selectGroup(commentGroup.id)">{{commentGroup.ordering}}</td>
-                <td ng-click="groupController.selectGroup(commentGroup.id)">{{commentGroup.color}}</td>
-                <td class="actions">
-                <span class="buttonActions">
-                    <a class="button link" ng-click="groupController.editRow(commentGroup)">{{'edit'|translate}}</a>
-                    <a class="button link" ng-click="groupController.deleteRow(commentGroup.id)">{{'delete'|translate}}</a>
-                </span>
-                </td>
-            </tr>
-            </tbody>
-        </table>
-        <pagination class="pull-right pagination-sm" ng-model="groupController.currentPage" total-items="groupController.resultCount"
-                    items-per-page="groupController.listFilter.size" max-size="10" boundary-links="true" previous-text="{{'previous'|translate}}"
-                    next-text="{{'next'|translate}}" first-text="{{'first'|translate}}" last-text="{{'last'|translate}}"></pagination>
+        <div ui-grid="groupController.gridOptions" ui-grid-pagination ui-grid-selection></div>
+        <!--<table class="statsTable">-->
+        <!--<thead>-->
+        <!--<tr>-->
+        <!--<th class="highlighted">{{'name'|translate}}</th>-->
+        <!--<th>{{'commentOrdering'|translate}}</th>-->
+        <!--<th>{{'color'|translate}}</th>-->
+        <!--<th>{{'actions'|translate}}</th>-->
+        <!--</tr>-->
+        <!--</thead>-->
+        <!--<tbody>-->
+        <!--<tr class="data" ng-class="{selected:groupController.checkSelected(commentGroup.id)}"-->
+        <!--ng-repeat="commentGroup in groupController.commentsGroup |startFrom:(groupController.currentPage-1)*groupController.listFilter.size | limitTo: groupController.listFilter.size">-->
+        <!--<td ng-click="groupController.selectGroup(commentGroup.id)">{{commentGroup.name}}</td>-->
+        <!--<td ng-click="groupController.selectGroup(commentGroup.id)">{{commentGroup.ordering}}</td>-->
+        <!--<td ng-click="groupController.selectGroup(commentGroup.id)">{{commentGroup.color}}</td>-->
+        <!--<td class="actions">-->
+        <!--<span class="buttonActions">-->
+        <!--<a class="button link" ng-click="groupController.editRow(commentGroup)">{{'edit'|translate}}</a>-->
+        <!--<a class="button link" ng-click="groupController.deleteRow(commentGroup.id)">{{'delete'|translate}}</a>-->
+        <!--</span>-->
+        <!--</td>-->
+        <!--</tr>-->
+        <!--</tbody>-->
+        <!--</table>-->
+        <!--<pagination class="pull-right pagination-sm" ng-model="groupController.currentPage" total-items="groupController.resultCount"-->
+        <!--items-per-page="groupController.listFilter.size" max-size="10" boundary-links="true" previous-text="{{'previous'|translate}}"-->
+        <!--next-text="{{'next'|translate}}" first-text="{{'first'|translate}}" last-text="{{'last'|translate}}"></pagination>-->
+    </section>
+    <section class="no-bordered">
+        <div ng-if="groupController.visibled">
+            <div class="row section-row">
+                <div class="col-xs-12">
+                    <h1 class="title">Comments in selected group:</h1>
+                </div>
+            </div>
+            <div ui-grid="groupController.gridOptions2" ui-grid-pagination></div>
+        </div>
     </section>
 </div>

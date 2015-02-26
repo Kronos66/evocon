@@ -157,13 +157,17 @@ function setupBackendMock($httpBackend)
     });
     $httpBackend.whenGET('/rest/v1/defects').respond(function ()
     {
-       return [200,[{id:2, name:'FirstDefect',groupId:2,createdDate:new Date().getTime()}]];
+        return [200, [{id: 2, name: 'FirstDefect', groupId: 2, createdDate: new Date().getTime()}]];
     });
     $httpBackend.whenGET(/\/rest\/v1\/commentgroups\/(\d+)$/).respond(function (method, url, jsonParams)
     {
         var match = /\/rest\/v1\/commentgroups\/(\d+)$/.exec(url);
-        return [200, commentsGroup[match[1]-1]];
+        return [200, commentsGroup[match[1] - 1]];
 
+    });
+    $httpBackend.whenGET(/rest\/v1\/commentgroups\/(\d+)\/comments/).respond(function ()
+    {
+        return [200, []];
     });
 
     $httpBackend.whenGET('/rest/v1/products').respond(function ()

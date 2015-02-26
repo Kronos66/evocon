@@ -1,20 +1,35 @@
 (function ()
 {
     'use strict';
-    function DefectsController($modal,DefectsDAO,DefectsGroupDAO,paginationSupport){
+    function DefectsController($modal, DefectsDAO, DefectsGroupDAO)
+    {
+        var actionsTemplate = '<a class="button link" ng-click="grid.appScope.defectsCtrl.editRow(row.entity)">{{\'edit\'|translate}}</a>\n<a class="button link" ng-click="grid.appScope.defectsCtrl.deleteRow(row.entity.id)">{{\'delete\'|translate}}</a>\n<a class="button link" ng-click="grid.appScope.defectsCtrl.stationRow(row.entity.id)">{{\'stations\'|translate}}</a>';
         var ctrl = this;
-        this.filter = {query: null, size: 10};
-        this.listFilter = {size: 10};
-        this.currentPage = 1;
-        var refresh = paginationSupport(ctrl.filter, function (callback)
+        var refresh = function ()
         {
             DefectsDAO.query().then(function (result)
             {
                 ctrl.defects = result;
-                ctrl.resultCount = result.length;
-                callback(result.length);
             });
-        });
+        };
+        this.gridOptions = {
+            enableRowHashing: false,
+            data: 'defectsCtrl.defects',
+            paginationPageSizes: [10, 20, 30],
+            paginationPageSize: 10,
+            enableRowHeaderSelection: false,
+            columnDefs: [{
+                             field: 'name', displayName: 'Name'
+                         }, {
+                             field: 'groupId', displayName: 'Group'
+                         }, {
+                             field: 'category', displayName: 'Category'
+                         }, {
+                             field: 'color', displayName: 'Color'
+                         }, {
+                            width:280, minWidth: 300, displayName: 'Actions', field: 'remove', cellTemplate: actionsTemplate
+                         }]
+        };
         this.newGroup = function ()
         {
             var row = {};
@@ -78,11 +93,12 @@
                 DefectsDAO.update(result);
             }).then(refresh);
         };
-        this.stationRow= function (id)
+        this.stationRow = function ()
         {
 
         };
         refresh();
     }
-    angular.module('evoReports').controller('defectsController',['$modal','DefectsDAO','DefectsGroupDAO','paginationSupport',DefectsController]);
+
+    angular.module('evoReports').controller('defectsController', ['$modal', 'DefectsDAO', 'DefectsGroupDAO', DefectsController]);
 })();

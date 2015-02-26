@@ -13,32 +13,32 @@
                 </div>
             </div>
         </div>
-
-        <table class="statsTable">
-            <thead>
-            <tr>
-                <th class="highlighted">{{'name'|translate}}</th>
-                <th>{{'description'|translate}}</th>
-                <th>{{'controls'|translate}}</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr class="data"
-                ng-repeat="defect in defectsCtrl.defects|startFrom:(defectsCtrl.currentPage-1)*defectsCtrl.listFilter.size | limitTo: defectsCtrl.listFilter.size">
-                <td>{{defect.name}}</td>
-                <td>{{defect.description}}</td>
-                <td class="actions">
-        <span class="buttonActions">
-          <a class="button link" ng-click="defectsCtrl.editRow(defect)">{{"EDIT"|translate}}</a>
-          <a class="button link" ng-click="defectsCtrl.deleteRow(defect.id)">{{"DELETE"|translate}}</a>
-          <a class="button link" ng-click="defectsCtrl.stationRow(defect.id)">{{"STATIONS"|translate}}</a>
-        </span>
-                </td>
-            </tr>
-            </tbody>
-        </table>
-        <pagination class="pull-right pagination-sm" ng-model="commentsController.currentPage" total-items="commentsController.resultCount"
-                    items-per-page="commentsController.listFilter.size" max-size="10" boundary-links="true"  previous-text="{{'previous'|translate}}"
-                    next-text="{{'next'|translate}}" first-text="{{'first'|translate}}" last-text="{{'last'|translate}}"></pagination>
+        <div ui-grid="defectsCtrl.gridOptions" ui-grid-pagination></div>
+        <!--<table class="statsTable">-->
+            <!--<thead>-->
+            <!--<tr>-->
+                <!--<th class="highlighted">{{'name'|translate}}</th>-->
+                <!--<th>{{'description'|translate}}</th>-->
+                <!--<th>{{'controls'|translate}}</th>-->
+            <!--</tr>-->
+            <!--</thead>-->
+            <!--<tbody>-->
+            <!--<tr class="data"-->
+                <!--ng-repeat="defect in defectsCtrl.defects|startFrom:(defectsCtrl.currentPage-1)*defectsCtrl.listFilter.size | limitTo: defectsCtrl.listFilter.size">-->
+                <!--<td>{{defect.name}}</td>-->
+                <!--<td>{{defect.description}}</td>-->
+                <!--<td class="actions">-->
+        <!--<span class="buttonActions">-->
+          <!--<a class="button link" ng-click="defectsCtrl.editRow(defect)">{{"EDIT"|translate}}</a>-->
+          <!--<a class="button link" ng-click="defectsCtrl.deleteRow(defect.id)">{{"DELETE"|translate}}</a>-->
+          <!--<a class="button link" ng-click="defectsCtrl.stationRow(defect.id)">{{"STATIONS"|translate}}</a>-->
+        <!--</span>-->
+                <!--</td>-->
+            <!--</tr>-->
+            <!--</tbody>-->
+        <!--</table>-->
+        <!--<pagination class="pull-right pagination-sm" ng-model="commentsController.currentPage" total-items="commentsController.resultCount"-->
+                    <!--items-per-page="commentsController.listFilter.size" max-size="10" boundary-links="true"  previous-text="{{'previous'|translate}}"-->
+                    <!--next-text="{{'next'|translate}}" first-text="{{'first'|translate}}" last-text="{{'last'|translate}}"></pagination>-->
     </section>
 </div>

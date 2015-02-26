@@ -1,22 +1,39 @@
 (function ()
 {
     'use strict';
-    function CommentsController($modal, CommentsDAO, CommentsGroupDAO, paginationSupport)
+    function CommentsController($modal, CommentsDAO, CommentsGroupDAO)
     {
         var ctrl = this;
         this.filter = {query: null, size: 10};
         this.listFilter = {size: 10};
         this.currentPage = 1;
-        var refresh = paginationSupport(ctrl.filter, function (callback)
+        var refresh = function ()
         {
             CommentsDAO.query().then(function (result)
             {
                 ctrl.comments = result;
-                ctrl.resultCount = result.length;
-                callback(result.length);
             });
-        });
+        };
+        var actionsTemplate = '<a class="button link" ng-click="grid.appScope.commentsController.editRow(row.entity)">{{\'edit\'|translate}}</a>\n<a class="button link" ng-click="grid.appScope.commentsController.deleteRow(row.entity.id)">{{\'delete\'|translate}}</a>';
 
+        this.gridOptions = {
+            enableRowHashing: false,
+            data: 'commentsController.comments',
+            paginationPageSizes: [10, 20, 30],
+            paginationPageSize: 10,
+            enableRowHeaderSelection: false,
+            columnDefs: [{
+                             field: 'name', displayName: 'Name'
+                         }, {
+                             field: 'commentsGroup', displayName: 'Group'
+                         }, {
+                             field: 'category', displayName: 'Category'
+                         }, {
+                             field: 'color', displayName: 'Color'
+                         }, {
+                             displayName: 'Actions', field: 'remove', cellTemplate: actionsTemplate
+                         }]
+        };
         this.newGroup = function ()
         {
             var row = {};
@@ -72,7 +89,7 @@
 
             modalInstance.result.then(function (result)
             {
-                result.groupComments = result.groupComments.id;
+                console.log(result);
                 CommentsDAO.update(result);
             }).then(refresh);
         };
@@ -97,5 +114,5 @@
     }
 
 
-    angular.module('evoReports').controller('commentsController', ['$modal', 'CommentsDAO', 'CommentsGroupDAO', 'paginationSupport', CommentsController]);
+    angular.module('evoReports').controller('commentsController', ['$modal', 'CommentsDAO', 'CommentsGroupDAO', CommentsController]);
 })();
