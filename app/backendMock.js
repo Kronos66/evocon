@@ -107,6 +107,45 @@ function setupBackendMock($httpBackend)
         effMediumLimit: 75,
         effHighLimit: 100
     };
+
+    var teamsSequence = 1,
+        teams = [
+            { id: teamsSequence++, name: 'Dobry Tim' },
+            { id: teamsSequence++, name: 'Slaby Tim' },
+            { id: teamsSequence++, name: 'Mocny Tim' },
+            { id: teamsSequence++, name: 'ITCrowd' }
+        ];
+
+    var opSequence = 1,
+        operators = [
+            { id: opSequence++, firstName: 'Roman', lastName: 'Polanski', barcode: 'codebar' },
+            { id: opSequence++, firstName: 'Leo', lastName: 'Messi', barcode: 'codebar' },
+            { id: opSequence++, firstName: 'Maciej', lastName: 'Makula', barcode: 'codebar' },
+            { id: opSequence++, firstName: 'Stanley', lastName: 'Kubrick', barcode: 'codebar' },
+            { id: opSequence++, firstName: 'aaa', lastName: 'aaa', barcode: 'codebar' },
+            { id: opSequence++, firstName: 'bbb', lastName: 'bbb', barcode: 'codebar' },
+            { id: opSequence++, firstName: 'ccc', lastName: 'ccc', barcode: 'codebar' },
+            { id: opSequence++, firstName: 'ddd', lastName: 'ddd', barcode: 'codebar' },
+            { id: opSequence++, firstName: 'ee', lastName: 'ee', barcode: 'codebar' },
+            { id: opSequence++, firstName: 'ff', lastName: 'ff', barcode: 'codebar' },
+            { id: opSequence++, firstName: 'gg', lastName: 'gg', barcode: 'codebar' },
+            { id: opSequence++, firstName: 'rr', lastName: 'rr', barcode: 'codebar' }
+        ];
+
+    var opMembership = [
+        { operatorId: 1, teamId: 3 },
+        { operatorId: 2, teamId: 1 },
+        { operatorId: 3, teamId: 1 },
+        { operatorId: 4, teamId: 2 },
+        { operatorId: 5, teamId: 3 },
+        { operatorId: 6, teamId: 2 },
+        { operatorId: 7, teamId: 1 },
+        { operatorId: 8, teamId: 2 },
+        { operatorId: 9, teamId: 3 },
+        { operatorId: 10, teamId: 3 },
+        { operatorId: 11, teamId: 4 },
+        { operatorId: 12, teamId: 4 }
+    ];
     $httpBackend.whenGET('/rest/v1/comments').respond(function ()
     {
         return [200, comments];
@@ -202,6 +241,29 @@ function setupBackendMock($httpBackend)
     $httpBackend.whenGET( '/rest/v1/lineviewsettings' ).respond( function() {
         return [ 200, lineViewSettings ];
     } );
+
+
+
+
+    $httpBackend.whenGET('/rest/v1/teams').respond(function (method, url, jsonParams)
+    {
+        return[ 200, teams ];
+    });
+    $httpBackend.whenGET(/\/rest\/v1\/teams\/(\d+)\/operators/).respond(function (method, url)
+    {
+        var match = /\/rest\/v1\/teams\/(\d+)\/operators/.exec(url),
+                result = [];
+
+        angular.forEach( opMembership, function( val ) {
+            if( val.teamId === parseInt( match[ 1 ] ) )
+                result.push( operators[ val.operatorId ] );
+        } );
+        return[ 200, result ];
+    });
+    $httpBackend.whenGET('/rest/v1/operators').respond(function ()
+    {
+        return[ 200, operators ];
+    });
 
 
     $httpBackend.whenGET(/.*\.html/).passThrough();
