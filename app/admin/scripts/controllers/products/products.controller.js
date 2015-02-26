@@ -1,41 +1,42 @@
 (function ()
 {
     'use strict';
-    function ProductsController($modal, ProductsDAO)
+    function ProductsController(ProductsDAO, ProductsGroupDAO)
     {
         var ctrl = this;
 
         this.products = null;
         this.resultCount = null;
 
+        var actionsTemplate = '<a class="button link" ng-href="#/product/{{row.entity.id}}">{{ \'edit\' | translate}}</a>' +
+                '<a class="button link" ng-click="grid.appScope.productsCtrl.delete(row.entity.id)">{{ \'delete\' | translate}}</a>';
+
         this.gridOptions = {
-            height: '100%',
+            enableRowHashing: false,
             data: 'productsCtrl.products',
+            paginationPageSizes: [10, 20, 30],
+            paginationPageSize: 10,
+            enableRowHeaderSelection: false,
             columnDefs: [
                 {field:'name', displayName:'Name'},
                 {field:'barcode', displayName:'Barcode'},
+                {field:'sku', displayName:'Sku'},
                 {field:'enable', displayName:'Enable'},
-                {field:'groupId', displayName:'Product Group'}
+                {field:'groupId', displayName:'Product Group'},
+                {displayName: 'Actions', field: 'remove', cellTemplate: actionsTemplate}
             ]
         };
 
-        this.newProduct = function ()
-        {
-            var row = {};
-            var modalInstance = $modal.open({
-                templateUrl: 'admin/views/products/editOrCreateModal.tpl.html',
-                backdrop: 'static',
-                keyboard: false,
-                controller: 'ModalProductsController',
-                controllerAs: 'modal',
-                resolve: {
-                    row: function ()
-                    {
-                        return row;
-                    }
-                }
-            });
-            modalInstance.result.then(ProductsDAO.save).then(refresh);
+        this.select2Options = {
+            width:'100%',
+            allowClear: true,
+            multiple: false,
+            minimumInputLength: 1,
+            maximumInputLength: 10,
+            initSelection: function ()
+            {
+
+            }
         };
 
         this.delete = function (id)
@@ -52,69 +53,14 @@
             });
         };
 
-        refresh();
+        ProductsGroupDAO.query().then(function (result)
+        {
+            ctrl.group = result;
+            ctrl.resultCount = result.length;
+        });
 
-//        this.newGroup = function ()
-//        {
-//            var row = {};
-//            var modalInstance = $modal.open({
-//                templateUrl: 'admin/views/commentsGroup/editOrCreateModal.tpl.html',
-//                backdrop: 'static',
-//                keyboard: false,
-//                controller: 'modalGroupCommentsController',
-//                controllerAs: 'modal',
-//                resolve: {
-//                    row: function ()
-//                    {
-//                        return row;
-//                    }
-//                }
-//            });
-//
-//            modalInstance.result.then(CommentsGroupDAO.save).then(refresh);
-//        };
-//
-//        this.addRow = function ()
-//        {
-//            var row = {};
-//            var modalInstance = $modal.open({
-//                templateUrl: 'admin/views/comments/editOrCreateModal.tpl.html',
-//                backdrop: 'static',
-//                keyboard: false,
-//                controller: 'modalCommentsController',
-//                controllerAs: 'modal',
-//                resolve: {
-//                    row: function ()
-//                    {
-//                        return row;
-//                    }
-//                }
-//            });
-//            modalInstance.result.then(CommentsDAO.save).then(refresh);
-//        };
-//        this.editRow = function (row)
-//        {
-//            var modalInstance = $modal.open({
-//                templateUrl: 'admin/views/comments/editOrCreateModal.tpl.html',
-//                backdrop: 'static',
-//                keyboard: false,
-//                controller: 'modalCommentsController',
-//                controllerAs: 'modal',
-//                resolve: {
-//                    row: function ()
-//                    {
-//                        return angular.extend({}, row);
-//                    }
-//                }
-//            });
-//
-//            modalInstance.result.then(function (result)
-//            {
-//                result.groupComments = result.groupComments.id;
-//                CommentsDAO.update(result);
-//            }).then(refresh);
-//        };
+        refresh();
     }
 
-    angular.module('evoReports').controller('ProductsController', ['$modal', 'ProductsDAO', ProductsController]);
+    angular.module('evoReports').controller('ProductsController', ['ProductsDAO', 'ProductsGroupDAO', ProductsController]);
 })();

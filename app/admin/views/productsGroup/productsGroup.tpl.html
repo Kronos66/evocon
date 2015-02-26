@@ -7,13 +7,22 @@
             <h3>Products Groups</h3>
         </div>
         <div class="col-md-6 text-right">
-            <button class="button center" ng-click="groupCtrl.newGroup()">New product group</button>
+            <button class="button center" ng-click="groupCtrl.newGroup()">{{ 'addProductGroup' | translate }}</button>
         </div>
     </div>
 
     <div class="row">
         <div class="col-md-12">
-            <div data-ui-grid="groupCtrl.gridOptions"></div>
+            <div data-ui-grid="groupCtrl.gridOptionsGroups" data-ui-grid-pagination data-ui-grid-selection></div>
+        </div>
+    </div>
+
+    <div class="row" ng-if="groupCtrl.visible">
+        <div class="col-md-12">
+            <h3>Products in selected groups</h3>
+        </div>
+        <div class="col-md-12">
+            <div data-ui-grid="groupCtrl.gridOptionsProducts" data-ui-grid-pagination></div>
         </div>
     </div>
 </div>

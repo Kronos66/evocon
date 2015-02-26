@@ -53,33 +53,33 @@ function setupBackendMock($httpBackend)
 
     var sequenceProduct = 0;
     var products = [
-        {id: sequenceProduct++, name: 'Product ' + sequenceProduct, barcode: 'BarCode', enabled: true, groupId: 0},
-        {id: sequenceProduct++, name: 'Product ' + sequenceProduct, barcode: 'BarCode', enabled: true, groupId: 0},
-        {id: sequenceProduct++, name: 'Product ' + sequenceProduct, barcode: 'BarCode', enabled: true, groupId: 0},
-        {id: sequenceProduct++, name: 'Product ' + sequenceProduct, barcode: 'BarCode', enabled: true, groupId: 0},
-        {id: sequenceProduct++, name: 'Product ' + sequenceProduct, barcode: 'BarCode', enabled: true, groupId: 0},
-        {id: sequenceProduct++, name: 'Product ' + sequenceProduct, barcode: 'BarCode', enabled: true, groupId: 0},
-        {id: sequenceProduct++, name: 'Product ' + sequenceProduct, barcode: 'BarCode', enabled: true, groupId: 0},
-        {id: sequenceProduct++, name: 'Product ' + sequenceProduct, barcode: 'BarCode', enabled: true, groupId: 0},
-        {id: sequenceProduct++, name: 'Product ' + sequenceProduct, barcode: 'BarCode', enabled: true, groupId: 0},
-        {id: sequenceProduct++, name: 'Product ' + sequenceProduct, barcode: 'BarCode', enabled: true, groupId: 0},
-        {id: sequenceProduct++, name: 'Product ' + sequenceProduct, barcode: 'BarCode', enabled: true, groupId: 0},
-        {id: sequenceProduct++, name: 'Product ' + sequenceProduct, barcode: 'BarCode', enabled: true, groupId: 0},
-        {id: sequenceProduct++, name: 'Product ' + sequenceProduct, barcode: 'BarCode', enabled: true, groupId: 0},
-        {id: sequenceProduct++, name: 'Product ' + sequenceProduct, barcode: 'BarCode', enabled: true, groupId: 0},
-        {id: sequenceProduct++, name: 'Product ' + sequenceProduct, barcode: 'BarCode', enabled: true, groupId: 0},
-        {id: sequenceProduct++, name: 'Product ' + sequenceProduct, barcode: 'BarCode', enabled: true, groupId: 0},
-        {id: sequenceProduct++, name: 'Product ' + sequenceProduct, barcode: 'BarCode', enabled: true, groupId: 0},
-        {id: sequenceProduct++, name: 'Product ' + sequenceProduct, barcode: 'BarCode', enabled: true, groupId: 0},
-        {id: sequenceProduct++, name: 'Product ' + sequenceProduct, barcode: 'BarCode', enabled: true, groupId: 0},
-        {id: sequenceProduct++, name: 'Product ' + sequenceProduct, barcode: 'BarCode', enabled: true, groupId: 0},
-        {id: sequenceProduct++, name: 'Product ' + sequenceProduct, barcode: 'BarCode', enabled: true, groupId: 0},
-        {id: sequenceProduct++, name: 'Product ' + sequenceProduct, barcode: 'BarCode', enabled: true, groupId: 0},
-        {id: sequenceProduct++, name: 'Product ' + sequenceProduct, barcode: 'BarCode', enabled: true, groupId: 0},
-        {id: sequenceProduct++, name: 'Product ' + sequenceProduct, barcode: 'BarCode', enabled: true, groupId: 0},
-        {id: sequenceProduct++, name: 'Product ' + sequenceProduct, barcode: 'BarCode', enabled: true, groupId: 0},
-        {id: sequenceProduct++, name: 'Product ' + sequenceProduct, barcode: 'BarCode', enabled: true, groupId: 0},
-        {id: sequenceProduct++, name: 'Product ' + sequenceProduct, barcode: 'BarCode', enabled: true, groupId: 0}
+        {id: sequenceProduct++, name: 'Product ' + sequenceProduct, barcode: 'BarCode', sku: 'Sku', enabled: true, groupId: 28},
+        {id: sequenceProduct++, name: 'Product ' + sequenceProduct, barcode: 'BarCode', sku: 'Sku', enabled: true, groupId: 1},
+        {id: sequenceProduct++, name: 'Product ' + sequenceProduct, barcode: 'BarCode', sku: 'Sku', enabled: true, groupId: 1},
+        {id: sequenceProduct++, name: 'Product ' + sequenceProduct, barcode: 'BarCode', sku: 'Sku', enabled: true, groupId: 1},
+        {id: sequenceProduct++, name: 'Product ' + sequenceProduct, barcode: 'BarCode', sku: 'Sku', enabled: true, groupId: 1},
+        {id: sequenceProduct++, name: 'Product ' + sequenceProduct, barcode: 'BarCode', sku: 'Sku', enabled: true, groupId: 1},
+        {id: sequenceProduct++, name: 'Product ' + sequenceProduct, barcode: 'BarCode', sku: 'Sku', enabled: true, groupId: 1},
+        {id: sequenceProduct++, name: 'Product ' + sequenceProduct, barcode: 'BarCode', sku: 'Sku', enabled: true, groupId: 1},
+        {id: sequenceProduct++, name: 'Product ' + sequenceProduct, barcode: 'BarCode', sku: 'Sku', enabled: true, groupId: 1},
+        {id: sequenceProduct++, name: 'Product ' + sequenceProduct, barcode: 'BarCode', sku: 'Sku', enabled: true, groupId: 1},
+        {id: sequenceProduct++, name: 'Product ' + sequenceProduct, barcode: 'BarCode', sku: 'Sku', enabled: true, groupId: 1},
+        {id: sequenceProduct++, name: 'Product ' + sequenceProduct, barcode: 'BarCode', sku: 'Sku', enabled: true, groupId: 1},
+        {id: sequenceProduct++, name: 'Product ' + sequenceProduct, barcode: 'BarCode', sku: 'Sku', enabled: true, groupId: 1},
+        {id: sequenceProduct++, name: 'Product ' + sequenceProduct, barcode: 'BarCode', sku: 'Sku', enabled: true, groupId: 1},
+        {id: sequenceProduct++, name: 'Product ' + sequenceProduct, barcode: 'BarCode', sku: 'Sku', enabled: true, groupId: 1},
+        {id: sequenceProduct++, name: 'Product ' + sequenceProduct, barcode: 'BarCode', sku: 'Sku', enabled: true, groupId: 1},
+        {id: sequenceProduct++, name: 'Product ' + sequenceProduct, barcode: 'BarCode', sku: 'Sku', enabled: true, groupId: 1},
+        {id: sequenceProduct++, name: 'Product ' + sequenceProduct, barcode: 'BarCode', sku: 'Sku', enabled: true, groupId: 1},
+        {id: sequenceProduct++, name: 'Product ' + sequenceProduct, barcode: 'BarCode', sku: 'Sku', enabled: true, groupId: 1},
+        {id: sequenceProduct++, name: 'Product ' + sequenceProduct, barcode: 'BarCode', sku: 'Sku', enabled: true, groupId: 1},
+        {id: sequenceProduct++, name: 'Product ' + sequenceProduct, barcode: 'BarCode', sku: 'Sku', enabled: true, groupId: 1},
+        {id: sequenceProduct++, name: 'Product ' + sequenceProduct, barcode: 'BarCode', sku: 'Sku', enabled: true, groupId: 1},
+        {id: sequenceProduct++, name: 'Product ' + sequenceProduct, barcode: 'BarCode', sku: 'Sku', enabled: true, groupId: 1},
+        {id: sequenceProduct++, name: 'Product ' + sequenceProduct, barcode: 'BarCode', sku: 'Sku', enabled: true, groupId: 1},
+        {id: sequenceProduct++, name: 'Product ' + sequenceProduct, barcode: 'BarCode', sku: 'Sku', enabled: true, groupId: 1},
+        {id: sequenceProduct++, name: 'Product ' + sequenceProduct, barcode: 'BarCode', sku: 'Sku', enabled: true, groupId: 1},
+        {id: sequenceProduct++, name: 'Product ' + sequenceProduct, barcode: 'BarCode', sku: 'Sku', enabled: true, groupId: 1}
     ];
 
     var sequenceProductGroup = 0;
@@ -182,6 +182,12 @@ function setupBackendMock($httpBackend)
     $httpBackend.whenGET('/rest/v1/products').respond(function ()
     {
         return [200, products];
+    });
+
+    $httpBackend.whenGET(/\/rest\/v1\/products\/(\d+)$/).respond(function (method, url)
+    {
+        var match = /\/rest\/v1\/products\/(\d+)$/.exec(url);
+        return [200, products[match[1]]];
     });
 
     $httpBackend.whenGET('/rest/v1/productgroups').respond(function ()

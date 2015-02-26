@@ -7,13 +7,13 @@
             <h3>Products</h3>
         </div>
         <div class="col-md-6 text-right">
-            <button class="button center" ng-click="productsCtrl.newProduct()">New product</button>
+            <a class="button center" ng-href="#/product/addnew">{{ 'addProduct' | translate }}</a>
         </div>
     </div>
 
     <div class="row">
         <div class="col-md-12">
-            <div data-ui-grid="productsCtrl.gridOptions"></div>
+            <div data-ui-grid="productsCtrl.gridOptions" data-ui-grid-pagination></div>
         </div>
     </div>
 </div>
