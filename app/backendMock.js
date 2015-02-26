@@ -249,6 +249,24 @@ function setupBackendMock($httpBackend)
     {
         return[ 200, teams ];
     });
+    $httpBackend.whenPOST('/rest/v1/teams').respond(function (method, url, jsonParams)
+    {
+        var data = JSON.parse(jsonParams),
+            newRow = {
+                id: teamsSequence++,
+                name: data.name
+            };
+        teams.push( newRow );
+        return[ 200, newRow ];
+    });
+    $httpBackend.whenPUT('/rest/v1/teams').respond(function (method, url, jsonParams)
+    {
+        var data = JSON.parse(jsonParams);
+
+        teams[ data.id + 1 ] = data;
+
+        return[ 200 ];
+    });
     $httpBackend.whenGET(/\/rest\/v1\/teams\/(\d+)\/operators/).respond(function (method, url)
     {
         var match = /\/rest\/v1\/teams\/(\d+)\/operators/.exec(url),
@@ -259,6 +277,13 @@ function setupBackendMock($httpBackend)
                 result.push( operators[ val.operatorId ] );
         } );
         return[ 200, result ];
+    });
+    $httpBackend.whenGET(/\/rest\/v1\/teams\/(\d+)$/).respond(function (method, url)
+    {
+        var match = /\/rest\/v1\/teams\/(\d+)\/operators/.exec(url);
+
+        delete teams[ match[ 2 ] ];
+        return[ 200 ];
     });
     $httpBackend.whenGET('/rest/v1/operators').respond(function ()
     {

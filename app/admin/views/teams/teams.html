@@ -1,0 +1,36 @@
+<div class="container adminContent">
+    <admin-menu></admin-menu>
+    <section class="no-bordered">
+        <div class="row section-row">
+            <div class="col-xs-12">
+                <h1 class="title">Teams</h1>
+                <div class="buttons">
+                    <button ng-click="newTeam()" class="button center">New team</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="row section-row">
+            <div class="col-xs-12">
+                <div class="gridStyle" ui-grid="gridOptions" ui-grid-selection ui-grid-pagination></div>
+            </div>
+        </div>
+    </section>
+
+    <section class="no-bordered" ng-if="showDDArea">
+        <div class="row section-row">
+            <div class="col-xs-6">
+                <div class="thumbnail" data-drop="true" data-jqyoui-options ng-model="membership" jqyoui-droppable style='height:200px;'>
+                    <div class="btn btn-success" ng-repeat="member in membership" data-drag="true" data-jqyoui-options ng-model="membership" jqyoui-draggable ng-hide="!member.firstName">{{member.firstName}}</div>
+                </div>
+            </div>
+            <div class="col-xs-6">
+                <div class="thumbnail" data-drop="true" data-jqyoui-options ng-model="othersOperators" jqyoui-droppable style='height:200px;'>
+                    <div class="btn btn-primary" ng-repeat="operator in othersOperators" data-drag="true" data-jqyoui-options ng-model="othersOperators" jqyoui-draggable ng-hide="!operator.firstName">{{operator.firstName}}</div>
+                </div>
+            </div>
+        </div>
+        {{membership}}<br /><br />
+        {{othersOperators}}
+    </section>
+</div>

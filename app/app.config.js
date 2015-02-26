@@ -9,7 +9,8 @@
                                                'angularSpectrumColorpicker',
                                                'ui.grid',
                                                'ui.grid.selection',
-                                               'ui.grid.pagination']);
+                                               'ui.grid.pagination',
+                                                'ngDragDrop']);
     module.config(function ($provide, $translateProvider, $routeProvider)
     {
 
