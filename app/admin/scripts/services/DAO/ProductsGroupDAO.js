@@ -8,7 +8,7 @@
             query: {isArray: true, method: 'GET'},
             get: {isArray: false, method: 'GET'},
             update: {method: 'PUT'},
-            getProducts: {method: 'GET', params: {action: 'products'}}
+            getProducts: {isArray: true, method: 'GET', params: {action: 'products'}}
         });
         return {
             query: function ()
