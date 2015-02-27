@@ -300,7 +300,7 @@ function setupBackendMock($httpBackend)
     {
         var match = /\/rest\/v1\/teams\/(\d+)\/operators\/(\d+)$/.exec(url);
 
-      console.log( 'Jesli tu bedzie blad to tylko z winy mockowanego backendu' );
+        console.log( 'Jesli tu bedzie blad to tylko z winy mockowanego backendu' );
 
         teams[ parseInt( match[ 1 ] ) ].operators.push( parseInt( match[ 2 ] ) );
 

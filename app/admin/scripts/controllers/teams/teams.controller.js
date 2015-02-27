@@ -125,6 +125,7 @@
         };
 
         var changeTeamRejection = function() {
+            console.log( 'rejection' );
             setTimeout( function() {
                 var from = ( recentlyDragged.wasMemberArea ) ? $scope.othersOperators : $scope.membership,
                     dest = ( recentlyDragged.wasMemberArea ) ? $scope.membership : $scope.othersOperators;
