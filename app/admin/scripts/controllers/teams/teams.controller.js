@@ -2,8 +2,8 @@
 {
     'use strict';
     angular.module( 'evoReports' ).controller( 'teamsController', [
-        '$scope', 'teamsDAO', 'operatorsDAO', 'operatorMembershipDAO', '$modal',
-        function( $scope, teamsDAO, operatorsDAO, operatorMembershipDAO, $modal ) {
+        '$scope', '$modal', '$timeout', 'operatorMembershipDAO', 'operatorsDAO', 'teamsDAO',
+        function( $scope, $modal, $timeout, operatorMembershipDAO, operatorsDAO, teamsDAO ) {
 
         var recentlyDragged = [],
             numb = true,
@@ -73,7 +73,7 @@
                             }
 
                             $scope.showDDArea = true;
-                            setTimeout( function() {
+                            $timeout( function() {
                                 numb = false;
                             }, 500 );
                     });
@@ -126,7 +126,7 @@
 
         var changeTeamRejection = function() {
             console.log( 'rejection' );
-            setTimeout( function() {
+            $timeout( function() {
                 var from = ( recentlyDragged.wasMemberArea ) ? $scope.othersOperators : $scope.membership,
                     dest = ( recentlyDragged.wasMemberArea ) ? $scope.membership : $scope.othersOperators;
 
@@ -135,7 +135,6 @@
                         dest.push( from.splice( i, 1 ) );
 
             }, 500 );
-
         };
 
         $scope.dragged = function( id, area ) {
@@ -146,13 +145,13 @@
         $scope.add = function() {
             if( numb ) return;
             operatorMembershipDAO.create( selectedRow, recentlyDragged.id )
-                .then( null, changeTeamRejection );
+                    .catch( changeTeamRejection );
         };
 
         $scope.remove = function() {
             if( numb ) return;
             operatorMembershipDAO.remove( selectedRow, recentlyDragged.id )
-                .then( null, changeTeamRejection );
+                .catch( changeTeamRejection );
         };
 
         refresh();
