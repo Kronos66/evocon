@@ -10,7 +10,8 @@
                                                'ui.grid',
                                                'ui.grid.selection',
                                                'ui.grid.pagination',
-                                                'ngDragDrop']);
+                                               'angularMoment',
+                                               'ngDragDrop']);
     module.config(function ($provide, $translateProvider, $routeProvider)
     {
 
@@ -45,47 +46,9 @@
                 });
 
         $translateProvider.preferredLanguage('en');
-        $translateProvider.translations('en', {
-            'merge': 'Merge',
-            'mergeComments': 'Merge comments:',
-            'addComment': 'New comment',
-            'addGroupComment': 'New comment group',
-            'addDefect': 'Add defect',
-            'addGroupDefect': 'Add group defect',
-            'select': 'Select',
-            'name': 'Name',
-            'group': 'Group',
-            'category': 'Category',
-            'color': 'Color',
-            'actions': 'Actions',
-            'edit': 'Edit',
-            'delete': 'Delete',
-            'previous': 'Previous',
-            'next': 'Next',
-            'first': 'First',
-            'last': 'Last',
-            'negative': 'Negative',
-            'save': 'Save',
-            'cancel': 'Cancel',
-            'commentOrdering': 'Comment ordering',
-            'comments': 'Comments',
-            'groupComments': 'Group comments',
-            'pause': 'Pause',
-            'standby': 'Standby',
-            'setup': 'Setup',
-            'defects': 'Defects',
-            'description': 'Description',
-            'controls': 'Controls',
-            'stations': 'Stations',
-            'orderIndex': 'Order index',
-            'defectsGroup': 'Defects group',
-            'calendar':'Calendar',
-            'addProduct': 'Add new Product',
-            'addProductGroup': 'Add new Group',
-            'editProduct': 'Edit Product',
-            'sku': 'Sku',
-            'barcode': 'Barcode',
-            'enable': 'Enable'
+        $translateProvider.useStaticFilesLoader({
+            prefix: '/resources/',
+            suffix: '.json'
         });
     });
 

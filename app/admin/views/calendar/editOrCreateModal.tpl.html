@@ -1,0 +1,31 @@
+<div>
+    <div class="modal-header"></div>
+    <form class="form-horizontal" role="form">
+        <div class="modal-body">
+            <div class="form-group">
+                <label for="name">{{'name'|translate}}:</label>
+                <input id="name" ng-model="modal.row.name">
+            </div>
+            <div class="form-group">
+                <label for="group">{{'description'|translate}}:</label>
+                <input id="group" ng-model="modal.row.description">
+            </div>
+            <div class="form-group">
+                <label for="enable">{{'enable'|translate}}:</label>
+               <select id="enable" ng-model="modal.row.enabled">
+                   <option ng-repeat="enabled in modal.enable" ng-selected="modal.checkSelectedEnabled(enabled.id)" value="{{enabled.id}}">{{enabled.value}}</option>
+               </select>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-7 text-left">
+                    <button class="btn btn-success pull-left" ng-click="$close(modal.row)"><span class="glyphicon glyphicon-ok"></span>{{'save'|translate}}</button>
+                    <button class="btn btn-danger pull-left" ng-click="$dismiss()"><span class="glyphicon glyphicon-remove"></span> {{'cancel'|translate}}
+                    </button>
+                </div>
+                <div class="col-sm-3"></div>
+            </div>
+        </div>
+    </form>
+</div>

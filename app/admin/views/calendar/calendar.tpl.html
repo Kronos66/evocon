@@ -8,11 +8,21 @@
 
                 <div class="buttons">
                     <!--<button class="button center" ng-click="commentsController.mergeComments()">{{'merge'|translate}}</button>-->
-                    <!--<button class="button center" ng-click="commentsController.addRow()">{{'addComment'|translate}}</button>-->
+                    <button class="button center" ng-click="calendarController.addCalendar()">{{'addCalendar'|translate}}</button>
                     <!--<button class="button center" ng-click="commentsController.newGroup()">{{'addGroupComment'|translate}}</button>-->
                 </div>
             </div>
         </div>
-        <!--<div ui-grid="commentsController.gridOptions" ui-grid-pagination></div>-->
+        <div ui-grid="calendarController.gridOptions" ui-grid-pagination ui-grid-selection></div>
+    </section>
+    <section class="no-bordered">
+        <div ng-if="calendarController.visible">
+            <div class="row section-row">
+                <div class="col-xs-12">
+                    <h1 class="title">Lines in selected calendar:</h1>
+                </div>
+            </div>
+            <div ui-grid="calendarController.gridOptions2" ui-grid-pagination></div>
+        </div>
     </section>
 </div>

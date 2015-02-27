@@ -1,5 +1,4 @@
-.content
-{
+.content {
     width: 100%;
     -webkit-transition: width 600ms;
     -moz-transition: width 600ms;
@@ -7,8 +6,7 @@
     transition: width 600ms;
 }
 
-.content.content-narrow
-{
+.content.content-narrow {
     width: 80%;
     transition: width .6s;
 }
@@ -17,8 +15,7 @@
     border: 1px solid rgb(212, 212, 212);
     width: 101%;
     max-width: 800px;
-    height: 100%;
-    max-height: 300px;
+    height: 300px;
 }
 
 .confirm {
@@ -52,19 +49,11 @@
     background-color: #d9534f !important;
 }
 
-
-
-
-
-
 /*
  - - - - - MENU - - - -
  */
 
-
-
-#adminMenu
-{
+#adminMenu {
     background-color: #dedfcf;
     height: 100vh;
     position: fixed;
@@ -78,23 +67,20 @@
     z-index: 9;
 }
 
-#adminMenu:hover
-{
+#adminMenu:hover {
     right: 0;
 }
 
-#adminMenu .commentsMenu
-{
+#adminMenu .commentsMenu {
     position: relative;
     margin-top: 80px;
-    height: calc( 100vh - 80px - 90px );
+    height: calc(100vh - 80px - 90px);
     width: 200px;
     overflow-y: auto;
     float: left;
 }
 
-#adminMenu .menu-title
-{
+#adminMenu .menu-title {
     position: relative;
     top: 30%;
     margin: 0 5px;
@@ -109,45 +95,37 @@
     transition: opacity 600ms;
 }
 
-#adminMenu:hover .menu-title
-{
+#adminMenu:hover .menu-title {
     opacity: 0;
 }
 
-
-#adminMenu .commentsMenu ul a
-{
+#adminMenu .commentsMenu ul a {
     font-weight: bold;
     color: #111;
 }
 
-#adminMenu .commentsMenu > ul .submenu
-{
+#adminMenu .commentsMenu > ul .submenu {
     color: #999;
     margin-bottom: 20px;
 }
 
-#adminMenu .commentsMenu ul.submenu a
-{
+#adminMenu .commentsMenu ul.submenu a {
     display: block;
     margin-bottom: 0;
     color: #999;
     cursor: pointer;
 }
 
-@media (max-width: 992px)
-{
+@media (max-width: 992px) {
     .container {
         min-width: initial;
         width: 90%;
     }
+
     .content.content-narrow {
         width: 100%;
     }
 }
-
-
-
 
 /*
  - - - - - MODAL - - - -
@@ -158,15 +136,14 @@
     position: fixed;
     padding-top: 80px;
     border: none;
-    background-color: rgba( 0, 0, 0, 0.7 );
+    background-color: rgba(0, 0, 0, 0.7);
     width: 100%;
     height: 100%;
     z-index: 100;
     overflow-y: hidden;
 }
 
-.modal-body input, .modal-body select
-{
+.modal-body input, .modal-body select {
     border: 1px solid #999 !important;
     padding: 0 6px;
     height: 40px;
@@ -178,48 +155,41 @@
     background-color: inherit !important;
 }
 
-.modal-body input[ type=checkbox ]
-{
+.modal-body input[ type=checkbox ] {
     margin: 0 20px 0 0;
     width: 20px;
     height: 20px;
 }
 
-.modal-body label
-{
+.modal-body label {
     min-width: 100px;
     line-height: 1.6;
 }
 
-.adminContent section, .adminContent .section-row
-{
+.adminContent section, .adminContent .section-row {
     position: relative;
     margin-bottom: 40px;
 }
 
-.adminContent section
-{
+.adminContent section {
     padding-top: 50px;
     padding-bottom: 30px;
     border-bottom: 1px solid #111;
     overflow: hidden;
 }
 
-.adminContent section.no-bordered
-{
+.adminContent section.no-bordered {
     border-bottom: none;
 }
 
-.adminContent .title
-{
+.adminContent .title {
     margin: 0;
     padding: 0 30px 0 0;
     display: inline;
     float: left;
 }
 
-.adminContent .buttons
-{
+.adminContent .buttons {
     display: inline;
     float: right;
 }
@@ -228,39 +198,31 @@
  - - - - TABLES - - - -
 */
 
-
-
-.adminContent tr
-{
+.adminContent tr {
     border-bottom: 1px solid #111;
 }
 
-.adminContent .statsTable th, .adminContent .statsTable td
-{
+.adminContent .statsTable th, .adminContent .statsTable td {
     border: none;
 }
 
-.adminContent .statsTable th:not( :last-child )
-{
+.adminContent .statsTable th:not( :last-child ) {
     border-right: 1px solid #fff;
 }
 
-.adminContent table.statsTable label
-{
+.adminContent table.statsTable label {
     color: inherit;
     margin: 0;
     min-width: initial;
     line-height: 1;
 }
 
-.adminContent .statsTable .highlighted
-{
+.adminContent .statsTable .highlighted {
     background: #bdbdb0;
     color: #fff;
 }
 
-.adminContent .statsTable .buttonActions a
-{
+.adminContent .statsTable .buttonActions a {
     text-transform: none;
 }
 
@@ -274,24 +236,17 @@
     min-width: 100px;
 }
 
-
-
-
-
 /*
  - - - - INPUTS - - - -
 */
 
-
-.adminContent input[ type=checkbox ], .adminContent input[ type=radio ]
-{
+.adminContent input[ type=checkbox ], .adminContent input[ type=radio ] {
     margin: 0 20px 0 0;
     width: 20px;
     height: 20px;
 }
 
-.adminContent input[ type=number ], .adminContent input[ type=text ], .adminContent select
-{
+.adminContent input[ type=number ], .adminContent input[ type=text ], .adminContent select {
     border: 1px solid #999 !important;
     padding: 0 6px;
     /*width: 100%;*/
@@ -302,40 +257,33 @@
     color: #888;
 }
 
-.adminContent label
-{
+.adminContent label {
     margin: 0 0 20px 0;
     min-width: 220px;
     line-height: 1.6;
 }
 
-.adminContent select
-{
+.adminContent select {
     background-color: inherit !important;
 }
 
-.adminContent select.short
-{
+.adminContent select.short {
     width: 100px;
 }
 
-.adminContent input[ type=number ].short, input[ type=text ].short
-{
+.adminContent input[ type=number ].short, input[ type=text ].short {
     width: 80px;
 }
 
-.select2-search input
-{
+.select2-search input {
     width: 100% !important;
 }
 
-.adminContent input.long, .adminContent select.long
-{
+.adminContent input.long, .adminContent select.long {
     max-width: 340px;
 }
 
-.adminContent .inline-input-text
-{
+.adminContent .inline-input-text {
     display: inline;
     margin-left: 30px;
     color: #bbb;
@@ -344,228 +292,191 @@
     line-height: 1.7;
 }
 
-.adminContent .label-above
-{
-    display:block;
+.adminContent .label-above {
+    display: block;
     line-height: 40px;
     color: #111;
     font-weight: bold;
     font-size: 16px;
 }
 
-.adminContent .button
-{
+.adminContent .button {
     cursor: pointer;
 }
 
-.adminContent .button-submit
-{
+.adminContent .button-submit {
     margin-top: 40px;
 }
 
-.time-inputs input:first-child
-{
+.time-inputs input:first-child {
     width: 50px;
 }
 
-.time-inputs select:nth-child( 2 )
-{
+.time-inputs select:nth-child( 2 ) {
     width: 70px;
 }
 
-.time-inputs select:nth-child( 3 )
-{
+.time-inputs select:nth-child( 3 ) {
     width: 140px;
 }
-.colors input[ type=radio ]
-{
+
+.colors input[ type=radio ] {
     display: inline-block;
     margin-right: 12px !important;
     width: 36px;
     height: 66px;
 }
 
-.colors .color-square
-{
+.colors .color-square {
     display: block;
     width: 30px;
     height: 30px;
     float: left;
 }
 
-.color-square:last-child
-{
+.color-square:last-child {
     margin-right: 10px;
 }
 
-.green
-{
+.green {
     background-color: #009900;
 }
 
-.light-green
-{
+.light-green {
     background-color: #14ff00;
 }
 
-.yellow
-{
+.yellow {
     background-color: #FFA60D;
 }
 
-.red
-{
+.red {
     background-color: #cc0033;
 }
 
-.orange
-{
+.orange {
     background-color: #cc6600;
 }
 
-.purple
-{
+.purple {
     background-color: #660099;
 }
 
-.grey
-{
+.grey {
     background-color: #666;
 }
 
-.blue
-{
+.blue {
     background-color: #0066cc;
 }
 
-.colors label
-{
+.colors label {
     margin-right: 40px;
     margin-bottom: 0;
     color: #888;
 }
 
-.range-bar
-{
+.range-bar {
     width: 75%;
 }
 
-.range-bar .part
-{
+.range-bar .part {
     box-sizing: border-box;
     border-right: 1px solid #000;
     width: 25%;
     float: left;
 }
 
-.range-bar .part:last-child
-{
+.range-bar .part:last-child {
     border-right: none;
 }
 
-.range-bar .part .bar
-{
+.range-bar .part .bar {
     width: 100%;
     min-height: 50px;
-    box-shadow: 0 0 16px rgba( 0, 0, 0, 0.7 ) inset;
+    box-shadow: 0 0 16px rgba(0, 0, 0, 0.7) inset;
 }
 
-.range-bar .part:first-child .bar
-{
+.range-bar .part:first-child .bar {
     border-top-left-radius: 6px;
     border-bottom-left-radius: 6px;
 }
 
-.range-bar .part:last-child .bar
-{
+.range-bar .part:last-child .bar {
     border-top-right-radius: 6px;
     border-bottom-right-radius: 6px;
 }
 
-.range-bar .part .bar p
-{
+.range-bar .part .bar p {
     padding-top: 10px;
     text-align: center;
     color: #111;
     font-size: 20px;
 }
 
-.range-bar .part .bar .mascot
-{
+.range-bar .part .bar .mascot {
     position: relative;
     width: 100%;
     background-color: #ddd;
     z-index: -1;
 }
 
-.range-bar .part .bar .mascot:before
-{
+.range-bar .part .bar .mascot:before {
     content: '';
     display: block;
     padding-top: 88%;
 }
 
-.range-bar .part .bar .mascot .image
-{
+.range-bar .part .bar .mascot .image {
     position: absolute;
     bottom: 0;
     width: 100%;
     height: 80%;
 }
 
-.range-bar .part .bar .mascot .image .img
-{
+.range-bar .part .bar .mascot .image .img {
     margin: 0 auto;
     width: 80%;
     height: 100%;
-    background-image: url( sprite.png );
+    background-image: url(sprite.png);
     background-size: 410%;
 }
 
-.range-bar .part:nth-child( 1 ) .bar .mascot .image .img
-{
+.range-bar .part:nth-child( 1 ) .bar .mascot .image .img {
     background-position: -194% -119%;
 }
 
-.range-bar .part:nth-child( 2 ) .bar .mascot .image .img
-{
+.range-bar .part:nth-child( 2 ) .bar .mascot .image .img {
     background-position: -96% -119%;
 }
 
-.range-bar .part:nth-child( 3 ) .bar .mascot .image .img
-{
+.range-bar .part:nth-child( 3 ) .bar .mascot .image .img {
     background-position: -2px -119%;
 }
 
-.range-bar .part:nth-child( 4 ) .bar .mascot .image .img
-{
+.range-bar .part:nth-child( 4 ) .bar .mascot .image .img {
     background-position: -194% -119%;
 }
 
-.range-bar .part .values
-{
+.range-bar .part .values {
     margin-top: 20px;
     padding-top: 10px;
     font-size: 28px;
     background: #fff;
 }
 
-.range-bar .part:first-child .values
-{
+.range-bar .part:first-child .values {
     padding-top: 10px;
 }
 
-.range-bar .part:not( :first-child ) .values
-{
+.range-bar .part:not( :first-child ) .values {
     margin-left: -38px;
 }
 
-.range-bar .part:last-child .values
-{
+.range-bar .part:last-child .values {
     margin-right: -22px;
 }
 
-footer
-{
+footer {
     z-index: 10;
 }

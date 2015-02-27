@@ -57,7 +57,6 @@
                                 isMember = false;
                             $scope.othersOperators = [];
                             for( var i=0; i<data.length; i++ ) {
-                                console.log( data[ i ].id );
                                 isMember = false;
                                 if( data[ i ] && temp.length ) {
                                     for( var j=0; j<temp.length; j++ ) {
@@ -68,7 +67,7 @@
                                         }
                                     }
                                 }
-                                if( isMember ) continue;
+                                if( isMember ){ continue;}
                                 $scope.othersOperators.push( data[ i ] );
                             }
 
@@ -100,7 +99,6 @@
         };
 
         $scope.editTeam = function( entity ) {
-            console.log( entity );
             var row = angular.extend( {}, entity );
             var modalInstance = $modal.open({
                 templateUrl: 'admin/views/teams/editTeamModal.html',
@@ -125,14 +123,15 @@
         };
 
         var changeTeamRejection = function() {
-            console.log( 'rejection' );
             $timeout( function() {
                 var from = ( recentlyDragged.wasMemberArea ) ? $scope.othersOperators : $scope.membership,
                     dest = ( recentlyDragged.wasMemberArea ) ? $scope.membership : $scope.othersOperators;
 
-                for( var i=0; i<from.length; i++ )
-                    if( from[ i ] && from[ i ].id === recentlyDragged.id )
-                        dest.push( from.splice( i, 1 ) );
+                for( var i=0; i<from.length; i++ ) {
+                    if (from[i] && from[i].id === recentlyDragged.id) {
+                        dest.push(from.splice(i, 1));
+                    }
+                }
 
             }, 500 );
         };
@@ -143,13 +142,13 @@
         };
 
         $scope.add = function() {
-            if( numb ) return;
+            if( numb ) {return;}
             operatorMembershipDAO.create( selectedRow, recentlyDragged.id )
                     .catch( changeTeamRejection );
         };
 
         $scope.remove = function() {
-            if( numb ) return;
+            if( numb ) {return;}
             operatorMembershipDAO.remove( selectedRow, recentlyDragged.id )
                 .catch( changeTeamRejection );
         };

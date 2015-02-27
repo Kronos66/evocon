@@ -1,7 +1,7 @@
 (function ()
 {
     'use strict';
-    function ModalController($moment,DefectsGroupDAO, row)
+    function ModalController(DefectsGroupDAO, row)
     {
         var ctrl = this;
         this.groupComments = [];
@@ -30,5 +30,5 @@
 
     }
 
-    angular.module('evoReports').controller('modalDefectsController', ['$moment','DefectsGroupDAO', 'row', ModalController]);
+    angular.module('evoReports').controller('modalDefectsController', ['DefectsGroupDAO', 'row', ModalController]);
 })();
