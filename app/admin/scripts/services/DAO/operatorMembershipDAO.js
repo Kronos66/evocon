@@ -17,9 +17,9 @@
             {
                 return api.query( { teamId: teamId } ).$promise;
             },
-            create: function ( teamId, data )
+            create: function ( teamId, operatorId )
             {
-                return api.create( { teamId: teamId, body: data } ).$promise;
+                return api.create( { teamId: teamId, operatorId: operatorId } ).$promise;
             },
             remove: function ( teamId, operatorId )
             {

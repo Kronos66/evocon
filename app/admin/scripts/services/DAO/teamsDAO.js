@@ -2,12 +2,12 @@
 {
     'use strict';
     angular.module( 'evoReports' ).factory( 'teamsDAO', [ '$resource', function( $resource ) {
-        var api = $resource( '/EvoconReportingServer/rest/v1/teams/:id', { id: '@id' }, {
+        var api = $resource( '/rest/v1/teams/:id', { id: '@id' }, {
             query: { method: 'GET', isArray: true },
             'get': { method: 'GET' },
             create: { method: 'POST' },
-            upadate: { method: 'PUT' },
-            'delete': { metchod: 'DELETE' }
+            update: { method: 'PUT' },
+            'delete': { method: 'DELETE' }
         } );
 
         return {

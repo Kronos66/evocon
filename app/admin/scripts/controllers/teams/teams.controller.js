@@ -5,7 +5,9 @@
         '$scope', 'teamsDAO', 'operatorsDAO', 'operatorMembershipDAO', '$modal',
         function( $scope, teamsDAO, operatorsDAO, operatorMembershipDAO, $modal ) {
 
-        var recentlySelectedRow,
+        var recentlyDragged = [],
+            numb = true,
+            selectedRow,
             refresh = function () {
                 teamsDAO.query()
                     .then( function( data ) {
@@ -38,41 +40,47 @@
 
         $scope.gridOptions.onRegisterApi = function( gridApi ) {
             gridApi.selection.on.rowSelectionChanged( $scope, function( row ) {
-                if( $scope.showDDArea && recentlySelectedRow == row.entity.id ) {
+                if( $scope.showDDArea && $scope.recentlySelectedRow === row.entity.name ) {
                     $scope.showDDArea = false;
                     return;
                 }
 
-                $scope.showDDArea = true;
-                operatorMembershipDAO.query( row.entity.id )
+                $scope.recentlySelectedRow = row.entity.name;
+                selectedRow = row.entity.id;
+                operatorMembershipDAO.query( selectedRow )
                     .then( function( data ) {
                             $scope.membership = data;
                             return operatorsDAO.query();
                     })
                     .then( function( data ) {
-                            var isMember = false;
-                            $scope.othersOperators = [];
-                            angular.forEach( data, function( opElem ){
-                                angular.forEach( $scope.membership, function( memElem ) {
-                                    if( opElem.id === memElem.id ) {
-                                        isMember = true;
-                                        return;
-                                    }
-                                } );
-                                if( !isMember )
-                                    $scope.othersOperators.push( opElem );
-
+                            var temp = $scope.membership.slice(),
                                 isMember = false;
-                            } );
+                            $scope.othersOperators = [];
+                            for( var i=0; i<data.length; i++ ) {
+                                console.log( data[ i ].id );
+                                isMember = false;
+                                if( data[ i ] && temp.length ) {
+                                    for( var j=0; j<temp.length; j++ ) {
+                                        if( temp[ j ].id === data[ i ].id ) {
+                                            isMember = true;
+                                            temp.splice( j, 1 );
+                                            break;
+                                        }
+                                    }
+                                }
+                                if( isMember ) continue;
+                                $scope.othersOperators.push( data[ i ] );
+                            }
 
-                            console.log($scope.othersOperators);
-                            console.log($scope.membership);
+                            $scope.showDDArea = true;
+                            setTimeout( function() {
+                                numb = false;
+                            }, 500 );
                     });
             } );
         };
 
-        $scope.newTeam = function()
-        {
+        $scope.newTeam = function() {
             var row = {};
             var modalInstance = $modal.open({
                 templateUrl: 'admin/views/teams/addTeamModal.html',
@@ -91,8 +99,7 @@
             modalInstance.result.then(teamsDAO.create).then(refresh);
         };
 
-        $scope.editTeam = function( entity )
-        {
+        $scope.editTeam = function( entity ) {
             console.log( entity );
             var row = angular.extend( {}, entity );
             var modalInstance = $modal.open({
@@ -112,10 +119,39 @@
             modalInstance.result.then(teamsDAO.update).then(refresh);
         };
 
-        $scope.deleteTeam = function( entity )
-        {
+        $scope.deleteTeam = function( entity ) {
             teamsDAO.delete( entity )
                     .then( refresh );
+        };
+
+        var changeTeamRejection = function() {
+            setTimeout( function() {
+                var from = ( recentlyDragged.wasMemberArea ) ? $scope.othersOperators : $scope.membership,
+                    dest = ( recentlyDragged.wasMemberArea ) ? $scope.membership : $scope.othersOperators;
+
+                for( var i=0; i<from.length; i++ )
+                    if( from[ i ] && from[ i ].id === recentlyDragged.id )
+                        dest.push( from.splice( i, 1 ) );
+
+            }, 500 );
+
+        };
+
+        $scope.dragged = function( id, area ) {
+            recentlyDragged.id = id;
+            recentlyDragged.wasMemberArea = area;
+        };
+
+        $scope.add = function() {
+            if( numb ) return;
+            operatorMembershipDAO.create( selectedRow, recentlyDragged.id )
+                .then( null, changeTeamRejection );
+        };
+
+        $scope.remove = function() {
+            if( numb ) return;
+            operatorMembershipDAO.remove( selectedRow, recentlyDragged.id )
+                .then( null, changeTeamRejection );
         };
 
         refresh();

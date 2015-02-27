@@ -108,15 +108,15 @@ function setupBackendMock($httpBackend)
         effHighLimit: 100
     };
 
-    var teamsSequence = 1,
+    var teamsSequence = 0,
         teams = [
-            { id: teamsSequence++, name: 'Dobry Tim' },
-            { id: teamsSequence++, name: 'Slaby Tim' },
-            { id: teamsSequence++, name: 'Mocny Tim' },
-            { id: teamsSequence++, name: 'ITCrowd' }
+            { id: teamsSequence++, name: 'Dobry Tim', operators: [ 10, 11 ] },
+            { id: teamsSequence++, name: 'Slaby Tim', operators: [ 1, 2, 6 ] },
+            { id: teamsSequence++, name: 'Mocny Tim', operators: [ 3, 5, 7 ] },
+            { id: teamsSequence++, name: 'ITCrowd', operators: [ 0, 4, 8, 9 ] }
         ];
 
-    var opSequence = 1,
+    var opSequence = 0,
         operators = [
             { id: opSequence++, firstName: 'Roman', lastName: 'Polanski', barcode: 'codebar' },
             { id: opSequence++, firstName: 'Leo', lastName: 'Messi', barcode: 'codebar' },
@@ -133,18 +133,18 @@ function setupBackendMock($httpBackend)
         ];
 
     var opMembership = [
-        { operatorId: 1, teamId: 3 },
+        { operatorId: 0, teamId: 3 },
+        { operatorId: 1, teamId: 1 },
         { operatorId: 2, teamId: 1 },
-        { operatorId: 3, teamId: 1 },
-        { operatorId: 4, teamId: 2 },
-        { operatorId: 5, teamId: 3 },
-        { operatorId: 6, teamId: 2 },
-        { operatorId: 7, teamId: 1 },
-        { operatorId: 8, teamId: 2 },
+        { operatorId: 3, teamId: 2 },
+        { operatorId: 4, teamId: 3 },
+        { operatorId: 5, teamId: 2 },
+        { operatorId: 6, teamId: 1 },
+        { operatorId: 7, teamId: 2 },
+        { operatorId: 8, teamId: 3 },
         { operatorId: 9, teamId: 3 },
-        { operatorId: 10, teamId: 3 },
-        { operatorId: 11, teamId: 4 },
-        { operatorId: 12, teamId: 4 }
+        { operatorId: 10, teamId: 0 },
+        { operatorId: 11, teamId: 0 }
     ];
     $httpBackend.whenGET('/rest/v1/comments').respond(function ()
     {
@@ -245,6 +245,7 @@ function setupBackendMock($httpBackend)
 
 
 
+
     $httpBackend.whenGET('/rest/v1/teams').respond(function (method, url, jsonParams)
     {
         return[ 200, teams ];
@@ -254,36 +255,89 @@ function setupBackendMock($httpBackend)
         var data = JSON.parse(jsonParams),
             newRow = {
                 id: teamsSequence++,
-                name: data.name
+                name: data.name,
+                operators: []
             };
         teams.push( newRow );
+        console.log( teams );
         return[ 200, newRow ];
     });
-    $httpBackend.whenPUT('/rest/v1/teams').respond(function (method, url, jsonParams)
+    $httpBackend.whenPUT(/\/rest\/v1\/teams\/(\d+)$/).respond(function (method, url, jsonParams)
     {
-        var data = JSON.parse(jsonParams);
+        var data = JSON.parse(jsonParams),
+            toUpdate = -1;
 
-        teams[ data.id + 1 ] = data;
+        for( var i=0; i<teams.length; i++ )
+            if( teams[ i ].id === parseInt( data.id ) ) {
+                toUpdate = i;
+                break;
+            }
+        teams[ toUpdate ] = data;
 
         return[ 200 ];
     });
+
+
     $httpBackend.whenGET(/\/rest\/v1\/teams\/(\d+)\/operators/).respond(function (method, url)
     {
         var match = /\/rest\/v1\/teams\/(\d+)\/operators/.exec(url),
-                result = [];
+            realIndex = -1,
+            result = [];
 
-        angular.forEach( opMembership, function( val ) {
-            if( val.teamId === parseInt( match[ 1 ] ) )
-                result.push( operators[ val.operatorId ] );
+        for( var i=0; i<teams.length; i++ )
+            if( teams[ i ].id === parseInt( match[ 1 ] ) ) {
+                realIndex = i;
+                break;
+            }
+
+        angular.forEach( teams[ realIndex ].operators, function( elem ) {
+            result.push( operators[ elem ] );
         } );
+
         return[ 200, result ];
     });
-    $httpBackend.whenGET(/\/rest\/v1\/teams\/(\d+)$/).respond(function (method, url)
+    $httpBackend.whenPOST(/\/rest\/v1\/teams\/(\d+)\/operators\/(\d+)$/).respond(function (method, url)
     {
-        var match = /\/rest\/v1\/teams\/(\d+)\/operators/.exec(url);
+        var match = /\/rest\/v1\/teams\/(\d+)\/operators\/(\d+)$/.exec(url);
 
-        delete teams[ match[ 2 ] ];
+      console.log( 'Jesli tu bedzie blad to tylko z winy mockowanego backendu' );
+
+        teams[ parseInt( match[ 1 ] ) ].operators.push( parseInt( match[ 2 ] ) );
+
         return[ 200 ];
+    });
+    $httpBackend.whenDELETE(/\/rest\/v1\/teams\/(\d+)\/operators\/(\d+)$/).respond(function (method, url)
+    {
+        var match = /\/rest\/v1\/teams\/(\d+)\/operators\/(\d+)$/.exec(url),
+            realIndex;
+
+        realIndex = teams[ parseInt( match[ 1 ] ) ].operators.indexOf( parseInt( match[ 2 ] ) );
+
+        if( realIndex > -1 ) {
+            teams[ parseInt( match[ 1 ] ) ].operators = teams[ parseInt( match[ 1 ] ) ].operators.splice( realIndex, 1 );
+            return[ 200 ];
+        }
+        else
+            return[ 404 ];
+    });
+    $httpBackend.whenDELETE(/\/rest\/v1\/teams\/(\d+)$/).respond(function (method, url)
+    {
+        var match = /\/rest\/v1\/teams\/(\d+)$/.exec(url);
+        var toDelete = -1;
+
+
+        for( var i=0; i<teams.length; i++ )
+            if( teams[ i ].id === parseInt( match[ 1 ] ) ) {
+                toDelete = i;
+                break;
+            }
+
+        if( toDelete > -1 ) {
+            teams.splice( toDelete, 1 );
+            return [200];
+        }
+        else
+            return [404];
     });
     $httpBackend.whenGET('/rest/v1/operators').respond(function ()
     {
