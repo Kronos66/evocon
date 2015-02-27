@@ -101,6 +101,7 @@
     float: left;
     font-size: 28px;
     text-align: center;
+    color: #666;
     opacity: 1;
     -webkit-transition: opacity 600ms;
     -moz-transition: opacity 600ms;
@@ -120,10 +121,14 @@
     color: #111;
 }
 
+#adminMenu .commentsMenu > ul > li
+{
+    margin-bottom: 20px;
+}
+
 #adminMenu .commentsMenu > ul .submenu
 {
     color: #999;
-    margin-bottom: 20px;
 }
 
 #adminMenu .commentsMenu ul.submenu a
@@ -308,7 +313,7 @@ section.no-bordered
 input, select
 {
     border: 1px solid #999 !important;
-    padding: 0 6px;
+    padding: 0 6px !important;
     height: 40px;
     width: 100%;
     border-radius: 8px;

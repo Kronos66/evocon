@@ -45,7 +45,7 @@
 
         </div>
     </div>
-    <section data-ui-view="subBar"></section>
+    <section style="display: none" data-ui-view="subBar"></section>
 
 
 </header>
@@ -57,7 +57,8 @@
 <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your
     experience.</p>
 <![endif]-->
-<div ui-view class="content fullHeight">
+
+<div style="display: none" ui-view class="content fullHeight">
 
 </div>
 <footer ng-hide="hideFooter" class="animate-hide">
@@ -73,7 +74,7 @@
     </div>
 </footer>
 
-!-- build:js(.) scripts/vendor.js -->
+<!-- build:js(.) scripts/vendor.js -->
 <!-- bower:js -->
 <script src="bower_components/jquery/dist/jquery.js"></script>
 <script src="bower_components/angular/angular.js"></script>
