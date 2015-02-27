@@ -32,7 +32,7 @@
 }
 
 .adminContent {
-    padding-top: 100px;
+    padding-top: 60px;
 }
 
 .actions {
@@ -262,6 +262,16 @@
 .adminContent .statsTable .buttonActions a
 {
     text-transform: none;
+}
+
+.thumbnail
+{
+    min-height: 150px;
+}
+
+.thumbnail .btn
+{
+    min-width: 100px;
 }
 
 

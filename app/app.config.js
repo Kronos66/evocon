@@ -1,9 +1,16 @@
 (function ()
 {
     'use strict';
-    var module = angular.module('evoReports',
-            ['ngRoute', 'ngResource', 'ui.bootstrap', 'ui.select2', 'pascalprecht.translate', 'angularSpectrumColorpicker', 'ui.grid', 'ui.grid.selection',
-             'ui.grid.pagination']);
+    var module = angular.module('evoReports', ['ngRoute',
+                                               'ngResource',
+                                               'ui.bootstrap',
+                                               'ui.select2',
+                                               'pascalprecht.translate',
+                                               'angularSpectrumColorpicker',
+                                               'ui.grid',
+                                               'ui.grid.selection',
+                                               'ui.grid.pagination',
+                                                'ngDragDrop']);
     module.config(function ($provide, $translateProvider, $routeProvider)
     {
 
@@ -31,6 +38,8 @@
                     templateUrl: 'admin/views/production/production.tpl.html', controller: 'productionController as PC'
                 }).when('/calendar', {
                     templateUrl: 'admin/views/calendar/calendar.tpl.html', controller: 'calendarController as calendarController'
+                }).when('/teams', {
+                    templateUrl: 'admin/views/teams/teams.html', controller: 'teamsController'
                 }).otherwise({
                     redirectTo: '/'
                 });

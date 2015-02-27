@@ -1,0 +1,38 @@
+<div class="container adminContent">
+    <admin-menu></admin-menu>
+    <section class="no-bordered">
+        <div class="row section-row">
+            <div class="col-xs-12">
+                <h1 class="title">Teams</h1>
+                <div class="buttons">
+                    <button ng-click="newTeam()" class="button center">New team</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="row section-row">
+            <div class="col-xs-12">
+                <div class="gridStyle" ui-grid="gridOptions" ui-grid-selection ui-grid-pagination></div>
+            </div>
+        </div>
+    </section>
+
+    <section class="no-bordered" ng-if="showDDArea">
+        <div class="row section-row">
+            <div class="col-xs-6">
+                <p class="label-for">members of {{ recentlySelectedRow }}</p>
+                <div class="thumbnail" data-drop="true" ng-model="membership" jqyoui-droppable="{multiple:true, onDrop: add()}" style='height:200px;'>
+                    <div class="btn btn-primary" ng-repeat="member in membership" data-drag="true" data-jqyoui-options="{revert: 'invalid'}"
+                         ng-model="membership" ng-mousedown="dragged( member.id, true )" jqyoui-draggable="{index: {{$index}},animate:true}" ng-hide="!member.firstName">{{member.firstName}}</div>
+                </div>
+            </div>
+            <div class="col-xs-6">
+                <p class="label-for">others operators</p>
+                <div class="thumbnail" data-drop="true" ng-model="othersOperators" jqyoui-droppable="{multiple:true, onDrop: remove()}" style='height:200px;'>
+                    <div class="btn btn-default" ng-repeat="operator in othersOperators" data-drag="true" data-jqyoui-options="{revert: 'invalid'}"
+                         ng-model="othersOperators" ng-mousedown="dragged( operator.id, false )" jqyoui-draggable="{index: {{$index}},animate:true}" ng-hide="!operator.firstName">{{operator.firstName}}</div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
