@@ -2,51 +2,70 @@
 
     <admin-menu></admin-menu>
 
-    <div class="row">
-        <div class="col-md-6">
-            <h3 ng-if="productDetailCtrl.isCreating">{{ 'addProduct' | translate }}</h3>
-            <h3 ng-if="!productDetailCtrl.isCreating">{{ 'editProduct' | translate }}</h3>
+    <section class="no-bordered">
+        <div class="row section-row">
+            <div class="col-xs-12">
+                <h1 ng-if="productDetailCtrl.isCreating" class="title">{{ 'addProduct' | translate }}</h1>
+                <h1 ng-if="!productDetailCtrl.isCreating" class="title">{{ 'editProduct' | translate }}</h1>
+            </div>
         </div>
-    </div>
-
-    <div class="row">
-        <div class="col-md-12">
-            <form>
-                <div class="form-group col-md-6">
-                    <label for="name">{{ 'name' | translate }}:</label>
-                    <input type="text" class="form-control" id="name" data-ng-model="productDetailCtrl.product.name" placeholder="Enter name">
+        <div class="row section-row">
+            <div class="col-xs-6">
+                <div class="row">
+                    <div class="col-xs-3">
+                        <label for="name">{{ 'name' | translate }}:</label>
+                    </div>
+                    <div class="col-xs-9">
+                        <input type="text"  id="name" data-ng-model="productDetailCtrl.product.name" placeholder="Enter name">
+                    </div>
                 </div>
-
-                <div class="form-group col-md-6">
-                    <label for="group">{{ 'group' | translate }}:</label>
-                    <select id="group" data-ui-select2="productDetailCtrl.select2Options" data-ng-model="productDetailCtrl.product.groupId"
-                            data-placeholder="Choose group">
-                        <option ng-selected="productDetailCtrl.selectGroup(group.id)" ng-repeat="group in productDetailCtrl.group" value="{{ group.id }}">
-                            {{ group.name }}
-                        </option>
-                    </select>
+            </div>
+            <div class="col-xs-6">
+                <div class="row">
+                    <div class="col-xs-3">
+                        <label for="group">{{ 'group' | translate }}:</label>
+                    </div>
+                    <div class="col-xs-9">
+                        <select id="group" data-ui-select2="productDetailCtrl.select2Options" data-ng-model="productDetailCtrl.product.groupId"
+                                data-placeholder="Choose group">
+                            <option ng-selected="productDetailCtrl.selectGroup(group.id)" ng-repeat="group in productDetailCtrl.group" value="{{ group.id }}">
+                                {{ group.name }}
+                            </option>
+                        </select>
+                    </div>
                 </div>
-
-                <div class="form-group col-md-6">
-                    <label for="sku">{{ 'sku' | translate }}:</label>
-                    <input type="text" class="form-control" id="sku" data-ng-model="productDetailCtrl.product.sku" placeholder="Barcode">
+            </div>
+        </div>
+        <div class="row section-row">
+            <div class="col-xs-6">
+                <div class="row">
+                    <div class="col-xs-3">
+                        <label for="sku">{{ 'sku' | translate }}:</label>
+                    </div>
+                    <div class="col-xs-9">
+                        <input type="text"  id="sku" data-ng-model="productDetailCtrl.product.sku" placeholder="Barcode">
+                    </div>
                 </div>
-
-                <div class="form-group col-md-6">
-                    <label for="barcode">{{ 'barcode' | translate }}:</label>
-                    <input type="text" class="form-control" id="barcode" data-ng-model="productDetailCtrl.product.barcode" placeholder="Barcode">
+            </div>
+            <div class="col-xs-6">
+                <div class="row">
+                    <div class="col-xs-3">
+                        <label for="group">{{ 'group' | translate }}:</label>
+                    </div>
+                    <div class="col-xs-9">
+                        <input type="text"  id="barcode" data-ng-model="productDetailCtrl.product.barcode" placeholder="Barcode">
+                    </div>
                 </div>
-
-                <div class="form-group col-md-12">
-                    <label>
-                        <input type="checkbox" ng-model="productDetailCtrl.product.enabled"> {{ 'enable' | translate }}
-                    </label>
-                </div>
-
-                <button class="btn btn-success pull-right">
+            </div>
+        </div>
+    </section>
+    <section class="no-bordered">
+        <div class="row section-row">
+            <div class="col-xs-12 text-center">
+                <button class="button">
                     <span class="glyphicon glyphicon-ok"></span> {{ 'save' | translate }}
                 </button>
-            </form>
+            </div>
         </div>
-    </div>
+    </section>
 </div>

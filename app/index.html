@@ -16,6 +16,7 @@
     <link rel="stylesheet" href="/bower_components/angular-ui-grid/ui-grid.css"/>
     <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.css"/>
     <link rel="stylesheet" href="/bower_components/spectrum/spectrum.css">
+    <link rel="stylesheet" href="/bower_components/select2-bootstrap-css/select2-bootstrap.min.css">
     <link rel="stylesheet" href="css/app.css"/>
     <link rel="stylesheet" href="css/main.css">
 
@@ -38,13 +39,14 @@
                                                                                                   ng-bind="navBarCounters.improvements"></span></a>
                     </li>
                 </ul>
+                <admin-menu></admin-menu>
             </nav>
             <a href="#/comments" ui-sref="settings" class="settings"></a>
             <a href ng-click="toggleFullscreen()" class="fullscreen"></a>
 
         </div>
     </div>
-    <section data-ui-view="subBar"></section>
+    <section style="display: none" data-ui-view="subBar"></section>
 
 
 </header>
@@ -56,7 +58,8 @@
 <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your
     experience.</p>
 <![endif]-->
-<div ui-view class="content fullHeight">
+
+<div style="display: none" ui-view class="content fullHeight">
 
 </div>
 <footer ng-hide="hideFooter" class="animate-hide">
@@ -72,7 +75,7 @@
     </div>
 </footer>
 
-!-- build:js(.) scripts/vendor.js -->
+<!-- build:js(.) scripts/vendor.js -->
 <!-- bower:js -->
 <script src="bower_components/jquery/dist/jquery.js"></script>
 <script src="bower_components/angular/angular.js"></script>
@@ -95,9 +98,9 @@
 <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
 <script src="bower_components/spectrum/spectrum.js"></script>
 <script src="bower_components/angular-spectrum-colorpicker/dist/angular-spectrum-colorpicker.min.js"></script>
-<script src="bower_components/angular-moment/angular-moment.js"></script>
 <script src="bower_components/jquery-ui/jquery-ui.js"></script>
 <script src="bower_components/angular-dragdrop/src/angular-dragdrop.js"></script>
+<script src="bower_components/angular-moment/angular-moment.js"></script>
 <script src="bower_components/angular-translate-loader-static-files/angular-translate-loader-static-files.js"></script>
 <!-- endbower -->
 <script src="/bower_components/angular-mocks/angular-mocks.js"></script>
@@ -116,9 +119,11 @@
 <script src="admin/scripts/controllers/comments/modalMergeComments.controller.js"></script>
 <script src="admin/scripts/controllers/comments/modalComments.controller.js"></script>
 <script src="admin/scripts/controllers/defects/defects.controller.js"></script>
-<script src="admin/scripts/controllers/defectsGroup/defectsGroup.controller.js"></script>
 <script src="admin/scripts/controllers/defects/modalDefects.controller.js"></script>
 <script src="admin/scripts/controllers/defects/modalMergeDefects.controller.js"></script>
+<script src="admin/scripts/controllers/defectsGroup/defectsGroup.controller.js"></script>
+<script src="admin/scripts/controllers/comments/modalComments.controller.js"></script>
+<script src="admin/scripts/controllers/comments/modalMergeComments.controller.js"></script>
 <script src="admin/scripts/controllers/products/products.controller.js"></script>
 <script src="admin/scripts/controllers/products/productDetails.controller.js"></script>
 <script src="admin/scripts/controllers/productsGroup/modalProductsGroup.controller.js"></script>
