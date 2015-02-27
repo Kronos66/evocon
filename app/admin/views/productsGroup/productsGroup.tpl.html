@@ -1,28 +1,27 @@
 <div class="container adminContent">
 
-    <admin-menu></admin-menu>
+    <section class="no-bordered">
+        <div class="row section-row">
+            <div class="col-xs-12">
+                <h1 class="title">Products Groups</h1>
 
-    <div class="row">
-        <div class="col-md-6">
-            <h3>Products Groups</h3>
+                <div class="buttons">
+                    <button class="button center" ng-click="groupCtrl.newGroup()">{{ 'addProductGroup' | translate }}</button>
+                </div>
+            </div>
         </div>
-        <div class="col-md-6 text-right">
-            <button class="button center" ng-click="groupCtrl.newGroup()">{{ 'addProductGroup' | translate }}</button>
-        </div>
-    </div>
+        <div data-ui-grid="groupCtrl.gridOptionsGroups" data-ui-grid-pagination data-ui-grid-selection></div>
+    </section>
 
-    <div class="row">
-        <div class="col-md-12">
-            <div data-ui-grid="groupCtrl.gridOptionsGroups" data-ui-grid-pagination data-ui-grid-selection></div>
+    <section class="no-bordered" ng-if="groupCtrl.visible">
+        <div class="row section-row">
+            <div class="col-xs-12">
+                <h2 class="title">Products in selected groups</h2>
+            </div>
         </div>
-    </div>
+        <div data-ui-grid="groupCtrl.gridOptionsProducts" data-ui-grid-pagination></div>
 
-    <div class="row" ng-if="groupCtrl.visible">
-        <div class="col-md-12">
-            <h3>Products in selected groups</h3>
-        </div>
-        <div class="col-md-12">
-            <div data-ui-grid="groupCtrl.gridOptionsProducts" data-ui-grid-pagination></div>
-        </div>
-    </div>
+        <div class="row section-row"></div>
+    </section>
+
 </div>

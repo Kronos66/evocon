@@ -7,9 +7,9 @@
     transition: width 600ms;
 }
 
-.content.content-narrow
+.content.content-narrow, .content.static
 {
-    width: 80%;
+    width: 82%;
     transition: width .6s;
 }
 
@@ -17,12 +17,19 @@
     border: 1px solid rgb(212, 212, 212);
     width: 101%;
     max-width: 800px;
-    height: 400px;
 }
 
 .confirm {
     margin-left: 30%;
     margin-top: 2%;
+}
+
+.modal-header {
+    overflow: hidden;
+}
+
+.modal-header h2 {
+    margin-left: 32px;
 }
 
 .modal-body {
@@ -41,6 +48,10 @@
 .buttonActions {
     display: block;
     width: 250px;
+}
+
+.buttonActions a {
+    text-transform: none;
 }
 
 .selected td {
@@ -74,10 +85,10 @@
     -moz-transition: right 600ms;
     -o-transition: right 600ms;
     transition: right 600ms;
-    z-index: 9;
+    z-index: -1;
 }
 
-#adminMenu:hover
+#adminMenu:hover, .static #adminMenu
 {
     right: 0;
 }
@@ -95,30 +106,76 @@
 #adminMenu .menu-title
 {
     position: relative;
-    top: 80px;
+    top: 90px;
     margin: 0 5px;
     width: 30px;
+    height: 100%;
     float: left;
     font-size: 28px;
     text-align: center;
     color: #666;
     opacity: 1;
+}
+
+#adminMenu span
+{
+    position: absolute;
+    top: 0;
+    left: 0;
     -webkit-transition: opacity 600ms;
     -moz-transition: opacity 600ms;
     -o-transition: opacity 600ms;
     transition: opacity 600ms;
 }
 
-#adminMenu:hover .menu-title
+#adminMenu span.pushpin
+{
+    opacity: 0;
+    cursor: pointer;
+}
+
+.static #adminMenu span.pushpin
+{
+    color: #0A7541;
+}
+
+#adminMenu span.hamburger
+{
+    opacity: 1;
+}
+
+#adminMenu:hover span.pushpin, .static #adminMenu span.pushpin
+{
+    opacity: 1;
+}
+
+#adminMenu:hover span.hamburger, .static #adminMenu span.hamburger
 {
     opacity: 0;
 }
 
 
+
 #adminMenu .commentsMenu ul a
 {
+    display: inline-block;
+    padding: 6px;
+    width: 164px;
     font-weight: bold;
     color: #111;
+    border-radius: 12px;
+}
+
+#adminMenu .commentsMenu ul a.active
+{
+    background: #eee;
+}
+
+#adminMenu .commentsMenu li
+{
+    margin-left: 0;
+    float: none;
+    line-height: 1;
 }
 
 #adminMenu .commentsMenu > ul > li
@@ -133,8 +190,6 @@
 
 #adminMenu .commentsMenu ul.submenu a
 {
-    display: block;
-    margin-bottom: 0;
     color: #999;
     cursor: pointer;
 }
@@ -146,6 +201,9 @@
         width: 90%;
     }
     .content.content-narrow {
+        width: 100%;
+    }
+    .content.static {
         width: 100%;
     }
 }
@@ -253,6 +311,12 @@ section.no-bordered
     float: right;
 }
 
+.buttons a:hover
+{
+    color: #fff;
+    text-decoration: none;
+}
+
 .thumbnail
 {
     min-height: 150px;
@@ -265,11 +329,58 @@ section.no-bordered
 
 /*
  - - - - TABLES - - - -
+*/
+.ui-grid-top-panel-background,
+.ui-grid-top-panel,
+.ui-grid-no-row-overlay,
+.ui-grid-footer-panel-background,
+.ui-grid-footer-panel
+{
+    background: none !important;
+}
+
+.ui-grid-render-container *, .ui-grid
+{
+    border: none;
+}
+
+.ui-grid-row,
+.ui-grid-cell,
+.ui-grid-cell-contents,
+.ui-grid-vertical-bar
+{
+    height: 40px !important;
+}
+
+.ui-grid-cell-contents
+{
+    padding-top: 8px;
+    padding-bottom: 8px;
+}
+
+.ui-grid-header .ui-grid-cell-contents
+{
+    background: #dedfcf;
+}
+
+.ui-grid-header .ui-grid-header-cell:first-child .ui-grid-cell-contents
+{
+    background: #bcbdaf;
+}
+
+.ui-grid-icon-angle-down
+{
+    display: inline-block;
+    margin-top: 8px;
+}
+
+.ui-grid-row
+{
+    border-bottom: 1px solid #666 !important;
+}
 
 
-
-
-.adminContent tr
+/*.adminContent tr
 {
     border-bottom: 1px solid #111;
 }
@@ -297,11 +408,6 @@ section.no-bordered
     background: #bdbdb0;
     color: #fff;
 }
-
-.adminContent .statsTable .buttonActions a
-{
-    text-transform: none;
-}
 */
 
 
@@ -316,9 +422,9 @@ input, select
     padding: 0 6px !important;
     height: 40px;
     width: 100%;
-    border-radius: 8px;
-    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-    font-size: 18px;
+    border-radius: 8px !important;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
+    font-size: 18px !important;
     color: #888;
     background-color: inherit !important;
 }
@@ -330,14 +436,19 @@ input, select
 
 input[ type=checkbox ], input[ type=radio ]
 {
-    margin: 0 20px 0 0;
+    margin: 10px 20px 0 0;
     width: 20px;
     height: 20px;
 }
 
+.confirm input[ type=checkbox ]
+{
+    margin-top: 0;
+}
+
 label
 {
-    margin: 0 0 20px 0;
+    margin: 10px 0;
     min-width: 220px;
     line-height: 1.6;
 }
@@ -349,7 +460,7 @@ select.short
 
 input[ type=number ].short, input[ type=text ].short
 {
-    width: 80px;
+    width: 60px;
 }
 
 .select2-search input
@@ -416,6 +527,7 @@ input.long, select.long
 .colors .color-square
 {
     display: block;
+    margin-top: 4px;
     width: 30px;
     height: 30px;
     float: left;
@@ -585,12 +697,12 @@ input.long, select.long
 
 .range-bar .part:not( :first-child ) .values
 {
-    margin-left: -38px;
+    margin-left: -30px;
 }
 
 .range-bar .part:last-child .values
 {
-    margin-right: -22px;
+    margin-right: -24px;
 }
 
 footer

@@ -39,6 +39,7 @@
                                                                                                   ng-bind="navBarCounters.improvements"></span></a>
                     </li>
                 </ul>
+                <admin-menu></admin-menu>
             </nav>
             <a href="#/comments" ui-sref="settings" class="settings"></a>
             <a href ng-click="toggleFullscreen()" class="fullscreen"></a>
@@ -97,9 +98,9 @@
 <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
 <script src="bower_components/spectrum/spectrum.js"></script>
 <script src="bower_components/angular-spectrum-colorpicker/dist/angular-spectrum-colorpicker.min.js"></script>
-<script src="bower_components/angular-moment/angular-moment.js"></script>
 <script src="bower_components/jquery-ui/jquery-ui.js"></script>
 <script src="bower_components/angular-dragdrop/src/angular-dragdrop.js"></script>
+<script src="bower_components/angular-moment/angular-moment.js"></script>
 <script src="bower_components/angular-translate-loader-static-files/angular-translate-loader-static-files.js"></script>
 <!-- endbower -->
 <script src="/bower_components/angular-mocks/angular-mocks.js"></script>
@@ -118,9 +119,11 @@
 <script src="admin/scripts/controllers/comments/modalMergeComments.controller.js"></script>
 <script src="admin/scripts/controllers/comments/modalComments.controller.js"></script>
 <script src="admin/scripts/controllers/defects/defects.controller.js"></script>
-<script src="admin/scripts/controllers/defectsGroup/defectsGroup.controller.js"></script>
 <script src="admin/scripts/controllers/defects/modalDefects.controller.js"></script>
 <script src="admin/scripts/controllers/defects/modalMergeDefects.controller.js"></script>
+<script src="admin/scripts/controllers/defectsGroup/defectsGroup.controller.js"></script>
+<script src="admin/scripts/controllers/comments/modalComments.controller.js"></script>
+<script src="admin/scripts/controllers/comments/modalMergeComments.controller.js"></script>
 <script src="admin/scripts/controllers/products/products.controller.js"></script>
 <script src="admin/scripts/controllers/products/productDetails.controller.js"></script>
 <script src="admin/scripts/controllers/productsGroup/modalProductsGroup.controller.js"></script>

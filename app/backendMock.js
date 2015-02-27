@@ -304,7 +304,7 @@ function setupBackendMock($httpBackend)
 
         teams[ parseInt( match[ 1 ] ) ].operators.push( parseInt( match[ 2 ] ) );
 
-        return[ 404 ];
+        return[ 200 ];
     });
     $httpBackend.whenDELETE(/\/rest\/v1\/teams\/(\d+)\/operators\/(\d+)$/).respond(function (method, url)
     {
@@ -315,7 +315,7 @@ function setupBackendMock($httpBackend)
 
         if( realIndex > -1 ) {
             teams[ parseInt( match[ 1 ] ) ].operators = teams[ parseInt( match[ 1 ] ) ].operators.splice( realIndex, 1 );
-            return[ 404 ];
+            return[ 200 ];
         }
         else
             return[ 404 ];
