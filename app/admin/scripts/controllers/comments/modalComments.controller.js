@@ -17,7 +17,6 @@
             return selectedId === parseInt(row.groupId);
         };
         this.select2Options = {
-            width:'260px',
             allowClear: true,
             multiple: false,
             minimumInputLength: 1,

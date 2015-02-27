@@ -1,36 +1,32 @@
 (function ()
 {
     'use strict';
-    function CommentsGroupController($modal, $scope, CommentsDAO, CommentsGroupDAO)
+
+    function DefectsGroupController($modal, $scope, DefectsDAO, DefectsGroupDAO)
     {
         var ctrl = this;
         var selectedGroup;
         var refresh = function ()
         {
-            CommentsGroupDAO.query().then(function (result)
+            DefectsGroupDAO.query().then(function (result)
             {
-                ctrl.commentsGroup = result;
+                ctrl.defectsGroup = result;
             });
         };
-        var actionsTemplate = '<a class="button link" ng-click="$event.stopPropagation();grid.appScope.groupController.editRow(row.entity)">' +
+        var actionsTemplate = '<a class="button link" ng-click="$event.stopPropagation();grid.appScope.groupCtrl.editRow(row.entity)">' +
                 '{{\'edit\'|translate}}</a>' +
-                '<a class="button link" ng-click="$event.stopPropagation();grid.appScope.groupController.deleteRow(row.entity.id)">' +
+                '<a class="button link" ng-click="$event.stopPropagation();grid.appScope.groupCtrl.deleteRow(row.entity.id)">' +
                 '{{\'delete\'|translate}}</a>';
+
         this.gridOptions = {
             enableRowHeaderSelection: false,
             enableRowSelection: true,
             multiSelect: false,
-            data: 'groupCtrl.commentsGroup',
+            data: 'groupCtrl.defectsGroup',
             paginationPageSizes: [10, 20, 30],
             paginationPageSize: 10,
             columnDefs: [{
                              field: 'name', displayName: 'Name'
-                         }, {
-                             field: 'groupId', displayName: 'Group'
-                         }, {
-                             field: 'category', displayName: 'Category'
-                         }, {
-                             field: 'color', displayName: 'Color'
                          }, {
                              displayName: 'Actions', field: 'remove', cellTemplate: actionsTemplate
                          }]
@@ -41,10 +37,10 @@
             {
                 if (selectedGroup !== row.entity.id) {
                     selectedGroup = row.entity.id;
-                    CommentsGroupDAO.getComments(row.entity.id).then(function (result)
+                    DefectsGroupDAO.getDefects(row.entity.id).then(function (result)
                     {
                         ctrl.visibled = true;
-                        ctrl.commentsInGroup = result;
+                        ctrl.defectsInGroup = result;
                     });
                 } else {
                     ctrl.visibled = false;
@@ -53,15 +49,26 @@
             });
         };
         this.gridOptions2 = {
-            data: 'groupCtrl.commentsInGroup',
+            enableRowHeaderSelection: false,
+            enableRowSelection: false,
+            multiSelect: false,
+            data: 'groupCtrl.defectsInGroup',
             paginationPageSizes: [10, 20, 30],
-            paginationPageSize: 10
+            paginationPageSize: 10,
+            columnDefs: [{
+                             field: 'name', displayName: 'Name'
+                         }, {
+                             field: 'groupId', displayName: 'Group'
+                         }, {
+                             field: 'stationId', displayName: 'Station'
+                         }, {
+                             field: 'createdDate', displayName: 'Created'
+                         }]
         };
-
         this.editRow = function (row)
         {
             var modalInstance = $modal.open({
-                templateUrl: 'admin/views/commentsGroup/editOrCreateModal.tpl.html',
+                templateUrl: 'admin/views/defectsGroup/editOrCreateModal.tpl.html',
                 backdrop: 'static',
                 keyboard: false,
                 controller: 'addGroup',
@@ -69,17 +76,17 @@
                 resolve: {
                     row: function ()
                     {
-                        return angular.extend({},row);
+                        return angular.extend({}, row);
                     }
                 }
             });
-            modalInstance.result.then(CommentsGroupDAO.update).then(refresh);
+            modalInstance.result.then(DefectsGroupDAO.update).then(refresh);
         };
         this.addRow = function ()
         {
             var row = {};
             var modalInstance = $modal.open({
-                templateUrl: 'admin/views/commentsGroup/editOrCreateModal.tpl.html',
+                templateUrl: 'admin/views/defectsGroup/editOrCreateModal.tpl.html',
                 backdrop: 'static',
                 keyboard: false,
                 controller: 'addGroup',
@@ -92,16 +99,16 @@
                 }
             });
 
-            modalInstance.result.then(CommentsGroupDAO.save).then(refresh);
+            modalInstance.result.then(DefectsGroupDAO.save).then(refresh);
         };
-        this.newComments = function ()
+        this.newDefect = function ()
         {
             var row = {groupId: selectedGroup};
             var modalInstance = $modal.open({
-                templateUrl: 'admin/views/comments/editOrCreateModal.tpl.html',
+                templateUrl: 'admin/views/defects/editOrCreateModal.tpl.html',
                 backdrop: 'static',
                 keyboard: false,
-                controller: 'modalCommentsController',
+                controller: 'modalDefectsController',
                 controllerAs: 'modal',
                 resolve: {
                     row: function ()
@@ -110,18 +117,15 @@
                     }
                 }
             });
-            modalInstance.result.then(function (result)
-            {
-                result.groupId = parseInt(result.groupId);
-                CommentsDAO.save(result);
-            }).then(refresh);
+            modalInstance.result.then(DefectsDAO.save).then(refresh);
         };
         this.deleteRow = function (id)
         {
-            CommentsGroupDAO.remove(id).then(refresh);
+            DefectsGroupDAO.remove(id).then(refresh);
         };
         refresh();
+
     }
 
-    angular.module('evoReports').controller('commentsGroupController', ['$modal', '$scope', 'CommentsDAO', 'CommentsGroupDAO', CommentsGroupController]);
+    angular.module('evoReports').controller('defectsGroupController', ['$modal', '$scope', 'DefectsDAO', 'DefectsGroupDAO', DefectsGroupController]);
 })();

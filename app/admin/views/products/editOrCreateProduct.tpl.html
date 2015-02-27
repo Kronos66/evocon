@@ -1,0 +1,71 @@
+<div class="container adminContent">
+
+    <admin-menu></admin-menu>
+
+    <section class="no-bordered">
+        <div class="row section-row">
+            <div class="col-xs-12">
+                <h1 ng-if="productDetailCtrl.isCreating" class="title">{{ 'addProduct' | translate }}</h1>
+                <h1 ng-if="!productDetailCtrl.isCreating" class="title">{{ 'editProduct' | translate }}</h1>
+            </div>
+        </div>
+        <div class="row section-row">
+            <div class="col-xs-6">
+                <div class="row">
+                    <div class="col-xs-3">
+                        <label for="name">{{ 'name' | translate }}:</label>
+                    </div>
+                    <div class="col-xs-9">
+                        <input type="text"  id="name" data-ng-model="productDetailCtrl.product.name" placeholder="Enter name">
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-6">
+                <div class="row">
+                    <div class="col-xs-3">
+                        <label for="group">{{ 'group' | translate }}:</label>
+                    </div>
+                    <div class="col-xs-9">
+                        <select id="group" data-ui-select2="productDetailCtrl.select2Options" data-ng-model="productDetailCtrl.product.groupId"
+                                data-placeholder="Choose group">
+                            <option ng-selected="productDetailCtrl.selectGroup(group.id)" ng-repeat="group in productDetailCtrl.group" value="{{ group.id }}">
+                                {{ group.name }}
+                            </option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row section-row">
+            <div class="col-xs-6">
+                <div class="row">
+                    <div class="col-xs-3">
+                        <label for="sku">{{ 'sku' | translate }}:</label>
+                    </div>
+                    <div class="col-xs-9">
+                        <input type="text"  id="sku" data-ng-model="productDetailCtrl.product.sku" placeholder="Barcode">
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-6">
+                <div class="row">
+                    <div class="col-xs-3">
+                        <label for="group">{{ 'group' | translate }}:</label>
+                    </div>
+                    <div class="col-xs-9">
+                        <input type="text"  id="barcode" data-ng-model="productDetailCtrl.product.barcode" placeholder="Barcode">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="no-bordered">
+        <div class="row section-row">
+            <div class="col-xs-12 text-center">
+                <button class="button">
+                    <span class="glyphicon glyphicon-ok"></span> {{ 'save' | translate }}
+                </button>
+            </div>
+        </div>
+    </section>
+</div>

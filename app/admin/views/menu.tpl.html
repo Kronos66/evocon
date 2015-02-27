@@ -1,63 +1,44 @@
-<div id="adminMenu">
+<div id="adminMenu" ng-if="activePage!='/'">
     <div class="menu-title">
-        M
-        E
-        N
-        U
+        <span class="glyphicon glyphicon-menu-hamburger hamburger" aria-hidden="true"></span>
+        <span class="glyphicon glyphicon-pushpin pushpin" ng-click="setMenuStatic()" aria-hidden="true"></span>
     </div>
     <div class="commentsMenu">
         <ul class="list-unstyled">
             <li>
-                <a>General</a>
+                <a href="#/comments" ng-class="{ 'active': ( activePage=='/comments' ) }">{{'comments'|translate}}</a>
                 <ul class="list-unstyled submenu">
-                    <li><a href="#/comments">{{'comments'|translate}}</a></li>
-                    <li><a href="#/commentsgroup">{{'groupComments'|translate}}</a></li>
-                    <li><a href="#/defects">Defects</a></li>
-                    <li><a>Production</a></li>
+                    <li><a href="#/commentsgroup" ng-class="{ 'active': ( activePage=='/commentsgroup' ) }">{{'groupComments'|translate}}</a></li>
                 </ul>
             </li>
             <li>
-                <a href="#/production">Production</a>
+                <a href="#/defects" ng-class="{ 'active': ( activePage=='/defects' ) }">Defects</a>
                 <ul class="list-unstyled submenu">
-                    <li><a>Metrics</a></li>
-                    <li><a>Delays</a></li>
-                    <li><a>Defects/rejestrs</a></li>
-                    <li><a>Production</a></li>
+                    <li><a href="#/defectsgroup" ng-class="{ 'active': ( activePage=='/defectsgroup' ) }">Group defects</a></li>
                 </ul>
             </li>
             <li>
-                <a href="#/products">Products</a>
+                <a href="#/products" ng-class="{ 'active': ( activePage=='/products' ) }">Products</a>
                 <ul class="list-unstyled submenu">
-                    <li><a href="#/productsgroup">Menage Groups</a></li>
+                    <li><a href="#/product/addnew" ng-class="{ 'active': ( activePage=='/product/addnew' ) }">Add new</a></li>
+                    <li><a href="#/productsgroup" ng-class="{ 'active': ( activePage=='/productsgroup' ) }">Menage Groups</a></li>
                 </ul>
             </li>
             <li>
-                <a>Users</a>
-                <ul class="list-unstyled submenu">
-                    <li><a>Metrics</a></li>
-                    <li><a>Delays</a></li>
-                    <li><a>Defects/rejestrs</a></li>
-                    <li><a>Production</a></li>
-                </ul>
+                <a href="#/calendar" ng-class="{ 'active': ( activePage=='/calendar' ) }">Calendar</a>
             </li>
+
             <li>
-                <a>Stations</a>
-                <ul class="list-unstyled submenu">
-                    <li><a>Metrics</a></li>
-                    <li><a>Delays</a></li>
-                    <li><a>Defects/rejestrs</a></li>
-                    <li><a>Production</a></li>
-                </ul>
+                <a href="#/production" ng-class="{ 'active': ( activePage=='/production' ) }">Production</a>
             </li>
+
             <li>
-                <a>Devices</a>
-                <ul class="list-unstyled submenu">
-                    <li><a>Metrics</a></li>
-                    <li><a>Delays</a></li>
-                    <li><a>Defects/rejestrs</a></li>
-                    <li><a>Production</a></li>
-                </ul>
+                <a href="#/teams" ng-class="{ 'active': ( activePage=='/teams' ) }">Teams</a>
             </li>
+
+            <li>
+            </li>
+
         </ul>
     </div>
 </div>

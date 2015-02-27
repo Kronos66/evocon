@@ -25,9 +25,9 @@
                          }, {
                              field: 'groupId', displayName: 'Group'
                          }, {
-                             field: 'category', displayName: 'Category'
+                             field: 'stationId', displayName: 'Station'
                          }, {
-                             field: 'color', displayName: 'Color'
+                             field: 'createdDate', displayName: 'Created'
                          }, {
                              width: 280, minWidth: 300, displayName: 'Actions', field: 'remove', cellTemplate: actionsTemplate
                          }]
@@ -36,7 +36,7 @@
         {
             var row = {};
             var modalInstance = $modal.open({
-                templateUrl: 'admin/views/commentsGroup/editOrCreateModal.tpl.html',
+                templateUrl: 'admin/views/defectsGroup/editOrCreateModal.tpl.html',
                 backdrop: 'static',
                 keyboard: false,
                 controller: 'addGroup',
@@ -89,15 +89,12 @@
                 }
             });
 
-            modalInstance.result.then(function (result)
-            {
-                DefectsDAO.update(result);
-            }).then(refresh);
+            modalInstance.result.then(DefectsDAO.update).then(refresh);
         };
         this.mergeDefects = function ()
         {
             var modalInstance = $modal.open({
-                size:'lg',
+                size: 'lg',
                 templateUrl: 'admin/views/defects/mergeModal.tpl.html',
                 backdrop: 'static',
                 keyboard: false,

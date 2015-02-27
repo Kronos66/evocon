@@ -1,11 +1,13 @@
 <div class="container adminContent">
-    <admin-menu></admin-menu>
+
     <section>
-        <div class="row section-row">
+        <div class="row">
             <div class="col-xs-12">
                 <h1 class="title">Production / Line view settings</h1>
             </div>
         </div>
+    </section>
+    <section>
         <div class="row section-row">
             <div class="col-xs-12">
                 <h2 class="title">Line view color mode</h2>
@@ -18,7 +20,7 @@
                     <span class="color-square green"></span>
                     <span class="color-square yellow"></span>
                     <span class="color-square red"></span>
-                    Simple
+                    <p class="inline-input-text">Simple</p>
                 </label>
                 <input name="color-mode" id="detailed" class="radio" type="radio" ng-model="PC.settings.colormode" value="1">
                 <label for="detailed">
@@ -29,7 +31,8 @@
                     <span class="color-square purple"></span>
                     <span class="color-square grey"></span>
                     <span class="color-square blue"></span>
-                    Detailed
+                    <p class="inline-input-text">Detailed</p>
+
                 </label>
             </div>
         </div>
@@ -53,7 +56,7 @@
                             <p>NORMAL</p>
                         </div>
                         <div class="values">
-                            <input type="number" ng-model="PC.settings.normalMarker" />
+                            <input type="number" class="short" ng-model="PC.settings.normalMarker" />
                         </div>
                     </div>
                     <div class="part">
@@ -61,7 +64,7 @@
                             <p>SLOW</p>
                         </div>
                         <div class="values">
-                            <input type="number" ng-model="PC.settings.slowMarker" />
+                            <input type="number" class="short" ng-model="PC.settings.slowMarker" />
                         </div>
                     </div>
                     <div class="part">
@@ -69,16 +72,16 @@
                             <p>TOO SLOW</p>
                         </div>
                         <div class="values">
-                            <input type="number" ng-model="PC.settings.extraSlowMarker" />
+                            <input type="number" class="short" ng-model="PC.settings.extraSlowMarker" />
                             <span class="pull-right">%</span>
-                            <input type="number" class="pull-right" ng-model="PC.settings.stoppageMarker" />
+                            <input type="number" class="short pull-right" ng-model="PC.settings.stoppageMarker" />
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
-    <section>
+    <section class="no-bordered">
         <div class="row section-row">
             <div class="col-xs-12">
                 <h2 class="title">Production EFF marker</h2>
@@ -106,7 +109,7 @@
                             </div>
                         </div>
                         <div class="values">
-                            <input type="number" ng-model="PC.settings.effLowLimit" />
+                            <input type="number" class="short" ng-model="PC.settings.effLowLimit" />
                         </div>
                     </div>
                     <div class="part">
@@ -118,7 +121,7 @@
                             </div>
                         </div>
                         <div class="values">
-                            <input type="number" ng-model="PC.settings.effMediumLimit" />
+                            <input type="number" class="short" ng-model="PC.settings.effMediumLimit" />
                         </div>
                     </div>
                     <div class="part">
@@ -130,15 +133,13 @@
                             </div>
                         </div>
                         <div class="values">
-                            <input type="number" ng-model="PC.settings.effHighLimit" />
+                            <input type="number" class="short" ng-model="PC.settings.effHighLimit" />
                             %
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </section>
-    <section class="no-bordered">
         <div class="row section-row">
             <div class="col-xs-12 text-center">
                 <span class="button button-submit">save</span>

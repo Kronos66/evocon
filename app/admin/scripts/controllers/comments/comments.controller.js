@@ -11,8 +11,10 @@
                 ctrl.comments = result;
             });
         };
-        var actionsTemplate = '<a class="button link" ng-click="grid.appScope.commentsController.editRow(row.entity)">{{\'edit\'|translate}}</a>' +
-                '<a class="button link" ng-click="grid.appScope.commentsController.deleteRow(row.entity.id)">{{\'delete\'|translate}}</a>';
+        var actionsTemplate = '<span class="buttonActions">' +
+                '<a class="button link" ng-click="grid.appScope.commentsController.editRow(row.entity)">{{\'edit\'|translate}}</a>' +
+                '<a class="button link" ng-click="grid.appScope.commentsController.deleteRow(row.entity.id)">{{\'delete\'|translate}}</a>' +
+                '</span>';
 
         this.gridOptions = {
             enableRowHashing: false,

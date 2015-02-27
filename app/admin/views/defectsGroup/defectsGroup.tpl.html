@@ -3,11 +3,11 @@
     <section class="no-bordered">
         <div class="row section-row">
             <div class="col-xs-12">
-                <h1 class="title">{{'groupComments'|translate}}</h1>
+                <h1 class="title">{{'defectsGroup'|translate}}:</h1>
 
                 <div class="buttons">
-                    <button class="button center" ng-click="groupCtrl.addRow()">{{'addGroupComment'|translate}}</button>
-                    <button class="button center" ng-click="groupCtrl.newComments()">{{'addComment'|translate}}</button>
+                    <button class="button center" ng-click="groupCtrl.addRow()">{{'addGroupDefect'|translate}}</button>
+                    <button class="button center" ng-click="groupCtrl.newDefect()">{{'addDefect'|translate}}</button>
                 </div>
             </div>
         </div>
@@ -17,7 +17,7 @@
         <div ng-if="groupCtrl.visibled">
             <div class="row section-row">
                 <div class="col-xs-12">
-                    <h1 class="title">Comments in selected group:</h1>
+                    <h1 class="title">Defects in selected group:</h1>
                 </div>
             </div>
             <div ui-grid="groupCtrl.gridOptions2" ui-grid-pagination></div>

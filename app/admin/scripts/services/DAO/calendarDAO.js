@@ -1,10 +1,9 @@
 (function ()
 {
     'use strict';
-
-    function defectsGroupDAO($resource)
+    function CalendarDAO($resource)
     {
-        var api = $resource('/EvoconReportingServer/rest/v1/defectgroups/:id/:defects', {id: '@id'}, {
+        var api = $resource('/EvoconReportingServer/rest/v1/calendar/:id/:comments', {id: '@id'}, {
             query: {isArray: true, method: 'GET'},
             update: {method: 'PUT'},
             get: {isArray: false, method: 'GET'}
@@ -31,12 +30,12 @@
             {
                 return api.remove({id: id}).$promise;
             },
-            getDefects: function (id)
+            getComments: function (id)
             {
-                return api.query({id: id, defects: 'defects'}).$promise;
+                return api.query({id: id, comments: 'comments'}).$promise;
             }
         };
     }
 
-    angular.module('evoReports').service('DefectsGroupDAO', ['$resource', defectsGroupDAO]);
+    angular.module('evoReports').service('CalendarDAO', ['$resource', CalendarDAO]);
 })();
