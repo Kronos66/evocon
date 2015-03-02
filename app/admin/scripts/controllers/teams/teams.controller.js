@@ -26,11 +26,13 @@
                 columnDefs: [
                     {
                         field: 'name',
+                        cellClass: 'classclassclass',
                         displayName: 'Name'
                     },
                     {
-                        field: 'actions',
-                        displayName: 'Actions',
+                        headerCellClass: 'classclass',
+                        cellClass: 'classclass',
+                        field: ' ',
                         cellTemplate: '<span class="buttonActions"><a class="button link" ng-click="$event.stopPropagation();grid.appScope.teamCtrl.editTeam( row.entity )">' +
                             '{{\'edit\'|translate}}</a>' +
                             '<a class="button link" ng-click="$event.stopPropagation();grid.appScope.teamCtrl.deleteTeam( row.entity.id )">' +

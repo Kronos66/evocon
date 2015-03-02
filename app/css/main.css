@@ -47,7 +47,6 @@
 
 .buttonActions {
     display: block;
-    width: 250px;
 }
 
 .buttonActions a {
@@ -130,8 +129,10 @@
 
 #adminMenu span.pushpin
 {
+    margin-left: 8px;
     opacity: 0;
     cursor: pointer;
+    font-size: 20px;
 }
 
 .static #adminMenu span.pushpin
@@ -324,7 +325,8 @@ section.no-bordered
 
 .thumbnail .btn
 {
-    min-width: 100px;
+    margin-bottom: 4px;
+    min-width: 100%;
 }
 .modal-body .colon td:nth-child(2){
     font-size: 30px;
@@ -368,7 +370,7 @@ section.no-bordered
     background: #dedfcf;
 }
 
-.ui-grid-header .ui-grid-header-cell:first-child .ui-grid-cell-contents
+.ui-grid-render-container-body .ui-grid-header .ui-grid-header-cell:first-child .ui-grid-cell-contents
 {
     background: #bcbdaf;
 }
@@ -383,6 +385,42 @@ section.no-bordered
 {
     border-bottom: 1px solid #666 !important;
 }
+
+.ui-grid-row .ui-grid-cell
+{
+    background-color: inherit !important;
+}
+
+.ui-grid-render-container-body .ui-grid-viewport
+{
+    overflow: auto !important;
+}
+
+.ui-grid-column-menu-button
+{
+    display: none;
+}
+
+.ui-grid-canvas
+{
+    width: 100% !important;
+}
+
+.ui-grid-header-cell-wrapper
+{
+    width: 100% !important;
+}
+
+
+/*.ui-grid-canvas .ui-grid-cell:last-child
+{
+    min-width: 150px !important;
+}
+
+.ui-grid-header-cell-row .ui-grid-header-cell:last-child
+{
+    min-width: 150px !important;
+}*/
 
 
 
@@ -723,3 +761,20 @@ footer
     z-index: 10;
 }
 
+.classclass
+{
+    max-width: 130px !important;
+    min-width: 130px !important;
+    float: right;
+}
+
+.classclassclass
+{
+    max-width: none !important;
+    min-width: initial !important;
+}
+
+.ui-grid-row, .ui-grid-cell-row
+{
+    clear: both;
+}

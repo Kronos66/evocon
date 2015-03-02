@@ -47,7 +47,7 @@
                          }, {
                              field: 'enable', displayName: 'Enable'
                          }, {
-                             displayName: 'Actions', field: 'remove', cellTemplate: actionsTemplate
+                            maxWidth: 120, field: ' ', cellTemplate: actionsTemplate
                          }]
         };
         this.gridOptions.onRegisterApi = function (gridApi)

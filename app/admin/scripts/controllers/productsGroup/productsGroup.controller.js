@@ -23,7 +23,7 @@
             paginationPageSize: 10,
             columnDefs: [
                 {field:'name', displayName:'Name'},
-                {displayName: 'Actions', field: 'remove', cellTemplate: actionsTemplate}
+                {maxWidth: 120, field: ' ', cellTemplate: actionsTemplate}
             ]
         };
 

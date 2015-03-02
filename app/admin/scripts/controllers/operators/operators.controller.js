@@ -32,8 +32,8 @@
             displayName: 'Barcode'
           },
           {
-            field: 'actions',
-            displayName: 'Actions',
+            maxWidth: 120,
+            field: ' ',
             cellTemplate: '<span class="buttonActions">' +
             '<a class="button link" ng-click="$event.stopPropagation();grid.appScope.opCtrl.editOp( row.entity )">' +
             '{{\'edit\'|translate}}</a>' +
