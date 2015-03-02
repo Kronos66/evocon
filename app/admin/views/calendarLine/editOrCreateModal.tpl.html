@@ -21,8 +21,8 @@
                 <div class="col-sm-8 colon">
                     <div class="input-group">
 
-                        <input type="text" value=" {{modal.row.startTime |date : 'd-MM-yyyy HH:mm'}}">
-                        <input  type="text" class="form-control" datepicker-popup="dd-MM-yyyy" ng-model="modal.row.startTime" is-open="modal.opened"
+                        <input type="text" ng-disabled="true" value="{{modal.row.startTime |date : 'd-MM-yyyy HH:mm'}}">
+                        <input type="text" class="not-visible form-control" datepicker-popup="dd-MM-yyyy" ng-model="modal.row.startTime" is-open="modal.opened"
                                datepicker-options="modal.dateOptions" close-text="{{'cancel'|translate}}"/>
                     <span class="input-group-btn">
                         <button type="button" class="btn btn-default" ng-click="modal.open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
@@ -37,8 +37,8 @@
                 </div>
                 <div class="col-sm-8 colon">
                     <div class="input-group">
-                        <input type="text" value=" {{modal.row.endTime |date : 'd-MM-yyyy HH:mm'}}">
-                        <input type="text" class="form-control timepicker" datepicker-popup="dd-MMMM-yyyy" ng-model="modal.row.endTime" is-open="modal.opened2"
+                        <input type="text" ng-disabled="true" value=" {{modal.row.endTime |date : 'd-MM-yyyy HH:mm'}}">
+                        <input type="text" class="not-visible form-control timepicker" datepicker-popup="dd-MMMM-yyyy" ng-model="modal.row.endTime" is-open="modal.opened2"
                                datepicker-options="modal.dateOptions" close-text="{{'cancel'|translate}}"/>
                     <span class="input-group-btn">
                         <button type="button" class="btn btn-default" ng-click="modal.open2($event)"><i class="glyphicon glyphicon-calendar"></i></button>

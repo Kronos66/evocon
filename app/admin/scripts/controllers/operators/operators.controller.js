@@ -69,7 +69,7 @@
           templateUrl: 'admin/views/operators/addOrEditOperatorModal.tpl.html',
           backdrop: 'static',
           keyboard: false,
-          size: 'lg',
+          size: 'md',
           controller: 'addGroup',
           controllerAs: 'modal',
           resolve: {

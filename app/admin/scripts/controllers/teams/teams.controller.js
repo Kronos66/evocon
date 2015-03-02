@@ -30,8 +30,8 @@
                         displayName: 'Name'
                     },
                     {
-                        /*headerCellClass: 'classclass',
-                        cellClass: 'classclass',*/
+                        headerCellClass: 'classclass',
+                        cellClass: 'classclass Cclassclass',
                         maxWidth: 120,
                         field: ' ',
                         cellTemplate: '<span class="buttonActions"><a class="button link" ng-click="$event.stopPropagation();grid.appScope.teamCtrl.editTeam( row.entity )">' +
@@ -89,7 +89,7 @@
                 templateUrl: 'admin/views/teams/addTeamModal.html',
                 backdrop: 'static',
                 keyboard: false,
-                size: 'lg',
+                size: 'md',
                 controller: 'addGroup',
                 controllerAs: 'modal',
                 resolve: {
@@ -108,7 +108,7 @@
                 templateUrl: 'admin/views/teams/editTeamModal.html',
                 backdrop: 'static',
                 keyboard: false,
-                size: 'lg',
+                size: 'md',
                 controller: 'addGroup',
                 controllerAs: 'modal',
                 resolve: {

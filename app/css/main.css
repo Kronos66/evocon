@@ -20,8 +20,7 @@
 }
 
 .confirm {
-    margin-left: 30%;
-    margin-top: 2%;
+    margin-top: 60px;
 }
 
 .modal-header {
@@ -228,19 +227,11 @@
     overflow-y: hidden;
 }
 
-/*.modal-body input[ type=checkbox ]
+.not-visible
 {
-    margin: 12px 20px 0 0;
-    width: 20px;
-    height: 20px;
+    height: 0 !important;
+    border: none !important;
 }
-
-.modal-body label
-{
-    min-width: 100px;
-    line-height: 1.6;
-    margin-top: 10px;
-}*/
 
 .select2-container
 {
@@ -330,9 +321,6 @@ section.no-bordered
 }
 .modal-body .colon td:nth-child(2){
     font-size: 30px;
-}
-.timepicker-label{
-    margin-top: 40px;
 }
 /*
  - - - - TABLES - - - -
@@ -761,20 +749,24 @@ footer
     z-index: 10;
 }
 
-/*.classclass
+.classclass
 {
     max-width: 130px !important;
     min-width: 130px !important;
+}
+
+.Cclassclass
+{
     float: right;
 }
 
 .classclassclass
 {
-    max-width: none !important;
-    min-width: initial !important;
+    display: block;
+    float: left;
 }
 
-.ui-grid-row, .ui-grid-cell-row
+.ui-grid-header-cell-row, .ui-grid-cell-row
 {
     clear: both;
-}*/
+}
