@@ -177,10 +177,9 @@
             var variable = {};
             modalInstance.result.then(function (result)
             {
-                console.log(result);
-                angular.copy(variable, result);
-                variable.startTime = moment(result.startTime).format('HH:mm:ss:sss');
-                variable.endTime = moment(result.startTime).format('HH:mm:ss:sss');
+                angular.extend(variable, result);
+                variable.startTime = moment(result.startTime).format('DD-MM-YYYY HH:mm:ss');
+                variable.endTime = moment(result.endTime).format('DD-MM-YYYY HH:mm:ss');
                 return CalendarLineDAO.save(selected, result);
             }).then(refresh);
         };

@@ -1,7 +1,7 @@
 <div>
     <div class="modal-header">
-        <div class="title">
-            <h2>{{'addCalendarLine'|translate}}</h2>
+        <div >
+            <h2 class="title">{{'addCalendarLine'|translate}}</h2>
         </div>
     </div>
     <form class="form-horizontal" role="form">
@@ -20,13 +20,15 @@
                 </div>
                 <div class="col-sm-8 colon">
                     <div class="input-group">
-                        <input type="text" class="form-control timepicker" datepicker-popup="dd-MMMM-yyyy" ng-model="modal.row.startTime" is-open="modal.opened"
+
+                        <input type="text" value=" {{modal.row.startTime |date : 'd-MM-yyyy HH:mm'}}">
+                        <input  type="text" class="form-control" datepicker-popup="dd-MM-yyyy" ng-model="modal.row.startTime" is-open="modal.opened"
                                datepicker-options="modal.dateOptions" close-text="{{'cancel'|translate}}"/>
                     <span class="input-group-btn">
                         <button type="button" class="btn btn-default" ng-click="modal.open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
                     </span>
                     </div>
-                    <timepicker ng-model="modal.row.startTime"></timepicker>
+                    <timepicker  show-meridian="false" ng-model="modal.row.startTime"></timepicker>
                 </div>
             </div>
             <div class="form-group">
@@ -35,13 +37,14 @@
                 </div>
                 <div class="col-sm-8 colon">
                     <div class="input-group">
+                        <input type="text" value=" {{modal.row.endTime |date : 'd-MM-yyyy HH:mm'}}">
                         <input type="text" class="form-control timepicker" datepicker-popup="dd-MMMM-yyyy" ng-model="modal.row.endTime" is-open="modal.opened2"
                                datepicker-options="modal.dateOptions" close-text="{{'cancel'|translate}}"/>
                     <span class="input-group-btn">
                         <button type="button" class="btn btn-default" ng-click="modal.open2($event)"><i class="glyphicon glyphicon-calendar"></i></button>
                     </span>
                     </div>
-                    <timepicker ng-model="modal.row.endTime"></timepicker>
+                    <timepicker show-meridian="false" ng-model="modal.row.endTime"></timepicker>
                 </div>
             </div>
         </div>
