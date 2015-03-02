@@ -761,7 +761,7 @@ footer
     z-index: 10;
 }
 
-.classclass
+/*.classclass
 {
     max-width: 130px !important;
     min-width: 130px !important;
@@ -777,4 +777,4 @@ footer
 .ui-grid-row, .ui-grid-cell-row
 {
     clear: both;
-}
+}*/

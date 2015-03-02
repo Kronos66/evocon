@@ -30,8 +30,9 @@
                         displayName: 'Name'
                     },
                     {
-                        headerCellClass: 'classclass',
-                        cellClass: 'classclass',
+                        /*headerCellClass: 'classclass',
+                        cellClass: 'classclass',*/
+                        maxWidth: 120,
                         field: ' ',
                         cellTemplate: '<span class="buttonActions"><a class="button link" ng-click="$event.stopPropagation();grid.appScope.teamCtrl.editTeam( row.entity )">' +
                             '{{\'edit\'|translate}}</a>' +
