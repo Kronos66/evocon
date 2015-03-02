@@ -40,7 +40,9 @@
                 }).when('/calendar', {
                     templateUrl: 'admin/views/calendar/calendar.tpl.html', controller: 'calendarController as calendarController'
                 }).when('/teams', {
-                    templateUrl: 'admin/views/teams/teams.html', controller: 'teamsController'
+                    templateUrl: 'admin/views/teams/teams.tpl.html', controller: 'teamsController as teamCtrl'
+                }).when('/operators', {
+                    templateUrl: 'admin/views/operators/operators.tpl.html', controller: 'operatorsController as opCtrl'
                 }).otherwise({
                     redirectTo: '/'
                 });

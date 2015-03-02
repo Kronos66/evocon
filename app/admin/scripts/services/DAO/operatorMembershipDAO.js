@@ -4,7 +4,7 @@
 
     function operatorMembershipDAO($resource)
     {
-        var api = $resource('/rest/v1/teams/:teamId/operators/:operatorId', {
+        var api = $resource('/EvoconReportingServer/rest/v1/teams/:teamId/operators/:operatorId', {
             teamId: '@teamId',
             operatorId: '@operatorId'
         }, {
