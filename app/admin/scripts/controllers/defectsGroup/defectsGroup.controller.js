@@ -13,10 +13,10 @@
                 ctrl.defectsGroup = result;
             });
         };
-        var actionsTemplate = '<a class="button link" ng-click="$event.stopPropagation();grid.appScope.groupCtrl.editRow(row.entity)">' +
+        var actionsTemplate = '<span class="buttonActions"><a class="button link" ng-click="$event.stopPropagation();grid.appScope.groupCtrl.editRow(row.entity)">' +
                 '{{\'edit\'|translate}}</a>' +
                 '<a class="button link" ng-click="$event.stopPropagation();grid.appScope.groupCtrl.deleteRow(row.entity.id)">' +
-                '{{\'delete\'|translate}}</a>';
+                '{{\'delete\'|translate}}</a></span>';
 
         this.gridOptions = {
             enableRowHeaderSelection: false,

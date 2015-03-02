@@ -3,7 +3,7 @@
     <section class="no-bordered">
         <div class="row section-row">
             <div class="col-xs-12">
-                <h1 class="title">Products Groups</h1>
+                <h1 class="title">{{'productsGroup'|translate}}</h1>
 
                 <div class="buttons">
                     <button class="button center" ng-click="groupCtrl.newGroup()">{{ 'addProductGroup' | translate }}</button>
@@ -16,7 +16,7 @@
     <section class="no-bordered" ng-if="groupCtrl.visible">
         <div class="row section-row">
             <div class="col-xs-12">
-                <h2 class="title">Products in selected groups</h2>
+                <h2 class="title">{{'productsInSelectedGroup'|translate}}</h2>
             </div>
         </div>
         <div data-ui-grid="groupCtrl.gridOptionsProducts" data-ui-grid-pagination></div>

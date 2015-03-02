@@ -10,8 +10,8 @@
 
         var selectedGroup;
 
-        var actionsTemplate = '<a class="button link" ng-click="$event.stopPropagation();grid.appScope.groupCtrl.edit(row.entity)">{{\'edit\'|translate}}</a>' +
-                '<a class="button link" ng-click="$event.stopPropagation();grid.appScope.groupCtrl.delete(row.entity.id)">{{\'delete\'|translate}}</a>';
+        var actionsTemplate = '<span class="buttonActions"><a class="button link" ng-click="$event.stopPropagation();grid.appScope.groupCtrl.edit(row.entity)">{{\'edit\'|translate}}</a>' +
+                '<a class="button link" ng-click="$event.stopPropagation();grid.appScope.groupCtrl.delete(row.entity.id)">{{\'delete\'|translate}}</a></span>';
 
 
         this.gridOptionsGroups = {
@@ -96,7 +96,6 @@
 
         this.delete = function (id)
         {
-            console.log(id);
             ProductsGroupDAO.remove(id).then(refresh);
         };
 

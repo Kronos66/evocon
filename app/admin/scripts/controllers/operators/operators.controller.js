@@ -47,7 +47,7 @@
       ctrl.newOp = function() {
         var row = {};
         var modalInstance = $modal.open({
-          templateUrl: 'admin/views/operators/addOrEditoperatorModa.tpll.html',
+          templateUrl: 'admin/views/operators/addOrEditOperatorModal.tpl.html',
           backdrop: 'static',
           keyboard: false,
           size: 'md',
@@ -66,7 +66,7 @@
       ctrl.editOp = function( entity ) {
         var row = angular.extend( {}, entity );
         var modalInstance = $modal.open({
-          templateUrl: 'admin/views/operators/addOrEditoperatorModa.tpll.html',
+          templateUrl: 'admin/views/operators/addOrEditOperatorModal.tpl.html',
           backdrop: 'static',
           keyboard: false,
           size: 'lg',

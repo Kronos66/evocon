@@ -326,7 +326,12 @@ section.no-bordered
 {
     min-width: 100px;
 }
-
+.modal-body .colon td:nth-child(2){
+    font-size: 30px;
+}
+.timepicker-label{
+    margin-top: 40px;
+}
 /*
  - - - - TABLES - - - -
 */
@@ -378,6 +383,7 @@ section.no-bordered
 {
     border-bottom: 1px solid #666 !important;
 }
+
 
 
 /*.adminContent tr
@@ -704,7 +710,14 @@ input.long, select.long
 {
     margin-right: -24px;
 }
-
+.timepicker{
+    border-bottom-right-radius: 0!important;
+    border-top-right-radius: 0!important;
+    -moz-border-radius-bottomright: 0!important;
+    -moz-border-radius-topright: 0!important;
+    -webkit-border-bottom-right-radius: 0!important;
+    -webkit-border-top-right-radius: 0!important;
+}
 footer
 {
     z-index: 10;

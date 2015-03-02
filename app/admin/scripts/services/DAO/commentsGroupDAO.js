@@ -37,5 +37,5 @@
         };
     }
 
-    angular.module('evoReports').service('CommentsGroupDAO', ['$resource', commentsGroupDAO]);
+    angular.module('evoReports').factory('CommentsGroupDAO', ['$resource', commentsGroupDAO]);
 })();

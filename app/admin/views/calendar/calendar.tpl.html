@@ -6,9 +6,7 @@
                 <h1 class="title">{{'calendar'|translate}}</h1>
 
                 <div class="buttons">
-                    <!--<button class="button center" ng-click="commentsController.mergeComments()">{{'merge'|translate}}</button>-->
                     <button class="button center" ng-click="calendarController.addCalendar()">{{'addCalendar'|translate}}</button>
-                    <!--<button class="button center" ng-click="commentsController.newGroup()">{{'addGroupComment'|translate}}</button>-->
                 </div>
             </div>
         </div>
@@ -18,7 +16,10 @@
         <div ng-if="calendarController.visible">
             <div class="row section-row">
                 <div class="col-xs-12">
-                    <h1 class="title">Lines in selected calendar:</h1>
+                    <h1 class="title">{{'lineInSelected'|translate}}:</h1>
+                    <div class="buttons">
+                        <button class="button center" ng-click="calendarController.addLine()">{{'addCalendarLine'|translate}}</button>
+                    </div>
                 </div>
             </div>
             <div ui-grid="calendarController.gridOptions2" ui-grid-pagination></div>

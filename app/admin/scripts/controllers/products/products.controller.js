@@ -8,8 +8,8 @@
         this.products = null;
         this.resultCount = null;
 
-        var actionsTemplate = '<a class="button link" ng-href="#/product/{{row.entity.id}}">{{ \'edit\' | translate}}</a>' +
-                '<a class="button link" ng-click="grid.appScope.productsCtrl.delete(row.entity.id)">{{ \'delete\' | translate}}</a>';
+        var actionsTemplate = '<span class="buttonActions"><a class="button link" ng-href="#/product/{{row.entity.id}}">{{ \'edit\' | translate}}</a>' +
+                '<a class="button link" ng-click="grid.appScope.productsCtrl.delete(row.entity.id)">{{ \'delete\' | translate}}</a></span>';
 
         this.gridOptions = {
             enableRowHashing: false,

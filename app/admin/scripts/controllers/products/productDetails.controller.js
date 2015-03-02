@@ -41,7 +41,7 @@
         this.save = function () {
             ProductsDAO.save(ctrl.product).then(function () {
                 $location.path('/tasks');
-            })
+            });
         };
 
         ProductsGroupDAO.query().then(function (result)

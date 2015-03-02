@@ -31,10 +31,10 @@
                     {
                         field: 'actions',
                         displayName: 'Actions',
-                        cellTemplate: '<a class="button link" ng-click="$event.stopPropagation();grid.appScope.teamCtrl.editTeam( row.entity )">' +
+                        cellTemplate: '<span class="buttonActions"><a class="button link" ng-click="$event.stopPropagation();grid.appScope.teamCtrl.editTeam( row.entity )">' +
                             '{{\'edit\'|translate}}</a>' +
                             '<a class="button link" ng-click="$event.stopPropagation();grid.appScope.teamCtrl.deleteTeam( row.entity.id )">' +
-                            '{{\'delete\'|translate}}</a>'
+                            '{{\'delete\'|translate}}</a></span>'
                     }
                 ]
         };
@@ -51,11 +51,9 @@
                 operatorMembershipDAO.query( selectedRow )
                     .then( function( data ) {
                             ctrl.membership = data;
-                    console.log( data );
                             return operatorsDAO.query();
                     })
                     .then( function( data ) {
-                    console.log( data );
                             var temp = ctrl.membership.slice(),
                                 isMember = false;
                             ctrl.othersOperators = [];

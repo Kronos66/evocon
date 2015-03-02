@@ -3,9 +3,9 @@
     'use strict';
     function DefectsController($modal, DefectsDAO, DefectsGroupDAO)
     {
-        var actionsTemplate = '<a class="button link" ng-click="grid.appScope.defectsCtrl.editRow(row.entity)">{{\'edit\'|translate}}</a>' +
+        var actionsTemplate = '<span class="buttonActions"><a class="button link" ng-click="grid.appScope.defectsCtrl.editRow(row.entity)">{{\'edit\'|translate}}</a>' +
                 '<a class="button link" ng-click="grid.appScope.defectsCtrl.deleteRow(row.entity.id)">{{\'delete\'|translate}}</a>' +
-                '<a class="button link" ng-click="grid.appScope.defectsCtrl.stationRow(row.entity.id)">{{\'stations\'|translate}}</a>';
+                '<a class="button link" ng-click="grid.appScope.defectsCtrl.stationRow(row.entity.id)">{{\'stations\'|translate}}</a></span>';
         var ctrl = this;
         var refresh = function ()
         {
