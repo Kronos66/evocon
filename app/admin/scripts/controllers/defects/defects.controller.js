@@ -1,7 +1,7 @@
 (function ()
 {
     'use strict';
-    function DefectsController($modal, DefectsDAO, DefectsGroupDAO)
+    function DefectsController($modal, $q, DefectsDAO, DefectsGroupDAO, StationDefectDAO)
     {
         var actionsTemplate = '<span class="buttonActions"><a class="button link" ng-click="grid.appScope.defectsCtrl.editRow(row.entity)">{{\'edit\'|translate}}</a>' +
                 '<a class="button link" ng-click="grid.appScope.defectsCtrl.deleteRow(row.entity.id)">{{\'delete\'|translate}}</a>' +
@@ -21,15 +21,29 @@
             paginationPageSize: 10,
             enableRowHeaderSelection: false,
             columnDefs: [{
-                             field: 'name', displayName: 'Name'
-                         }, {
-                             field: 'groupId', displayName: 'Group'
-                         }, {
-                             field: 'stationId', displayName: 'Station'
-                         }, {
-                             field: 'createdDate', displayName: 'Created'
-                         }, {
-                             width: 280, minWidth: 300, displayName: '', field: 'remove', cellTemplate: actionsTemplate, enableSorting: false, enableHiding: false
+                             field: 'name',
+                             displayName: 'Name'
+                         },
+                         {
+                             field: 'groupId',
+                             displayName: 'Group'
+                         },
+                         {
+                             field: 'stationId',
+                             displayName: 'Station'
+                         },
+                         {
+                             field: 'createdDate',
+                             displayName: 'Created'
+                         },
+                         {
+                             width: 280,
+                             minWidth: 300,
+                             displayName: '',
+                             field: 'remove',
+                             cellTemplate: actionsTemplate,
+                             enableSorting: false,
+                             enableHiding: false
                          }]
         };
         this.newGroup = function ()
@@ -48,7 +62,6 @@
                     }
                 }
             });
-
             modalInstance.result.then(DefectsGroupDAO.save).then(refresh);
         };
         this.deleteRow = function (id)
@@ -109,12 +122,37 @@
             });
             modalInstance.result.then(DefectsDAO.merge).then(refresh);
         };
-        this.stationRow = function ()
+        function saveStation(id, stationToSave)
         {
+            if (0 < stationToSave.length) {
+                stationToSave[0].defectId = id;
+                StationDefectDAO.save(stationToSave[0]).then(function ()
+                {
+                    stationToSave.splice(0, 1);
+                    saveStation(id, stationToSave);
+                });
+            } else if (0 === stationToSave.length) {
+                refresh();
+            }
+        }
 
+        this.stationRow = function (id)
+        {
+            var modalInstance = $modal.open({
+                templateUrl: 'admin/views/defects/defectsStationModal.tpl.html',
+                size: 'lg',
+                controller: 'stationListController',
+                controllerAs: 'modal',
+                backdrop: 'static',
+                keyboard: false
+            });
+            modalInstance.result.then(function (result)
+            {
+                saveStation(id, result);
+            });
         };
         refresh();
     }
 
-    angular.module('evoReports').controller('defectsController', ['$modal', 'DefectsDAO', 'DefectsGroupDAO', DefectsController]);
+    angular.module('evoReports').controller('defectsController', ['$modal', '$q', 'DefectsDAO', 'DefectsGroupDAO', 'StationDefectDAO', DefectsController]);
 })();

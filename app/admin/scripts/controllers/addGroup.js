@@ -1,4 +1,3 @@
-/*globals moment*/
 (function ()
 {
     'use strict';
