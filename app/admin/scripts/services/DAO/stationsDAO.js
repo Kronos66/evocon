@@ -1,9 +1,9 @@
 (function ()
 {
     'use strict';
-    function StationGroupDAO($resource)
+    function StationsDAO($resource)
     {
-        var api = $resource('/EvoconReportingServer/rest/v1/stationgroup/:id', {id: '@id'}, {
+        var api = $resource('/EvoconReportingServer/rest/v1/stations/:id', {id: '@id'}, {
             query: {isArray: true, method: 'GET'},
             update: {method: 'PUT'},
             get: {isArray: false, method: 'GET'}
@@ -32,5 +32,5 @@
         };
     }
 
-    angular.module('evoReports').factory('StationGroupDAO', ['$resource', StationGroupDAO]);
+    angular.module('evoReports').factory('StationsDAO', ['$resource', StationsDAO]);
 })();

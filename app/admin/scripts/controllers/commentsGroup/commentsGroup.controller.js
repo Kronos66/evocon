@@ -118,7 +118,15 @@
         };
         this.deleteRow = function (id)
         {
+            var modalInstance = $modal.open({
+                templateUrl: 'admin/views/confirmModal.tpl.html',
+                backdrop: 'static',
+                keyboard: false
+            });
+            modalInstance.result.then(function ()
+            {
             CommentsGroupDAO.remove(id).then(refresh);
+            });
         };
         refresh();
     }

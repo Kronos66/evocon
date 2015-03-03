@@ -83,8 +83,15 @@
       };
 
       ctrl.deleteOp = function( entity ) {
-        operatorsDAO.delete( entity )
-          .then( refresh );
+          var modalInstance = $modal.open({
+              templateUrl: 'admin/views/confirmModal.tpl.html',
+              backdrop: 'static',
+              keyboard: false
+          });
+          modalInstance.result.then(function ()
+          {
+              operatorsDAO.delete(entity).then(refresh);
+          });
       };
 
       refresh();

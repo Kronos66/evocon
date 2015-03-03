@@ -122,8 +122,15 @@
         };
 
         ctrl.deleteTeam = function( entity ) {
-            teamsDAO.delete( entity )
-                    .then( refresh );
+            var modalInstance = $modal.open({
+                templateUrl: 'admin/views/confirmModal.tpl.html',
+                backdrop: 'static',
+                keyboard: false
+            });
+            modalInstance.result.then(function ()
+            {
+                teamsDAO.delete(entity).then(refresh);
+            });
         };
 
         var changeTeamRejection = function() {

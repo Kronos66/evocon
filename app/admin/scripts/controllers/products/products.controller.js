@@ -1,7 +1,7 @@
 (function ()
 {
     'use strict';
-    function ProductsController(ProductsDAO, ProductsGroupDAO)
+    function ProductsController($modal,ProductsDAO, ProductsGroupDAO)
     {
         var ctrl = this;
 
@@ -41,7 +41,15 @@
 
         this.delete = function (id)
         {
-            ProductsDAO.remove(id).then(refresh);
+            var modalInstance = $modal.open({
+                templateUrl: 'admin/views/confirmModal.tpl.html',
+                backdrop: 'static',
+                keyboard: false
+            });
+            modalInstance.result.then(function ()
+            {
+                ProductsDAO.remove(id).then(refresh);
+            });
         };
 
         var refresh = function ()
@@ -62,5 +70,5 @@
         refresh();
     }
 
-    angular.module('evoReports').controller('ProductsController', ['ProductsDAO', 'ProductsGroupDAO', ProductsController]);
+    angular.module('evoReports').controller('ProductsController', ['$modal','ProductsDAO', 'ProductsGroupDAO', ProductsController]);
 })();

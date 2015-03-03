@@ -36,5 +36,9 @@
   "moduleName": "evoconApp",
   "devDependencies": {
     "angular-mocks": "~1.3.13"
+  },
+  "resolutions": {
+    "angular": "1.3.14",
+    "select2": "3.5.2"
   }
 }

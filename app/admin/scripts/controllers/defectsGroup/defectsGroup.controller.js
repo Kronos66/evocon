@@ -27,12 +27,16 @@
             paginationPageSize: 10,
             columnDefs: [{
                              cellClass: 'special-first-cell-for-two-columns',
-                             field: 'name', displayName: 'Name'
-                         }, {
+                             field: 'name',
+                             displayName: 'Name'
+                         },
+                         {
 
-                            headerCellClass: 'smallActionsWidth',
-                            cellClass: 'smallActionsWidth actionsDivToRight',
-                            maxWidth: 120, field: ' ', cellTemplate: actionsTemplate
+                             headerCellClass: 'smallActionsWidth',
+                             cellClass: 'smallActionsWidth actionsDivToRight',
+                             maxWidth: 120,
+                             field: ' ',
+                             cellTemplate: actionsTemplate
                          }]
         };
         this.gridOptions.onRegisterApi = function (gridApi)
@@ -125,7 +129,13 @@
         };
         this.deleteRow = function (id)
         {
-            DefectsGroupDAO.remove(id).then(refresh);
+            var modalInstance = $modal.open({
+                templateUrl: 'admin/views/confirmModal.tpl.html', backdrop: 'static', keyboard: false
+            });
+            modalInstance.result.then(function ()
+            {
+                DefectsGroupDAO.remove(id).then(refresh);
+            });
         };
         refresh();
 

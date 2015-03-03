@@ -60,6 +60,9 @@
         }).when('/device', {
             templateUrl: 'admin/views/device/device.tpl.html',
             controller: 'deviceController as devCtrl'
+        }).when('/station', {
+            templateUrl: 'admin/views/stations/stations.tpl.html',
+            controller: 'stationsController as stationsController'
         }).otherwise({
             redirectTo: '/'
         });

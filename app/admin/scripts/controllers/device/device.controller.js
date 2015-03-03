@@ -82,7 +82,15 @@
 
         ctrl.deleteDev = function (entity)
         {
-            deviceDAO.remove(entity).then(refresh);
+            var modalInstance = $modal.open({
+                templateUrl: 'admin/views/confirmModal.tpl.html',
+                backdrop: 'static',
+                keyboard: false
+            });
+            modalInstance.result.then(function ()
+            {
+                deviceDAO.remove(entity).then(refresh);
+            });
         };
 
         refresh();

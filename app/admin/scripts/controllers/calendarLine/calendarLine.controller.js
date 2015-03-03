@@ -1,4 +1,3 @@
-/*globals moment*/
 (function ()
 {
     'use strict';
@@ -7,7 +6,10 @@
         var ctrl = this;
         this.opened = false;
         this.row = row;
-
+        if (row && !row.startTime) {
+            this.row.startTime = new Date();
+            this.row.endTime = new Date();
+        }
         this.open = function ($event)
         {
             $event.preventDefault();

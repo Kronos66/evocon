@@ -29,7 +29,7 @@
                          }, {
                              field: 'createdDate', displayName: 'Created'
                          }, {
-                            maxWidth: 300, field: ' ', cellTemplate: actionsTemplate
+                             width: 280, minWidth: 300, displayName: 'Actions', field: 'remove', cellTemplate: actionsTemplate
                          }]
         };
         this.newGroup = function ()
@@ -53,7 +53,13 @@
         };
         this.deleteRow = function (id)
         {
-            DefectsDAO.remove(id).then(refresh);
+            var modalInstance = $modal.open({
+                templateUrl: 'admin/views/confirmModal.tpl.html', backdrop: 'static', keyboard: false
+            });
+            modalInstance.result.then(function ()
+            {
+                DefectsDAO.remove(id).then(refresh);
+            });
         };
         this.addRow = function ()
         {

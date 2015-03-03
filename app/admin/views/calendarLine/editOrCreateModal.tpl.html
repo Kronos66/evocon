@@ -21,7 +21,7 @@
                 <div class="col-sm-8 colon">
                     <div class="input-group">
 
-                        <input type="text" ng-disabled="true" value="{{modal.row.startTime |date : 'd-MM-yyyy HH:mm'}}">
+                        <input type="text" ng-disabled="true" value="{{modal.row.startTime |date : 'd-MM-yyyy'}}">
                         <input type="text" class="not-visible form-control" datepicker-popup="dd-MM-yyyy" ng-model="modal.row.startTime" is-open="modal.opened"
                                datepicker-options="modal.dateOptions" close-text="{{'cancel'|translate}}"/>
                     <span class="input-group-btn">
@@ -37,7 +37,7 @@
                 </div>
                 <div class="col-sm-8 colon">
                     <div class="input-group">
-                        <input type="text" ng-disabled="true" value=" {{modal.row.endTime |date : 'd-MM-yyyy HH:mm'}}">
+                        <input type="text" ng-disabled="true" value=" {{modal.row.endTime |date : 'd-MM-yyyy'}}">
                         <input type="text" class="not-visible form-control timepicker" datepicker-popup="dd-MMMM-yyyy" ng-model="modal.row.endTime" is-open="modal.opened2"
                                datepicker-options="modal.dateOptions" close-text="{{'cancel'|translate}}"/>
                     <span class="input-group-btn">

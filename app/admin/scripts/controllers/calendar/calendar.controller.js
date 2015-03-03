@@ -47,7 +47,7 @@
                          }, {
                              field: 'enable', displayName: 'Enable'
                          }, {
-                            maxWidth: 120, field: ' ', cellTemplate: actionsTemplate
+                             maxWidth: 120, field: ' ', cellTemplate: actionsTemplate
                          }]
         };
         this.gridOptions.onRegisterApi = function (gridApi)
@@ -83,9 +83,15 @@
         };
         this.deleteLine = function (id)
         {
-            CalendarLineDAO.remove(selected, id).then(function ()
+            var modalInstance = $modal.open({
+                templateUrl: 'admin/views/confirmModal.tpl.html', backdrop: 'static', keyboard: false
+            });
+            modalInstance.result.then(function ()
             {
-                refreshLine(selected);
+                CalendarLineDAO.remove(selected, id).then(function ()
+                {
+                    refreshLine(selected);
+                });
             });
         };
         this.editLine = function (line)
@@ -137,7 +143,13 @@
 
         this.deleteRow = function (id)
         {
-            CalendarDAO.remove(id).then(refresh);
+            var modalInstance = $modal.open({
+                templateUrl: 'admin/views/confirmModal.tpl.html', backdrop: 'static', keyboard: false
+            });
+            modalInstance.result.then(function ()
+            {
+                CalendarDAO.remove(id).then(refresh);
+            });
         };
 
         this.editRow = function (row)
@@ -177,11 +189,10 @@
             var variable = {};
             modalInstance.result.then(function (result)
             {
-                console.log(result);
-                angular.copy(variable, result);
+                angular.extend(variable, result);
                 variable.startTime = moment(result.startTime).format('HH:mm:ss:sss');
                 variable.endTime = moment(result.startTime).format('HH:mm:ss:sss');
-                return CalendarLineDAO.save(selected, result);
+                return CalendarLineDAO.save(selected, variable);
             }).then(refresh);
         };
         refresh();

@@ -96,7 +96,15 @@
 
         this.delete = function (id)
         {
-            ProductsGroupDAO.remove(id).then(refresh);
+            var modalInstance = $modal.open({
+                templateUrl: 'admin/views/confirmModal.tpl.html',
+                backdrop: 'static',
+                keyboard: false
+            });
+            modalInstance.result.then(function ()
+            {
+                ProductsGroupDAO.remove(id).then(refresh);
+            });
         };
 
         var refresh = function ()
