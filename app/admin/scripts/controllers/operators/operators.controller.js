@@ -32,14 +32,16 @@
             displayName: 'Barcode'
           },
           {
-            field: 'actions',
-            displayName: 'Actions',
+            headerCellClass: 'smallActionsWidthHeader',
+            cellClass: 'smallActionsWidth actionsDivToRight',
+            maxWidth: 120,
+            field: ' ',
             cellTemplate: '<span class="buttonActions">' +
             '<a class="button link" ng-click="$event.stopPropagation();grid.appScope.opCtrl.editOp( row.entity )">' +
             '{{\'edit\'|translate}}</a>' +
             '<a class="button link" ng-click="$event.stopPropagation();grid.appScope.opCtrl.deleteOp( row.entity.id )">' +
             '{{\'delete\'|translate}}</a>' +
-            '</span>'
+            '</span>', enableSorting: false, enableHiding: false
           }
         ]
       };
@@ -47,7 +49,7 @@
       ctrl.newOp = function() {
         var row = {};
         var modalInstance = $modal.open({
-          templateUrl: 'admin/views/operators/addOrEditoperatorModa.tpll.html',
+          templateUrl: 'admin/views/operators/addOrEditOperatorModal.tpl.html',
           backdrop: 'static',
           keyboard: false,
           size: 'md',
@@ -66,10 +68,10 @@
       ctrl.editOp = function( entity ) {
         var row = angular.extend( {}, entity );
         var modalInstance = $modal.open({
-          templateUrl: 'admin/views/operators/addOrEditoperatorModa.tpll.html',
+          templateUrl: 'admin/views/operators/addOrEditOperatorModal.tpl.html',
           backdrop: 'static',
           keyboard: false,
-          size: 'lg',
+          size: 'md',
           controller: 'addGroup',
           controllerAs: 'modal',
           resolve: {
@@ -83,8 +85,15 @@
       };
 
       ctrl.deleteOp = function( entity ) {
-        operatorsDAO.delete( entity )
-          .then( refresh );
+          var modalInstance = $modal.open({
+              templateUrl: 'admin/views/confirmModal.tpl.html',
+              backdrop: 'static',
+              keyboard: false
+          });
+          modalInstance.result.then(function ()
+          {
+              operatorsDAO.delete(entity).then(refresh);
+          });
       };
 
       refresh();

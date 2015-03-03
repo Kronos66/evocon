@@ -26,15 +26,20 @@
                 columnDefs: [
                     {
                         field: 'name',
+                        cellClass: 'special-cell',
                         displayName: 'Name'
                     },
                     {
-                        field: 'actions',
-                        displayName: 'Actions',
-                        cellTemplate: '<a class="button link" ng-click="$event.stopPropagation();grid.appScope.teamCtrl.editTeam( row.entity )">' +
+                        headerCellClass: 'smallActionsWidthHeader',
+                        enableSorting: false,
+                        enableHiding: false,
+                        cellClass: 'smallActionsWidth actionsDivToRight',
+                        maxWidth: 120,
+                        field: ' ',
+                        cellTemplate: '<span class="buttonActions"><a class="button link" ng-click="$event.stopPropagation();grid.appScope.teamCtrl.editTeam( row.entity )">' +
                             '{{\'edit\'|translate}}</a>' +
                             '<a class="button link" ng-click="$event.stopPropagation();grid.appScope.teamCtrl.deleteTeam( row.entity.id )">' +
-                            '{{\'delete\'|translate}}</a>'
+                            '{{\'delete\'|translate}}</a></span>'
                     }
                 ]
         };
@@ -51,11 +56,9 @@
                 operatorMembershipDAO.query( selectedRow )
                     .then( function( data ) {
                             ctrl.membership = data;
-                    console.log( data );
                             return operatorsDAO.query();
                     })
                     .then( function( data ) {
-                    console.log( data );
                             var temp = ctrl.membership.slice(),
                                 isMember = false;
                             ctrl.othersOperators = [];
@@ -88,7 +91,7 @@
                 templateUrl: 'admin/views/teams/addTeamModal.html',
                 backdrop: 'static',
                 keyboard: false,
-                size: 'lg',
+                size: 'md',
                 controller: 'addGroup',
                 controllerAs: 'modal',
                 resolve: {
@@ -107,7 +110,7 @@
                 templateUrl: 'admin/views/teams/editTeamModal.html',
                 backdrop: 'static',
                 keyboard: false,
-                size: 'lg',
+                size: 'md',
                 controller: 'addGroup',
                 controllerAs: 'modal',
                 resolve: {
@@ -121,8 +124,15 @@
         };
 
         ctrl.deleteTeam = function( entity ) {
-            teamsDAO.delete( entity )
-                    .then( refresh );
+            var modalInstance = $modal.open({
+                templateUrl: 'admin/views/confirmModal.tpl.html',
+                backdrop: 'static',
+                keyboard: false
+            });
+            modalInstance.result.then(function ()
+            {
+                teamsDAO.delete(entity).then(refresh);
+            });
         };
 
         var changeTeamRejection = function() {

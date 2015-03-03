@@ -1,8 +1,6 @@
 <div>
     <div class="modal-header">
-        <div>
-            <h2 class="title">Merge Defects</h2>
-        </div>
+        <h2 class="title">{{'mergeDefects'|translate}}:</h2>
     </div>
     <form class="form-horizontal" role="form">
         <div class="modal-body">
@@ -11,12 +9,12 @@
             </div>
             <div class="confirm">
                 <input id="confirm" type="checkbox" ng-model="confirm">
-                <label for="confirm">Are you sure to merge this comments??</label>
+                <label for="confirm">{{'confirmMergeDefects'|translate}}</label>
             </div>
         </div>
         <div class="modal-footer">
             <div class="form-group">
-                <div class="col-xs-12 text-center">
+                <div class="col-sm-offset-2 col-sm-7 text-center">
                     <button ng-disabled="!confirm" class="btn btn-success" ng-click="$close(modal.merge)">
                         <span class="glyphicon glyphicon-ok"></span>
                         {{'save'|translate}}
@@ -26,6 +24,7 @@
                         {{'cancel'|translate}}
                     </button>
                 </div>
+                <div class="col-sm-3"></div>
             </div>
         </div>
     </form>

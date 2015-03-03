@@ -3,13 +3,14 @@
     <section class="no-bordered">
         <div class="row section-row">
             <div class="col-xs-12">
-                <h1 class="title">Products</h1>
+                <h1 class="title">{{'products'|translate}}</h1>
 
                 <div class="buttons">
                     <a class="button center" ng-href="#/product/addnew">{{ 'addProduct' | translate }}</a>
                 </div>
             </div>
         </div>
-        <div data-ui-grid="productsCtrl.gridOptions" data-ui-grid-pagination></div>
+        <div class="grid-style" data-ui-grid="productsCtrl.gridOptions" data-ui-grid-pagination></div>
+        <div class="row section-row"></div>
     </section>
 </div>

@@ -10,8 +10,8 @@
 
         var selectedGroup;
 
-        var actionsTemplate = '<a class="button link" ng-click="$event.stopPropagation();grid.appScope.groupCtrl.edit(row.entity)">{{\'edit\'|translate}}</a>' +
-                '<a class="button link" ng-click="$event.stopPropagation();grid.appScope.groupCtrl.delete(row.entity.id)">{{\'delete\'|translate}}</a>';
+        var actionsTemplate = '<span class="buttonActions"><a class="button link" ng-click="$event.stopPropagation();grid.appScope.groupCtrl.edit(row.entity)">{{\'edit\'|translate}}</a>' +
+                '<a class="button link" ng-click="$event.stopPropagation();grid.appScope.groupCtrl.delete(row.entity.id)">{{\'delete\'|translate}}</a></span>';
 
 
         this.gridOptionsGroups = {
@@ -22,8 +22,14 @@
             paginationPageSizes: [10, 20, 30],
             paginationPageSize: 10,
             columnDefs: [
-                {field:'name', displayName:'Name'},
-                {displayName: 'Actions', field: 'remove', cellTemplate: actionsTemplate}
+                {
+                    field:'name', displayName:'Name', cellClass: 'special-cell'
+                },
+                {
+                    headerCellClass: 'smallActionsWidthHeader',
+                    cellClass: 'smallActionsWidth actionsDivToRight',
+                    maxWidth: 120, field: ' ', cellTemplate: actionsTemplate
+                }
             ]
         };
 
@@ -96,8 +102,15 @@
 
         this.delete = function (id)
         {
-            console.log(id);
-            ProductsGroupDAO.remove(id).then(refresh);
+            var modalInstance = $modal.open({
+                templateUrl: 'admin/views/confirmModal.tpl.html',
+                backdrop: 'static',
+                keyboard: false
+            });
+            modalInstance.result.then(function ()
+            {
+                ProductsGroupDAO.remove(id).then(refresh);
+            });
         };
 
         var refresh = function ()

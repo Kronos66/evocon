@@ -1,11 +1,8 @@
 <div class="container adminContent">
-
-    <admin-menu></admin-menu>
-
     <section class="no-bordered">
         <div class="row section-row">
             <div class="col-xs-12">
-                <h1 ng-if="productDetailCtrl.isCreating" class="title">{{ 'addProduct' | translate }}</h1>
+                <h1 ng-if="productDetailCtrl.isCreating" class="title">{{ 'productDetails' | translate }}</h1>
                 <h1 ng-if="!productDetailCtrl.isCreating" class="title">{{ 'editProduct' | translate }}</h1>
             </div>
         </div>
@@ -16,7 +13,7 @@
                         <label for="name">{{ 'name' | translate }}:</label>
                     </div>
                     <div class="col-xs-9">
-                        <input type="text"  id="name" data-ng-model="productDetailCtrl.product.name" placeholder="Enter name">
+                        <input type="text"  id="name" data-ng-model="productDetailCtrl.product.name" placeholder="{{'enterName'|translate}}">
                     </div>
                 </div>
             </div>
@@ -27,7 +24,7 @@
                     </div>
                     <div class="col-xs-9">
                         <select id="group" data-ui-select2="productDetailCtrl.select2Options" data-ng-model="productDetailCtrl.product.groupId"
-                                data-placeholder="Choose group">
+                                data-placeholder="{{'chooseGroup'|translate}}">
                             <option ng-selected="productDetailCtrl.selectGroup(group.id)" ng-repeat="group in productDetailCtrl.group" value="{{ group.id }}">
                                 {{ group.name }}
                             </option>
@@ -43,7 +40,7 @@
                         <label for="sku">{{ 'sku' | translate }}:</label>
                     </div>
                     <div class="col-xs-9">
-                        <input type="text"  id="sku" data-ng-model="productDetailCtrl.product.sku" placeholder="Barcode">
+                        <input type="text"  id="sku" data-ng-model="productDetailCtrl.product.sku" placeholder="{{'sku'|translate}}">
                     </div>
                 </div>
             </div>
@@ -53,7 +50,7 @@
                         <label for="group">{{ 'group' | translate }}:</label>
                     </div>
                     <div class="col-xs-9">
-                        <input type="text"  id="barcode" data-ng-model="productDetailCtrl.product.barcode" placeholder="Barcode">
+                        <input type="text"  id="barcode" data-ng-model="productDetailCtrl.product.barcode" placeholder="{{'barcode'|translate}}">
                     </div>
                 </div>
             </div>

@@ -38,5 +38,5 @@
         };
     }
 
-    angular.module('evoReports').service('DefectsGroupDAO', ['$resource', defectsGroupDAO]);
+    angular.module('evoReports').factory('DefectsGroupDAO', ['$resource', defectsGroupDAO]);
 })();

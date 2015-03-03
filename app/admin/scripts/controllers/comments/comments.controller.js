@@ -31,7 +31,8 @@
                          }, {
                              field: 'color', displayName: 'Color'
                          }, {
-                             displayName: 'Actions', field: 'remove', cellTemplate: actionsTemplate
+                            headerCellClass: 'smallActionsWidthHeader',
+                            maxWidth: 120, field: ' ', cellTemplate: actionsTemplate
                          }]
         };
         this.newGroup = function ()
@@ -90,7 +91,16 @@
         };
         this.deleteRow = function (id)
         {
-            CommentsDAO.remove(id).then(refresh);
+            var modalInstance = $modal.open({
+                templateUrl: 'admin/views/confirmModal.tpl.html',
+                backdrop: 'static',
+                keyboard: false
+            });
+            modalInstance.result.then(function ()
+            {
+                CommentsDAO.remove(id).then(refresh);
+            });
+
         };
 
         this.mergeComments = function ()

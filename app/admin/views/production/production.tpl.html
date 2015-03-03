@@ -3,14 +3,14 @@
     <section>
         <div class="row">
             <div class="col-xs-12">
-                <h1 class="title">Production / Line view settings</h1>
+                <h1 class="title">{{'production'|translate}} / {{'lineViewsSetting'|translate}}</h1>
             </div>
         </div>
     </section>
     <section>
         <div class="row section-row">
             <div class="col-xs-12">
-                <h2 class="title">Line view color mode</h2>
+                <h2 class="title">{{'lineViewColor'|translate}}</h2>
             </div>
         </div>
         <div class="row section-row">
@@ -20,7 +20,7 @@
                     <span class="color-square green"></span>
                     <span class="color-square yellow"></span>
                     <span class="color-square red"></span>
-                    <p class="inline-input-text">Simple</p>
+                    <p class="inline-input-text">{{'simple'|translate}}</p>
                 </label>
                 <input name="color-mode" id="detailed" class="radio" type="radio" ng-model="PC.settings.colormode" value="1">
                 <label for="detailed">
@@ -31,7 +31,7 @@
                     <span class="color-square purple"></span>
                     <span class="color-square grey"></span>
                     <span class="color-square blue"></span>
-                    <p class="inline-input-text">Detailed</p>
+                    <p class="inline-input-text">{{'detailed'|translate}}</p>
 
                 </label>
             </div>
@@ -40,7 +40,7 @@
     <section>
         <div class="row section-row">
             <div class="col-xs-12">
-                <h2 class="title">Production speed marker limits</h2>
+                <h2 class="title">{{'productionSpeedMarker'|translate}}</h2>
             </div>
         </div>
         <div class="row section-row">
@@ -48,12 +48,12 @@
                 <div class="range-bar">
                     <div class="part">
                         <div class="bar light-green">
-                            <p>TOO FAST</p>
+                            <p>{{'tooFast'|translate}}</p>
                         </div>
                     </div>
                     <div class="part">
                         <div class="bar green">
-                            <p>NORMAL</p>
+                            <p>{{'normal'|translate}}</p>
                         </div>
                         <div class="values">
                             <input type="number" class="short" ng-model="PC.settings.normalMarker" />
@@ -61,7 +61,7 @@
                     </div>
                     <div class="part">
                         <div class="bar yellow">
-                            <p>SLOW</p>
+                            <p>{{'slow'|translate}}</p>
                         </div>
                         <div class="values">
                             <input type="number" class="short" ng-model="PC.settings.slowMarker" />
@@ -69,7 +69,7 @@
                     </div>
                     <div class="part">
                         <div class="bar orange">
-                            <p>TOO SLOW</p>
+                            <p>{{'tooSlow'|translate}}</p>
                         </div>
                         <div class="values">
                             <input type="number" class="short" ng-model="PC.settings.extraSlowMarker" />
@@ -84,7 +84,7 @@
     <section class="no-bordered">
         <div class="row section-row">
             <div class="col-xs-12">
-                <h2 class="title">Production EFF marker</h2>
+                <h2 class="title">{{'productionEFFMarker'|translate}}</h2>
             </div>
         </div>
         <div class="row section-row">
@@ -142,7 +142,7 @@
         </div>
         <div class="row section-row">
             <div class="col-xs-12 text-center">
-                <span class="button button-submit">save</span>
+                <span class="button button-submit">{{'save'|translate}}</span>
             </div>
         </div>
     </section>

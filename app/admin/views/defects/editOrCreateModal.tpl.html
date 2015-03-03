@@ -1,8 +1,6 @@
 <div>
     <div class="modal-header">
-        <div>
-            <h2 class="title">Add Defect</h2>
-        </div>
+        <h2 class="title">{{'defectDetails'|translate}}</h2>
     </div>
     <form class="form-horizontal" role="form">
         <div class="modal-body">
@@ -19,7 +17,7 @@
                     <label for="group">{{'group'|translate}}:</label>
                 </div>
                 <div class="col-sm-8">
-                    <select id="group" ui-select2="modal.select2Options" data-ng-model="modal.row.groupId" data-placeholder="Choose category">
+                    <select id="group" ui-select2="modal.select2Options" data-ng-model="modal.row.groupId" data-placeholder="{{'chooseCategory'|translate}}">
                         <option ng-selected="modal.selectCategory(category.id)" ng-repeat="category in modal.category" value="{{category.id}}">{{category.name}}
                         </option>
                     </select>

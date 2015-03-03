@@ -20,8 +20,7 @@
 }
 
 .confirm {
-    margin-left: 30%;
-    margin-top: 2%;
+    margin-top: 60px;
 }
 
 .modal-header {
@@ -47,7 +46,6 @@
 
 .buttonActions {
     display: block;
-    width: 250px;
 }
 
 .buttonActions a {
@@ -130,8 +128,10 @@
 
 #adminMenu span.pushpin
 {
+    margin-left: 8px;
     opacity: 0;
     cursor: pointer;
+    font-size: 20px;
 }
 
 .static #adminMenu span.pushpin
@@ -215,7 +215,8 @@
  - - - - - MODAL - - - -
  */
 
-.modal {
+.modal
+{
     display: none;
     position: fixed;
     padding-top: 80px;
@@ -227,19 +228,50 @@
     overflow-y: hidden;
 }
 
-/*.modal-body input[ type=checkbox ]
+.time label
 {
-    margin: 12px 20px 0 0;
-    width: 20px;
-    height: 20px;
+    margin-top: 38px;
 }
 
-.modal-body label
+.colon table
 {
-    min-width: 100px;
-    line-height: 1.6;
-    margin-top: 10px;
-}*/
+    margin-right: 4px;
+    float: left;
+}
+
+.colon table input
+{
+    color: #888;
+}
+
+.date-input
+{
+    margin-top: 35px;
+    width: 150px;
+    float: left;
+}
+
+.date-input input
+{
+    height: 34px;
+    border-top-right-radius: 0 !important;
+    border-bottom-right-radius: 0 !important;
+}
+
+.not-visible
+{
+    height: 0 !important;
+    border: none !important;
+}
+
+.modal-body .colon td:nth-child(2){
+    font-size: 30px;
+}
+
+
+
+
+
 
 .select2-container
 {
@@ -324,12 +356,26 @@ section.no-bordered
 
 .thumbnail .btn
 {
-    min-width: 100px;
+    margin-bottom: 4px;
+    min-width: 100%;
 }
+
+.station-checkbox-top-margined
+{
+    margin-top: 36px;
+}
+
+
 
 /*
  - - - - TABLES - - - -
 */
+
+.grid-style
+{
+    height: 490px;
+}
+
 .ui-grid-top-panel-background,
 .ui-grid-top-panel,
 .ui-grid-no-row-overlay,
@@ -363,7 +409,7 @@ section.no-bordered
     background: #dedfcf;
 }
 
-.ui-grid-header .ui-grid-header-cell:first-child .ui-grid-cell-contents
+.ui-grid-render-container-body .ui-grid-header .ui-grid-header-cell:first-child .ui-grid-cell-contents
 {
     background: #bcbdaf;
 }
@@ -379,36 +425,98 @@ section.no-bordered
     border-bottom: 1px solid #666 !important;
 }
 
-
-/*.adminContent tr
+.ui-grid-row .ui-grid-cell
 {
-    border-bottom: 1px solid #111;
+    background-color: inherit !important;
 }
 
-.adminContent .statsTable th, .adminContent .statsTable td
+.ui-grid-render-container-body .ui-grid-viewport
 {
-    border: none;
+    overflow: auto !important;
 }
 
-.adminContent .statsTable th:not( :last-child )
+.adminContent .smallActionsWidthHeader .ui-grid-column-menu-button
 {
-    border-right: 1px solid #fff;
+    display: none;
 }
 
-.adminContent table.statsTable label
+.ui-grid-canvas
 {
-    color: inherit;
-    margin: 0;
-    min-width: initial;
-    line-height: 1;
+    width: 100% !important;
 }
 
-.adminContent .statsTable .highlighted
+.ui-grid-header-cell-wrapper
 {
-    background: #bdbdb0;
-    color: #fff;
+    width: 100% !important;
 }
-*/
+
+div[ ui-grid-row=row ]
+{
+    position: relative;
+}
+
+div[ ui-grid-row=row ] > div:last-child
+{
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+.smallActionsWidth
+{
+    max-width: 130px !important;
+    min-width: 130px !important;
+}
+
+.smallActionsWidthHeader
+{
+    max-width: 160px !important;
+    min-width: 160px !important;
+}
+
+.smallActionsWidthHeader.longer
+{
+    max-width: 320px !important;
+    min-width: 320px !important;
+}
+
+.actionsDivToRight
+{
+    float: right;
+}
+
+.special-cell
+{
+    display: block;
+    float: left;
+}
+
+.ui-grid-header-cell-row, .ui-grid-cell-row
+{
+    clear: both;
+}
+
+.special-cell
+{
+    max-width: none !important;
+    min-width: initial !important;
+    width: 100%;
+}
+
+.special-cell.shorter
+{
+    width: 50%;
+}
+
+.special-cell.more-shorter
+{
+    width: 40%;
+}
+
+.special-cell.shortest
+{
+    width: 30%;
+}
 
 
 
@@ -441,7 +549,7 @@ input[ type=checkbox ], input[ type=radio ]
     height: 20px;
 }
 
-.confirm input[ type=checkbox ]
+.confirm input[ type=checkbox ], .station-disabled input[ type=checkbox ]
 {
     margin-top: 0;
 }
@@ -471,6 +579,13 @@ input[ type=number ].short, input[ type=text ].short
 input.long, select.long
 {
     max-width: 340px;
+}
+
+.station-disabled input[ disabled=disabled ]
+{
+    background: #eee !important;
+    border-color: #ddd !important;
+    color: #ccc !important;
 }
 
 .inline-input-text
@@ -704,9 +819,16 @@ input.long, select.long
 {
     margin-right: -24px;
 }
+.timepicker{
+    border-bottom-right-radius: 0!important;
+    border-top-right-radius: 0!important;
+    -moz-border-radius-bottomright: 0!important;
+    -moz-border-radius-topright: 0!important;
+    -webkit-border-bottom-right-radius: 0!important;
+    -webkit-border-top-right-radius: 0!important;
+}
 
 footer
 {
     z-index: 10;
 }
-

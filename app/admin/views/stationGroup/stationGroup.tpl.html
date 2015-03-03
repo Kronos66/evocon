@@ -1,0 +1,17 @@
+<div class="container adminContent">
+
+    <section class="no-bordered">
+        <div class="row section-row">
+            <div class="col-xs-12">
+                <h1 class="title">{{'stationGroup'|translate}}</h1>
+
+                <div class="buttons">
+                    <button class="button center" ng-click="stationGroupController.addStation()">{{'addStation'|translate}}</button>
+                </div>
+            </div>
+        </div>
+        <div class="grid-style" ui-grid="stationGroupController.gridOptions" ui-grid-pagination ui-grid-selection></div>
+
+        <div class="row section-row"></div>
+    </section>
+</div>

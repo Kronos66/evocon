@@ -14,7 +14,22 @@
             enableRowSelection: true,
             data: 'modal.defectsToMerge',
             paginationPageSizes: [10, 20, 30],
-            paginationPageSize: 10
+            paginationPageSize: 10,
+            columnDefs: [
+                {
+                    field: 'name',
+                    displayName: 'Name'
+                },
+                {
+                    field: 'groupId',
+                    displayName: 'Group Id',
+                    cellClass: 'special-cell shorter'
+                },
+                {
+                    field: 'createdDate',
+                    displayName: 'Created Date'
+                }
+            ]
         };
         this.gridOptions.onRegisterApi = function (gridApi)
         {

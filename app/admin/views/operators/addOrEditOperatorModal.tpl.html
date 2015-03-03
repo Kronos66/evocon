@@ -1,0 +1,49 @@
+<div>
+    <div class="modal-header">
+        <h2 class="title">{{'editOrCreateOperators'|translate}}</h2>
+    </div>
+
+    <form class="form-horizontal" role="form">
+        <div class="modal-body">
+            <div class="form-group">
+                <div class="col-sm-3">
+                    <label for="firstname" >{{'firstName'|translate}}</label>
+                </div>
+                <div class="col-sm-9">
+                    <input id="firstname" type="text" ng-model="modal.row.firstname" />
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-3">
+                    <label for="lastname" >{{'lastName'|translate}}</label>
+                </div>
+                <div class="col-sm-9">
+                    <input id="lastname" type="text" ng-model="modal.row.lastname" />
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-3">
+                    <label for="barcode" >{{'barcode'|translate}}</label>
+                </div>
+                <div class="col-sm-9">
+                    <input id="barcode" type="text" ng-model="modal.row.barcode" />
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-7 text-left">
+                    <button class="btn btn-success pull-left" ng-click="$close(modal.row)">
+                        <span class="glyphicon glyphicon-ok"></span>
+                        {{'save'|translate}}
+                    </button>
+                    <button class="btn btn-danger pull-left" ng-click="$dismiss()">
+                        <span class="glyphicon glyphicon-remove"></span>
+                        {{'cancel'|translate}}
+                    </button>
+                </div>
+                <div class="col-sm-3"></div>
+            </div>
+        </div>
+    </form>
+</div>

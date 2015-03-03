@@ -12,10 +12,10 @@
                 ctrl.commentsGroup = result;
             });
         };
-        var actionsTemplate = '<a class="button link" ng-click="$event.stopPropagation();grid.appScope.groupController.editRow(row.entity)">' +
+        var actionsTemplate = '<span class="buttonActions"><a class="button link" ng-click="$event.stopPropagation();grid.appScope.groupCtrl.editRow(row.entity)">' +
                 '{{\'edit\'|translate}}</a>' +
-                '<a class="button link" ng-click="$event.stopPropagation();grid.appScope.groupController.deleteRow(row.entity.id)">' +
-                '{{\'delete\'|translate}}</a>';
+                '<a class="button link" ng-click="$event.stopPropagation();grid.appScope.groupCtrl.deleteRow(row.entity.id)">' +
+                '{{\'delete\'|translate}}</a></span>';
         this.gridOptions = {
             enableRowHeaderSelection: false,
             enableRowSelection: true,
@@ -30,9 +30,11 @@
                          }, {
                              field: 'category', displayName: 'Category'
                          }, {
-                             field: 'color', displayName: 'Color'
+                             field: 'color', displayName: 'Color',
+                            cellClass: 'special-cell shortest'
                          }, {
-                             displayName: 'Actions', field: 'remove', cellTemplate: actionsTemplate
+                             headerCellClass: 'smallActionsWidthHeader',
+                            maxWidth: 120, field: ' ', cellTemplate: actionsTemplate, enableSorting: false, enableHiding: false
                          }]
         };
         this.gridOptions.onRegisterApi = function (gridApi)
@@ -118,7 +120,15 @@
         };
         this.deleteRow = function (id)
         {
+            var modalInstance = $modal.open({
+                templateUrl: 'admin/views/confirmModal.tpl.html',
+                backdrop: 'static',
+                keyboard: false
+            });
+            modalInstance.result.then(function ()
+            {
             CommentsGroupDAO.remove(id).then(refresh);
+            });
         };
         refresh();
     }

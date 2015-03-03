@@ -21,7 +21,8 @@
                          },
                          {
                              field: 'category',
-                             displayName: 'Category'
+                             displayName: 'Category',
+                             cellClass: 'special-cell shorter'
                          },
                          {
                              field: 'color',

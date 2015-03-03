@@ -1,20 +1,22 @@
 <div class="container adminContent">
 
-  <section class="no-bordered">
-    <div class="row section-row">
-      <div class="col-xs-12">
-        <h1 class="title">Operators</h1>
+    <section class="no-bordered">
+        <div class="row section-row">
+            <div class="col-xs-12">
+                <h1 class="title">{{'operators'|translate}}</h1>
 
-        <div class="buttons">
-          <button ng-click="opCtrl.newOp()" class="button center">New Operator</button>
+                <div class="buttons">
+                    <button ng-click="opCtrl.newOp()" class="button center">{{'newOperator'|translate}}</button>
+                </div>
+            </div>
         </div>
-      </div>
-    </div>
 
-    <div class="row section-row">
-      <div class="col-xs-12">
-        <div ui-grid="opCtrl.gridOptions" ui-grid-selection ui-grid-pagination></div>
-      </div>
-    </div>
-  </section>
+        <div class="row section-row">
+            <div class="col-xs-12">
+                <div class="grid-style" ui-grid="opCtrl.gridOptions" ui-grid-selection ui-grid-pagination></div>
+            </div>
+        </div>
+
+        <div class="row section-row"></div>
+    </section>
 </div>

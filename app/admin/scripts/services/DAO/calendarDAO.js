@@ -37,5 +37,5 @@
         };
     }
 
-    angular.module('evoReports').service('CalendarDAO', ['$resource', CalendarDAO]);
+    angular.module('evoReports').factory('CalendarDAO', ['$resource', CalendarDAO]);
 })();

@@ -1,0 +1,22 @@
+<div class="container adminContent">
+
+    <section class="no-bordered">
+        <div class="row section-row">
+            <div class="col-xs-12">
+                <h1 class="title">{{'devices'|translate}}</h1>
+
+                <div class="buttons">
+                    <button ng-click="devCtrl.newDev()" class="button center">{{'newDevice'|translate}}</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="row section-row">
+            <div class="col-xs-12">
+                <div class="grid-style" ui-grid="devCtrl.gridOptions" ui-grid-selection ui-grid-pagination></div>
+            </div>
+        </div>
+
+        <div class="row section-row"></div>
+    </section>
+</div>
