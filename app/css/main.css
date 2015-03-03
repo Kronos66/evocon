@@ -215,7 +215,8 @@
  - - - - - MODAL - - - -
  */
 
-.modal {
+.modal
+{
     display: none;
     position: fixed;
     padding-top: 80px;
@@ -319,6 +320,7 @@ section.no-bordered
     margin-bottom: 4px;
     min-width: 100%;
 }
+
 .modal-body .colon td:nth-child(2){
     font-size: 30px;
 }
@@ -384,7 +386,7 @@ section.no-bordered
     overflow: auto !important;
 }
 
-.ui-grid-column-menu-button
+.adminContent .ui-grid-header-cell:last-child .ui-grid-column-menu-button
 {
     display: none;
 }
@@ -399,48 +401,51 @@ section.no-bordered
     width: 100% !important;
 }
 
-
-/*.ui-grid-canvas .ui-grid-cell:last-child
+div[ ui-grid-row=row ]
 {
-    min-width: 150px !important;
+    position: relative;
 }
 
-.ui-grid-header-cell-row .ui-grid-header-cell:last-child
+div[ ui-grid-row=row ] > div:last-child
 {
-    min-width: 150px !important;
-}*/
-
-
-
-/*.adminContent tr
-{
-    border-bottom: 1px solid #111;
+    position: absolute;
+    top: 0;
+    right: 0;
 }
 
-.adminContent .statsTable th, .adminContent .statsTable td
+.smallActionsWidth
 {
-    border: none;
+    max-width: 130px !important;
+    min-width: 130px !important;
 }
 
-.adminContent .statsTable th:not( :last-child )
+.actionsDivToRight
 {
-    border-right: 1px solid #fff;
+    float: right;
 }
 
-.adminContent table.statsTable label
+.special-cell
 {
-    color: inherit;
-    margin: 0;
-    min-width: initial;
-    line-height: 1;
+    display: block;
+    float: left;
 }
 
-.adminContent .statsTable .highlighted
+.ui-grid-header-cell-row, .ui-grid-cell-row
 {
-    background: #bdbdb0;
-    color: #fff;
+    clear: both;
 }
-*/
+
+.special-cell
+{
+    max-width: none !important;
+    min-width: initial !important;
+    width: 100%;
+}
+
+.special-cell.shorter
+{
+    width: 50%;
+}
 
 
 
@@ -744,29 +749,8 @@ input.long, select.long
     -webkit-border-bottom-right-radius: 0!important;
     -webkit-border-top-right-radius: 0!important;
 }
+
 footer
 {
     z-index: 10;
-}
-
-.classclass
-{
-    max-width: 130px !important;
-    min-width: 130px !important;
-}
-
-.Cclassclass
-{
-    float: right;
-}
-
-.classclassclass
-{
-    display: block;
-    float: left;
-}
-
-.ui-grid-header-cell-row, .ui-grid-cell-row
-{
-    clear: both;
 }

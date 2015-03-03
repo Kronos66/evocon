@@ -26,12 +26,12 @@
                 columnDefs: [
                     {
                         field: 'name',
-                        cellClass: 'classclassclass',
+                        cellClass: 'special-cell',
                         displayName: 'Name'
                     },
                     {
-                        headerCellClass: 'classclass',
-                        cellClass: 'classclass Cclassclass',
+                        headerCellClass: 'smallActionsWidth',
+                        cellClass: 'smallActionsWidth actionsDivToRight',
                         maxWidth: 120,
                         field: ' ',
                         cellTemplate: '<span class="buttonActions"><a class="button link" ng-click="$event.stopPropagation();grid.appScope.teamCtrl.editTeam( row.entity )">' +
