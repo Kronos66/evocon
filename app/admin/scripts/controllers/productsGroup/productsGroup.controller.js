@@ -22,8 +22,14 @@
             paginationPageSizes: [10, 20, 30],
             paginationPageSize: 10,
             columnDefs: [
-                {field:'name', displayName:'Name'},
-                {maxWidth: 120, field: ' ', cellTemplate: actionsTemplate}
+                {
+                    field:'name', displayName:'Name', cellClass: 'special-cell'
+                },
+                {
+                    headerCellClass: 'smallActionsWidthHeader',
+                    cellClass: 'smallActionsWidth actionsDivToRight',
+                    maxWidth: 120, field: ' ', cellTemplate: actionsTemplate
+                }
             ]
         };
 

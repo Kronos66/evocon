@@ -29,7 +29,8 @@
                          }, {
                              field: 'createdDate', displayName: 'Created'
                          }, {
-                             width: 280, minWidth: 300, displayName: 'Actions', field: 'remove', cellTemplate: actionsTemplate
+                            headerCellClass: 'smallActionsWidthHeader longer',
+                            maxWidth: 300, field: ' ', cellTemplate: actionsTemplate
                          }]
         };
         this.newGroup = function ()

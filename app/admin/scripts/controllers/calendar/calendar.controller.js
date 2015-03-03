@@ -45,9 +45,12 @@
                          }, {
                              field: 'description', displayName: 'Description'
                          }, {
-                             field: 'enable', displayName: 'Enable'
+                             field: 'enable', displayName: 'Enable',
+                            cellClass: 'special-cell more-shorter'
                          }, {
-                             maxWidth: 120, field: ' ', cellTemplate: actionsTemplate
+                            headerCellClass: 'smallActionsWidthHeader',
+                            cellClass: 'smallActionsWidth actionsDivToRight',
+                            maxWidth: 120, field: ' ', cellTemplate: actionsTemplate
                          }]
         };
         this.gridOptions.onRegisterApi = function (gridApi)
@@ -66,14 +69,17 @@
                     ctrl.visible = true;
                     ctrl.gridOptions2 = {
                         data: 'calendarController.lines', columnDefs: [{
-                                                                           field: 'id', displayName: 'Id line'
-                                                                       }, {
-                                                                           field: 'startTime', displayName: 'Start time'
-                                                                       }, {
-                                                                           field: 'endTime', displayName: 'End time'
-                                                                       }, {
-                                                                           displayName: 'Actions', field: 'remove', cellTemplate: actionsTemplate2
-                                                                       }]
+                               field: 'id', displayName: 'Id line'
+                           }, {
+                               field: 'startTime', displayName: 'Start time'
+                           }, {
+                               field: 'endTime', displayName: 'End time',
+                                cellClass: 'special-cell more-shorter'
+                           }, {
+                                headerCellClass: 'smallActionsWidthHeader',
+                                cellClass: 'smallActionsWidth actionsDivToRight',
+                                maxWidth: 120, field: ' ', cellTemplate: actionsTemplate2
+                           }]
                     };
                 } else {
                     ctrl.visible = false;

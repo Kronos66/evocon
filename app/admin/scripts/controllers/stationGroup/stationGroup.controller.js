@@ -25,9 +25,12 @@
             columnDefs: [{
                              field: 'name', displayName: 'Name'
                          }, {
-                             field: 'description', displayName: 'Description'
+                             field: 'description', displayName: 'Description',
+                            cellClass: 'special-cell shorter'
                          }, {
-                             field: ' ', displayName: '', cellTemplate: actionsTemplate
+                            headerCellClass: 'smallActionsWidthHeader',
+                            cellClass: 'smallActionsWidth actionsDivToRight',
+                            maxWidth: 120, field: ' ', displayName: '', cellTemplate: actionsTemplate
                          }]
         };
         this.editRow= function (row)

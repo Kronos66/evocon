@@ -28,9 +28,12 @@
             columnDefs: [{
                              field: 'name', displayName: 'Name'
                          }, {
-                             field: 'description', displayName: 'Description'
+                             field: 'description', displayName: 'Description',
+                            cellClass: 'special-cell shorter'
                          }, {
-                             displayName: '', field: 'remove', cellTemplate: actionsTemplate
+                            headerCellClass: 'smallActionsWidthHeader',
+                            cellClass: 'smallActionsWidth actionsDivToRight',
+                            maxWidth: 120, displayName: '', field: 'remove', cellTemplate: actionsTemplate
                          }]
         };
         this.gridOptions.onRegisterApi = function (gridApi)

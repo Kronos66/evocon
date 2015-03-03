@@ -31,7 +31,8 @@
                          }, {
                              field: 'color', displayName: 'Color'
                          }, {
-                             displayName: 'Actions', field: 'remove', cellTemplate: actionsTemplate, enableSorting: false, enableHiding: false
+                            headerCellClass: 'smallActionsWidthHeader',
+                            maxWidth: 120, field: ' ', cellTemplate: actionsTemplate
                          }]
         };
         this.newGroup = function ()
@@ -90,9 +91,6 @@
         };
         this.deleteRow = function (id)
         {
-            //if ($window.confirm('Are you sure delete this row?')) {
-            //    CommentsDAO.remove(id).then(refresh);
-            //}
             var modalInstance = $modal.open({
                 templateUrl: 'admin/views/confirmModal.tpl.html',
                 backdrop: 'static',

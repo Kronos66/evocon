@@ -32,6 +32,8 @@
             displayName: 'Barcode'
           },
           {
+            headerCellClass: 'smallActionsWidthHeader',
+            cellClass: 'smallActionsWidth actionsDivToRight',
             maxWidth: 120,
             field: ' ',
             cellTemplate: '<span class="buttonActions">' +
