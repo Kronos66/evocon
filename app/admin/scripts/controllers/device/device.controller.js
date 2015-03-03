@@ -22,9 +22,10 @@
                     displayName: 'Description'
                 },{
                     field: 'id',
-                    displayName: 'Id'
-                },
-                {
+                    displayName: 'Id',
+                     maxWidth: 100,
+                     minWidth: 100
+                },{
                     field: 'inputs',
                     displayName: 'Inputs'
                 },
