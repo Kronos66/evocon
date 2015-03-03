@@ -32,6 +32,8 @@
                     headerCellClass: 'smallActionsWidthHeader',
                     cellClass: 'smallActionsWidth actionsDivToRight',
                     maxWidth: 120,
+                    enableSorting: false,
+                    enableHiding: false,
                     field: ' ',
                     cellTemplate: '<span class="buttonActions">' +
                     '<a class="button link" ng-click="$event.stopPropagation();grid.appScope.devCtrl.editDev( row.entity )">' +

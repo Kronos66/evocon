@@ -31,6 +31,8 @@
                     },
                     {
                         headerCellClass: 'smallActionsWidthHeader',
+                        enableSorting: false,
+                        enableHiding: false,
                         cellClass: 'smallActionsWidth actionsDivToRight',
                         maxWidth: 120,
                         field: ' ',

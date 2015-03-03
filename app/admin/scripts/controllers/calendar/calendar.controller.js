@@ -50,7 +50,7 @@
                          }, {
                             headerCellClass: 'smallActionsWidthHeader',
                             cellClass: 'smallActionsWidth actionsDivToRight',
-                            maxWidth: 120, field: ' ', cellTemplate: actionsTemplate
+                            maxWidth: 120, field: ' ', cellTemplate: actionsTemplate, enableSorting: false, enableHiding: false
                          }]
         };
         this.gridOptions.onRegisterApi = function (gridApi)
@@ -78,7 +78,7 @@
                            }, {
                                 headerCellClass: 'smallActionsWidthHeader',
                                 cellClass: 'smallActionsWidth actionsDivToRight',
-                                maxWidth: 120, field: ' ', cellTemplate: actionsTemplate2
+                                maxWidth: 120, field: ' ', cellTemplate: actionsTemplate2, enableSorting: false, enableHiding: false
                            }]
                     };
                 } else {
@@ -107,7 +107,6 @@
                 controllerAs: 'modal',
                 backdrop: 'static',
                 keyboard: false,
-                size: 'lg',
                 templateUrl: 'admin/views/calendarLine/editOrCreateModal.tpl.html',
                 resolve: {
                     row: function ()
@@ -119,10 +118,10 @@
             var variable = {};
             modalInstance.result.then(function (result)
             {
-                angular.copy(variable, result);
-                variable.startTime = moment(result.startTime).format('HH:mm:ss:sss');
-                variable.endTime = moment(result.startTime).format('HH:mm:ss:sss');
-                return CalendarLineDAO.update(selected, result);
+                angular.extend(variable, result);
+                variable.startTime = moment(result.startTime).format('HH:mm:ss');
+                variable.endTime = moment(result.endTime).format('HH:mm:ss');
+                return CalendarLineDAO.update(selected, variable);
             }).then(function ()
             {
                 refreshLine(selected);
@@ -196,10 +195,13 @@
             modalInstance.result.then(function (result)
             {
                 angular.extend(variable, result);
-                variable.startTime = moment(result.startTime).format('HH:mm:ss:sss');
-                variable.endTime = moment(result.startTime).format('HH:mm:ss:sss');
+                variable.startTime = moment(variable.startTime).format('HH:mm:ss');
+                variable.endTime = moment(variable.endTime).format('HH:mm:ss');
                 return CalendarLineDAO.save(selected, variable);
-            }).then(refresh);
+            }).then(function ()
+            {
+                refreshLine(selected);
+            });
         };
         refresh();
     }

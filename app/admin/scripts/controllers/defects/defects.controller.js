@@ -29,8 +29,7 @@
                          }, {
                              field: 'createdDate', displayName: 'Created'
                          }, {
-                            headerCellClass: 'smallActionsWidthHeader longer',
-                            maxWidth: 300, field: ' ', cellTemplate: actionsTemplate
+                             width: 280, minWidth: 300, displayName: '', field: 'remove', cellTemplate: actionsTemplate, enableSorting: false, enableHiding: false
                          }]
         };
         this.newGroup = function ()

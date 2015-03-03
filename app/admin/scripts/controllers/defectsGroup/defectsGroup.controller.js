@@ -31,7 +31,7 @@
                          }, {
                             headerCellClass: 'smallActionsWidthHeader',
                             cellClass: 'smallActionsWidth actionsDivToRight',
-                            maxWidth: 120, field: ' ', cellTemplate: actionsTemplate
+                            maxWidth: 120, field: ' ', cellTemplate: actionsTemplate, enableSorting: false, enableHiding: false
                          }]
         };
         this.gridOptions.onRegisterApi = function (gridApi)

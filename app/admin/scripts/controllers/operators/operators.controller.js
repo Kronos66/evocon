@@ -41,7 +41,7 @@
             '{{\'edit\'|translate}}</a>' +
             '<a class="button link" ng-click="$event.stopPropagation();grid.appScope.opCtrl.deleteOp( row.entity.id )">' +
             '{{\'delete\'|translate}}</a>' +
-            '</span>'
+            '</span>', enableSorting: false, enableHiding: false
           }
         ]
       };

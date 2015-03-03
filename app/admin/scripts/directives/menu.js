@@ -20,14 +20,13 @@
                 } );
 
                 elem.find( 'span' ).on( 'click', function() {
-                    console.log( 'clicked' );
                     elem.find( '#adminMenu' ).toggleClass( 'static' );
                 } );
 
                 scope.setMenuStatic = function() {
                     elem.toggleClass( 'static' );
                     $( 'body > .content' ).toggleClass( 'static' );
-                }
+                };
             }
         };
     });

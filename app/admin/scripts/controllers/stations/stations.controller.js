@@ -33,7 +33,7 @@
                          }, {
                             headerCellClass: 'smallActionsWidthHeader',
                             cellClass: 'smallActionsWidth actionsDivToRight',
-                            maxWidth: 120, displayName: '', field: 'remove', cellTemplate: actionsTemplate
+                            maxWidth: 120, displayName: '', field: 'remove', cellTemplate: actionsTemplate, enableSorting: false, enableHiding: false
                          }]
         };
         this.gridOptions.onRegisterApi = function (gridApi)
@@ -54,8 +54,8 @@
         };
         this.addStation = function ()
         {
-            var station={};
-            var modalInstance=$modal.open({
+            var station = {};
+            var modalInstance = $modal.open({
                 controller: 'editOrCreateStationController',
                 controllerAs: 'modal',
                 backdrop: 'static',
@@ -73,7 +73,7 @@
         };
         this.editRow = function (station)
         {
-            var modalInstance=$modal.open({
+            var modalInstance = $modal.open({
                 controller: 'editOrCreateStationController',
                 controllerAs: 'modal',
                 backdrop: 'static',

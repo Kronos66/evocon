@@ -30,7 +30,7 @@
                          }, {
                             headerCellClass: 'smallActionsWidthHeader',
                             cellClass: 'smallActionsWidth actionsDivToRight',
-                            maxWidth: 120, field: ' ', displayName: '', cellTemplate: actionsTemplate
+                            maxWidth: 120, field: ' ', displayName: '', cellTemplate: actionsTemplate, enableSorting: false, enableHiding: false
                          }]
         };
         this.editRow= function (row)
