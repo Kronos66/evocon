@@ -26,11 +26,14 @@
                 columnDefs: [
                     {
                         field: 'name',
+                        cellClass: 'special-cell',
                         displayName: 'Name'
                     },
                     {
-                        field: 'actions',
-                        displayName: 'Actions',
+                        headerCellClass: 'smallActionsWidth',
+                        cellClass: 'smallActionsWidth actionsDivToRight',
+                        maxWidth: 120,
+                        field: ' ',
                         cellTemplate: '<span class="buttonActions"><a class="button link" ng-click="$event.stopPropagation();grid.appScope.teamCtrl.editTeam( row.entity )">' +
                             '{{\'edit\'|translate}}</a>' +
                             '<a class="button link" ng-click="$event.stopPropagation();grid.appScope.teamCtrl.deleteTeam( row.entity.id )">' +
@@ -86,7 +89,7 @@
                 templateUrl: 'admin/views/teams/addTeamModal.html',
                 backdrop: 'static',
                 keyboard: false,
-                size: 'lg',
+                size: 'md',
                 controller: 'addGroup',
                 controllerAs: 'modal',
                 resolve: {
@@ -105,7 +108,7 @@
                 templateUrl: 'admin/views/teams/editTeamModal.html',
                 backdrop: 'static',
                 keyboard: false,
-                size: 'lg',
+                size: 'md',
                 controller: 'addGroup',
                 controllerAs: 'modal',
                 resolve: {

@@ -55,6 +55,11 @@
         }).when('/stationsgroup', {
             templateUrl: 'admin/views/stationGroup/stationGroup.tpl.html',
             controller: 'stationGroupController as stationGroupController'
+        }).when('/users', {
+            templateUrl: 'admin/views/users/users.tpl.html'
+        }).when('/device', {
+            templateUrl: 'admin/views/device/device.tpl.html',
+            controller: 'deviceController as devCtrl'
         }).otherwise({
             redirectTo: '/'
         });

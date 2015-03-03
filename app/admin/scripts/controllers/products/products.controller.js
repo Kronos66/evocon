@@ -23,7 +23,7 @@
                 {field:'sku', displayName:'Sku'},
                 {field:'enable', displayName:'Enable'},
                 {field:'groupId', displayName:'Product Group'},
-                {displayName: 'Actions', field: 'remove', cellTemplate: actionsTemplate}
+                {maxWidth: 120, field: ' ', cellTemplate: actionsTemplate}
             ]
         };
 

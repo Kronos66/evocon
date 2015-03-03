@@ -26,9 +26,13 @@
             paginationPageSizes: [10, 20, 30],
             paginationPageSize: 10,
             columnDefs: [{
+                             cellClass: 'special-first-cell-for-two-columns',
                              field: 'name', displayName: 'Name'
                          }, {
-                             displayName: 'Actions', field: 'remove', cellTemplate: actionsTemplate
+
+                            headerCellClass: 'smallActionsWidth',
+                            cellClass: 'smallActionsWidth actionsDivToRight',
+                            maxWidth: 120, field: ' ', cellTemplate: actionsTemplate
                          }]
         };
         this.gridOptions.onRegisterApi = function (gridApi)

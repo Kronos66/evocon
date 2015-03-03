@@ -31,7 +31,7 @@
                          }, {
                              field: 'color', displayName: 'Color'
                          }, {
-                             displayName: 'Actions', field: 'remove', cellTemplate: actionsTemplate
+                            maxWidth: 120, field: ' ', cellTemplate: actionsTemplate
                          }]
         };
         this.newGroup = function ()

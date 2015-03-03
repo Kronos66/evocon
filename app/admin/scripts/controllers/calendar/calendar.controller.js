@@ -47,7 +47,7 @@
                          }, {
                              field: 'enable', displayName: 'Enable'
                          }, {
-                             displayName: 'Actions', field: 'remove', cellTemplate: actionsTemplate
+                            maxWidth: 120, field: ' ', cellTemplate: actionsTemplate
                          }]
         };
         this.gridOptions.onRegisterApi = function (gridApi)
@@ -123,7 +123,7 @@
                 keyboard: false,
                 templateUrl: 'admin/views/calendar/editOrCreateModal.tpl.html',
                 controller: 'editOrCreateModalController',
-                size: 'lg',
+                size: 'md',
                 controllerAs: 'modal',
                 resolve: {
                     row: function ()
@@ -147,7 +147,7 @@
                 keyboard: false,
                 templateUrl: 'admin/views/calendar/editOrCreateModal.tpl.html',
                 controller: 'editOrCreateModalController',
-                size: 'lg',
+                size: 'md',
                 controllerAs: 'modal',
                 resolve: {
                     row: function ()
@@ -177,9 +177,10 @@
             var variable = {};
             modalInstance.result.then(function (result)
             {
-                angular.extend(variable, result);
-                variable.startTime = moment(result.startTime).format('DD-MM-YYYY HH:mm:ss');
-                variable.endTime = moment(result.endTime).format('DD-MM-YYYY HH:mm:ss');
+                console.log(result);
+                angular.copy(variable, result);
+                variable.startTime = moment(result.startTime).format('HH:mm:ss:sss');
+                variable.endTime = moment(result.startTime).format('HH:mm:ss:sss');
                 return CalendarLineDAO.save(selected, result);
             }).then(refresh);
         };
