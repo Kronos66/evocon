@@ -11,215 +11,98 @@
                 </div>
             </div>
         </div>
-        <div ui-grid="stationsController.gridOptions" ui-grid-pagination ui-grid-selection></div>
+        <div class="grid-style" ui-grid="stationsController.gridOptions" ui-grid-pagination ui-grid-selection></div>
     </section>
-    <section ng-if="stationsController.selected" class="no-bordered">
+    <section ng-if="stationsController.selected" class="no-bordered station-disabled">
         <div class="row section-row">
             <div class="col-xs-12">
                 <h1 class="title">{{'detailsStation'|translate}}:</h1>
             </div>
         </div>
         <div class="row section-row">
-            <div class="col-xs-6">
-                <div class="row">
-                    <div class="col-xs-3">
-                        <label for="name">{{ 'name' | translate }}:</label>
-                    </div>
-                    <div class="col-xs-9">
-                        <input ng-disabled="true" type="text" id="name" data-ng-model="stationsController.detailsStation.name"
-                               placeholder="{{'enterName'|translate}}">
-                    </div>
-                </div>
+            <div class="col-xs-4">
+                <label for="name">{{ 'name' | translate }}:</label>
+                <input ng-disabled="true" type="text" id="name" data-ng-model="stationsController.detailsStation.name">
             </div>
-            <div class="col-xs-6">
-                <div class="row">
-                    <div class="col-xs-3">
-                        <label for="description">{{ 'description' | translate }}:</label>
-                    </div>
-                    <div class="col-xs-9">
-                        <input ng-disabled="true" type="text" id="description" data-ng-model="stationsController.detailsStation.description"
-                               placeholder="{{'description'|translate}}">
-                    </div>
-                </div>
+            <div class="col-xs-4">
+                <label for="description">{{ 'description' | translate }}:</label>
+                <input ng-disabled="true" type="text" id="description" data-ng-model="stationsController.detailsStation.description">
+            </div>
+            <div class="col-xs-4">
+                <label for="speedSlowLimit">{{ 'speedSlowLimit' | translate }}:</label>
+                <input ng-disabled="true" type="number" id="speedSlowLimit" data-ng-model="stationsController.detailsStation.speedSlowLimit">
             </div>
         </div>
         <div class="row section-row">
-            <div class="col-xs-6">
-                <div class="row">
-                    <div class="col-xs-3">
-                        <label for="speedSlowLimit">{{ 'speedSlowLimit' | translate }}:</label>
-                    </div>
-                    <div class="col-xs-9">
-                        <input ng-disabled="true" type="number" id="speedSlowLimit" data-ng-model="stationsController.detailsStation.speedSlowLimit">
-                    </div>
-                </div>
+            <div class="col-xs-4">
+                <label for="lineNumber">{{ 'lineNumber' | translate }}:</label>
+                <input ng-disabled="true" type="number" id="lineNumber" data-ng-model="stationsController.detailsStation.lineNumber">
             </div>
-            <div class="col-xs-6">
-                <div class="row">
-                    <div class="col-xs-3">
-                        <label for="lineNumber">{{ 'lineNumber' | translate }}:</label>
-                    </div>
-                    <div class="col-xs-9">
-                        <input ng-disabled="true" type="number" id="lineNumber" data-ng-model="stationsController.detailsStation.lineNumber">
-                    </div>
-                </div>
+            <div class="col-xs-4">
+                <label for="groupId">{{ 'groupId' | translate }}:</label>
+                <input ng-disabled="true" type="number" id="groupId" data-ng-model="stationsController.detailsStation.groupId">
             </div>
-        </div>
-        <div class="row section-row">
-            <div class="col-xs-6">
-                <div class="row">
-                    <div class="col-xs-3">
-                        <label for="groupId">{{ 'groupId' | translate }}:</label>
-                    </div>
-                    <div class="col-xs-9">
-                        <input ng-disabled="true" type="number" id="groupId" data-ng-model="stationsController.detailsStation.groupId">
-                    </div>
-                </div>
-            </div>
-            <div class="col-xs-6">
-                <div class="row">
-                    <div class="col-xs-3">
-                        <label for="markerQty">{{ 'markerQty' | translate }}:</label>
-                    </div>
-                    <div class="col-xs-9">
-                        <input ng-disabled="true" type="number" id="markerQty" data-ng-model="stationsController.detailsStation.markerQty">
-                    </div>
-                </div>
+            <div class="col-xs-4">
+                <label for="markerQty">{{ 'markerQty' | translate }}:</label>
+                <input ng-disabled="true" type="number" id="markerQty" data-ng-model="stationsController.detailsStation.markerQty">
             </div>
         </div>
 
         <div class="row section-row">
-            <div class="col-xs-6">
-                <div class="row">
-                    <div class="col-xs-3">
-                        <label for="colorMode">{{ 'colorMode' | translate }}:</label>
-                    </div>
-                    <div class="col-xs-9">
-                        <input ng-disabled="true" type="number" id="colorMode" data-ng-model="stationsController.detailsStation.colorMode">
-                    </div>
-                </div>
+            <div class="col-xs-4">
+                <label for="colorMode">{{ 'colorMode' | translate }}:</label>
+                <input ng-disabled="true" type="number" id="colorMode" data-ng-model="stationsController.detailsStation.colorMode">
             </div>
-            <div class="col-xs-6">
-                <div class="row">
-                    <div class="col-xs-3">
-                        <label for="speedNormalLimit">{{ 'speedNormalLimit' | translate }}:</label>
-                    </div>
-                    <div class="col-xs-9">
-                        <input ng-disabled="true" type="number" id="speedNormalLimit" data-ng-model="stationsController.detailsStation.speedNormalLimit">
-                    </div>
-                </div>
+            <div class="col-xs-4">
+                <label for="speedNormalLimit">{{ 'speedNormalLimit' | translate }}:</label>
+                <input ng-disabled="true" type="number" id="speedNormalLimit" data-ng-model="stationsController.detailsStation.speedNormalLimit">
+            </div>
+            <div class="col-xs-4">
+                <label for="speedTooSlowLimit">{{ 'speedTooSlowLimit' | translate }}:</label>
+                <input ng-disabled="true" type="number" id="speedTooSlowLimit" data-ng-model="stationsController.detailsStation.speedTooSlowLimit">
             </div>
         </div>
 
         <div class="row section-row">
-            <div class="col-xs-6">
-                <div class="row">
-                    <div class="col-xs-3">
-                        <label for="speedTooSlowLimit">{{ 'speedTooSlowLimit' | translate }}:</label>
-                    </div>
-                    <div class="col-xs-9">
-                        <input ng-disabled="true" type="number" id="speedTooSlowLimit" data-ng-model="stationsController.detailsStation.speedTooSlowLimit">
-                    </div>
-                </div>
+            <div class="col-xs-4">
+                <label for="unit">{{ 'unit' | translate }}:</label>
+                <input ng-disabled="true" type="text" id="unit" data-ng-model="stationsController.detailsStation.unit">
             </div>
-            <div class="col-xs-6">
-                <div class="row">
-                    <div class="col-xs-3">
-                        <label for="unit">{{ 'unit' | translate }}:</label>
-                    </div>
-                    <div class="col-xs-9">
-                        <input ng-disabled="true" type="text" id="unit" data-ng-model="stationsController.detailsStation.unit">
-                    </div>
-                </div>
+            <div class="col-xs-4">
+                <label for="autoStanby">{{ 'autoStanby' | translate }}:</label>
+                <input ng-disabled="true" type="number" id="autoStanby" data-ng-model="stationsController.detailsStation.autoStanby">
             </div>
-        </div>
-
-        <div class="row section-row">
-            <div class="col-xs-6">
-                <div class="row">
-                    <div class="col-xs-3">
-                        <label for="autoStanby">{{ 'autoStanby' | translate }}:</label>
-                    </div>
-                    <div class="col-xs-9">
-                        <input ng-disabled="true" type="number" id="autoStanby" data-ng-model="stationsController.detailsStation.autoStanby">
-                    </div>
-                </div>
-            </div>
-            <div class="col-xs-6">
-                <div class="row">
-                    <div class="col-xs-3">
-                        <label for="offFilter">{{ 'offFilter' | translate }}:</label>
-                    </div>
-                    <div class="col-xs-9">
-                        <input ng-disabled="true" type="checkbox" id="offFilter" data-ng-model="stationsController.detailsStation.offFilter">
-                    </div>
-                </div>
+            <div class="col-xs-4 station-checkbox-top-margined">
+                <input ng-disabled="true" type="checkbox" id="effMarkersEnabled" data-ng-model="stationsController.detailsStation.effMarkersEnabled">
+                <label for="effMarkersEnabled">{{ 'effMarkersEnabled' | translate }}</label>
             </div>
         </div>
         <div class="row section-row">
-            <div class="col-xs-6">
-                <div class="row">
-                    <div class="col-xs-3">
-                        <label for="signalInversion">{{ 'signalInversion' | translate }}:</label>
-                    </div>
-                    <div class="col-xs-9">
-                        <input ng-disabled="true" type="checkbox" id="signalInversion" data-ng-model="stationsController.detailsStation.signalInversion">
-                    </div>
-                </div>
+            <div class="col-xs-4">
+                <input ng-disabled="true" type="checkbox" id="offFilter" data-ng-model="stationsController.detailsStation.offFilter">
+                <label for="offFilter">{{ 'offFilter' | translate }}</label>
             </div>
-            <div class="col-xs-6">
-                <div class="row">
-                    <div class="col-xs-3">
-                        <label for="stopTime">{{ 'stopTime' | translate }}:</label>
-                    </div>
-                    <div class="col-xs-9">
-                        <input ng-disabled="true" type="checkbox" id="stopTime" data-ng-model="stationsController.detailsStation.stopTime">
-                    </div>
-                </div>
+            <div class="col-xs-4">
+                <input ng-disabled="true" type="checkbox" id="signalInversion" data-ng-model="stationsController.detailsStation.signalInversion">
+                <label for="signalInversion">{{ 'signalInversion' | translate }}</label>
+            </div>
+            <div class="col-xs-4">
+                <input ng-disabled="true" type="checkbox" id="stopTime" data-ng-model="stationsController.detailsStation.stopTime">
+                <label for="stopTime">{{ 'stopTime' | translate }}</label>
             </div>
         </div>
         <div class="row section-row">
-            <div class="col-xs-6">
-                <div class="row">
-                    <div class="col-xs-3">
-                        <label for="enabled">{{ 'enabled' | translate }}:</label>
-                    </div>
-                    <div class="col-xs-9">
-                        <input ng-disabled="true" type="checkbox" id="enabled" data-ng-model="stationsController.detailsStation.enabled">
-                    </div>
-                </div>
+            <div class="col-xs-4">
+                <input ng-disabled="true" type="checkbox" id="enabled" data-ng-model="stationsController.detailsStation.enabled">
+                <label for="enabled">{{ 'enabled' | translate }}</label>
             </div>
-            <div class="col-xs-6">
-                <div class="row">
-                    <div class="col-xs-3">
-                        <label for="standbyEnabled">{{ 'standbyEnabled' | translate }}:</label>
-                    </div>
-                    <div class="col-xs-9">
-                        <input ng-disabled="true" type="checkbox" id="standbyEnabled" data-ng-model="stationsController.detailsStation.standbyEnabled">
-                    </div>
-                </div>
+            <div class="col-xs-4">
+                <input ng-disabled="true" type="checkbox" id="standbyEnabled" data-ng-model="stationsController.detailsStation.standbyEnabled">
+                <label for="standbyEnabled">{{ 'standbyEnabled' | translate }}</label>
             </div>
-        </div>
-        <div class="row section-row">
-            <div class="col-xs-6">
-                <div class="row">
-                    <div class="col-xs-3">
-                        <label for="onFilter">{{ 'onFilter' | translate }}:</label>
-                    </div>
-                    <div class="col-xs-9">
-                        <input ng-disabled="true" type="checkbox" id="onFilter" data-ng-model="stationsController.detailsStation.onFilter">
-                    </div>
-                </div>
-            </div>
-            <div class="col-xs-6">
-                <div class="row">
-                    <div class="col-xs-3">
-                        <label for="effMarkersEnabled">{{ 'effMarkersEnabled' | translate }}:</label>
-                    </div>
-                    <div class="col-xs-9">
-                        <input ng-disabled="true" type="checkbox" id="effMarkersEnabled" data-ng-model="stationsController.detailsStation.effMarkersEnabled">
-                    </div>
-                </div>
+            <div class="col-xs-4">
+                <input ng-disabled="true" type="checkbox" id="onFilter" data-ng-model="stationsController.detailsStation.onFilter">
+                <label for="onFilter">{{ 'onFilter' | translate }}</label>
             </div>
         </div>
     </section>

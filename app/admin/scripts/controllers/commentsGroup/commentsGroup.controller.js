@@ -30,8 +30,10 @@
                          }, {
                              field: 'category', displayName: 'Category'
                          }, {
-                             field: 'color', displayName: 'Color'
+                             field: 'color', displayName: 'Color',
+                            cellClass: 'special-cell shortest'
                          }, {
+                             headerCellClass: 'smallActionsWidthHeader',
                             maxWidth: 120, field: ' ', cellTemplate: actionsTemplate
                          }]
         };

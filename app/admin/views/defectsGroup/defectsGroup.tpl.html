@@ -11,7 +11,7 @@
                 </div>
             </div>
         </div>
-        <div ui-grid="groupCtrl.gridOptions" ui-grid-pagination ui-grid-selection></div>
+        <div class="grid-style" ui-grid="groupCtrl.gridOptions" ui-grid-pagination ui-grid-selection></div>
     </section>
     <section class="no-bordered">
         <div ng-if="groupCtrl.visibled">
@@ -20,7 +20,9 @@
                     <h1 class="title">{{'defectsInSelected'|translate}}:</h1>
                 </div>
             </div>
-            <div ui-grid="groupCtrl.gridOptions2" ui-grid-pagination></div>
+            <div class="grid-style" ui-grid="groupCtrl.gridOptions2" ui-grid-pagination></div>
         </div>
+
+        <div class="row section-row"></div>
     </section>
 </div>

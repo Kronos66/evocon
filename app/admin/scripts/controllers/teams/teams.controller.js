@@ -30,7 +30,7 @@
                         displayName: 'Name'
                     },
                     {
-                        headerCellClass: 'smallActionsWidth',
+                        headerCellClass: 'smallActionsWidthHeader',
                         cellClass: 'smallActionsWidth actionsDivToRight',
                         maxWidth: 120,
                         field: ' ',

@@ -228,11 +228,50 @@
     overflow-y: hidden;
 }
 
+.time label
+{
+    margin-top: 38px;
+}
+
+.colon table
+{
+    margin-right: 4px;
+    float: left;
+}
+
+.colon table input
+{
+    color: #888;
+}
+
+.date-input
+{
+    margin-top: 35px;
+    width: 150px;
+    float: left;
+}
+
+.date-input input
+{
+    height: 34px;
+    border-top-right-radius: 0 !important;
+    border-bottom-right-radius: 0 !important;
+}
+
 .not-visible
 {
     height: 0 !important;
     border: none !important;
 }
+
+.modal-body .colon td:nth-child(2){
+    font-size: 30px;
+}
+
+
+
+
+
 
 .select2-container
 {
@@ -321,12 +360,22 @@ section.no-bordered
     min-width: 100%;
 }
 
-.modal-body .colon td:nth-child(2){
-    font-size: 30px;
+.station-checkbox-top-margined
+{
+    margin-top: 36px;
 }
+
+
+
 /*
  - - - - TABLES - - - -
 */
+
+.grid-style
+{
+    height: 490px;
+}
+
 .ui-grid-top-panel-background,
 .ui-grid-top-panel,
 .ui-grid-no-row-overlay,
@@ -386,7 +435,7 @@ section.no-bordered
     overflow: auto !important;
 }
 
-.adminContent .ui-grid-header-cell:last-child .ui-grid-column-menu-button
+.adminContent .smallActionsWidthHeader .ui-grid-column-menu-button
 {
     display: none;
 }
@@ -419,6 +468,18 @@ div[ ui-grid-row=row ] > div:last-child
     min-width: 130px !important;
 }
 
+.smallActionsWidthHeader
+{
+    max-width: 160px !important;
+    min-width: 160px !important;
+}
+
+.smallActionsWidthHeader.longer
+{
+    max-width: 320px !important;
+    min-width: 320px !important;
+}
+
 .actionsDivToRight
 {
     float: right;
@@ -445,6 +506,16 @@ div[ ui-grid-row=row ] > div:last-child
 .special-cell.shorter
 {
     width: 50%;
+}
+
+.special-cell.more-shorter
+{
+    width: 40%;
+}
+
+.special-cell.shortest
+{
+    width: 30%;
 }
 
 
@@ -478,7 +549,7 @@ input[ type=checkbox ], input[ type=radio ]
     height: 20px;
 }
 
-.confirm input[ type=checkbox ]
+.confirm input[ type=checkbox ], .station-disabled input[ type=checkbox ]
 {
     margin-top: 0;
 }
@@ -508,6 +579,13 @@ input[ type=number ].short, input[ type=text ].short
 input.long, select.long
 {
     max-width: 340px;
+}
+
+.station-disabled input[ disabled=disabled ]
+{
+    background: #eee !important;
+    border-color: #ddd !important;
+    color: #ccc !important;
 }
 
 .inline-input-text

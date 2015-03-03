@@ -23,7 +23,7 @@
                 {field:'sku', displayName:'Sku'},
                 {field:'enable', displayName:'Enable'},
                 {field:'groupId', displayName:'Product Group'},
-                {maxWidth: 120, field: ' ', cellTemplate: actionsTemplate}
+                {headerCellClass: 'smallActionsWidthHeader', maxWidth: 120, field: ' ', cellTemplate: actionsTemplate}
             ]
         };
 

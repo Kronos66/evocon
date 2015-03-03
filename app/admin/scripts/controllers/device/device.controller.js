@@ -20,15 +20,17 @@
             columnDefs: [{
                     field: 'id',
                     displayName: 'Id'
+                },
+                {
+                    field: 'description',
+                    displayName: 'Description'
                 },{
                     field: 'inputs',
                     displayName: 'Inputs'
                 },
                 {
-                    field: 'description',
-                    displayName: 'Description'
-                },
-                {
+                    headerCellClass: 'smallActionsWidthHeader',
+                    cellClass: 'smallActionsWidth actionsDivToRight',
                     maxWidth: 120,
                     field: ' ',
                     cellTemplate: '<span class="buttonActions">' +

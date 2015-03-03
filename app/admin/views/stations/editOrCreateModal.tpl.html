@@ -4,67 +4,67 @@
             <h2 class="title">{{'stationDetails'|translate}}</h2>
         </div>
     </div>
-    <form class="form-horizontal" role="form">
+    <form class="form-horizontal station-disabled" role="form">
         <div class="modal-body">
             <div class="form-group">
                 <div class="col-sm-6">
-                    <label for="name" class="label label-default">{{'name'|translate}}:</label>
+                    <label for="name">{{'name'|translate}}:</label>
                     <input type="text" id="name" ng-model="modal.row.name">
                 </div>
                 <div class="col-sm-6">
-                    <label for="description" class="label label-default">{{'description'|translate}}:</label>
+                    <label for="description">{{'description'|translate}}:</label>
                     <input type="text" id="description" ng-model="modal.row.description">
                 </div>
             </div>
             <div class="form-group">
                 <div class="col-sm-6">
-                    <label for="speedSlowLimit" class="label label-default">{{'speedSlowLimit'|translate}}:</label>
+                    <label for="speedSlowLimit">{{'speedSlowLimit'|translate}}:</label>
                     <input type="number" min="0" id="speedSlowLimit" ng-model="modal.row.speedSlowLimit">
                 </div>
                 <div class="col-sm-6">
-                    <label for="lineNumber" class="label label-default">{{'lineNumber'|translate}}:</label>
+                    <label for="lineNumber">{{'lineNumber'|translate}}:</label>
                     <input type="number" min="0" id="lineNumber" ng-model="modal.row.lineNumber">
                 </div>
             </div>
 
             <div class="form-group">
                 <div class="col-sm-6">
-                    <label for="groupId" class="label label-default">{{'groupId'|translate}}:</label>
+                    <label for="groupId">{{'groupId'|translate}}:</label>
                     <input type="number" min="0" id="groupId" ng-model="modal.row.groupId">
                 </div>
                 <div class="col-sm-6">
-                    <label for="markerQty" class="label label-default">{{'markerQty'|translate}}:</label>
+                    <label for="markerQty">{{'markerQty'|translate}}:</label>
                     <input type="number" min="0" id="markerQty" ng-model="modal.row.markerQty">
                 </div>
             </div>
 
             <div class="form-group">
                 <div class="col-sm-6">
-                    <label for="colorMode" class="label label-default">{{'colorMode'|translate}}:</label>
+                    <label for="colorMode">{{'colorMode'|translate}}:</label>
                     <input type="number" min="0" id="colorMode" ng-model="modal.row.colorMode">
                 </div>
                 <div class="col-sm-6">
-                    <label for="speedNormalLimit" class="label label-default">{{'speedNormalLimit'|translate}}:</label>
+                    <label for="speedNormalLimit">{{'speedNormalLimit'|translate}}:</label>
                     <input type="number" min="0" id="speedNormalLimit" ng-model="modal.row.speedNormalLimit">
                 </div>
             </div>
             <div class="form-group">
                 <div class="col-sm-6">
-                    <label for="speedTooSlowLimit" class="label label-default">{{'speedTooSlowLimit'|translate}}:</label>
+                    <label for="speedTooSlowLimit">{{'speedTooSlowLimit'|translate}}:</label>
                     <input type="number" min="0" id="speedTooSlowLimit" ng-model="modal.row.speedTooSlowLimit">
                 </div>
                 <div class="col-sm-6">
-                    <label for="unit" class="label label-default">{{'unit'|translate}}:</label>
+                    <label for="unit">{{'unit'|translate}}:</label>
                     <input type="text" id="unit" ng-model="modal.row.unit">
                 </div>
             </div>
 
             <div class="form-group">
                 <div class="col-sm-6">
-                    <label for="autoStanby" class="label label-default">{{'autoStanby'|translate}}:</label>
+                    <label for="autoStanby">{{'autoStanby'|translate}}:</label>
                     <input type="number" min="0" id="autoStanby" ng-model="modal.row.autoStanby">
                 </div>
-                <div class="col-sm-6">
+                <div class="col-sm-6 station-checkbox-top-margined">
                     <label for="offFilter">{{'offFilter'|translate}}:</label>
                     <input type="checkbox" id="offFilter" ng-model="modal.row.offFilter">
                 </div>
