@@ -281,13 +281,21 @@
 .select2-container .select2-choice
 {
     border-color: #999;
-    height: 40px;
+    height: 30px;
     border-radius: 8px;
     font-size: 18px;
 }
 
+.select2-container .select2-choice .select2-arrow
+{
+    margin-top: -8px;
+    color: #111;
+}
+
 .select2-container .select2-choice > .select2-chosen
 {
+    padding-top: 2px;
+    padding-bottom: 0;
     color: #888;
 }
 
@@ -372,7 +380,7 @@ section.no-bordered
 
 .station-checkbox-top-margined
 {
-    margin-top: 36px;
+    margin-top: 28px;
 }
 
 
@@ -581,7 +589,7 @@ input, select
 {
     border: 1px solid #999 !important;
     padding: 0 6px !important;
-    height: 40px;
+    height: 30px;
     width: 100%;
     border-radius: 8px !important;
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
@@ -597,7 +605,7 @@ input, select
 
 input[ type=checkbox ], input[ type=radio ]
 {
-    margin: 10px 20px 0 0;
+    margin: 0 20px 0 0;
     width: 20px;
     height: 20px;
 }
@@ -609,7 +617,7 @@ input[ type=checkbox ], input[ type=radio ]
 
 label
 {
-    margin: 10px 0;
+    margin: 0;
     min-width: 220px;
     line-height: 1.6;
 }
@@ -622,6 +630,11 @@ select.short
 input[ type=number ].short, input[ type=text ].short
 {
     width: 60px;
+}
+
+input[ type=number ].short.short-margined
+{
+    margin-top: 6px;
 }
 
 .select2-search input
@@ -688,8 +701,8 @@ input.long, select.long
 {
     display: inline-block;
     margin-right: 12px !important;
-    width: 36px;
-    height: 66px;
+    width: 28px;
+    height: 28px;
 }
 
 .colors .color-square
@@ -763,6 +776,7 @@ input.long, select.long
     box-sizing: border-box;
     border-right: 1px solid #000;
     width: 25%;
+    min-height: 60px;
     float: left;
 }
 
