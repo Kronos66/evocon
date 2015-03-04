@@ -31,6 +31,8 @@
                          }, {
                              field: 'color', displayName: 'Color'
                          }, {
+                            enableSorting: false,
+                            enableHiding: false,
                             headerCellClass: 'actions-header',
                             cellClass: 'actions-column',
                             maxWidth: 120, field: ' ', cellTemplate: actionsTemplate

@@ -7,6 +7,7 @@
 
                 <div class="buttons">
                     <button class="button center" ng-click="stationsController.addStation()">{{'addStation'|translate}}</button>
+                    <button class="button center" ng-click="stationsController.addStationGroup()">{{'addStationGroup'|translate}}</button>
                     <!--<button class="button center" ng-click="stationsController.newGroup()">{{'editStation'|translate}}</button>-->
                 </div>
             </div>
@@ -73,35 +74,35 @@
                 <input ng-disabled="true" type="number" id="autoStanby" data-ng-model="stationsController.detailsStation.autoStanby">
             </div>
             <div class="col-xs-4 station-checkbox-top-margined">
-                <input ng-disabled="true" type="checkbox" id="effMarkersEnabled" data-ng-model="stationsController.detailsStation.effMarkersEnabled">
+                <input ng-disabled="true" type="checkbox" id="effMarkersEnabled" ng-checked="stationsController.detailsStation.effMarkersEnabled" data-ng-model="stationsController.detailsStation.effMarkersEnabled">
                 <label for="effMarkersEnabled">{{ 'effMarkersEnabled' | translate }}</label>
             </div>
         </div>
         <div class="row section-row">
             <div class="col-xs-4">
-                <input ng-disabled="true" type="checkbox" id="offFilter" data-ng-model="stationsController.detailsStation.offFilter">
+                <input ng-disabled="true" type="checkbox" id="offFilter" ng-checked="stationsController.detailsStation.offFilter" data-ng-model="stationsController.detailsStation.offFilter">
                 <label for="offFilter">{{ 'offFilter' | translate }}</label>
             </div>
             <div class="col-xs-4">
-                <input ng-disabled="true" type="checkbox" id="signalInversion" data-ng-model="stationsController.detailsStation.signalInversion">
+                <input ng-disabled="true" type="checkbox" id="signalInversion" ng-checked="stationsController.detailsStation.signalInversion"  data-ng-model="stationsController.detailsStation.signalInversion">
                 <label for="signalInversion">{{ 'signalInversion' | translate }}</label>
             </div>
             <div class="col-xs-4">
-                <input ng-disabled="true" type="checkbox" id="stopTime" data-ng-model="stationsController.detailsStation.stopTime">
+                <input ng-disabled="true" type="checkbox" id="stopTime" ng-checked="stationsController.detailsStation.stopTime"  data-ng-model="stationsController.detailsStation.stopTime">
                 <label for="stopTime">{{ 'stopTime' | translate }}</label>
             </div>
         </div>
         <div class="row section-row">
             <div class="col-xs-4">
-                <input ng-disabled="true" type="checkbox" id="enabled" data-ng-model="stationsController.detailsStation.enabled">
+                <input ng-disabled="true" type="checkbox" id="enabled"  ng-checked="stationsController.detailsStation.enabled" data-ng-model="stationsController.detailsStation.enabled">
                 <label for="enabled">{{ 'enabled' | translate }}</label>
             </div>
             <div class="col-xs-4">
-                <input ng-disabled="true" type="checkbox" id="standbyEnabled" data-ng-model="stationsController.detailsStation.standbyEnabled">
+                <input ng-disabled="true" type="checkbox" id="standbyEnabled" ng-checked="stationsController.detailsStation.standbyEnabled" data-ng-model="stationsController.detailsStation.standbyEnabled">
                 <label for="standbyEnabled">{{ 'standbyEnabled' | translate }}</label>
             </div>
             <div class="col-xs-4">
-                <input ng-disabled="true" type="checkbox" id="onFilter" data-ng-model="stationsController.detailsStation.onFilter">
+                <input ng-disabled="true" type="checkbox" id="onFilter" ng-checked="stationsController.detailsStation.onFilter" data-ng-model="stationsController.detailsStation.onFilter">
                 <label for="onFilter">{{ 'onFilter' | translate }}</label>
             </div>
         </div>

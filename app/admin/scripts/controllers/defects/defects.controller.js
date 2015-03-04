@@ -82,7 +82,11 @@
                     }
                 }
             });
-            modalInstance.result.then(DefectsDAO.save).then(refresh);
+            modalInstance.result.then(function (result)
+            {
+                result.createdDate=result.createdDate.getTime();
+                return DefectsDAO.save(result);
+            }).then(refresh);
         };
         this.editRow = function (row)
         {

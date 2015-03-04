@@ -21,7 +21,7 @@
                 {field:'name', displayName:'Name'},
                 {field:'barcode', displayName:'Barcode'},
                 {field:'sku', displayName:'Sku'},
-                {field:'enable', displayName:'Enable'},
+                {field:'enabled', displayName:'Enable'},
                 {field:'groupId', displayName:'Product Group'},
                 {headerCellClass: 'actions-header', cellClass: 'actions-column', maxWidth: 120, field: ' ',
                     cellTemplate: actionsTemplate, enableSorting: false, enableHiding: false}
@@ -59,6 +59,10 @@
         {
             ProductsDAO.query().then(function (result)
             {
+                angular.forEach(result, function (product)
+                {
+                    product.enabled = product.enable ? 'Yes' : 'No';
+                });
                 ctrl.products = result;
                 ctrl.resultCount = result.length;
             });

@@ -7,7 +7,6 @@
 
         this.group = null;
         this.resultCount = null;
-
         var selectedGroup;
 
         var actionsTemplate = '<span class="buttonActions"><a class="button link" ng-click="$event.stopPropagation();grid.appScope.groupCtrl.edit(row.entity)">{{\'edit\'|translate}}</a>' +
@@ -21,16 +20,19 @@
             data: 'groupCtrl.group',
             paginationPageSizes: [10, 20, 30],
             paginationPageSize: 10,
-            columnDefs: [
-                {
-                    field:'name', displayName:'Name'
-                },
-                {
-                    headerCellClass: 'actions-header two-columns',
-                    cellClass: 'actions-column',
-                    maxWidth: 120, field: ' ', cellTemplate: actionsTemplate
-                }
-            ]
+            columnDefs: [{
+                             field: 'name',
+                             displayName: 'Name'
+                         },
+                         {
+                             enableSorting: false,
+                             enableHiding: false,
+                             headerCellClass: 'actions-header two-columns',
+                             cellClass: 'actions-column',
+                             maxWidth: 120,
+                             field: ' ',
+                             cellTemplate: actionsTemplate
+                         }]
         };
 
         this.gridOptionsGroups.onRegisterApi = function (gridApi)
@@ -55,14 +57,9 @@
             data: 'groupCtrl.productsInGroup',
             paginationPageSizes: [10, 20, 30],
             paginationPageSize: 10,
-            columnDefs: [
-                {field:'name', displayName:'Name'},
-                {field:'barcode', displayName:'Barcode'},
-                {field:'enabled', displayName:'Enabled'},
-                {field:'groupId', displayName:'Group',
-                    headerCellClass: 'actions-header',
-                    cellClass: 'actions-column'}
-            ]
+            columnDefs: [{field: 'name', displayName: 'Name'}, {field: 'barcode', displayName: 'Barcode'}, {field: 'enabled', displayName: 'Enabled'}, {
+                field: 'groupId', displayName: 'Group', headerCellClass: 'actions-header', cellClass: 'actions-column'
+            }]
         };
 
         this.newGroup = function ()
@@ -95,7 +92,7 @@
                 resolve: {
                     row: function ()
                     {
-                        return angular.extend({},row);
+                        return angular.extend({}, row);
                     }
                 }
             });
@@ -105,9 +102,7 @@
         this.delete = function (id)
         {
             var modalInstance = $modal.open({
-                templateUrl: 'admin/views/confirmModal.tpl.html',
-                backdrop: 'static',
-                keyboard: false
+                templateUrl: 'admin/views/confirmModal.tpl.html', backdrop: 'static', keyboard: false
             });
             modalInstance.result.then(function ()
             {

@@ -13,7 +13,7 @@
             enableRowSelection: true,
             paginationPageSizes: [10, 20, 30],
             paginationPageSize: 10,
-            data: [{stationId: 1, name: 'first', description: 'some text'}, {stationId: 2, name: 'second', description: 'second text'}],//endpoint NOT work 'modal.listStations'
+            data: 'modal.listStations',
             columnDefs: [{
                              field: 'stationId', displayName: 'ID'
                          }, {

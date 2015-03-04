@@ -8,12 +8,7 @@
         this.product = null;
 
         this.select2Options = {
-            width:'100%',
-            allowClear: true,
-            multiple: false,
-            minimumInputLength: 1,
-            maximumInputLength: 10,
-            initSelection: function ()
+            width: '100%', allowClear: true, multiple: false, minimumInputLength: 1, maximumInputLength: 10, initSelection: function ()
             {
 
             }
@@ -38,15 +33,18 @@
             return selectedId === parseInt(ctrl.product.groupId);
         };
 
-        this.save = function () {
+        this.save = function ()
+        {
             if ($routeParams.id === 'addnew') {
-                ProductsDAO.save(ctrl.product).then(function () {
-                    $location.path('/product');
+                ctrl.product.enable = ctrl.product.enable ? 1 : 0;
+                ProductsDAO.save(ctrl.product).then(function ()
+                {
+                    $location.path('/products');
                 });
             } else {
                 ProductsDAO.update(ctrl.product).then(function ()
                 {
-                    $location.path('/product');
+                    $location.path('/products');
                 });
             }
         };
@@ -60,5 +58,6 @@
         init();
     }
 
-    angular.module('evoReports').controller('ProductDetailController', ['$location', '$routeParams', 'ProductsDAO', 'ProductsGroupDAO', ProductDetailController]);
+    angular.module('evoReports').controller('ProductDetailController',
+            ['$location', '$routeParams', 'ProductsDAO', 'ProductsGroupDAO', ProductDetailController]);
 })();

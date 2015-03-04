@@ -10,9 +10,11 @@
   "addNewTeam": "Team details",
   "addDefect": "New defect",
   "addGroupComment": "New comment group",
-  "addGroupDefect": "New defect group details",
+  "addGroupDefect": "New defect group",
+  "detailsDefectGroup": "Defect group details",
   "addNewGroup": "Product group details",
   "addStation": "New station",
+  "addStationGroup":"New station group",
   "barcode": "Barcode",
   "calendar": "Calendar",
   "calendarLine": "Calendar line",
@@ -113,5 +115,7 @@
   "speedSlowLimit": "Speed slow limit",
   "users": "Users",
   "sureToDelete": "Are you sure you want to remove this entry?",
-  "yes": "Yes"
+  "yes": "Yes",
+  "editProduct":"Product details",
+  "stationInGroup":"Station in selected group"
 }
