@@ -47,12 +47,11 @@
                          },
                          {
                              field: 'datecalcultion',
-                             displayName: 'Date calculation',
-                             cellClass: 'special-cell more-shorter'
+                             displayName: 'Date calculation'
                          },
                          {
-                             headerCellClass: 'smallActionsWidthHeader',
-                             cellClass: 'smallActionsWidth actionsDivToRight',
+                             headerCellClass: 'actions-header',
+                             cellClass: 'actions-column',
                              maxWidth: 120,
                              field: ' ',
                              cellTemplate: actionsTemplate,
@@ -89,8 +88,8 @@
                                                                            cellClass: 'special-cell more-shorter'
                                                                        },
                                                                        {
-                                                                           headerCellClass: 'smallActionsWidthHeader',
-                                                                           cellClass: 'smallActionsWidth actionsDivToRight',
+                                                                           headerCellClass: 'actions-header',
+                                                                           cellClass: 'actions-column',
                                                                            maxWidth: 120,
                                                                            field: ' ',
                                                                            cellTemplate: actionsTemplate2,

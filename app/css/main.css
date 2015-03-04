@@ -20,7 +20,7 @@
 }
 
 .confirm {
-    margin-top: 60px;
+    margin-top: 20px;
 }
 
 .modal-header {
@@ -33,7 +33,7 @@
 
 .modal-body {
     position: relative;
-    padding: 50px;
+    padding: 30px 50px;
 }
 
 .adminContent {
@@ -313,7 +313,7 @@
 section, .section-row
 {
     position: relative;
-    margin-bottom: 40px;
+    margin-bottom: 28px;
 }
 
 section
@@ -325,6 +325,11 @@ section
 }
 
 section:first-child
+{
+    padding-top: 10px;
+}
+
+section:last-child
 {
     padding-top: 10px;
 }
@@ -378,7 +383,8 @@ section.no-bordered
 
 .grid-style
 {
-    height: 490px;
+    height: 386px;
+
 }
 
 .ui-grid-top-panel-background,
@@ -400,7 +406,7 @@ section.no-bordered
 .ui-grid-cell-contents,
 .ui-grid-vertical-bar
 {
-    height: 40px !important;
+    height: 32px !important;
 }
 
 .ui-grid-cell-contents
@@ -440,7 +446,8 @@ section.no-bordered
     overflow: auto !important;
 }
 
-.adminContent .smallActionsWidthHeader .ui-grid-column-menu-button
+.adminContent .actions-header .ui-grid-column-menu-button,
+.adminContent .device-actions-header .ui-grid-column-menu-button
 {
     display: none;
 }
@@ -460,29 +467,70 @@ div[ ui-grid-row=row ]
     position: relative;
 }
 
-div[ ui-grid-row=row ] > div:last-child
+.ui-grid-row-selected > [ui-grid-row] > .ui-grid-cell
+{
+    background: none !important;
+}
+
+.ui-grid-row-selected
+{
+    background: #c9dde1 !important;
+}
+
+.actions-column
+{
+    background: none !important;
+}
+
+.ui-grid-row-selected
+{
+    background: #c9dde1 !important;
+}
+
+.actions-column
 {
     position: absolute;
     top: 0;
     right: 0;
-}
-
-.smallActionsWidth
-{
+    text-align: right;
     max-width: 130px !important;
     min-width: 130px !important;
 }
 
-.smallActionsWidthHeader
+.actions-column.more-actions
 {
-    max-width: 160px !important;
-    min-width: 160px !important;
+    max-width: 300px !important;
+    min-width: 300px !important;
 }
 
-.smallActionsWidthHeader.longer
+.actions-header
 {
-    max-width: 320px !important;
-    min-width: 320px !important;
+    max-width: 400px !important;
+    min-width: 400px !important;
+}
+
+.actions-header.two-columns
+{
+    max-width: 120px !important;
+    min-width: 120px !important;
+}
+
+.column-4th
+{
+    max-width: 200px !important;
+    min-width: 200px !important;
+}
+
+.column-3th
+{
+    max-width: 260px !important;
+    min-width: 260px !important;
+}
+
+.last-column-modal
+{
+    max-width: 290px !important;
+    min-width: 290px !important;
 }
 
 .actionsDivToRight
@@ -590,7 +638,7 @@ input.long, select.long
 {
     background: #eee !important;
     border-color: #ddd !important;
-    color: #ccc !important;
+    color: #666 !important;
 }
 
 .inline-input-text

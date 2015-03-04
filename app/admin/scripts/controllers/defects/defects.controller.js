@@ -29,10 +29,10 @@
                              displayName: 'Group'
                          },
                          {
-                             width: 280,
-                             minWidth: 300,
-                             displayName: '',
-                             field: 'remove',
+                             headerCellClass: 'actions-header',
+                             cellClass: 'actions-column more-actions',
+                             maxWidth: 120,
+                             field: ' ',
                              cellTemplate: actionsTemplate,
                              enableSorting: false,
                              enableHiding: false

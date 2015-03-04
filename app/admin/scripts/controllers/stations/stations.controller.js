@@ -36,22 +36,19 @@
                          {
                              field: 'description',
                              displayName: 'Description'
-                             //cellClass: 'special-cell shorter'
                          },
                          {
                              field: 'stationGroup'
-                             //displayName: 'Station group'
                          },
                          {
                              field: 'enabled',
                              displayName: 'Enabled'
                          },
                          {
-                             //headerCellClass: 'smallActionsWidthHeader',
-                             //cellClass: 'smallActionsWidth actionsDivToRight',
+                             headerCellClass: 'actions-header',
+                             cellClass: 'actions-column',
                              maxWidth: 120,
-                             displayName: '',
-                             field: 'remove',
+                             field: ' ',
                              cellTemplate: actionsTemplate,
                              enableSorting: false,
                              enableHiding: false

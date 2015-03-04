@@ -30,8 +30,8 @@
                     displayName: 'Inputs'
                 },
                 {
-                    headerCellClass: 'smallActionsWidthHeader',
-                    cellClass: 'smallActionsWidth actionsDivToRight',
+                    headerCellClass: 'device-actions-header',
+                    cellClass: 'actions-column',
                     maxWidth: 120,
                     enableSorting: false,
                     enableHiding: false,

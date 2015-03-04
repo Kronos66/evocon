@@ -17,8 +17,9 @@
             columnDefs: [{
                              field: 'stationId', displayName: 'ID'
                          }, {
-                             field: 'name', displayName: 'Name', cellClass: 'special-cell shorter'
+                             field: 'name', displayName: 'Name'
                          }, {
+                            headerCellClass: 'last-column-modal',
                              field: 'description', displayName: 'Description'
                          }]
         };
