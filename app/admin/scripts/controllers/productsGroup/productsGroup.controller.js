@@ -23,11 +23,11 @@
             paginationPageSize: 10,
             columnDefs: [
                 {
-                    field:'name', displayName:'Name', cellClass: 'special-cell'
+                    field:'name', displayName:'Name'
                 },
                 {
-                    headerCellClass: 'smallActionsWidthHeader',
-                    cellClass: 'smallActionsWidth actionsDivToRight',
+                    headerCellClass: 'actions-header two-columns',
+                    cellClass: 'actions-column',
                     maxWidth: 120, field: ' ', cellTemplate: actionsTemplate
                 }
             ]
@@ -59,7 +59,9 @@
                 {field:'name', displayName:'Name'},
                 {field:'barcode', displayName:'Barcode'},
                 {field:'enabled', displayName:'Enabled'},
-                {field:'groupId', displayName:'Group'}
+                {field:'groupId', displayName:'Group',
+                    headerCellClass: 'actions-header',
+                    cellClass: 'actions-column'}
             ]
         };
 

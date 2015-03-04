@@ -22,10 +22,10 @@
                 },
                 {
                     field: 'groupId',
-                    displayName: 'Group Id',
-                    cellClass: 'special-cell shorter'
+                    displayName: 'Group Id'
                 },
                 {
+                    headerCellClass: 'last-column-modal',
                     field: 'createdDate',
                     displayName: 'Created Date'
                 }

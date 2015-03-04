@@ -23,9 +23,12 @@
                 {field:'sku', displayName:'Sku'},
                 {field:'enable', displayName:'Enable'},
                 {field:'groupId', displayName:'Product Group'},
-                {headerCellClass: 'smallActionsWidthHeader', maxWidth: 120, field: ' ', cellTemplate: actionsTemplate, enableSorting: false, enableHiding: false}
+                {headerCellClass: 'actions-header', cellClass: 'actions-column', maxWidth: 120, field: ' ',
+                    cellTemplate: actionsTemplate, enableSorting: false, enableHiding: false}
             ]
         };
+
+
 
         this.select2Options = {
             width:'100%',

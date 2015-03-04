@@ -20,7 +20,7 @@
 }
 
 .confirm {
-    margin-top: 60px;
+    margin-top: 20px;
 }
 
 .modal-header {
@@ -33,11 +33,11 @@
 
 .modal-body {
     position: relative;
-    padding: 50px;
+    padding: 30px 50px;
 }
 
 .adminContent {
-    padding-top: 60px;
+    padding-top: 10px;
 }
 
 .actions {
@@ -281,13 +281,21 @@
 .select2-container .select2-choice
 {
     border-color: #999;
-    height: 40px;
+    height: 30px;
     border-radius: 8px;
     font-size: 18px;
 }
 
+.select2-container .select2-choice .select2-arrow
+{
+    margin-top: -8px;
+    color: #111;
+}
+
 .select2-container .select2-choice > .select2-chosen
 {
+    padding-top: 2px;
+    padding-bottom: 0;
     color: #888;
 }
 
@@ -313,15 +321,25 @@
 section, .section-row
 {
     position: relative;
-    margin-bottom: 40px;
+    margin-bottom: 28px;
 }
 
 section
 {
-    padding-top: 50px;
+    padding-top: 30px;
     padding-bottom: 30px;
     border-bottom: 1px solid #111;
     overflow: hidden;
+}
+
+section:first-child
+{
+    padding-top: 10px;
+}
+
+section:last-child
+{
+    padding-top: 10px;
 }
 
 section.no-bordered
@@ -362,7 +380,7 @@ section.no-bordered
 
 .station-checkbox-top-margined
 {
-    margin-top: 36px;
+    margin-top: 28px;
 }
 
 
@@ -373,7 +391,8 @@ section.no-bordered
 
 .grid-style
 {
-    height: 490px;
+    height: 386px;
+
 }
 
 .ui-grid-top-panel-background,
@@ -395,7 +414,7 @@ section.no-bordered
 .ui-grid-cell-contents,
 .ui-grid-vertical-bar
 {
-    height: 40px !important;
+    height: 32px !important;
 }
 
 .ui-grid-cell-contents
@@ -435,7 +454,8 @@ section.no-bordered
     overflow: auto !important;
 }
 
-.adminContent .smallActionsWidthHeader .ui-grid-column-menu-button
+.adminContent .actions-header .ui-grid-column-menu-button,
+.adminContent .device-actions-header .ui-grid-column-menu-button
 {
     display: none;
 }
@@ -455,29 +475,70 @@ div[ ui-grid-row=row ]
     position: relative;
 }
 
-div[ ui-grid-row=row ] > div:last-child
+.ui-grid-row-selected > [ui-grid-row] > .ui-grid-cell
+{
+    background: none !important;
+}
+
+.ui-grid-row-selected
+{
+    background: #c9dde1 !important;
+}
+
+.actions-column
+{
+    background: none !important;
+}
+
+.ui-grid-row-selected
+{
+    background: #c9dde1 !important;
+}
+
+.actions-column
 {
     position: absolute;
     top: 0;
     right: 0;
-}
-
-.smallActionsWidth
-{
+    text-align: right;
     max-width: 130px !important;
     min-width: 130px !important;
 }
 
-.smallActionsWidthHeader
+.actions-column.more-actions
 {
-    max-width: 160px !important;
-    min-width: 160px !important;
+    max-width: 300px !important;
+    min-width: 300px !important;
 }
 
-.smallActionsWidthHeader.longer
+.actions-header
 {
-    max-width: 320px !important;
-    min-width: 320px !important;
+    max-width: 400px !important;
+    min-width: 400px !important;
+}
+
+.actions-header.two-columns
+{
+    max-width: 120px !important;
+    min-width: 120px !important;
+}
+
+.column-4th
+{
+    max-width: 200px !important;
+    min-width: 200px !important;
+}
+
+.column-3th
+{
+    max-width: 260px !important;
+    min-width: 260px !important;
+}
+
+.last-column-modal
+{
+    max-width: 290px !important;
+    min-width: 290px !important;
 }
 
 .actionsDivToRight
@@ -528,7 +589,7 @@ input, select
 {
     border: 1px solid #999 !important;
     padding: 0 6px !important;
-    height: 40px;
+    height: 30px;
     width: 100%;
     border-radius: 8px !important;
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
@@ -544,7 +605,7 @@ input, select
 
 input[ type=checkbox ], input[ type=radio ]
 {
-    margin: 10px 20px 0 0;
+    margin: 0 20px 0 0;
     width: 20px;
     height: 20px;
 }
@@ -556,7 +617,7 @@ input[ type=checkbox ], input[ type=radio ]
 
 label
 {
-    margin: 10px 0;
+    margin: 0;
     min-width: 220px;
     line-height: 1.6;
 }
@@ -569,6 +630,11 @@ select.short
 input[ type=number ].short, input[ type=text ].short
 {
     width: 60px;
+}
+
+input[ type=number ].short.short-margined
+{
+    margin-top: 6px;
 }
 
 .select2-search input
@@ -585,7 +651,7 @@ input.long, select.long
 {
     background: #eee !important;
     border-color: #ddd !important;
-    color: #ccc !important;
+    color: #666 !important;
 }
 
 .inline-input-text
@@ -635,8 +701,8 @@ input.long, select.long
 {
     display: inline-block;
     margin-right: 12px !important;
-    width: 36px;
-    height: 66px;
+    width: 28px;
+    height: 28px;
 }
 
 .colors .color-square
@@ -710,6 +776,7 @@ input.long, select.long
     box-sizing: border-box;
     border-right: 1px solid #000;
     width: 25%;
+    min-height: 60px;
     float: left;
 }
 

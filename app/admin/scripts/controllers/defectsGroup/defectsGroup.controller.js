@@ -26,11 +26,10 @@
             paginationPageSizes: [10, 20, 30],
             paginationPageSize: 10,
             columnDefs: [{
-                             cellClass: 'special-cell',
                              field: 'name', displayName: 'Name'
                          }, {
-                            headerCellClass: 'smallActionsWidthHeader',
-                            cellClass: 'smallActionsWidth actionsDivToRight',
+                            headerCellClass: 'actions-header two-columns',
+                            cellClass: 'actions-column',
                             maxWidth: 120, field: ' ', cellTemplate: actionsTemplate, enableSorting: false, enableHiding: false
                          }]
         };

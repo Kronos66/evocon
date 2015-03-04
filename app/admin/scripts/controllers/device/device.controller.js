@@ -22,15 +22,16 @@
                     displayName: 'Description'
                 },{
                     field: 'id',
-                    displayName: 'Id'
-                },
-                {
+                    displayName: 'Id',
+                     maxWidth: 100,
+                     minWidth: 100
+                },{
                     field: 'inputs',
                     displayName: 'Inputs'
                 },
                 {
-                    headerCellClass: 'smallActionsWidthHeader',
-                    cellClass: 'smallActionsWidth actionsDivToRight',
+                    headerCellClass: 'device-actions-header',
+                    cellClass: 'actions-column',
                     maxWidth: 120,
                     enableSorting: false,
                     enableHiding: false,

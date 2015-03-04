@@ -26,11 +26,11 @@
             columnDefs: [{
                              field: 'name', displayName: 'Name'
                          }, {
-                             field: 'color', displayName: 'Color',
-                            cellClass: 'special-cell shorter'
+                             field: 'color', displayName: 'Color'
                          }, {
-                             headerCellClass: 'smallActionsWidthHeader',
-                            maxWidth: 120, field: ' ', cellTemplate: actionsTemplate, enableSorting: false, enableHiding: false
+                            headerCellClass: 'actions-header',
+                            cellClass: 'actions-column',
+                            maxWidth: 100, field: ' ', cellTemplate: actionsTemplate, enableSorting: false, enableHiding: false
                          }]
         };
         this.gridOptions.onRegisterApi = function (gridApi)

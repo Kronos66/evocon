@@ -25,11 +25,10 @@
             columnDefs: [{
                              field: 'name', displayName: 'Name'
                          }, {
-                             field: 'description', displayName: 'Description',
-                            cellClass: 'special-cell shorter'
+                             field: 'description', displayName: 'Description'
                          }, {
-                            headerCellClass: 'smallActionsWidthHeader',
-                            cellClass: 'smallActionsWidth actionsDivToRight',
+                            headerCellClass: 'actions-header',
+                            cellClass: 'actions-column',
                             maxWidth: 120, field: ' ', displayName: '', cellTemplate: actionsTemplate, enableSorting: false, enableHiding: false
                          }]
         };
