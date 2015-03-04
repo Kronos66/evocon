@@ -3,6 +3,7 @@
     'use strict';
     function EditOrCreateStationController(station)
     {
+        station.enabled = (station.enabled === 'Yes');
         this.row = station;
     }
 

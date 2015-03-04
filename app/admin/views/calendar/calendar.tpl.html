@@ -3,7 +3,7 @@
     <section class="no-bordered">
         <div class="row section-row">
             <div class="col-xs-12">
-                <h1 class="title">{{'calendar'|translate}}:</h1>
+                <h1 class="title">{{'calendar'|translate}}</h1>
 
                 <div class="buttons">
                     <button class="button center" ng-click="calendarController.addCalendar()">{{'addCalendar'|translate}}</button>
@@ -16,7 +16,7 @@
         <div ng-if="calendarController.visible">
             <div class="row section-row">
                 <div class="col-xs-12">
-                    <h1 class="title">{{'lineInSelected'|translate}}:</h1>
+                    <h1 class="title">{{'lineInSelected'|translate}}</h1>
                     <div class="buttons">
                         <button class="button center" ng-click="calendarController.addLine()">{{'addCalendarLine'|translate}}</button>
                     </div>
@@ -24,6 +24,7 @@
             </div>
             <div class="grid-style" ui-grid="calendarController.gridOptions2" ui-grid-pagination></div>
         </div>
+        <div class="row section-row"></div>
         <div class="row section-row"></div>
     </section>
 </div>

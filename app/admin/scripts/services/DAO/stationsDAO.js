@@ -3,7 +3,7 @@
     'use strict';
     function StationsDAO($resource)
     {
-        var api = $resource('/EvoconReportingServer/rest/v1/stations/:id', {id: '@id'}, {
+        var api = $resource('/rest/v1/stations/:id', {id: '@stationId'}, {
             query: {isArray: true, method: 'GET'},
             update: {method: 'PUT'},
             get: {isArray: false, method: 'GET'}

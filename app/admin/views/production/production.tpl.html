@@ -3,7 +3,7 @@
     <section>
         <div class="row">
             <div class="col-xs-12">
-                <h1 class="title">{{'production'|translate}} / {{'lineViewsSetting'|translate}}</h1>
+                <h1 class="title">{{'production'|translate}}</h1>
             </div>
         </div>
     </section>
@@ -15,25 +15,28 @@
         </div>
         <div class="row section-row">
             <div class="col-xs-12 colors">
-                <input name="color-mode" id="simple" class="radio" type="radio" ng-model="PC.settings.colormode" value="0">
-                <label for="simple">
-                    <span class="color-square green"></span>
-                    <span class="color-square yellow"></span>
-                    <span class="color-square red"></span>
-                    <p class="inline-input-text">{{'simple'|translate}}</p>
-                </label>
-                <input name="color-mode" id="detailed" class="radio" type="radio" ng-model="PC.settings.colormode" value="1">
-                <label for="detailed">
-                    <span class="color-square green"></span>
-                    <span class="color-square yellow"></span>
-                    <span class="color-square orange"></span>
-                    <span class="color-square red"></span>
-                    <span class="color-square purple"></span>
-                    <span class="color-square grey"></span>
-                    <span class="color-square blue"></span>
-                    <p class="inline-input-text">{{'detailed'|translate}}</p>
-
-                </label>
+                <div class="pull-left">
+                    <input name="color-mode" id="simple" class="radio" type="radio" ng-model="PC.settings.colormode" value="0">
+                    <label for="simple">
+                        <span class="color-square green"></span>
+                        <span class="color-square yellow"></span>
+                        <span class="color-square red"></span>
+                        <p class="inline-input-text">{{'simple'|translate}}</p>
+                    </label>
+                </div>
+                <div class="pull-left">
+                    <input name="color-mode" id="detailed" class="radio" type="radio" ng-model="PC.settings.colormode" value="1">
+                    <label for="detailed">
+                        <span class="color-square green"></span>
+                        <span class="color-square yellow"></span>
+                        <span class="color-square orange"></span>
+                        <span class="color-square red"></span>
+                        <span class="color-square purple"></span>
+                        <span class="color-square grey"></span>
+                        <span class="color-square blue"></span>
+                        <p class="inline-input-text">{{'detailed'|translate}}</p>
+                    </label>
+                </div>
             </div>
         </div>
     </section>
@@ -73,8 +76,8 @@
                         </div>
                         <div class="values">
                             <input type="number" class="short" ng-model="PC.settings.extraSlowMarker" />
-                            <span class="pull-right">%</span>
-                            <input type="number" class="short pull-right" ng-model="PC.settings.stoppageMarker" />
+                            <span class="pull-right">&nbsp;%</span>
+                            <input type="number" class="short short-margined pull-right" ng-model="PC.settings.stoppageMarker" />
                         </div>
                     </div>
                 </div>
@@ -142,9 +145,11 @@
         </div>
         <div class="row section-row">
             <div class="col-xs-12 text-center">
-                <span class="button button-submit">{{'save'|translate}}</span>
+                <span ng-click="PC.save()" class="button button-submit">{{'save'|translate}}</span>
             </div>
         </div>
+
+        <div class="row section-row"></div>
     </section>
 
 </div>

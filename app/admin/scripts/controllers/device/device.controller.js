@@ -7,7 +7,6 @@
         var ctrl = this,
             refresh = function () {
                 deviceDAO.query().then(function (data) {
-                    console.log( data );
                     ctrl.gridOptions.data = data;
                 });
             };
@@ -17,20 +16,22 @@
             enableRowHeaderSelection: false,
             paginationPageSizes: [10, 20, 30],
             paginationPageSize: 10,
-            columnDefs: [{
-                    field: 'id',
-                    displayName: 'Id'
-                },
+            columnDefs: [
                 {
                     field: 'description',
                     displayName: 'Description'
+                },{
+                    field: 'id',
+                    displayName: 'Id',
+                     maxWidth: 100,
+                     minWidth: 100
                 },{
                     field: 'inputs',
                     displayName: 'Inputs'
                 },
                 {
-                    headerCellClass: 'smallActionsWidthHeader',
-                    cellClass: 'smallActionsWidth actionsDivToRight',
+                    headerCellClass: 'device-actions-header',
+                    cellClass: 'actions-column',
                     maxWidth: 120,
                     enableSorting: false,
                     enableHiding: false,

@@ -13,7 +13,7 @@
                         <label for="name">{{ 'name' | translate }}:</label>
                     </div>
                     <div class="col-xs-9">
-                        <input type="text"  id="name" data-ng-model="productDetailCtrl.product.name" placeholder="{{'enterName'|translate}}">
+                        <input type="text"  id="name" data-ng-model="productDetailCtrl.product.name">
                     </div>
                 </div>
             </div>
@@ -40,17 +40,29 @@
                         <label for="sku">{{ 'sku' | translate }}:</label>
                     </div>
                     <div class="col-xs-9">
-                        <input type="text"  id="sku" data-ng-model="productDetailCtrl.product.sku" placeholder="{{'sku'|translate}}">
+                        <input type="text"  id="sku" data-ng-model="productDetailCtrl.product.sku" >
                     </div>
                 </div>
             </div>
             <div class="col-xs-6">
                 <div class="row">
                     <div class="col-xs-3">
-                        <label for="group">{{ 'group' | translate }}:</label>
+                        <label for="group">{{ 'barcode' | translate }}:</label>
                     </div>
                     <div class="col-xs-9">
-                        <input type="text"  id="barcode" data-ng-model="productDetailCtrl.product.barcode" placeholder="{{'barcode'|translate}}">
+                        <input type="text"  id="barcode" data-ng-model="productDetailCtrl.product.barcode">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row section-row">
+            <div class="col-xs-6">
+                <div class="row">
+                    <div class="col-xs-3">
+                        <label for="enable">{{ 'enable' | translate }}:</label>
+                    </div>
+                    <div class="col-xs-9">
+                        <input type="checkbox"  id="enable" data-ng-model="productDetailCtrl.product.enable" >
                     </div>
                 </div>
             </div>
@@ -59,7 +71,7 @@
     <section class="no-bordered">
         <div class="row section-row">
             <div class="col-xs-12 text-center">
-                <button class="button">
+                <button ng-click="productDetailCtrl.save()" class="button">
                     <span class="glyphicon glyphicon-ok"></span> {{ 'save' | translate }}
                 </button>
             </div>

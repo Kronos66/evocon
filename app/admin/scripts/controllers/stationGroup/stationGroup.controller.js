@@ -1,9 +1,10 @@
 (function ()
 {
     'use strict';
-    function StationGroupController($modal, StationGroupDAO)
+    function StationGroupController($modal,$scope, StationGroupDAO)
     {
         var ctrl = this;
+        var selectedGroup;
         var refresh = function ()
         {
             StationGroupDAO.query().then(function (result)
@@ -21,17 +22,38 @@
             multiSelect: false,
             paginationPageSizes: [10, 20, 30],
             paginationPageSize: 10,
-            data: [{name:'mock',id:2}], //wait to endpoint correct run 'stationGroupController.stationGroups'
+            data: 'stationGroupController.stationGroups',
             columnDefs: [{
                              field: 'name', displayName: 'Name'
                          }, {
-                             field: 'description', displayName: 'Description',
-                            cellClass: 'special-cell shorter'
+                             field: 'description', displayName: 'Description'
                          }, {
-                            headerCellClass: 'smallActionsWidthHeader',
-                            cellClass: 'smallActionsWidth actionsDivToRight',
+                            headerCellClass: 'actions-header',
+                            cellClass: 'actions-column',
                             maxWidth: 120, field: ' ', displayName: '', cellTemplate: actionsTemplate, enableSorting: false, enableHiding: false
                          }]
+        };
+        this.gridOptions.onRegisterApi = function (gridApi)
+        {
+            gridApi.selection.on.rowSelectionChanged($scope, function (row)
+            {
+                if (selectedGroup !== row.entity.id) {
+                    selectedGroup = row.entity.id;
+                    StationGroupDAO.get(row.entity.id).then(function (result)
+                    {
+                        ctrl.visibled = true;
+                        ctrl.station = result;
+                    });
+                } else {
+                    ctrl.visibled = false;
+                    selectedGroup = '';
+                }
+            });
+        };
+        this.gridOptions2 = {
+            data: 'stationGroupController.station',
+            paginationPageSizes: [10, 20, 30],
+            paginationPageSize: 10
         };
         this.editRow= function (row)
         {
@@ -79,5 +101,5 @@
         refresh();
     }
 
-    angular.module('evoReports').controller('stationGroupController', ['$modal', 'StationGroupDAO', StationGroupController]);
+    angular.module('evoReports').controller('stationGroupController', ['$modal','$scope', 'StationGroupDAO', StationGroupController]);
 })();

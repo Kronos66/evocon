@@ -27,9 +27,10 @@
                     <label for="enable">{{'enable'|translate}}:</label>
                 </div>
                 <div class="col-sm-8">
-                    <select id="enable" ng-model="modal.row.enabled">
-                        <option ng-repeat="enabled in modal.enable" ng-selected="modal.checkSelectedEnabled(enabled.id)" value="{{enabled.id}}">{{enabled.value}}</option>
-                    </select>
+                    <input id="enable" type="checkbox" ng-model="modal.row.enabled" ng-checked="modal.row.enabled">
+                    <!--<select id="enable" ng-model="modal.row.enabled">-->
+                        <!--<option ng-repeat="enabled in modal.enable" ng-selected="modal.checkSelectedEnabled(enabled.id)" value="{{enabled.id}}">{{enabled.value}}</option>-->
+                    <!--</select>-->
                 </div>
             </div>
         </div>

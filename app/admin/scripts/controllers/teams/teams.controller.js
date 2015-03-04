@@ -26,14 +26,13 @@
                 columnDefs: [
                     {
                         field: 'name',
-                        cellClass: 'special-cell',
                         displayName: 'Name'
                     },
                     {
-                        headerCellClass: 'smallActionsWidthHeader',
+                        headerCellClass: 'actions-header two-columns',
+                        cellClass: 'actions-column',
                         enableSorting: false,
                         enableHiding: false,
-                        cellClass: 'smallActionsWidth actionsDivToRight',
                         maxWidth: 120,
                         field: ' ',
                         cellTemplate: '<span class="buttonActions"><a class="button link" ng-click="$event.stopPropagation();grid.appScope.teamCtrl.editTeam( row.entity )">' +
@@ -88,7 +87,7 @@
         ctrl.newTeam = function() {
             var row = {};
             var modalInstance = $modal.open({
-                templateUrl: 'admin/views/teams/addTeamModal.html',
+                templateUrl: 'admin/views/teams/editOrCreateTeamModal.tpl.html',
                 backdrop: 'static',
                 keyboard: false,
                 size: 'md',
@@ -107,7 +106,7 @@
         ctrl.editTeam = function( entity ) {
             var row = angular.extend( {}, entity );
             var modalInstance = $modal.open({
-                templateUrl: 'admin/views/teams/editTeamModal.html',
+                templateUrl: 'admin/views/teams/editOrCreateTeamModal.tpl.html',
                 backdrop: 'static',
                 keyboard: false,
                 size: 'md',

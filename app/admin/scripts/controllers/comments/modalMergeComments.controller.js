@@ -21,10 +21,10 @@
                          },
                          {
                              field: 'category',
-                             displayName: 'Category',
-                             cellClass: 'special-cell shorter'
+                             displayName: 'Category'
                          },
                          {
+                             headerCellClass: 'last-column-modal',
                              field: 'color',
                              displayName: 'Color'
                          }]

@@ -25,13 +25,16 @@
             columnDefs: [{
                              field: 'name', displayName: 'Name'
                          }, {
-                             field: 'commentsGroup', displayName: 'Group'
+                             field: 'groupId', displayName: 'Group ID'
                          }, {
                              field: 'category', displayName: 'Category'
                          }, {
                              field: 'color', displayName: 'Color'
                          }, {
-                            headerCellClass: 'smallActionsWidthHeader',
+                            enableSorting: false,
+                            enableHiding: false,
+                            headerCellClass: 'actions-header',
+                            cellClass: 'actions-column',
                             maxWidth: 120, field: ' ', cellTemplate: actionsTemplate
                          }]
         };
