@@ -20,7 +20,6 @@
             <li>
                 <a href="#/products" ng-class="{ 'active': ( activePage=='/products' ) }">{{'products'|translate}}</a>
                 <ul class="list-unstyled submenu">
-                    <li><a href="#/product/addnew" ng-class="{ 'active': ( activePage=='/product/addnew' ) }">{{'addNew'|translate}}</a></li>
                     <li><a href="#/productsgroup" ng-class="{ 'active': ( activePage=='/productsgroup' ) }">{{'manageGroup'|translate}}</a></li>
                 </ul>
             </li>
@@ -39,11 +38,10 @@
             </li>
 
             <li>
-                <a href="#/teams" ng-class="{ 'active': ( activePage=='/teams' ) }">{{'teams'|translate}}</a>
-            </li>
-
-            <li>
                 <a href="#/operators" ng-class="{ 'active': ( activePage=='/operators' ) }">{{'operators'|translate}}</a>
+                <ul class="list-unstyled submenu">
+                    <li><a href="#/teams" ng-class="{ 'active': ( activePage=='/teams' ) }">{{'teams'|translate}}</a></li>
+                </ul>
             </li>
 
             <li>

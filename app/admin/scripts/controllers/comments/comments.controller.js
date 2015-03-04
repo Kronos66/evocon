@@ -25,7 +25,7 @@
             columnDefs: [{
                              field: 'name', displayName: 'Name'
                          }, {
-                             field: 'commentsGroup', displayName: 'Group'
+                             field: 'groupId', displayName: 'Group ID'
                          }, {
                              field: 'category', displayName: 'Category'
                          }, {

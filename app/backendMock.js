@@ -213,6 +213,27 @@ function setupBackendMock($httpBackend)
         return [200, commentsGroup[match[1] - 1]];
 
     });
+    $httpBackend.whenPOST(/\/rest\/v1\/commentgroups$/).respond(function (method, url,json)
+    {
+        var data=JSON.parse(json);
+        commentsGroup.push(data);
+        return [200];
+
+    });
+    $httpBackend.whenPUT(/\/rest\/v1\/commentgroups\/(\d+)$/).respond(function (method, url,json)
+    {
+        var match = /\/rest\/v1\/commentgroups\/(\d+)$/.exec(url);
+        commentsGroup[match[1]-1]=JSON.parse(json);
+        return [200];
+
+    });
+    $httpBackend.whenDELETE(/\/rest\/v1\/commentgroups\/(\d+)$/).respond(function (method, url)
+    {
+        var match = /\/rest\/v1\/commentgroups\/(\d+)$/.exec(url);
+        commentsGroup.splice(match[1]-1,1);
+        return [200, commentsGroup[match[1] - 1]];
+
+    });
     $httpBackend.whenGET(/rest\/v1\/commentgroups\/(\d+)\/comments/).respond(function ()
     {
         return [200, []];

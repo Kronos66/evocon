@@ -1,7 +1,7 @@
 (function ()
 {
     'use strict';
-    function DefectsController($modal, $q, DefectsDAO, DefectsGroupDAO, StationDefectDAO)
+    function DefectsController($modal, DefectsDAO, DefectsGroupDAO, StationDefectDAO)
     {
         var actionsTemplate = '<span class="buttonActions"><a class="button link" ng-click="grid.appScope.defectsCtrl.editRow(row.entity)">{{\'edit\'|translate}}</a>' +
                 '<a class="button link" ng-click="grid.appScope.defectsCtrl.deleteRow(row.entity.id)">{{\'delete\'|translate}}</a>' +
@@ -27,14 +27,6 @@
                          {
                              field: 'groupId',
                              displayName: 'Group'
-                         },
-                         {
-                             field: 'stationId',
-                             displayName: 'Station'
-                         },
-                         {
-                             field: 'createdDate',
-                             displayName: 'Created'
                          },
                          {
                              width: 280,
@@ -133,6 +125,8 @@
                 });
             } else if (0 === stationToSave.length) {
                 refresh();
+            } else {
+                throw Error('NOT all stations saved.');
             }
         }
 
@@ -154,5 +148,5 @@
         refresh();
     }
 
-    angular.module('evoReports').controller('defectsController', ['$modal', '$q', 'DefectsDAO', 'DefectsGroupDAO', 'StationDefectDAO', DefectsController]);
+    angular.module('evoReports').controller('defectsController', ['$modal', 'DefectsDAO', 'DefectsGroupDAO', 'StationDefectDAO', DefectsController]);
 })();

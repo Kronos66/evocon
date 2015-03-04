@@ -12,20 +12,17 @@
             CalendarDAO.query().then(function (result)
             {
                 ctrl.dataCalendar = result;
-                angular.forEach(ctrl.dataCalendar, function (element)
-                {
-                    if (1 === element.enabled) {
-                        element.enable = 'Yes';
-                    } else {
-                        element.enable = 'No';
-                    }
-                });
             });
         };
         var refreshLine = function (id)
         {
             CalendarLineDAO.query(id).then(function (result)
             {
+                angular.forEach(result, function (calendarLine)
+                {
+                    calendarLine.startTime = moment('1970-01-01 ' + calendarLine.startTime).format('HH:mm');
+                    calendarLine.endTime = moment('1970-01-01 ' + calendarLine.endTime).format('HH:mm');
+                });
                 ctrl.lines = result;
             });
         };
@@ -41,16 +38,26 @@
             paginationPageSizes: [10, 20, 30],
             paginationPageSize: 10,
             columnDefs: [{
-                             field: 'name', displayName: 'Name'
-                         }, {
-                             field: 'description', displayName: 'Description'
-                         }, {
-                             field: 'enable', displayName: 'Enable',
-                            cellClass: 'special-cell more-shorter'
-                         }, {
-                            headerCellClass: 'smallActionsWidthHeader',
-                            cellClass: 'smallActionsWidth actionsDivToRight',
-                            maxWidth: 120, field: ' ', cellTemplate: actionsTemplate, enableSorting: false, enableHiding: false
+                             field: 'name',
+                             displayName: 'Name'
+                         },
+                         {
+                             field: 'description',
+                             displayName: 'Description'
+                         },
+                         {
+                             field: 'datecalcultion',
+                             displayName: 'Date calculation',
+                             cellClass: 'special-cell more-shorter'
+                         },
+                         {
+                             headerCellClass: 'smallActionsWidthHeader',
+                             cellClass: 'smallActionsWidth actionsDivToRight',
+                             maxWidth: 120,
+                             field: ' ',
+                             cellTemplate: actionsTemplate,
+                             enableSorting: false,
+                             enableHiding: false
                          }]
         };
         this.gridOptions.onRegisterApi = function (gridApi)
@@ -65,21 +72,31 @@
                         '{{\'delete\'|translate}}</a></span>';
                 if (data !== row) {
                     data = row;
-                    selected = row.entity.id;
+                    selected = row.entity;
                     ctrl.visible = true;
                     ctrl.gridOptions2 = {
                         data: 'calendarController.lines', columnDefs: [{
-                               field: 'id', displayName: 'Id line'
-                           }, {
-                               field: 'startTime', displayName: 'Start time'
-                           }, {
-                               field: 'endTime', displayName: 'End time',
-                                cellClass: 'special-cell more-shorter'
-                           }, {
-                                headerCellClass: 'smallActionsWidthHeader',
-                                cellClass: 'smallActionsWidth actionsDivToRight',
-                                maxWidth: 120, field: ' ', cellTemplate: actionsTemplate2, enableSorting: false, enableHiding: false
-                           }]
+                                                                           field: 'id',
+                                                                           displayName: 'ID'
+                                                                       },
+                                                                       {
+                                                                           field: 'startTime',
+                                                                           displayName: 'Start time'
+                                                                       },
+                                                                       {
+                                                                           field: 'endTime',
+                                                                           displayName: 'End time',
+                                                                           cellClass: 'special-cell more-shorter'
+                                                                       },
+                                                                       {
+                                                                           headerCellClass: 'smallActionsWidthHeader',
+                                                                           cellClass: 'smallActionsWidth actionsDivToRight',
+                                                                           maxWidth: 120,
+                                                                           field: ' ',
+                                                                           cellTemplate: actionsTemplate2,
+                                                                           enableSorting: false,
+                                                                           enableHiding: false
+                                                                       }]
                     };
                 } else {
                     ctrl.visible = false;
@@ -94,14 +111,15 @@
             });
             modalInstance.result.then(function ()
             {
-                CalendarLineDAO.remove(selected, id).then(function ()
+                CalendarLineDAO.remove(selected.id, id).then(function ()
                 {
-                    refreshLine(selected);
+                    refreshLine(selected.id);
                 });
             });
         };
         this.editLine = function (line)
         {
+            line.nameCalendar = selected.name;
             var modalInstance = $modal.open({
                 controller: 'calendarLineController',
                 controllerAs: 'modal',
@@ -121,10 +139,10 @@
                 angular.extend(variable, result);
                 variable.startTime = moment(result.startTime).format('HH:mm:ss');
                 variable.endTime = moment(result.endTime).format('HH:mm:ss');
-                return CalendarLineDAO.update(selected, variable);
+                return CalendarLineDAO.update(selected.id, variable);
             }).then(function ()
             {
-                refreshLine(selected);
+                refreshLine(selected.id);
             });
         };
         this.addCalendar = function ()
@@ -133,7 +151,7 @@
                 backdrop: 'static',
                 keyboard: false,
                 templateUrl: 'admin/views/calendar/editOrCreateModal.tpl.html',
-                controller: 'editOrCreateModalController',
+                controller: 'addGroup',
                 size: 'md',
                 controllerAs: 'modal',
                 resolve: {
@@ -143,7 +161,11 @@
                     }
                 }
             });
-            modalInstance.result.then(CalendarDAO.save).then(refresh);
+            modalInstance.result.then(function (result)
+            {
+                result.enabled = result.enabled ? 1 : 0;
+                return CalendarDAO.save(result);
+            }).then(refresh);
         };
 
         this.deleteRow = function (id)
@@ -163,7 +185,7 @@
                 backdrop: 'static',
                 keyboard: false,
                 templateUrl: 'admin/views/calendar/editOrCreateModal.tpl.html',
-                controller: 'editOrCreateModalController',
+                controller: 'addGroup',
                 size: 'md',
                 controllerAs: 'modal',
                 resolve: {
@@ -177,7 +199,7 @@
         };
         this.addLine = function ()
         {
-            var row = {};
+            var row = {nameCalendar: selected.name};
             var modalInstance = $modal.open({
                 controller: 'calendarLineController',
                 controllerAs: 'modal',
@@ -197,10 +219,10 @@
                 angular.extend(variable, result);
                 variable.startTime = moment(variable.startTime).format('HH:mm:ss');
                 variable.endTime = moment(variable.endTime).format('HH:mm:ss');
-                return CalendarLineDAO.save(selected, variable);
+                return CalendarLineDAO.save(selected.id, variable);
             }).then(function ()
             {
-                refreshLine(selected);
+                refreshLine(selected.id);
             });
         };
         refresh();

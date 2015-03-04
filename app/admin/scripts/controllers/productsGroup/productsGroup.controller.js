@@ -97,7 +97,7 @@
                     }
                 }
             });
-            modalInstance.result.then(ProductsGroupDAO.update()).then(refresh);
+            modalInstance.result.then(ProductsGroupDAO.update).then(refresh);
         };
 
         this.delete = function (id)

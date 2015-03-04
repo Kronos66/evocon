@@ -20,7 +20,7 @@
     <section class="no-bordered" ng-if="teamCtrl.showDDArea">
         <div class="row section-row">
             <div class="col-xs-6">
-                <p class="label-for">{{'membersOf'|translate}}: {{ teamCtrl.recentlySelectedRow }}</p>
+                <p class="label-for">{{'membersOf'|translate}} {{ teamCtrl.recentlySelectedRow }}:</p>
                 <div class="thumbnail" data-drop="true" ng-model="teamCtrl.membership" jqyoui-droppable="{multiple:true, onDrop: teamCtrl.add()}" style='height:200px;'>
                     <div class="btn btn-info" ng-repeat="member in teamCtrl.membership" data-drag="true" data-jqyoui-options="{revert: 'invalid'}"
                          ng-model="teamCtrl.membership" ng-mousedown="dragged( member.id, true )" jqyoui-draggable="{index: {{$index}},animate:true}" ng-hide="!member.firstName">{{member.firstName}} {{member.lastName}}</div>

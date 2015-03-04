@@ -26,14 +26,35 @@
             paginationPageSize: 10,
             data: [{id: 2, name: 'mockInController'}, {id: 5, name: 'mock'}],//'stationsController.data'
             columnDefs: [{
-                             field: 'name', displayName: 'Name'
-                         }, {
-                             field: 'description', displayName: 'Description',
-                            cellClass: 'special-cell shorter'
-                         }, {
-                            headerCellClass: 'smallActionsWidthHeader',
-                            cellClass: 'smallActionsWidth actionsDivToRight',
-                            maxWidth: 120, displayName: '', field: 'remove', cellTemplate: actionsTemplate, enableSorting: false, enableHiding: false
+                             field: 'id',
+                             displayName: 'Station number'
+                         },
+                         {
+                             field: 'name',
+                             displayName: 'Name'
+                         },
+                         {
+                             field: 'description',
+                             displayName: 'Description'
+                             //cellClass: 'special-cell shorter'
+                         },
+                         {
+                             field: 'stationGroup'
+                             //displayName: 'Station group'
+                         },
+                         {
+                             field: 'enabled',
+                             displayName: 'Enabled'
+                         },
+                         {
+                             //headerCellClass: 'smallActionsWidthHeader',
+                             //cellClass: 'smallActionsWidth actionsDivToRight',
+                             maxWidth: 120,
+                             displayName: '',
+                             field: 'remove',
+                             cellTemplate: actionsTemplate,
+                             enableSorting: false,
+                             enableHiding: false
                          }]
         };
         this.gridOptions.onRegisterApi = function (gridApi)
@@ -92,9 +113,7 @@
         this.deleteRow = function (id)
         {
             var modalInstance = $modal.open({
-                templateUrl: 'admin/views/confirmModal.tpl.html',
-                backdrop: 'static',
-                keyboard: false
+                templateUrl: 'admin/views/confirmModal.tpl.html', backdrop: 'static', keyboard: false
             });
             modalInstance.result.then(function ()
             {

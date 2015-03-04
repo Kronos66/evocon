@@ -39,9 +39,16 @@
         };
 
         this.save = function () {
-            ProductsDAO.save(ctrl.product).then(function () {
-                $location.path('/tasks');
-            });
+            if ($routeParams.id === 'addnew') {
+                ProductsDAO.save(ctrl.product).then(function () {
+                    $location.path('/product');
+                });
+            } else {
+                ProductsDAO.update(ctrl.product).then(function ()
+                {
+                    $location.path('/product');
+                });
+            }
         };
 
         ProductsGroupDAO.query().then(function (result)

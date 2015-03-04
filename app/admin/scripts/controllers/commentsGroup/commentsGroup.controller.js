@@ -26,12 +26,8 @@
             columnDefs: [{
                              field: 'name', displayName: 'Name'
                          }, {
-                             field: 'groupId', displayName: 'Group'
-                         }, {
-                             field: 'category', displayName: 'Category'
-                         }, {
                              field: 'color', displayName: 'Color',
-                            cellClass: 'special-cell shortest'
+                            cellClass: 'special-cell shorter'
                          }, {
                              headerCellClass: 'smallActionsWidthHeader',
                             maxWidth: 120, field: ' ', cellTemplate: actionsTemplate, enableSorting: false, enableHiding: false

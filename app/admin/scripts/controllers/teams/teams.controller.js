@@ -88,7 +88,7 @@
         ctrl.newTeam = function() {
             var row = {};
             var modalInstance = $modal.open({
-                templateUrl: 'admin/views/teams/addTeamModal.html',
+                templateUrl: 'admin/views/teams/editOrCreateTeamModal.tpl.html',
                 backdrop: 'static',
                 keyboard: false,
                 size: 'md',
@@ -107,7 +107,7 @@
         ctrl.editTeam = function( entity ) {
             var row = angular.extend( {}, entity );
             var modalInstance = $modal.open({
-                templateUrl: 'admin/views/teams/editTeamModal.html',
+                templateUrl: 'admin/views/teams/editOrCreateTeamModal.tpl.html',
                 backdrop: 'static',
                 keyboard: false,
                 size: 'md',

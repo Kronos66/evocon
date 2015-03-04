@@ -5,7 +5,7 @@
     {
         var ctrl = this;
         this.groupComments = [];
-        row.createdDate = new Date().getTime();
+        row.createdDate = new Date();
         this.row = row;
         DefectsGroupDAO.query().then(function (result)
         {
@@ -15,6 +15,12 @@
         this.selectCategory = function (selectedId)
         {
             return selectedId === parseInt(row.groupId);
+        };
+        this.open = function ($event)
+        {
+            $event.preventDefault();
+            $event.stopPropagation();
+            ctrl.opened = true;
         };
         this.select2Options = {
             width:'100%',

@@ -7,7 +7,6 @@
         var ctrl = this,
             refresh = function () {
                 deviceDAO.query().then(function (data) {
-                    console.log( data );
                     ctrl.gridOptions.data = data;
                 });
             };
@@ -17,14 +16,15 @@
             enableRowHeaderSelection: false,
             paginationPageSizes: [10, 20, 30],
             paginationPageSize: 10,
-            columnDefs: [{
-                    field: 'id',
-                    displayName: 'Id'
-                },
+            columnDefs: [
                 {
                     field: 'description',
                     displayName: 'Description'
                 },{
+                    field: 'id',
+                    displayName: 'Id'
+                },
+                {
                     field: 'inputs',
                     displayName: 'Inputs'
                 },
