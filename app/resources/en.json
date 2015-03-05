@@ -121,5 +121,6 @@
   "yes": "Yes",
   "editProduct": "Product details",
   "stationInGroup": "Station in selected group",
-  "endTime":"End time"
+  "endTime":"End time",
+  "overview": "Overview"
 }
