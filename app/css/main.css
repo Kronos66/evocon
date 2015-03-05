@@ -622,6 +622,12 @@ input, select
 {
     width: auto;
 }
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button
+{
+    display: none;
+    height:auto
+}
 
 input[ type=checkbox ], input[ type=radio ]
 {
