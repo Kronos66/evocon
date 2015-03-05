@@ -134,71 +134,6 @@ function setupBackendMock($httpBackend)
                          }, {
                              id: sequenceProductGroup++, name: 'Group ' + sequenceProductGroup
                          }];
-    var lineViewSettings = {
-        colormode: 1, normalMarker: 100, slowMarker: 75, extraSlowMarker: 25, stoppageMarker: 0, effLowLimit: 50, effMediumLimit: 75, effHighLimit: 100
-    };
-
-    var teamsSequence = 0, teams = [{
-                                        id: teamsSequence++, name: 'Dobry Tim', operators: [10, 11]
-                                    }, {
-                                        id: teamsSequence++, name: 'Slaby Tim', operators: [1, 2, 6]
-                                    }, {
-                                        id: teamsSequence++, name: 'Mocny Tim', operators: [3, 5, 7]
-                                    }, {
-                                        id: teamsSequence++, name: 'ITCrowd', operators: [0, 4, 8, 9]
-                                    }];
-
-    var opSequence = 0, operators = [{
-                                         id: opSequence++, firstName: 'Roman', lastName: 'Polanski', barcode: 'codebar'
-                                     }, {
-                                         id: opSequence++, firstName: 'Leo', lastName: 'Messi', barcode: 'codebar'
-                                     }, {
-                                         id: opSequence++, firstName: 'Maciej', lastName: 'Makula', barcode: 'codebar'
-                                     }, {
-                                         id: opSequence++, firstName: 'Stanley', lastName: 'Kubrick', barcode: 'codebar'
-                                     }, {
-                                         id: opSequence++, firstName: 'aaa', lastName: 'aaa', barcode: 'codebar'
-                                     }, {
-                                         id: opSequence++, firstName: 'bbb', lastName: 'bbb', barcode: 'codebar'
-                                     }, {
-                                         id: opSequence++, firstName: 'ccc', lastName: 'ccc', barcode: 'codebar'
-                                     }, {
-                                         id: opSequence++, firstName: 'ddd', lastName: 'ddd', barcode: 'codebar'
-                                     }, {
-                                         id: opSequence++, firstName: 'ee', lastName: 'ee', barcode: 'codebar'
-                                     }, {
-                                         id: opSequence++, firstName: 'ff', lastName: 'ff', barcode: 'codebar'
-                                     }, {
-                                         id: opSequence++, firstName: 'gg', lastName: 'gg', barcode: 'codebar'
-                                     }, {
-                                         id: opSequence++, firstName: 'rr', lastName: 'rr', barcode: 'codebar'
-                                     }];
-
-    var opMembership = [{
-                            operatorId: 0, teamId: 3
-                        }, {
-                            operatorId: 1, teamId: 1
-                        }, {
-                            operatorId: 2, teamId: 1
-                        }, {
-                            operatorId: 3, teamId: 2
-                        }, {
-                            operatorId: 4, teamId: 3
-                        }, {
-                            operatorId: 5, teamId: 2
-                        }, {
-                            operatorId: 6, teamId: 1
-                        }, {
-                            operatorId: 7, teamId: 2
-                        }, {
-                            operatorId: 8, teamId: 3
-                        }, {
-                            operatorId: 9, teamId: 3
-                        }, {
-                            operatorId: 10, teamId: 0
-                        }, {
-                            operatorId: 11, teamId: 0
-                        }];
 
 
     //Comments
@@ -435,7 +370,18 @@ function setupBackendMock($httpBackend)
     });
 
 
-    //lineViewSettings
+
+
+
+    // - - - - - - lineViewSettings
+
+
+
+    var lineViewSettings = {
+        colormode: 1, normalMarker: 100, slowMarker: 75, extraSlowMarker: 25, stoppageMarker: 0, effLowLimit: 50, effMediumLimit: 75, effHighLimit: 100
+    };
+
+
     $httpBackend.whenPUT('/rest/v1/lineviewsettings').respond(function (method, url, json)
     {
         lineViewSettings = JSON.parse(json);
@@ -447,7 +393,24 @@ function setupBackendMock($httpBackend)
     });
 
 
-    //teams
+
+
+
+    // - - - - - - teams
+
+
+
+    var teamsSequence = 0, teams = [{
+                                        teamId: teamsSequence++, name: 'Dobry Tim', operators: [10]
+                                    }, {
+                                        teamId: teamsSequence++, name: 'Slaby Tim', operators: [1, 2, 6, 11]
+                                    }, {
+                                        teamId: teamsSequence++, name: 'Mocny Tim', operators: [3, 5, 7]
+                                    }, {
+                                        teamId: teamsSequence++, name: 'ITCrowd', operators: [0, 4, 8, 9]
+                                    }];
+
+
     $httpBackend.whenGET('/rest/v1/teams').respond(function ()
     {
         return [200, teams];
@@ -474,16 +437,77 @@ function setupBackendMock($httpBackend)
 
         return [200];
     });
+    $httpBackend.whenDELETE(/\/rest\/v1\/teams\/(\d+)$/).respond(function (method, url)
+    {
+        var match = /\/rest\/v1\/teams\/(\d+)$/.exec(url);
+        var toDelete = -1;
+
+        for (var i = 0; i < teams.length; i++) {
+            if (teams[i].id === parseInt(match[1])) {
+                toDelete = i;
+                break;
+            }
+        }
+
+        if (toDelete > -1) {
+            teams.splice(toDelete, 1);
+            return [200];
+        } else {
+            return [404];
+        }
+    });
+
+
+
+
+
+
+
+    // - - - - - operators membership
+
+
+
+    var opMembership = [{
+                            operatorId: 0, teamId: 3
+                        }, {
+                            operatorId: 1, teamId: 1
+                        }, {
+                            operatorId: 2, teamId: 1
+                        }, {
+                            operatorId: 3, teamId: 2
+                        }, {
+                            operatorId: 4, teamId: 3
+                        }, {
+                            operatorId: 5, teamId: 2
+                        }, {
+                            operatorId: 6, teamId: 1
+                        }, {
+                            operatorId: 7, teamId: 2
+                        }, {
+                            operatorId: 8, teamId: 3
+                        }, {
+                            operatorId: 9, teamId: 3
+                        }, {
+                            operatorId: 10, teamId: 0
+                        }, {
+                            operatorId: 11, teamId: 0
+                        }];
+
+
+
     $httpBackend.whenGET(/\/rest\/v1\/teams\/(\d+)\/operators/).respond(function (method, url)
     {
         var match = /\/rest\/v1\/teams\/(\d+)\/operators/.exec(url), realIndex = -1, result = [];
 
         for (var i = 0; i < teams.length; i++) {
-            if (teams[i].id === parseInt(match[1])) {
+            if (teams[i].teamId === parseInt(match[1])) {
                 realIndex = i;
                 break;
             }
         }
+
+        if( realIndex < 0 ) return[ 404 ];
+
         angular.forEach(teams[realIndex].operators, function (elem)
         {
             result.push(operators[elem]);
@@ -507,36 +531,49 @@ function setupBackendMock($httpBackend)
 
         realIndex = teams[parseInt(match[1])].operators.indexOf(parseInt(match[2]));
 
+
         if (realIndex > -1) {
             teams[parseInt(match[1])].operators = teams[parseInt(match[1])].operators.splice(realIndex, 1);
-            return [200];
-        } else {
             return [404];
-        }
-    });
-    $httpBackend.whenDELETE(/\/rest\/v1\/teams\/(\d+)$/).respond(function (method, url)
-    {
-        var match = /\/rest\/v1\/teams\/(\d+)$/.exec(url);
-        var toDelete = -1;
-
-
-        for (var i = 0; i < teams.length; i++) {
-            if (teams[i].id === parseInt(match[1])) {
-                toDelete = i;
-                break;
-            }
-        }
-
-        if (toDelete > -1) {
-            teams.splice(toDelete, 1);
-            return [200];
         } else {
             return [404];
         }
     });
 
 
-    //operators
+
+
+
+    // - - - - - operators
+
+
+    var opSequence = 0, operators = [{
+                                         id: opSequence++, firstName: 'Roman', lastName: 'Polanski', barcode: 'codebar'
+                                     }, {
+                                         id: opSequence++, firstName: 'Leo', lastName: 'Messi', barcode: 'codebar'
+                                     }, {
+                                         id: opSequence++, firstName: 'Maciej', lastName: 'Makula', barcode: 'codebar'
+                                     }, {
+                                         id: opSequence++, firstName: 'Stanley', lastName: 'Kubrick', barcode: 'codebar'
+                                     }, {
+                                         id: opSequence++, firstName: 'aaa', lastName: 'aaa', barcode: 'codebar'
+                                     }, {
+                                         id: opSequence++, firstName: 'bbb', lastName: 'bbb', barcode: 'codebar'
+                                     }, {
+                                         id: opSequence++, firstName: 'ccc', lastName: 'ccc', barcode: 'codebar'
+                                     }, {
+                                         id: opSequence++, firstName: 'ddd', lastName: 'ddd', barcode: 'codebar'
+                                     }, {
+                                         id: opSequence++, firstName: 'ee', lastName: 'ee', barcode: 'codebar'
+                                     }, {
+                                         id: opSequence++, firstName: 'ff', lastName: 'ff', barcode: 'codebar'
+                                     }, {
+                                         id: opSequence++, firstName: 'gg', lastName: 'gg', barcode: 'codebar'
+                                     }, {
+                                         id: opSequence++, firstName: 'rr', lastName: 'rr', barcode: 'codebar'
+                                     }];
+
+
     $httpBackend.whenGET('/rest/v1/operators').respond(function ()
     {
         return [200, operators];

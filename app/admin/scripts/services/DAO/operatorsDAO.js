@@ -3,7 +3,7 @@
     'use strict';
     angular.module( 'evoReports' ).factory( 'operatorsDAO', [ '$resource', function( $resource )
     {
-        var api = $resource( '/EvoconReportingServer/rest/v1/operators/:id', { id: '@id' }, {
+        var api = $resource( '/rest/v1/operators/:id', { id: '@id' }, {
             create: { method: 'POST' },
             update: { method: 'PUT' },
             'delete': { method: 'DELETE' },
