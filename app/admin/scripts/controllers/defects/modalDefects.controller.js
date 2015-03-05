@@ -5,7 +5,9 @@
     {
         var ctrl = this;
         this.groupComments = [];
-        row.createdDate = new Date();
+        if (row && !row.createdDate) {
+            row.createdDate = new Date();
+        }
         this.row = row;
         DefectsGroupDAO.query().then(function (result)
         {
@@ -23,12 +25,7 @@
             ctrl.opened = true;
         };
         this.select2Options = {
-            width:'100%',
-            allowClear: true,
-            multiple: false,
-            minimumInputLength: 1,
-            maximumInputLength: 10,
-            initSelection: function ()
+            width: '100%', allowClear: true, multiple: false, minimumInputLength: 1, maximumInputLength: 10, initSelection: function ()
             {
 
             }

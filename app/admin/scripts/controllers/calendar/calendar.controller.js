@@ -29,7 +29,8 @@
         var actionsTemplate = '<span class="buttonActions"><a class="button link" ng-click="$event.stopPropagation();grid.appScope.calendarController.editRow(row.entity)">' +
                 '{{\'edit\'|translate}}</a>' +
                 '<a class="button link" ng-click="$event.stopPropagation();grid.appScope.calendarController.deleteRow(row.entity.id)">' +
-                '{{\'delete\'|translate}}</a></span>';
+                '{{\'delete\'|translate}}</a>' +
+                '<a class="button link" ng-click="$event.stopPropagation();grid.appScope.calendarController.addException(row.entity)">Exception</a></span>';
         this.gridOptions = {
             enableRowHeaderSelection: false,
             enableRowSelection: true,
@@ -51,7 +52,7 @@
                          },
                          {
                              headerCellClass: 'actions-header',
-                             cellClass: 'actions-column',
+                             cellClass: 'actions-column more-actions',
                              maxWidth: 120,
                              field: ' ',
                              cellTemplate: actionsTemplate,
@@ -100,6 +101,22 @@
                 } else {
                     ctrl.visible = false;
                     data = null;
+                }
+            });
+        };
+        this.addException = function (calendar)
+        {
+            var modalInstance = $modal.open({
+                templateUrl: 'admin/views/calendar/editOrCreateExceptionModal.tpl.html',
+                controller: 'calendarExceptionController',
+                controllerAs: 'modal',
+                backdrop: 'static',
+                keyboard: false,
+                resolve:{
+                    calendar:function ()
+                    {
+                        return calendar;
+                    }
                 }
             });
         };
@@ -194,7 +211,11 @@
                     }
                 }
             });
-            modalInstance.result.then(CalendarDAO.update).then(refresh);
+            modalInstance.result.then(function (result)
+            {
+                result.enabled = result.enabled ? 1 : 0;
+                return CalendarDAO.update(result);
+            }).then(refresh);
         };
         this.addLine = function ()
         {

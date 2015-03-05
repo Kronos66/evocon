@@ -22,7 +22,7 @@
                 {field:'barcode', displayName:'Barcode'},
                 {field:'sku', displayName:'Sku'},
                 {field:'enabled', displayName:'Enable'},
-                {field:'groupId', displayName:'Product Group'},
+                {field:'nameGroup', displayName:'Product Group'},
                 {headerCellClass: 'actions-header', cellClass: 'actions-column', maxWidth: 120, field: ' ',
                     cellTemplate: actionsTemplate, enableSorting: false, enableHiding: false}
             ]
@@ -65,7 +65,18 @@
                 });
                 ctrl.products = result;
                 ctrl.resultCount = result.length;
-            });
+                return ProductsGroupDAO.query();
+            }).then(function(result){
+                ctrl.products = ctrl.products.map(function (element)
+                {
+                    for (var i = 0; i < result.length; i++) {
+                        if (element.groupId === result[i].id) {
+                            element.nameGroup = result[i].name;
+                        }
+                    }
+                    return element;
+                });
+             });
         };
 
         ProductsGroupDAO.query().then(function (result)

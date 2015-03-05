@@ -6,7 +6,7 @@
         var api = $resource('/rest/v1/stationgroup/:id', {id: '@id'}, {
             query: {isArray: true, method: 'GET'},
             update: {method: 'PUT'},
-            get: {isArray: true, method: 'GET'}
+            get: {isArray: false, method: 'GET'}
         });
         return {
             query: function ()

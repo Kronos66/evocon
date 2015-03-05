@@ -15,9 +15,22 @@
                     station.enabled = station.enabled ? 'Yes' : 'No';
                 });
                 ctrl.data = result;
-
+                return StationGroupDAO.query();
+            }).then(function (result)
+            {
+                ctrl.listStationGroups = result;
+                ctrl.data = ctrl.data.map(function (element)
+                {
+                    for (var i = 0; i < result.length; i++) {
+                        if (parseInt(element.stationGroup) === result[i].id) {
+                            element.groupName = result[i].name;
+                        }
+                    }
+                    return element;
+                });
             });
         };
+
         var actionsTemplate = '<span class="buttonActions"><a class="button link" ng-click="$event.stopPropagation();grid.appScope.stationsController.editRow(row.entity)">' +
                 '{{\'edit\'|translate}}</a>' +
                 '<a class="button link" ng-click="$event.stopPropagation();grid.appScope.stationsController.deleteRow(row.entity.stationId)">' +
@@ -30,8 +43,8 @@
             paginationPageSize: 10,
             data: 'stationsController.data',
             columnDefs: [{
-                             field: 'id',
-                             displayName: 'Station number'
+                             field: 'stationId',
+                             displayName: 'Station ID'
                          },
                          {
                              field: 'name',
@@ -42,7 +55,7 @@
                              displayName: 'Description'
                          },
                          {
-                             field: 'stationGroup'
+                             field: 'groupName'
                          },
                          {
                              field: 'enabled',
@@ -58,14 +71,22 @@
                              enableHiding: false
                          }]
         };
+
         this.gridOptions.onRegisterApi = function (gridApi)
         {
+            ctrl.gridApi = gridApi;
             gridApi.selection.on.rowSelectionChanged($scope, function (row)
             {
                 if (ctrl.selected !== row.entity.stationId) {
                     ctrl.selected = row.entity.stationId;
                     StationsDAO.get(row.entity.stationId).then(function (result)
                     {
+                        angular.forEach(ctrl.listStationGroups, function (element)
+                        {
+                            if (parseInt(result.stationGroup) === element.id) {
+                                result.groupName = element.name;
+                            }
+                        });
                         ctrl.detailsStation = result;
                     });
                 } else {
@@ -132,8 +153,11 @@
             });
             modalInstance.result.then(function ()
             {
+                ctrl.selected = null;
+                ctrl.gridApi.selection.clearSelectedRows();
                 StationsDAO.remove(stationId).then(refresh);
             });
+
         };
         refresh();
     }

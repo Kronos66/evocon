@@ -8,7 +8,12 @@
         this.product = null;
 
         this.select2Options = {
-            width: '100%', allowClear: true, multiple: false, minimumInputLength: 1, maximumInputLength: 10, initSelection: function ()
+            width: '100%',
+            allowClear: true,
+            multiple: false,
+            minimumInputLength: 1,
+            maximumInputLength: 10,
+            initSelection: function ()
             {
 
             }
@@ -30,6 +35,7 @@
 
         this.selectGroup = function (selectedId)
         {
+            console.log(selectedId,ctrl.product.groupId);
             return selectedId === parseInt(ctrl.product.groupId);
         };
 

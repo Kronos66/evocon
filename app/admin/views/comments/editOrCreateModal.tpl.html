@@ -20,8 +20,7 @@
                 </div>
                 <div class="col-sm-8">
                     <select id="group" ui-select2="modal.select2Options" data-ng-model="modal.row.groupId" data-placeholder="{{'chooseCategory'|translate}}">
-                        <option ng-selected="modal.selectCategory(category.id)" ng-repeat="category in modal.category" value="{{category.id}}">{{category.name}}
-                        </option>
+                        <option ng-selected="modal.selectCategory(category.id)" ng-repeat="category in modal.category" value="{{category.id}}">{{category.name}}</option>
                     </select>
                 </div>
             </div>

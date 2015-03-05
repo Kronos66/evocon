@@ -7,7 +7,6 @@
 
         PC.save = function ()
         {
-            console.log('ghf');
             productionDAO.update(PC.settings);
         };
 
