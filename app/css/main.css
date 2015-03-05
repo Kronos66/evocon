@@ -322,6 +322,7 @@ section, .section-row
 {
     position: relative;
     margin-bottom: 28px;
+    overflow: visible !important;
 }
 
 section
@@ -369,13 +370,32 @@ section.no-bordered
 
 .thumbnail
 {
-    min-height: 150px;
+    height: 390px;
 }
 
 .thumbnail .btn
 {
     margin-bottom: 4px;
     min-width: 100%;
+}
+
+.filter-ctnr
+{
+    margin-top: -8px;
+}
+
+.filter
+{
+    width: 110px;
+}
+
+.error-when-transfer
+{
+    position: absolute;
+    top: -66px;
+    width: 100%;
+    text-align: center;
+    color: red;
 }
 
 .station-checkbox-top-margined

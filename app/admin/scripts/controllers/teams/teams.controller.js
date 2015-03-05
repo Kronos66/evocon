@@ -2,8 +2,8 @@
 {
     'use strict';
     angular.module( 'evoReports' ).controller( 'teamsController', [
-        '$scope', '$modal', '$timeout', 'operatorMembershipDAO', 'operatorsDAO', 'teamsDAO',
-        function( $scope, $modal, $timeout, operatorMembershipDAO, operatorsDAO, teamsDAO ) {
+        '$scope', '$modal', '$timeout', '$filter', 'operatorMembershipDAO', 'operatorsDAO', 'teamsDAO', 'paginationSupport',
+        function( $scope, $modal, $timeout, $filter, operatorMembershipDAO, operatorsDAO, teamsDAO, paginationSupport ) {
 
         var ctrl = this,
             recentlyDragged = [],
@@ -15,6 +15,33 @@
                         ctrl.gridOptions.data = data;
                     } );
             };
+
+            ctrl.errorMessage = false;
+
+            ctrl.filter = {query: null, size: 10};
+            ctrl.listFilter = {size: 10};
+            ctrl.currentPage = 1;
+
+
+            var paginationRefresh = paginationSupport(ctrl.filter, function (callback) {
+                $timeout( function() {
+                    ctrl.resultCount = ctrl.othersOperatorsFiltered.length;
+                    callback( ctrl.othersOperatorsFiltered.length );
+                }, 500 );
+            });
+
+            ctrl.search = {
+                firstName: '',
+                lastName: ''
+            };
+
+            $scope.$watch( function() {
+                return ctrl.search;
+            }, function( newValue ) {
+                ctrl.othersOperatorsFiltered = $filter( 'filter' )( ctrl.othersOperators, newValue );
+                paginationRefresh();
+            }, true );
+
 
             ctrl.showDDArea = false;
             ctrl.gridOptions = {
@@ -46,6 +73,7 @@
         ctrl.gridOptions.onRegisterApi = function( gridApi ) {
             gridApi.selection.on.rowSelectionChanged( $scope, function( row ) {
                 if( ctrl.showDDArea && ctrl.recentlySelectedRow === row.entity.name ) {
+                    numb = true;
                     ctrl.showDDArea = false;
                     return;
                 }
@@ -76,10 +104,16 @@
                                 ctrl.othersOperators.push( data[ i ] );
                             }
 
+                            ctrl.othersOperatorsFiltered = angular.extend( [], ctrl.othersOperators );
+
                             ctrl.showDDArea = true;
                             $timeout( function() {
-                                numb = false;
+                                if( ctrl.showDDArea ) {
+                                    numb = false;
+                                }
                             }, 500 );
+
+                            paginationRefresh();
                     });
             } );
         };
@@ -136,32 +170,47 @@
 
         var changeTeamRejection = function() {
             $timeout( function() {
-                var from = ( recentlyDragged.wasMemberArea ) ? ctrl.othersOperators : ctrl.membership,
-                    dest = ( recentlyDragged.wasMemberArea ) ? ctrl.membership : ctrl.othersOperators;
+                ctrl.errorMessage = true;
+
+                var from = ( recentlyDragged.wasMemberArea ) ? ctrl.othersOperatorsFiltered : ctrl.membership,
+                    dest = ( recentlyDragged.wasMemberArea ) ? ctrl.membership : ctrl.othersOperatorsFiltered;
 
                 for( var i=0; i<from.length; i++ ) {
-                    if (from[i] && from[i].id === recentlyDragged.id) {
-                        dest.push(from.splice(i, 1));
+                    if (from[i] && from[i].id === recentlyDragged.obj.id) {
+                        dest.push( from.splice( i, 1 )[ 0 ] );
                     }
                 }
 
+                $timeout( function() {
+                    ctrl.errorMessage = false;
+                }, 6000 );
             }, 500 );
         };
 
-        ctrl.dragged = function( id, area ) {
-            recentlyDragged.id = id;
+        ctrl.dragged = function( obj, area ) {
+            recentlyDragged.obj = obj;
             recentlyDragged.wasMemberArea = area;
         };
 
         ctrl.add = function() {
-            if( numb ) {return;}
-            operatorMembershipDAO.create( selectedRow, recentlyDragged.id )
-                    .catch( changeTeamRejection );
+            if( numb ) { return; }
+            else if( recentlyDragged.wasMemberArea ) { return; }
+            operatorMembershipDAO.create( selectedRow, recentlyDragged.obj.id )
+                .then( function() {
+                        ctrl.othersOperators.splice( ctrl.othersOperators.indexOf( recentlyDragged.obj ), 1 );
+                        paginationRefresh();
+                    } )
+                .catch( changeTeamRejection );
         };
 
         ctrl.remove = function() {
-            if( numb ) {return;}
-            operatorMembershipDAO.remove( selectedRow, recentlyDragged.id )
+            if( numb ) { return; }
+            else if( !recentlyDragged.wasMemberArea ) { return; }
+            operatorMembershipDAO.remove( selectedRow, recentlyDragged.obj.id )
+                .then( function() {
+                        ctrl.othersOperators.push( recentlyDragged.obj );
+                        paginationRefresh();
+                    } )
                 .catch( changeTeamRejection );
         };
 

@@ -19,20 +19,35 @@
 
     <section class="no-bordered" ng-if="teamCtrl.showDDArea">
         <div class="row section-row">
+            <h3 class="error-when-transfer" ng-if="teamCtrl.errorMessage">Something went wrong and operator was not transfered. Try again</h3>
             <div class="col-xs-6">
                 <p class="label-for">{{'membersOf'|translate}} {{ teamCtrl.recentlySelectedRow }}:</p>
-                <div class="thumbnail" data-drop="true" ng-model="teamCtrl.membership" jqyoui-droppable="{multiple:true, onDrop: teamCtrl.add()}" style='height:200px;'>
-                    <div class="btn btn-info" ng-repeat="member in teamCtrl.membership" data-drag="true" data-jqyoui-options="{revert: 'invalid'}"
-                         ng-model="teamCtrl.membership" ng-mousedown="dragged( member.id, true )" jqyoui-draggable="{index: {{$index}},animate:true}" ng-hide="!member.firstName">{{member.firstName}} {{member.lastName}}</div>
+                <div class="operators-container">
+                    <div class="thumbnail" data-drop="true" ng-model="teamCtrl.membership" jqyoui-droppable="{multiple:true, onDrop: teamCtrl.add()}">
+                        <div class="btn btn-info" ng-repeat="member in teamCtrl.membership" data-drag="true" data-jqyoui-options="{revert: 'invalid'}"
+                             ng-model="teamCtrl.membership" ng-mousedown="teamCtrl.dragged( member, true )" jqyoui-draggable="{index: {{$index}},animate:true}" ng-hide="!member.firstName">{{member.firstName}} {{member.lastName}}</div>
+                    </div>
                 </div>
             </div>
             <div class="col-xs-6">
-                <p class="label-for">{{'othersOperators'|translate}}:</p>
-                <div class="thumbnail" data-drop="true" ng-model="teamCtrl.othersOperators" jqyoui-droppable="{multiple:true, onDrop: teamCtrl.remove()}" style='height:200px;'>
-                    <div class="btn btn-default" ng-repeat="operator in teamCtrl.othersOperators" data-drag="true" data-jqyoui-options="{revert: 'invalid'}"
-                         ng-model="teamCtrl.othersOperators" ng-mousedown="dragged( operator.id, false )" jqyoui-draggable="{index: {{$index}},animate:true}" ng-hide="!operator.firstName">{{operator.firstName}} {{operator.lastName}}</div>
+                <p class="label-for">{{'othersOperators'|translate}}:
+                    <span class="filter-ctnr pull-right">search:
+                        <input type="text" class="filter" ng-model="teamCtrl.search.firstName" placeholder="First Name" />
+                        <input type="text" class="filter" ng-model="teamCtrl.search.lastName" placeholder="Last Name" />
+                    </span>
+                </p>
+                <div class="thumbnail" data-drop="true" ng-model="teamCtrl.othersOperatorsFiltered" jqyoui-droppable="{multiple:true, onDrop: teamCtrl.remove()}">
+                    <div class="btn btn-default" ng-repeat="operator in teamCtrl.othersOperatorsFiltered
+                    | startFrom: ( ( teamCtrl.currentPage-1 ) * teamCtrl.listFilter.size )
+                    | limitTo: teamCtrl.listFilter.size" data-drag="true" data-jqyoui-options="{revert: 'invalid'}"
+                         ng-model="teamCtrl.othersOperatorsFiltered" ng-mousedown="teamCtrl.dragged( operator, false )" jqyoui-draggable="{index: {{$index}},animate:true}" ng-hide="!operator.firstName">{{operator.firstName}} {{operator.lastName}}</div>
                 </div>
+                <pagination class="pull-right pagination-sm" ng-model="teamCtrl.currentPage" total-items="teamCtrl.resultCount"
+                            items-per-page="teamCtrl.listFilter.size" max-size="10" boundary-links="true" previous-text="Previous" next-text="Next"
+                            first-text="First" last-text="Last"></pagination>
             </div>
         </div>
+
+        <div class="row section-row"></div>
     </section>
 </div>
