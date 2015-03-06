@@ -407,7 +407,80 @@ section.no-bordered
 
 /*
  - - - - TABLES - - - -
-*/
+
+
+table {
+    table-layout: fixed;
+    width: 100%;
+    *margin-left: -100px;
+}
+tr {
+    overflow: hidden;
+    height: 37px;
+}
+td
+{
+    display: table-cell;
+    min-width: 120px !important;
+}
+td, th {
+    vertical-align: top;
+    border-top: 1px solid #ccc;
+    padding:10px;
+}
+th {
+    position:absolute;
+    *position: relative;
+    left:0;
+    width: 16.66666667%;
+}
+
+.outer {position:relative}
+.inner {
+    overflow-x:scroll;
+    overflow-y:visible;
+    margin-left: 16.66666667%;
+}*/
+table {
+    table-layout: fixed;
+    max-width: 100%;
+    *margin-left: -100px;/*ie7*/
+}
+tr
+{
+    height: 32px;
+}
+td, th {
+    border-top: 1px solid #666;
+    padding: 0 8px;
+    padding-top: 10px;
+    vertical-align: top;
+    height: 32px;
+    width:120px;
+    min-width:120px;
+}
+tr:first-child td,
+tr:first-child th,
+tr:nth-child( 2 ) td,
+tr:nth-child( 2 ) th
+{
+    border-top: none;
+}
+th {
+    position:absolute;
+    *position: relative;
+    left:0;
+    width: 16.66666667%;
+}
+
+.outer {position:relative}
+.inner {
+    overflow-x:scroll;
+    overflow-y:visible;
+    margin-left: 16.66666667%;
+}
+
+
 
 .grid-style
 {
@@ -443,12 +516,14 @@ section.no-bordered
     padding-bottom: 8px;
 }
 
-.ui-grid-header .ui-grid-cell-contents
+.ui-grid-header .ui-grid-cell-contents,
+tr:first-child td
 {
     background: #dedfcf;
 }
 
-.ui-grid-render-container-body .ui-grid-header .ui-grid-header-cell:first-child .ui-grid-cell-contents
+.ui-grid-render-container-body .ui-grid-header .ui-grid-header-cell:first-child .ui-grid-cell-contents,
+tr:first-child th
 {
     background: #bcbdaf;
 }

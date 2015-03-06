@@ -261,6 +261,34 @@ function setupBackendMock($httpBackend)
                              stationId: stationSeq++, name: 'first', description: 'some text', stationGroup: 1, stopTime: true
                          }, {
                              stationId: stationSeq++, name: 'second', description: 'second text', stationGroup: 2, enabled: true
+                         },{
+                             stationId: stationSeq++, name: 'first', description: 'some text', stationGroup: 1, stopTime: true
+                         }, {
+                             stationId: stationSeq++, name: 'second', description: 'second text', stationGroup: 2, enabled: true
+                         },{
+                             stationId: stationSeq++, name: 'first', description: 'some text', stationGroup: 1, stopTime: true
+                         }, {
+                             stationId: stationSeq++, name: 'second', description: 'second text', stationGroup: 2, enabled: true
+                         },{
+                             stationId: stationSeq++, name: 'first', description: 'some text', stationGroup: 1, stopTime: true
+                         }, {
+                             stationId: stationSeq++, name: 'second', description: 'second text', stationGroup: 2, enabled: true
+                         },{
+                             stationId: stationSeq++, name: 'first', description: 'some text', stationGroup: 1, stopTime: true
+                         }, {
+                             stationId: stationSeq++, name: 'second', description: 'second text', stationGroup: 2, enabled: true
+                         },{
+                             stationId: stationSeq++, name: 'first', description: 'some text', stationGroup: 1, stopTime: true
+                         }, {
+                             stationId: stationSeq++, name: 'second', description: 'second text', stationGroup: 2, enabled: true
+                         },{
+                             stationId: stationSeq++, name: 'first', description: 'some text', stationGroup: 1, stopTime: true
+                         }, {
+                             stationId: stationSeq++, name: 'second', description: 'second text', stationGroup: 2, enabled: true
+                         },{
+                             stationId: stationSeq++, name: 'first', description: 'some text', stationGroup: 1, stopTime: true
+                         }, {
+                             stationId: stationSeq++, name: 'second', description: 'second text', stationGroup: 2, enabled: true
                          }];
     $httpBackend.whenGET('/rest/v1/stations').respond(function ()
     {
@@ -527,13 +555,14 @@ function setupBackendMock($httpBackend)
         var match = /\/rest\/v1\/teams\/(\d+)\/operators/.exec(url), realIndex = -1, result = [];
 
         for (var i = 0; i < teams.length; i++) {
-            if (teams[i].id === parseInt(match[1])) {
+            if (teams[i].teamId === parseInt(match[1])) {
                 realIndex = i;
                 break;
             }
         }
 
         if( realIndex < 0 ) return[ 404 ];
+        console.log('ad');
 
         angular.forEach(teams[realIndex].operators, function (elem)
         {

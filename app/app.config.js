@@ -63,6 +63,9 @@
         }).when('/station', {
             templateUrl: 'admin/views/stations/stations.tpl.html',
             controller: 'stationsController as stationsController'
+        }).when('/overview', {
+            templateUrl: 'admin/views/overview/overview.tpl.html',
+            controller: 'overviewController as overviewCtrl'
         }).otherwise({
             redirectTo: '/'
         });
