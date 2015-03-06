@@ -1,18 +1,18 @@
 (function ()
 {
     'use strict';
-    function CalendarDAO($resource)
+    function CalendarExceptionDAO($resource)
     {
-        var api = $resource('/EvoconReportingServer/rest/v1/calendar/:id/:comments', {id: '@id'}, {
+        var api = $resource('/EvoconReportingServer/rest/v1/calendar/:calendarId/exceptions/:id', {calendarId: '@calendarId'}, {
             query: {isArray: true, method: 'GET'},
             update: {method: 'PUT'},
             get: {isArray: false, method: 'GET'}
         });
 
         return {
-            query: function ()
+            query: function (id)
             {
-                return api.query().$promise;
+                return api.query({calendarId: id}).$promise;
             },
             save: function (data)
             {
@@ -20,18 +20,18 @@
             },
             get: function (id)
             {
-                return api.get({id:id}).$promise;
+                return api.get({id: id}).$promise;
             },
             update: function (data)
             {
                 return api.update(data).$promise;
             },
-            remove: function (id)
+            remove: function (calendarId, id)
             {
-                return api.remove({id: id}).$promise;
+                return api.remove({calendarId: calendarId, id: id}).$promise;
             }
         };
     }
 
-    angular.module('evoReports').factory('CalendarDAO', ['$resource', CalendarDAO]);
+    angular.module('evoReports').factory('CalendarExceptionDAO', ['$resource', CalendarExceptionDAO]);
 })();

@@ -35,7 +35,6 @@
 
         this.selectGroup = function (selectedId)
         {
-            console.log(selectedId,ctrl.product.groupId);
             return selectedId === parseInt(ctrl.product.groupId);
         };
 

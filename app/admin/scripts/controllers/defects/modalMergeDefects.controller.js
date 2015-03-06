@@ -1,7 +1,7 @@
 (function ()
 {
     'use strict';
-    function ModalMergeController($scope,DefectsDAO)
+    function ModalMergeController($scope, DefectsDAO)
     {
         var ctrl = this;
         DefectsDAO.query().then(function (result)

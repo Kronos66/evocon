@@ -5,11 +5,13 @@
     {
 
         var ctrl = this,
-            refresh = function () {
-                deviceDAO.query().then(function (data) {
-                    ctrl.gridOptions.data = data;
-                });
-            };
+                refresh = function ()
+                {
+                    deviceDAO.query().then(function (data)
+                    {
+                        ctrl.gridOptions.data = data;
+                    });
+                };
 
         ctrl.gridOptions = {
             enableRowSelection: false,
@@ -20,12 +22,12 @@
                 {
                     field: 'description',
                     displayName: 'Description'
-                },{
+                }, {
                     field: 'id',
                     displayName: 'Id',
-                     maxWidth: 100,
-                     minWidth: 100
-                },{
+                    maxWidth: 100,
+                    minWidth: 100
+                }, {
                     field: 'inputs',
                     displayName: 'Inputs'
                 },

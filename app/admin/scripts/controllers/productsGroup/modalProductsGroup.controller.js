@@ -6,7 +6,7 @@
         this.row = row;
 
         this.select2Options = {
-            width:'100%',
+            width: '100%',
             allowClear: true,
             multiple: false,
             minimumInputLength: 1,

@@ -1,102 +1,108 @@
-( function()
+(function ()
 {
-  'use strict';
-  angular.module( 'evoReports' ).controller( 'operatorsController', [
-    '$modal', 'operatorsDAO',
-    function( $modal, operatorsDAO ) {
+    'use strict';
+    angular.module('evoReports').controller('operatorsController', [
+        '$modal', 'operatorsDAO',
+        function ($modal, operatorsDAO)
+        {
 
-      var ctrl = this,
-        refresh = function () {
-          operatorsDAO.query()
-            .then( function( data ) {
-              ctrl.gridOptions.data = data;
-            } );
-        };
+            var ctrl = this,
+                    refresh = function ()
+                    {
+                        operatorsDAO.query()
+                                .then(function (data)
+                                {
+                                    ctrl.gridOptions.data = data;
+                                });
+                    };
 
-      ctrl.gridOptions = {
-        enableRowSelection: false,
-        enableRowHeaderSelection: false,
-        paginationPageSizes: [ 10, 20, 30 ],
-        paginationPageSize: 10,
-        columnDefs: [
-          {
-            field: 'firstname',
-            displayName: 'First Name'
-          },
-          {
-            field: 'lastname',
-            displayName: 'Last Name'
-          },
-          {
-            field: 'barcode',
-            displayName: 'Barcode'
-          },
-          {
-            headerCellClass: 'actions-header',
-            cellClass: 'actions-column',
-            maxWidth: 120,
-            field: ' ',
-            cellTemplate: '<span class="buttonActions">' +
-            '<a class="button link" ng-click="$event.stopPropagation();grid.appScope.opCtrl.editOp( row.entity )">' +
-            '{{\'edit\'|translate}}</a>' +
-            '<a class="button link" ng-click="$event.stopPropagation();grid.appScope.opCtrl.deleteOp( row.entity.id )">' +
-            '{{\'delete\'|translate}}</a>' +
-            '</span>', enableSorting: false, enableHiding: false
-          }
-        ]
-      };
+            ctrl.gridOptions = {
+                enableRowSelection: false,
+                enableRowHeaderSelection: false,
+                paginationPageSizes: [10, 20, 30],
+                paginationPageSize: 10,
+                columnDefs: [
+                    {
+                        field: 'firstname',
+                        displayName: 'First Name'
+                    },
+                    {
+                        field: 'lastname',
+                        displayName: 'Last Name'
+                    },
+                    {
+                        field: 'barcode',
+                        displayName: 'Barcode'
+                    },
+                    {
+                        headerCellClass: 'actions-header',
+                        cellClass: 'actions-column',
+                        maxWidth: 120,
+                        field: ' ',
+                        cellTemplate: '<span class="buttonActions">' +
+                        '<a class="button link" ng-click="$event.stopPropagation();grid.appScope.opCtrl.editOp( row.entity )">' +
+                        '{{\'edit\'|translate}}</a>' +
+                        '<a class="button link" ng-click="$event.stopPropagation();grid.appScope.opCtrl.deleteOp( row.entity.id )">' +
+                        '{{\'delete\'|translate}}</a>' +
+                        '</span>', enableSorting: false, enableHiding: false
+                    }
+                ]
+            };
 
-      ctrl.newOp = function() {
-        var row = {};
-        var modalInstance = $modal.open({
-          templateUrl: 'admin/views/operators/addOrEditOperatorModal.tpl.html',
-          backdrop: 'static',
-          keyboard: false,
-          size: 'md',
-          controller: 'addGroup',
-          controllerAs: 'modal',
-          resolve: {
-            row: function ()
+            ctrl.newOp = function ()
             {
-              return row;
-            }
-          }
-        });
-        modalInstance.result.then(operatorsDAO.create).then(refresh);
-      };
+                var row = {};
+                var modalInstance = $modal.open({
+                    templateUrl: 'admin/views/operators/addOrEditOperatorModal.tpl.html',
+                    backdrop: 'static',
+                    keyboard: false,
+                    size: 'md',
+                    controller: 'addGroup',
+                    controllerAs: 'modal',
+                    resolve: {
+                        row: function ()
+                        {
+                            return row;
+                        }
+                    }
+                });
+                modalInstance.result.then(operatorsDAO.create).then(refresh);
+            };
 
-      ctrl.editOp = function( entity ) {
-        var row = angular.extend( {}, entity );
-        var modalInstance = $modal.open({
-          templateUrl: 'admin/views/operators/addOrEditOperatorModal.tpl.html',
-          backdrop: 'static',
-          keyboard: false,
-          size: 'md',
-          controller: 'addGroup',
-          controllerAs: 'modal',
-          resolve: {
-            row: function ()
+            ctrl.editOp = function (entity)
             {
-              return row;
-            }
-          }
-        });
-        modalInstance.result.then(operatorsDAO.update).then(refresh);
-      };
+                var row = angular.extend({}, entity);
+                var modalInstance = $modal.open({
+                    templateUrl: 'admin/views/operators/addOrEditOperatorModal.tpl.html',
+                    backdrop: 'static',
+                    keyboard: false,
+                    size: 'md',
+                    controller: 'addGroup',
+                    controllerAs: 'modal',
+                    resolve: {
+                        row: function ()
+                        {
+                            return row;
+                        }
+                    }
+                });
+                modalInstance.result.then(operatorsDAO.update).then(refresh);
+            };
 
-      ctrl.deleteOp = function( entity ) {
-          var modalInstance = $modal.open({
-              templateUrl: 'admin/views/confirmModal.tpl.html',
-              backdrop: 'static',
-              keyboard: false
-          });
-          modalInstance.result.then(function ()
-          {
-              operatorsDAO.delete(entity).then(refresh);
-          });
-      };
+            ctrl.deleteOp = function (entity)
+            {
+                var modalInstance = $modal.open({
+                    templateUrl: 'admin/views/confirmModal.tpl.html',
+                    backdrop: 'static',
+                    keyboard: false
+                });
+                modalInstance.result.then(function ()
+                {
+                    operatorsDAO.delete(entity).then(refresh);
+                });
+            };
 
-      refresh();
+            refresh();
 
-    } ] );
+        }]);
 })();

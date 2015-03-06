@@ -119,7 +119,7 @@
             modalInstance.result.then(function (result)
             {
                 result.createdDate = result.createdDate.getTime();
-                return  DefectsDAO.update(result);
+                return DefectsDAO.update(result);
             }).then(refresh);
         };
         this.mergeDefects = function ()

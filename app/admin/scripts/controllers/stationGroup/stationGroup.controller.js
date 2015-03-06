@@ -1,7 +1,7 @@
 (function ()
 {
     'use strict';
-    function StationGroupController($modal,$scope, StationGroupDAO)
+    function StationGroupController($modal, $scope, StationGroupDAO)
     {
         var ctrl = this;
         var selectedGroup;
@@ -28,9 +28,9 @@
                          }, {
                              field: 'description', displayName: 'Description'
                          }, {
-                            headerCellClass: 'actions-header',
-                            cellClass: 'actions-column',
-                            maxWidth: 120, field: ' ', displayName: '', cellTemplate: actionsTemplate, enableSorting: false, enableHiding: false
+                             headerCellClass: 'actions-header',
+                             cellClass: 'actions-column',
+                             maxWidth: 120, field: ' ', displayName: '', cellTemplate: actionsTemplate, enableSorting: false, enableHiding: false
                          }]
         };
         this.gridOptions.onRegisterApi = function (gridApi)
@@ -55,7 +55,7 @@
             paginationPageSizes: [10, 20, 30],
             paginationPageSize: 10
         };
-        this.editRow= function (row)
+        this.editRow = function (row)
         {
             var modalInstance = $modal.open({
                 templateUrl: 'admin/views/stationGroup/editOrCreateModal.tpl.html',
@@ -64,13 +64,13 @@
                 resolve: {
                     row: function ()
                     {
-                        return angular.extend({},row);
+                        return angular.extend({}, row);
                     }
                 }
             });
             modalInstance.result.then(StationGroupDAO.update).then(refresh);
         };
-        this.deleteRow= function (id)
+        this.deleteRow = function (id)
         {
             var modalInstance = $modal.open({
                 templateUrl: 'admin/views/confirmModal.tpl.html',
@@ -101,5 +101,5 @@
         refresh();
     }
 
-    angular.module('evoReports').controller('stationGroupController', ['$modal','$scope', 'StationGroupDAO', StationGroupController]);
+    angular.module('evoReports').controller('stationGroupController', ['$modal', '$scope', 'StationGroupDAO', StationGroupController]);
 })();

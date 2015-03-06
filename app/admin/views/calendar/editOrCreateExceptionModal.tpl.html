@@ -1,70 +1,31 @@
 <div>
     <div class="modal-header">
         <div>
-            <h2 class="title">{{'exceptionDetails'|translate}}</h2>
+            <h2 class="title">{{'calendarException'|translate}}</h2>
         </div>
     </div>
     <form class="form-horizontal" role="form">
         <div class="modal-body">
-            <div class="form-group">
-                <div class="col-sm-4">
-                    <label for="calendar">{{'exceptionCalendar'|translate}}:</label>
-                </div>
-                <div class="col-sm-8">
-                    <select id="calendar" ui-select2="modal.select2OptionsCalendar" data-ng-model="modal.row.calendarId">
-                        <option ng-repeat="calendar in modal.listCalendars" ng-selected="modal.selectedCalendar(calendar.id)" value="{{calendar.id}}">
-                            {{calendar.name}}
-                        </option>
-                    </select>
-                </div>
-            </div>
-            <div class="form-group">
-                <div class="col-sm-4">
-                    <label for="station">{{'station'|translate}}:</label>
-                </div>
-                <div class="col-sm-8">
-                    <select id="station" ui-select2="modal.select2OptionsStations" data-ng-model="modal.row.stationId">
-                        <option ng-repeat="station in modal.listStations" ng-selected="modal.selectedStation(station.stationId)" value="{{station.id}}">
-                            {{station.name}}
-                        </option>
-                    </select>
-                </div>
-            </div>
-            <div class="form-group">
-                <div class="col-sm-4 time">
-                    <label for="startTime">{{'startTime'|translate}}:</label>
-                </div>
-                <div class="col-sm-8 colon">
-                    <div class="input-group date-input" ng-click="modal.open($event)">
+            <div class="row section-row">
+                <div class="col-xs-12">
+                    <h2 class="title">{{exceptions.calendar.name}}</h2>
 
-                        <input id="startTime" type="text" ng-disabled="true" value="{{modal.row.startTime |date : 'd-MM-yyyy'}}">
-                        <input type="text" class="not-visible form-control" datepicker-popup="dd-MM-yyyy" ng-model="modal.row.startTime"
-                               is-open="modal.opened" datepicker-options="modal.dateOptions" close-text="{{'cancel'|translate}}"/>
-                    <span class="input-group-btn">
-                        <button type="button" class="btn btn-default" ng-click="modal.open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
-                    </span>
+                    <div class="buttons">
+                        <button class="button" ng-click="exceptions.newException()">{{'newException'|translate}}</button>
                     </div>
                 </div>
+                <div class="text-center text-danger" ng-if="exceptions.errorNew"><h3>{{'newRecordError'|translate}}</h3></div>
             </div>
-            <div class="form-group time">
-                <div class="col-sm-4">
-                    <label for="endTime">{{'endTime'|translate}}:</label>
-                </div>
-                <div class="input-group date-input" ng-click="modal.open2($event)">
-
-                    <input id="endTime" type="text" ng-disabled="true" value="{{modal.row.endTime |date : 'd-MM-yyyy'}}">
-                    <input type="text" class="not-visible form-control" datepicker-popup="dd-MM-yyyy" ng-model="modal.row.endTime" is-open="modal.opened2"
-                           datepicker-options="modal.dateOptions" close-text="{{'cancel'|translate}}"/>
-                    <span class="input-group-btn">
-                        <button type="button" class="btn btn-default" ng-click="modal.open2($event)"><i class="glyphicon glyphicon-calendar"></i></button>
-                    </span>
-                </div>
+            <div class="form-group">
+                <div class="gridStyle" ui-grid="exceptions.gridOptions"></div>
             </div>
         </div>
         <div class="modal-footer">
             <div class="form-group">
                 <div class="col-xs-12 text-center">
-                    <button class="btn btn-success" ng-click="$close(modal.row)"><span class="glyphicon glyphicon-ok"></span>{{'save'|translate}}</button>
+                    <div class="text-center text-danger" ng-if="exceptions.errorSave"><h4>{{'saveError'|translate}}</h4></div>
+                    <button class="btn btn-success" ng-click="exceptions.validations($close)"><span class="glyphicon glyphicon-ok"></span>{{'save'|translate}}
+                    </button>
                     <button class="btn btn-danger" ng-click="$dismiss()"><span class="glyphicon glyphicon-remove"></span> {{'cancel'|translate}}
                     </button>
                 </div>
