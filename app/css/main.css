@@ -407,50 +407,21 @@ section.no-bordered
 
 /*
  - - - - TABLES - - - -
+*/
 
 
-table {
-    table-layout: fixed;
-    width: 100%;
-    *margin-left: -100px;
-}
-tr {
-    overflow: hidden;
-    height: 37px;
-}
-td
-{
-    display: table-cell;
-    min-width: 120px !important;
-}
-td, th {
-    vertical-align: top;
-    border-top: 1px solid #ccc;
-    padding:10px;
-}
-th {
-    position:absolute;
-    *position: relative;
-    left:0;
-    width: 16.66666667%;
-}
 
-.outer {position:relative}
-.inner {
-    overflow-x:scroll;
-    overflow-y:visible;
-    margin-left: 16.66666667%;
-}*/
-table {
+.overview table {
     table-layout: fixed;
     max-width: 100%;
     *margin-left: -100px;/*ie7*/
 }
-tr
+.overview tr
 {
     height: 32px;
 }
-td, th {
+.overview td,
+.overview th {
     border-top: 1px solid #666;
     padding: 0 8px;
     padding-top: 10px;
@@ -459,22 +430,30 @@ td, th {
     width:120px;
     min-width:120px;
 }
-tr:first-child td,
-tr:first-child th,
-tr:nth-child( 2 ) td,
-tr:nth-child( 2 ) th
+.overview tr:first-child td,
+.overview tr:first-child th,
+.overview tr:nth-child( 2 ) td,
+.overview tr:nth-child( 2 ) th
 {
     border-top: none;
 }
-th {
+.overview th {
     position:absolute;
     *position: relative;
     left:0;
     width: 16.66666667%;
 }
+.overview tr:first-child td
+{
+    background: #dedfcf;
+}
+.overview tr:first-child th
+{
+    background: #bcbdaf;
+}
 
-.outer {position:relative}
-.inner {
+.overview .outer {position:relative}
+.overview .inner {
     overflow-x:scroll;
     overflow-y:visible;
     margin-left: 16.66666667%;
@@ -516,14 +495,12 @@ th {
     padding-bottom: 8px;
 }
 
-.ui-grid-header .ui-grid-cell-contents,
-tr:first-child td
+.ui-grid-header .ui-grid-cell-contents
 {
     background: #dedfcf;
 }
 
-.ui-grid-render-container-body .ui-grid-header .ui-grid-header-cell:first-child .ui-grid-cell-contents,
-tr:first-child th
+.ui-grid-render-container-body .ui-grid-header .ui-grid-header-cell:first-child .ui-grid-cell-contents
 {
     background: #bcbdaf;
 }
@@ -700,8 +677,7 @@ input, select
 input[type=number]::-webkit-inner-spin-button,
 input[type=number]::-webkit-outer-spin-button
 {
-    display: none;
-    height:auto
+    margin-top: -8px;
 }
 
 input[ type=checkbox ], input[ type=radio ]

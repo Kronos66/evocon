@@ -11,7 +11,8 @@
                                                'ui.grid.selection',
                                                'ui.grid.pagination',
                                                'angularMoment',
-                                               'ngDragDrop','ngQuickDate']);
+                                               'ngQuickDate',
+                                               'ui.sortable']);
     module.config(function ($provide, $translateProvider, $routeProvider)
     {
 

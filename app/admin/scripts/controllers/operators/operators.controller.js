@@ -99,7 +99,7 @@
                 modalInstance.result.then(function ()
                 {
                     operatorsDAO.delete(entity).then(refresh);
-                });
+                } );
             };
 
             refresh();

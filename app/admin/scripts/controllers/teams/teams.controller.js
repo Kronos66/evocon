@@ -19,26 +19,12 @@
                                 });
                     };
 
-            ctrl.errorMessage = false;
-
-            ctrl.filter = {query: null, size: 10};
-            ctrl.listFilter = {size: 10};
-            ctrl.currentPage = 1;
-
 
             var paginationRefresh = paginationSupport(ctrl.filter, function (callback)
             {
-                $timeout(function ()
-                {
-                    ctrl.resultCount = ctrl.othersOperatorsFiltered.length;
-                    callback(ctrl.othersOperatorsFiltered.length);
-                }, 500);
+                ctrl.resultCount = ctrl.othersOperatorsFiltered.length;
+                callback(ctrl.othersOperatorsFiltered.length);
             });
-
-            ctrl.search = {
-                firstName: '',
-                lastName: ''
-            };
 
             $scope.$watch(function ()
             {
@@ -49,6 +35,23 @@
                 paginationRefresh();
             }, true);
 
+
+
+            ctrl.errorMessage = false;
+
+            ctrl.filter = {query: null, size: 10};
+            ctrl.listFilter = {size: 10};
+            ctrl.currentPage = 1;
+
+            ctrl.search = {
+                firstname: '',
+                lastname: ''
+            };
+
+            ctrl.sortableOptions = {
+                placeholder: 'draggable',
+                connectWith: '.thumbnail'
+            };
 
             ctrl.showDDArea = false;
             ctrl.gridOptions = {
@@ -82,7 +85,6 @@
                 gridApi.selection.on.rowSelectionChanged($scope, function (row)
                 {
                     if (ctrl.showDDArea && ctrl.recentlySelectedRow === row.entity.name) {
-                        numb = true;
                         ctrl.showDDArea = false;
                         return;
                     }
@@ -120,12 +122,6 @@
                                 ctrl.othersOperatorsFiltered = angular.extend([], ctrl.othersOperators);
 
                                 ctrl.showDDArea = true;
-                                $timeout(function ()
-                                {
-                                    if (ctrl.showDDArea) {
-                                        numb = false;
-                                    }
-                                }, 500);
 
                                 paginationRefresh();
                             });
@@ -187,24 +183,21 @@
 
             var changeTeamRejection = function ()
             {
+                ctrl.errorMessage = true;
+
+                var from = ( recentlyDragged.wasMemberArea ) ? ctrl.othersOperatorsFiltered : ctrl.membership,
+                        dest = ( recentlyDragged.wasMemberArea ) ? ctrl.membership : ctrl.othersOperatorsFiltered;
+
+                for (var i = 0; i < from.length; i++) {
+                    if (from[i] && from[i].id === recentlyDragged.obj.id) {
+                        dest.push(from.splice(i, 1)[0]);
+                    }
+                }
+
                 $timeout(function ()
                 {
-                    ctrl.errorMessage = true;
-
-                    var from = ( recentlyDragged.wasMemberArea ) ? ctrl.othersOperatorsFiltered : ctrl.membership,
-                            dest = ( recentlyDragged.wasMemberArea ) ? ctrl.membership : ctrl.othersOperatorsFiltered;
-
-                    for (var i = 0; i < from.length; i++) {
-                        if (from[i] && from[i].id === recentlyDragged.obj.id) {
-                            dest.push(from.splice(i, 1)[0]);
-                        }
-                    }
-
-                    $timeout(function ()
-                    {
-                        ctrl.errorMessage = false;
-                    }, 6000);
-                }, 500);
+                    ctrl.errorMessage = false;
+                }, 6000);
             };
 
             ctrl.dragged = function (obj, area)
