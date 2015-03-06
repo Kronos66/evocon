@@ -7,41 +7,177 @@
             </div>
         </div>
         <div class="row section-row">
-            <div class="col-xs-2">
+            <div class="col-xs-12">
                 <div class="row">
-                    <table>
-                        <tr><th>Settings</th></tr>
-                        <tr><td>{{'name'|translate}}</td></tr>
-                        <tr><td>{{'description'|translate}}</td></tr>
-                        <tr><td>{{'speedSlowLimit'|translate}}</td></tr>
-                        <tr><td>{{'lineNumber'|translate}}</td></tr>
-                        <tr><td>{{'groupId'|translate}}</td></tr>
-                        <tr><td>{{'markerQty'|translate}}</td></tr>
-                        <tr><td>{{'colorMode'|translate}}</td></tr>
-                        <tr><td>{{'speedNormalLimit'|translate}}</td></tr>
-                        <tr><td>{{'speedTooSlowLimit'|translate}}</td></tr>
-                        <tr><td>{{'unit'|translate}}</td></tr>
-                        <tr><td>{{'autoStanby'|translate}}</td></tr>
-                        <tr><td>{{'offFilter'|translate}}</td></tr>
-                        <tr><td>{{'signalInversion'|translate}}</td></tr>
-                        <tr><td>{{'stopTime'|translate}}</td></tr>
-                        <tr><td>{{'enabled'|translate}}</td></tr>
-                        <tr><td>{{'standbyEnabled'|translate}}</td></tr>
-                        <tr><td>{{'onFilter'|translate}}</td></tr>
-                        <tr><td>{{'effMarkersEnabled'|translate}}</td></tr>
-                    </table>
-                </div>
-            </div>
-            <div class="col-xs-10">
-                <div class="row">
-                    <table>
-                        <tr>
-                            <th></th>
-                        </tr>
-                    </table>
+                    <!--<div class="outer">-->
+                        <!--<div class="inner">-->
+                            <!--<table class="table">-->
+                                <!--<tr>-->
+                                    <!--<th>Settings</th>-->
+                                    <!--<td ng-repeat="station in overviewCtrl.stations track by $index">Station {{ station.stationId }}</td>-->
+                                <!--</tr>-->
+                                <!--<tr>-->
+                                    <!--<th>{{'name'|translate}}</th>-->
+                                    <!--<td ng-repeat="name in overviewCtrl.data.description track by $index">{{ name }}</td>-->
+                                <!--</tr>-->
+                                <!--<tr>-->
+                                    <!--<th>{{'description'|translate}}</th>-->
+                                    <!--<td ng-repeat="description in overviewCtrl.data.description track by $index">{{ description }}</td>-->
+                                <!--</tr>-->
+                                <!--<tr>-->
+                                    <!--<th>{{'speedSlowLimit'|translate}}</th>-->
+                                    <!--<td ng-repeat="speedSlowLimit in overviewCtrl.data.speedSlowLimit track by $index">{{ speedSlowLimit }}</td>-->
+                                <!--</tr>-->
+                                <!--<tr>-->
+                                    <!--<th>{{'lineNumber'|translate}}</th>-->
+                                    <!--<td ng-repeat="lineNumber in overviewCtrl.data.lineNumber track by $index">{{ lineNumber }}</td>-->
+                                <!--</tr>-->
+                                <!--<tr>-->
+                                    <!--<th>{{'groupId'|translate}}</th>-->
+                                    <!--<td ng-repeat="groupId in overviewCtrl.data.groupId track by $index">{{ groupId }}</td>-->
+                                <!--</tr>-->
+                                <!--<tr>-->
+                                    <!--<th>{{'markerQty'|translate}}</th>-->
+                                    <!--<td ng-repeat="markerQty in overviewCtrl.data.markerQty track by $index">{{ markerQty }}</td>-->
+                                <!--</tr>-->
+                                <!--<tr>-->
+                                    <!--<th>{{'colorMode'|translate}}</th>-->
+                                    <!--<td ng-repeat="colorMode in overviewCtrl.data.colorMode track by $index">{{ colorMode }}</td>-->
+                                <!--</tr>-->
+                                <!--<tr>-->
+                                    <!--<th>{{'speedNormalLimit'|translate}}</th>-->
+                                    <!--<td ng-repeat="speedNormalLimit in overviewCtrl.data.speedNormalLimit track by $index">{{ speedNormalLimit }}</td>-->
+                                <!--</tr>-->
+                                <!--<tr>-->
+                                    <!--<th>{{'speedTooSlowLimit'|translate}}</th>-->
+                                    <!--<td ng-repeat="speedTooSlowLimit in overviewCtrl.data.speedTooSlowLimit track by $index">{{ speedTooSlowLimit }}</td>-->
+                                <!--</tr>-->
+                                <!--<tr>-->
+                                    <!--<th>{{'unit'|translate}}</th>-->
+                                    <!--<td ng-repeat="unit in overviewCtrl.data.unit track by $index">{{ unit }}</td>-->
+                                <!--</tr>-->
+                                <!--<tr>-->
+                                    <!--<th>{{'autoStanby'|translate}}</th>-->
+                                    <!--<td ng-repeat="autoStanby in overviewCtrl.data.autoStanby track by $index">{{ autoStanby }}</td>-->
+                                <!--</tr>-->
+                                <!--<tr>-->
+                                    <!--<th>{{'offFilter'|translate}}</th>-->
+                                    <!--<td ng-repeat="offFilter in overviewCtrl.data.offFilter track by $index">{{ offFilter }}</td>-->
+                                <!--</tr>-->
+                                <!--<tr>-->
+                                    <!--<th>{{'signalInversion'|translate}}</th>-->
+                                    <!--<td ng-repeat="signalInversion in overviewCtrl.data.signalInversion track by $index">{{ signalInversion }}</td>-->
+                                <!--</tr>-->
+                                <!--<tr>-->
+                                    <!--<th>{{'stopTime'|translate}}</th>-->
+                                    <!--<td ng-repeat="stopTime in overviewCtrl.data.stopTime track by $index">{{ stopTime }}</td>-->
+                                <!--</tr>-->
+                                <!--<tr>-->
+                                    <!--<th>{{'enabled'|translate}}</th>-->
+                                    <!--<td ng-repeat="enabled in overviewCtrl.data.enabled track by $index">{{ enabled }}</td>-->
+                                <!--</tr>-->
+                                <!--<tr>-->
+                                    <!--<th>{{'standbyEnabled'|translate}}</th>-->
+                                    <!--<td ng-repeat="standbyEnabled in overviewCtrl.data.standbyEnabled track by $index">{{ standbyEnabled }}</td>-->
+                                <!--</tr>-->
+                                <!--<tr>-->
+                                    <!--<th>{{'onFilter'|translate}}</th>-->
+                                    <!--<td ng-repeat="onFilter in overviewCtrl.data.onFilter track by $index">{{ onFilter }}</td>-->
+                                <!--</tr>-->
+                                <!--<tr>-->
+                                    <!--<th>{{'effMarkersEnabled'|translate}}</th>-->
+                                    <!--<td ng-repeat="effMarkersEnabled in overviewCtrl.data.effMarkersEnabled track by $index">{{ effMarkersEnabled }}</td>-->
+                                <!--</tr>-->
+                            <!--</table>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                    <div class="outer">
+                        <div class="inner">
+                            <table>
+                                <tr>
+                                    <th>Settings</th>
+                                    <td ng-repeat="station in overviewCtrl.stations track by $index">Station {{ station.stationId }}</td>
+                                </tr>
+                                <tr>
+                                    <th>{{'name'|translate}}</th>
+                                    <td ng-repeat="name in overviewCtrl.data.description track by $index">{{ name }}</td>
+                                </tr>
+                                <tr>
+                                    <th>{{'description'|translate}}</th>
+                                    <td ng-repeat="description in overviewCtrl.data.description track by $index">{{ description }}</td>
+                                </tr>
+                                <tr>
+                                    <th>{{'speedSlowLimit'|translate}}</th>
+                                    <td ng-repeat="speedSlowLimit in overviewCtrl.data.speedSlowLimit track by $index">{{ speedSlowLimit }}</td>
+                                </tr>
+                                <tr>
+                                    <th>{{'lineNumber'|translate}}</th>
+                                    <td ng-repeat="lineNumber in overviewCtrl.data.lineNumber track by $index">{{ lineNumber }}</td>
+                                </tr>
+                                <tr>
+                                    <th>{{'groupId'|translate}}</th>
+                                    <td ng-repeat="groupId in overviewCtrl.data.groupId track by $index">{{ groupId }}</td>
+                                </tr>
+                                <tr>
+                                    <th>{{'markerQty'|translate}}</th>
+                                    <td ng-repeat="markerQty in overviewCtrl.data.markerQty track by $index">{{ markerQty }}</td>
+                                </tr>
+                                <tr>
+                                    <th>{{'colorMode'|translate}}</th>
+                                    <td ng-repeat="colorMode in overviewCtrl.data.colorMode track by $index">{{ colorMode }}</td>
+                                </tr>
+                                <tr>
+                                    <th>{{'speedNormalLimit'|translate}}</th>
+                                    <td ng-repeat="speedNormalLimit in overviewCtrl.data.speedNormalLimit track by $index">{{ speedNormalLimit }}</td>
+                                </tr>
+                                <tr>
+                                    <th>{{'speedTooSlowLimit'|translate}}</th>
+                                    <td ng-repeat="speedTooSlowLimit in overviewCtrl.data.speedTooSlowLimit track by $index">{{ speedTooSlowLimit }}</td>
+                                </tr>
+                                <tr>
+                                    <th>{{'unit'|translate}}</th>
+                                    <td ng-repeat="unit in overviewCtrl.data.unit track by $index">{{ unit }}</td>
+                                </tr>
+                                <tr>
+                                    <th>{{'autoStanby'|translate}}</th>
+                                    <td ng-repeat="autoStanby in overviewCtrl.data.autoStanby track by $index">{{ autoStanby }}</td>
+                                </tr>
+                                <tr>
+                                    <th>{{'offFilter'|translate}}</th>
+                                    <td ng-repeat="offFilter in overviewCtrl.data.offFilter track by $index">{{ offFilter }}</td>
+                                </tr>
+                                <tr>
+                                    <th>{{'signalInversion'|translate}}</th>
+                                    <td ng-repeat="signalInversion in overviewCtrl.data.signalInversion track by $index">{{ signalInversion }}</td>
+                                </tr>
+                                <tr>
+                                    <th>{{'stopTime'|translate}}</th>
+                                    <td ng-repeat="stopTime in overviewCtrl.data.stopTime track by $index">{{ stopTime }}</td>
+                                </tr>
+                                <tr>
+                                    <th>{{'enabled'|translate}}</th>
+                                    <td ng-repeat="enabled in overviewCtrl.data.enabled track by $index">{{ enabled }}</td>
+                                </tr>
+                                <tr>
+                                    <th>{{'standbyEnabled'|translate}}</th>
+                                    <td ng-repeat="standbyEnabled in overviewCtrl.data.standbyEnabled track by $index">{{ standbyEnabled }}</td>
+                                </tr>
+                                <tr>
+                                    <th>{{'onFilter'|translate}}</th>
+                                    <td ng-repeat="onFilter in overviewCtrl.data.onFilter track by $index">{{ onFilter }}</td>
+                                </tr>
+                                <tr>
+                                    <th>{{'effMarkersEnabled'|translate}}</th>
+                                    <td ng-repeat="effMarkersEnabled in overviewCtrl.data.effMarkersEnabled track by $index">{{ effMarkersEnabled }}</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
+
+
 
         <div class="row section-row"></div>
     </section>
