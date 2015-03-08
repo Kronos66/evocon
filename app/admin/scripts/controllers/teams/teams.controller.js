@@ -8,33 +8,7 @@
 
             var ctrl = this,
                     recentlyDragged = [],
-                    numb = true,
-                    selectedRow,
-                    refresh = function ()
-                    {
-                        teamsDAO.query()
-                                .then(function (data)
-                                {
-                                    ctrl.gridOptions.data = data;
-                                });
-                    };
-
-
-            var paginationRefresh = paginationSupport(ctrl.filter, function (callback)
-            {
-                ctrl.resultCount = ctrl.othersOperatorsFiltered.length;
-                callback(ctrl.othersOperatorsFiltered.length);
-            });
-
-            $scope.$watch(function ()
-            {
-                return ctrl.search;
-            }, function (newValue)
-            {
-                ctrl.othersOperatorsFiltered = $filter('filter')(ctrl.othersOperators, newValue);
-                paginationRefresh();
-            }, true);
-
+                    selectedRow;
 
 
             ctrl.errorMessage = false;
@@ -48,11 +22,19 @@
                 lastname: ''
             };
 
-            ctrl.sortableOptions = {
-                placeholder: 'draggable',
-                connectWith: '.thumbnail'
+
+
+
+            var refresh = function ()
+            {
+                teamsDAO.query()
+                    .then(function (data)
+                    {
+                        ctrl.gridOptions.data = data;
+                    });
             };
 
+            ctrl.othersOperatorsFiltered = [];
             ctrl.showDDArea = false;
             ctrl.gridOptions = {
                 enableRowSelection: true,
@@ -120,6 +102,16 @@
                                 }
 
                                 ctrl.othersOperatorsFiltered = angular.extend([], ctrl.othersOperators);
+
+
+                                $scope.$watch(function ()
+                                {
+                                    return ctrl.search;
+                                }, function (newValue)
+                                {
+                                    ctrl.othersOperatorsFiltered = $filter('filter')(ctrl.othersOperators, newValue);
+                                    paginationRefresh();
+                                }, true);
 
                                 ctrl.showDDArea = true;
 
@@ -200,20 +192,8 @@
                 }, 6000);
             };
 
-            ctrl.dragged = function (obj, area)
+            var add = function ()
             {
-                recentlyDragged.obj = obj;
-                recentlyDragged.wasMemberArea = area;
-            };
-
-            ctrl.add = function ()
-            {
-                if (numb) {
-                    return;
-                }
-                else if (recentlyDragged.wasMemberArea) {
-                    return;
-                }
                 operatorMembershipDAO.create(selectedRow, recentlyDragged.obj.id)
                         .then(function ()
                         {
@@ -223,14 +203,8 @@
                         .catch(changeTeamRejection);
             };
 
-            ctrl.remove = function ()
+            var remove = function ()
             {
-                if (numb) {
-                    return;
-                }
-                else if (!recentlyDragged.wasMemberArea) {
-                    return;
-                }
                 operatorMembershipDAO.remove(selectedRow, recentlyDragged.obj.id)
                         .then(function ()
                         {
@@ -239,6 +213,34 @@
                         })
                         .catch(changeTeamRejection);
             };
+
+            var receive = function (event, ui)
+            {
+                recentlyDragged.obj = ui.item.sortable.model;
+                recentlyDragged.wasMemberArea = ui.item.sortable.source.attr( 'id' ) === 'members';
+
+                if( recentlyDragged.wasMemberArea === true ) {
+                    remove();
+                }
+                else if( recentlyDragged.wasMemberArea === false ) {
+                    add();
+                }
+            };
+
+
+
+            ctrl.sortableOptions = {
+                connectWith: '.thumbnail',
+                placeholder: 'draggable',
+                receive: receive
+            };
+
+
+            var paginationRefresh = paginationSupport(ctrl.filter, function (callback)
+            {
+                ctrl.resultCount = ctrl.othersOperatorsFiltered.length;
+                callback(ctrl.othersOperatorsFiltered.length);
+            });
 
             refresh();
 
