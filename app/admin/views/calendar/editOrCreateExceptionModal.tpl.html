@@ -1,0 +1,35 @@
+<div>
+    <div class="modal-header">
+        <div>
+            <h2 class="title">{{'calendarException'|translate}}</h2>
+        </div>
+    </div>
+    <form class="form-horizontal" role="form">
+        <div class="modal-body">
+            <div class="row section-row">
+                <div class="col-xs-12">
+                    <h2 class="title">{{exceptions.calendar.name}}</h2>
+
+                    <div class="buttons">
+                        <button class="button" ng-click="exceptions.newException()">{{'newException'|translate}}</button>
+                    </div>
+                </div>
+                <div class="text-center text-danger" ng-if="exceptions.errorNew"><h3>{{'newRecordError'|translate}}</h3></div>
+            </div>
+            <div class="form-group">
+                <div class="gridStyle" ui-grid="exceptions.gridOptions"></div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <div class="form-group">
+                <div class="col-xs-12 text-center">
+                    <div class="text-center text-danger" ng-if="exceptions.errorSave"><h4>{{'saveError'|translate}}</h4></div>
+                    <button class="btn btn-success" ng-click="exceptions.validations($close)"><span class="glyphicon glyphicon-ok"></span>{{'save'|translate}}
+                    </button>
+                    <button class="btn btn-danger" ng-click="$dismiss()"><span class="glyphicon glyphicon-remove"></span> {{'cancel'|translate}}
+                    </button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

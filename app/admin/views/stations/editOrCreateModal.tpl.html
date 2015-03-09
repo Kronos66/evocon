@@ -30,7 +30,10 @@
             <div class="form-group">
                 <div class="col-sm-6">
                     <label for="groupId">{{'groupId'|translate}}:</label>
-                    <input type="number" min="0" id="groupId" ng-model="modal.row.groupId">
+                    <select id="groupId" ui-select2="modal.select2Options" data-ng-model="modal.row.stationGroup" data-placeholder="{{'chooseCategory'|translate}}">
+                        <option ng-selected="modal.selectedGroup(group.id)" ng-repeat="group in modal.stationGroups" value="{{group.id}}">{{group.name}}
+                        </option>
+                    </select>
                 </div>
                 <div class="col-sm-6">
                     <label for="markerQty">{{'markerQty'|translate}}:</label>

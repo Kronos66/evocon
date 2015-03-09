@@ -322,6 +322,7 @@ section, .section-row
 {
     position: relative;
     margin-bottom: 28px;
+    overflow: visible !important;
 }
 
 section
@@ -369,13 +370,32 @@ section.no-bordered
 
 .thumbnail
 {
-    min-height: 150px;
+    height: 390px;
 }
 
 .thumbnail .btn
 {
     margin-bottom: 4px;
     min-width: 100%;
+}
+
+.filter-ctnr
+{
+    margin-top: -8px;
+}
+
+.filter
+{
+    width: 110px;
+}
+
+.error-when-transfer
+{
+    position: absolute;
+    top: -66px;
+    width: 100%;
+    text-align: center;
+    color: red;
 }
 
 .station-checkbox-top-margined
@@ -388,6 +408,58 @@ section.no-bordered
 /*
  - - - - TABLES - - - -
 */
+
+
+
+.overview table {
+    table-layout: fixed;
+    max-width: 100%;
+    *margin-left: -100px;/*ie7*/
+}
+.overview tr
+{
+    height: 32px;
+}
+.overview td,
+.overview th {
+    border-top: 1px solid #666;
+    padding: 0 8px;
+    padding-top: 10px;
+    vertical-align: top;
+    height: 32px;
+    width:120px;
+    min-width:120px;
+}
+.overview tr:first-child td,
+.overview tr:first-child th,
+.overview tr:nth-child( 2 ) td,
+.overview tr:nth-child( 2 ) th
+{
+    border-top: none;
+}
+.overview th {
+    position:absolute;
+    *position: relative;
+    left:0;
+    width: 16.66666667%;
+}
+.overview tr:first-child td
+{
+    background: #dedfcf;
+}
+.overview tr:first-child th
+{
+    background: #bcbdaf;
+}
+
+.overview .outer {position:relative}
+.overview .inner {
+    overflow-x:scroll;
+    overflow-y:visible;
+    margin-left: 16.66666667%;
+}
+
+
 
 .grid-style
 {
@@ -601,6 +673,11 @@ input, select
 .gridStyle input[ type=text ], .gridStyle input[ type=number ], .gridStyle select
 {
     width: auto;
+}
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button
+{
+    margin-top: -8px;
 }
 
 input[ type=checkbox ], input[ type=radio ]

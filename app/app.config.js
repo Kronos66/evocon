@@ -11,7 +11,8 @@
                                                'ui.grid.selection',
                                                'ui.grid.pagination',
                                                'angularMoment',
-                                               'ngDragDrop','ngQuickDate']);
+                                               'ngQuickDate',
+                                               'ui.sortable']);
     module.config(function ($provide, $translateProvider, $routeProvider)
     {
 
@@ -63,6 +64,9 @@
         }).when('/station', {
             templateUrl: 'admin/views/stations/stations.tpl.html',
             controller: 'stationsController as stationsController'
+        }).when('/overview', {
+            templateUrl: 'admin/views/overview/overview.tpl.html',
+            controller: 'overviewController as overviewCtrl'
         }).otherwise({
             redirectTo: '/'
         });

@@ -17,7 +17,7 @@
     <section ng-if="stationsController.selected" class="no-bordered station-disabled">
         <div class="row section-row">
             <div class="col-xs-12">
-                <h1 class="title">{{'detailsStation'|translate}}:</h1>
+                <h1 class="title">{{'detailsStation'|translate}}</h1>
             </div>
         </div>
         <div class="row section-row">
@@ -41,7 +41,7 @@
             </div>
             <div class="col-xs-4">
                 <label for="groupId">{{ 'groupId' | translate }}:</label>
-                <input ng-disabled="true" type="number" id="groupId" data-ng-model="stationsController.detailsStation.groupId">
+                <input ng-disabled="true" type="text" id="groupId" data-ng-model="stationsController.detailsStation.groupName">
             </div>
             <div class="col-xs-4">
                 <label for="markerQty">{{ 'markerQty' | translate }}:</label>

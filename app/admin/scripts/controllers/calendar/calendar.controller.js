@@ -3,7 +3,7 @@
 {
     'use strict';
 
-    function CalendarController($modal, $scope, CalendarDAO, CalendarLineDAO)
+    function CalendarController($modal, $scope, CalendarDAO, CalendarExceptionDAO, CalendarLineDAO, StationsDAO)
     {
         var ctrl = this;
         var selected;
@@ -26,10 +26,38 @@
                 ctrl.lines = result;
             });
         };
+        var refreshExceptions = function (id)
+        {
+            CalendarExceptionDAO.query(id).then(function (result)
+            {
+                angular.forEach(result, function (exception)
+                {
+                    exception.startDate = moment(exception.startDate).format('DD.MM.YYYY');
+                    exception.endDate = moment(exception.endDate).format('DD.MM.YYYY');
+                    ctrl.dataCalendar.map(function (calendar)
+                    {
+                        if (exception.exceptionCalendar === calendar.id) {
+                            exception.calendarName = calendar.name;
+                        }
+                    });
+                    StationsDAO.query().then(function (result)
+                    {
+                        result.map(function (element)
+                        {
+                            if (exception.stationId === element.stationId) {
+                                exception.stationName = element.name;
+                            }
+                        });
+                    });
+                });
+                ctrl.exceptionsInCalendar = result;
+            });
+        };
         var actionsTemplate = '<span class="buttonActions"><a class="button link" ng-click="$event.stopPropagation();grid.appScope.calendarController.editRow(row.entity)">' +
                 '{{\'edit\'|translate}}</a>' +
                 '<a class="button link" ng-click="$event.stopPropagation();grid.appScope.calendarController.deleteRow(row.entity.id)">' +
-                '{{\'delete\'|translate}}</a></span>';
+                '{{\'delete\'|translate}}</a>' +
+                '<a class="button link" ng-click="$event.stopPropagation();grid.appScope.calendarController.addException(row.entity)">Exceptions</a></span>';
         this.gridOptions = {
             enableRowHeaderSelection: false,
             enableRowSelection: true,
@@ -51,8 +79,8 @@
                          },
                          {
                              headerCellClass: 'actions-header',
-                             cellClass: 'actions-column',
-                             maxWidth: 120,
+                             cellClass: 'actions-column more-actions',
+                             maxWidth: 200,
                              field: ' ',
                              cellTemplate: actionsTemplate,
                              enableSorting: false,
@@ -65,6 +93,7 @@
             gridApi.selection.on.rowSelectionChanged($scope, function (row)
             {
                 refreshLine(row.entity.id);
+                refreshExceptions(row.entity.id);
                 var actionsTemplate2 = '<span class="buttonActions"><a class="button link" ng-click="$event.stopPropagation();grid.appScope.calendarController.editLine(row.entity)">' +
                         '{{\'edit\'|translate}}</a>' +
                         '<a class="button link" ng-click="$event.stopPropagation();grid.appScope.calendarController.deleteLine(row.entity.id)">' +
@@ -74,33 +103,109 @@
                     selected = row.entity;
                     ctrl.visible = true;
                     ctrl.gridOptions2 = {
-                        data: 'calendarController.lines', columnDefs: [{
-                                                                           field: 'id',
-                                                                           displayName: 'ID'
-                                                                       },
-                                                                       {
-                                                                           field: 'startTime',
-                                                                           displayName: 'Start time'
-                                                                       },
-                                                                       {
-                                                                           field: 'endTime',
-                                                                           displayName: 'End time',
-                                                                           cellClass: 'special-cell more-shorter'
-                                                                       },
-                                                                       {
-                                                                           headerCellClass: 'actions-header',
-                                                                           cellClass: 'actions-column',
-                                                                           maxWidth: 120,
-                                                                           field: ' ',
-                                                                           cellTemplate: actionsTemplate2,
-                                                                           enableSorting: false,
-                                                                           enableHiding: false
-                                                                       }]
+                        data: 'calendarController.lines',
+                        columnDefs: [{
+                                         field: 'id',
+                                         displayName: 'ID'
+                                     },
+                                     {
+                                         field: 'startTime',
+                                         displayName: 'Start time'
+                                     },
+                                     {
+                                         field: 'endTime',
+                                         displayName: 'End time',
+                                         cellClass: 'special-cell more-shorter'
+                                     },
+                                     {
+                                         headerCellClass: 'actions-header',
+                                         cellClass: 'actions-column',
+                                         maxWidth: 120,
+                                         field: ' ',
+                                         cellTemplate: actionsTemplate2,
+                                         enableSorting: false,
+                                         enableHiding: false
+                                     }]
+                    };
+                    ctrl.exceptionsGrid = {
+                        data: 'calendarController.exceptionsInCalendar',
+                        columnDefs: [{
+                                         field: 'id',
+                                         displayName: 'Id'
+                                     },
+                                     {
+                                         field: 'stationName',
+                                         displayName: 'Station'
+                                     },
+                                     {
+                                         field: 'calendarName',
+                                         displayName: 'Exception Calendar'
+                                     },
+                                     {
+                                         field: 'startDate',
+                                         displayName: 'Start Date'
+                                     }, {
+                                         field: 'endDate',
+                                         displayName: 'End date'
+                                     }]
                     };
                 } else {
                     ctrl.visible = false;
                     data = null;
                 }
+            });
+        };
+
+        function saveOrCreateException(exceptions)
+        {
+            if (0 === exceptions.length) {
+                return 'success';
+            }
+            var exception = exceptions[0];
+            exception.startDate = new Date(exception.startDate).getTime();
+            exception.endDate = new Date(exception.endDate).getTime();
+            if (exception.id) {
+                CalendarExceptionDAO.update(exception).then(function ()
+                {
+                    exceptions.splice(0, 1);
+                    saveOrCreateException(exceptions);
+                }).catch(function ()
+                {
+                    //    temporary because back-edn respond 405.....
+                    exceptions.splice(0, 1);
+                    saveOrCreateException(exceptions);
+                });
+            } else {
+                CalendarExceptionDAO.save(exception).then(function ()
+                {
+                    exceptions.splice(0, 1);
+                    saveOrCreateException(exceptions);
+                });
+            }
+        }
+
+        this.addException = function (calendar)
+        {
+            var modalInstance = $modal.open({
+                templateUrl: 'admin/views/calendar/editOrCreateExceptionModal.tpl.html',
+                controller: 'calendarExceptionController',
+                controllerAs: 'exceptions',
+                size: 'lg',
+                backdrop: 'static',
+                keyboard: false,
+                resolve: {
+                    calendar: function ()
+                    {
+                        return calendar;
+                    }
+                }
+            });
+            modalInstance.result.then(function (result)
+            {
+                saveOrCreateException(result);
+            }).then(function (result)
+            {
+                refresh();
             });
         };
         this.deleteLine = function (id)
@@ -194,7 +299,11 @@
                     }
                 }
             });
-            modalInstance.result.then(CalendarDAO.update).then(refresh);
+            modalInstance.result.then(function (result)
+            {
+                result.enabled = result.enabled ? 1 : 0;
+                return CalendarDAO.update(result);
+            }).then(refresh);
         };
         this.addLine = function ()
         {
@@ -227,5 +336,6 @@
         refresh();
     }
 
-    angular.module('evoReports').controller('calendarController', ['$modal', '$scope', 'CalendarDAO', 'CalendarLineDAO', CalendarController]);
+    angular.module('evoReports').controller('calendarController',
+            ['$modal', '$scope', 'CalendarDAO', 'CalendarExceptionDAO', 'CalendarLineDAO', 'StationsDAO', CalendarController]);
 })();

@@ -28,9 +28,9 @@
             columnDefs: [{
                              field: 'name', displayName: 'Name'
                          }, {
-                            headerCellClass: 'actions-header two-columns',
-                            cellClass: 'actions-column',
-                            maxWidth: 120, field: ' ', cellTemplate: actionsTemplate, enableSorting: false, enableHiding: false
+                             headerCellClass: 'actions-header two-columns',
+                             cellClass: 'actions-column',
+                             maxWidth: 120, field: ' ', cellTemplate: actionsTemplate, enableSorting: false, enableHiding: false
                          }]
         };
         this.gridOptions.onRegisterApi = function (gridApi)

@@ -8,7 +8,12 @@
         this.product = null;
 
         this.select2Options = {
-            width: '100%', allowClear: true, multiple: false, minimumInputLength: 1, maximumInputLength: 10, initSelection: function ()
+            width: '100%',
+            allowClear: true,
+            multiple: false,
+            minimumInputLength: 1,
+            maximumInputLength: 10,
+            initSelection: function ()
             {
 
             }

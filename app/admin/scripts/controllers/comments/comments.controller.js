@@ -9,7 +9,21 @@
             CommentsDAO.query().then(function (result)
             {
                 ctrl.comments = result;
+                return CommentsGroupDAO.query();
+            }).then(function (result)
+            {
+                ctrl.comments = ctrl.comments.map(function (element)
+                {
+                    for (var i = 0; i < result.length; i++) {
+                        if (parseInt(element.groupId) === result[i].id) {
+                            element.nameGroup = result[i].name;
+                        }
+                    }
+                    return element;
+                });
             });
+
+
         };
         var actionsTemplate = '<span class="buttonActions">' +
                 '<a class="button link" ng-click="grid.appScope.commentsController.editRow(row.entity)">{{\'edit\'|translate}}</a>' +
@@ -23,19 +37,29 @@
             paginationPageSize: 10,
             enableRowHeaderSelection: false,
             columnDefs: [{
-                             field: 'name', displayName: 'Name'
-                         }, {
-                             field: 'groupId', displayName: 'Group ID'
-                         }, {
-                             field: 'category', displayName: 'Category'
-                         }, {
-                             field: 'color', displayName: 'Color'
-                         }, {
-                            enableSorting: false,
-                            enableHiding: false,
-                            headerCellClass: 'actions-header',
-                            cellClass: 'actions-column',
-                            maxWidth: 120, field: ' ', cellTemplate: actionsTemplate
+                             field: 'name',
+                             displayName: 'Name'
+                         },
+                         {
+                             field: 'nameGroup',
+                             displayName: 'Group'
+                         },
+                         {
+                             field: 'category',
+                             displayName: 'Category'
+                         },
+                         {
+                             field: 'color',
+                             displayName: 'Color'
+                         },
+                         {
+                             enableSorting: false,
+                             enableHiding: false,
+                             headerCellClass: 'actions-header',
+                             cellClass: 'actions-column',
+                             maxWidth: 120,
+                             field: ' ',
+                             cellTemplate: actionsTemplate
                          }]
         };
         this.newGroup = function ()
@@ -89,15 +113,12 @@
                     }
                 }
             });
-
             modalInstance.result.then(CommentsDAO.update).then(refresh);
         };
         this.deleteRow = function (id)
         {
             var modalInstance = $modal.open({
-                templateUrl: 'admin/views/confirmModal.tpl.html',
-                backdrop: 'static',
-                keyboard: false
+                templateUrl: 'admin/views/confirmModal.tpl.html', backdrop: 'static', keyboard: false
             });
             modalInstance.result.then(function ()
             {

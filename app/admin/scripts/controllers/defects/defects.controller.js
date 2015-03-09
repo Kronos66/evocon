@@ -12,6 +12,18 @@
             DefectsDAO.query().then(function (result)
             {
                 ctrl.defects = result;
+                return DefectsGroupDAO.query();
+            }).then(function (result)
+            {
+                ctrl.defects = ctrl.defects.map(function (element)
+                {
+                    for (var i = 0; i < result.length; i++) {
+                        if (element.groupId === result[i].id) {
+                            element.nameGroup = result[i].name;
+                        }
+                    }
+                    return element;
+                });
             });
         };
         this.gridOptions = {
@@ -25,7 +37,7 @@
                              displayName: 'Name'
                          },
                          {
-                             field: 'groupId',
+                             field: 'nameGroup',
                              displayName: 'Group'
                          },
                          {
@@ -84,7 +96,7 @@
             });
             modalInstance.result.then(function (result)
             {
-                result.createdDate=result.createdDate.getTime();
+                result.createdDate = result.createdDate.getTime();
                 return DefectsDAO.save(result);
             }).then(refresh);
         };
@@ -104,7 +116,11 @@
                 }
             });
 
-            modalInstance.result.then(DefectsDAO.update).then(refresh);
+            modalInstance.result.then(function (result)
+            {
+                result.createdDate = result.createdDate.getTime();
+                return DefectsDAO.update(result);
+            }).then(refresh);
         };
         this.mergeDefects = function ()
         {

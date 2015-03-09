@@ -28,9 +28,9 @@
                          }, {
                              field: 'color', displayName: 'Color'
                          }, {
-                            headerCellClass: 'actions-header',
-                            cellClass: 'actions-column',
-                            maxWidth: 100, field: ' ', cellTemplate: actionsTemplate, enableSorting: false, enableHiding: false
+                             headerCellClass: 'actions-header',
+                             cellClass: 'actions-column',
+                             maxWidth: 100, field: ' ', cellTemplate: actionsTemplate, enableSorting: false, enableHiding: false
                          }]
         };
         this.gridOptions.onRegisterApi = function (gridApi)
@@ -67,7 +67,7 @@
                 resolve: {
                     row: function ()
                     {
-                        return angular.extend({},row);
+                        return angular.extend({}, row);
                     }
                 }
             });
@@ -123,7 +123,7 @@
             });
             modalInstance.result.then(function ()
             {
-            CommentsGroupDAO.remove(id).then(refresh);
+                CommentsGroupDAO.remove(id).then(refresh);
             });
         };
         refresh();
