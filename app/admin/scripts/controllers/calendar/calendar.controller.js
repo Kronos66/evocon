@@ -80,7 +80,7 @@
                          {
                              headerCellClass: 'actions-header',
                              cellClass: 'actions-column more-actions',
-                             maxWidth: 120,
+                             maxWidth: 200,
                              field: ' ',
                              cellTemplate: actionsTemplate,
                              enableSorting: false,

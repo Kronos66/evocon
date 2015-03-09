@@ -621,35 +621,86 @@ function setupBackendMock($httpBackend)
 
 
     var opSequence = 0, operators = [{
-                                         id: opSequence++, firstName: 'Roman', lastName: 'Polanski', barcode: 'codebar'
+                                         id: opSequence++, firstname: 'Roman', lastname: 'Polanski', barcode: 'codebar'
                                      }, {
-                                         id: opSequence++, firstName: 'Leo', lastName: 'Messi', barcode: 'codebar'
+                                         id: opSequence++, firstname: 'Leo', lastname: 'Messi', barcode: 'codebar'
                                      }, {
-                                         id: opSequence++, firstName: 'Maciej', lastName: 'Makula', barcode: 'codebar'
+                                         id: opSequence++, firstname: 'Maciej', lastname: 'Makula', barcode: 'codebar'
                                      }, {
-                                         id: opSequence++, firstName: 'Stanley', lastName: 'Kubrick', barcode: 'codebar'
+                                         id: opSequence++, firstname: 'Stanley', lastname: 'Kubrick', barcode: 'codebar'
                                      }, {
-                                         id: opSequence++, firstName: 'aaa', lastName: 'aaa', barcode: 'codebar'
+                                         id: opSequence++, firstname: 'aaa', lastname: 'aaa', barcode: 'codebar'
                                      }, {
-                                         id: opSequence++, firstName: 'bbb', lastName: 'bbb', barcode: 'codebar'
+                                         id: opSequence++, firstname: 'bbb', lastname: 'bbb', barcode: 'codebar'
                                      }, {
-                                         id: opSequence++, firstName: 'ccc', lastName: 'ccc', barcode: 'codebar'
+                                         id: opSequence++, firstname: 'ccc', lastname: 'ccc', barcode: 'codebar'
                                      }, {
-                                         id: opSequence++, firstName: 'ddd', lastName: 'ddd', barcode: 'codebar'
+                                         id: opSequence++, firstname: 'ddd', lastname: 'ddd', barcode: 'codebar'
                                      }, {
-                                         id: opSequence++, firstName: 'ee', lastName: 'ee', barcode: 'codebar'
+                                         id: opSequence++, firstname: 'ee', lastname: 'ee', barcode: 'codebar'
                                      }, {
-                                         id: opSequence++, firstName: 'ff', lastName: 'ff', barcode: 'codebar'
+                                         id: opSequence++, firstname: 'ff', lastname: 'ff', barcode: 'codebar'
                                      }, {
-                                         id: opSequence++, firstName: 'gg', lastName: 'gg', barcode: 'codebar'
+                                         id: opSequence++, firstname: 'gg', lastname: 'gg', barcode: 'codebar'
                                      }, {
-                                         id: opSequence++, firstName: 'rr', lastName: 'rr', barcode: 'codebar'
+                                         id: opSequence++, firstname: 'rr', lastname: 'rr', barcode: 'codebar'
                                      }];
 
 
     $httpBackend.whenGET('/rest/v1/operators').respond(function ()
     {
         return [200, operators];
+    });
+
+    $httpBackend.whenPUT(/\/rest\/v1\/operators\/(\d+)$/).respond(function (method, url, jsonParams)
+    {
+        var match = /\/rest\/v1\/operators\/(\d+)$/.exec(url);
+        var data = JSON.parse(jsonParams);
+        var toUpdate = -1;
+
+
+        for (var i = 0; i < operators.length; i++) {
+            if (operators[i].id === parseInt(match[1])) {
+                toUpdate = i;
+                break;
+            }
+        }
+
+        if (toUpdate > -1) {
+            operators[ toUpdate ] = data;
+            return [200];
+        } else {
+            return [404];
+        }
+    });
+
+    $httpBackend.whenPOST('/rest/v1/operators').respond(function (method, url, jsonParams)
+    {
+        var data = JSON.parse(jsonParams);
+
+        operators.push( angular.extend( data, { id: opSequence++ } ) );
+
+        return [200];
+    });
+
+    $httpBackend.whenDELETE(/\/rest\/v1\/operators\/(\d+)$/).respond(function (method, url)
+    {
+        var match = /\/rest\/v1\/operators\/(\d+)$/.exec(url);
+        var toDelete = -1;
+
+        for (var i = 0; i < operators.length; i++) {
+            if (operators[i].id === parseInt(match[1])) {
+                toDelete = i;
+                break;
+            }
+        }
+
+        if (toDelete > -1) {
+            operators.splice(toDelete, 1);
+            return [200];
+        } else {
+            return [404];
+        }
     });
 
 

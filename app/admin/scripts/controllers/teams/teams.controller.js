@@ -8,16 +8,8 @@
 
             var ctrl = this,
                     recentlyDragged = [],
-                    numb = true,
-                    selectedRow,
-                    refresh = function ()
-                    {
-                        teamsDAO.query()
-                                .then(function (data)
-                                {
-                                    ctrl.gridOptions.data = data;
-                                });
-                    };
+                    selectedRow;
+
 
             ctrl.errorMessage = false;
 
@@ -25,31 +17,24 @@
             ctrl.listFilter = {size: 10};
             ctrl.currentPage = 1;
 
-
-            var paginationRefresh = paginationSupport(ctrl.filter, function (callback)
-            {
-                $timeout(function ()
-                {
-                    ctrl.resultCount = ctrl.othersOperatorsFiltered.length;
-                    callback(ctrl.othersOperatorsFiltered.length);
-                }, 500);
-            });
-
             ctrl.search = {
-                firstName: '',
-                lastName: ''
+                firstname: '',
+                lastname: ''
             };
 
-            $scope.$watch(function ()
-            {
-                return ctrl.search;
-            }, function (newValue)
-            {
-                ctrl.othersOperatorsFiltered = $filter('filter')(ctrl.othersOperators, newValue);
-                paginationRefresh();
-            }, true);
 
 
+
+            var refresh = function ()
+            {
+                teamsDAO.query()
+                    .then(function (data)
+                    {
+                        ctrl.gridOptions.data = data;
+                    });
+            };
+
+            ctrl.othersOperatorsFiltered = [];
             ctrl.showDDArea = false;
             ctrl.gridOptions = {
                 enableRowSelection: true,
@@ -82,7 +67,6 @@
                 gridApi.selection.on.rowSelectionChanged($scope, function (row)
                 {
                     if (ctrl.showDDArea && ctrl.recentlySelectedRow === row.entity.name) {
-                        numb = true;
                         ctrl.showDDArea = false;
                         return;
                     }
@@ -119,13 +103,17 @@
 
                                 ctrl.othersOperatorsFiltered = angular.extend([], ctrl.othersOperators);
 
-                                ctrl.showDDArea = true;
-                                $timeout(function ()
+
+                                $scope.$watch(function ()
                                 {
-                                    if (ctrl.showDDArea) {
-                                        numb = false;
-                                    }
-                                }, 500);
+                                    return ctrl.search;
+                                }, function (newValue)
+                                {
+                                    ctrl.othersOperatorsFiltered = $filter('filter')(ctrl.othersOperators, newValue);
+                                    paginationRefresh();
+                                }, true);
+
+                                ctrl.showDDArea = true;
 
                                 paginationRefresh();
                             });
@@ -187,40 +175,25 @@
 
             var changeTeamRejection = function ()
             {
+                ctrl.errorMessage = true;
+
+                var from = ( recentlyDragged.wasMemberArea ) ? ctrl.othersOperatorsFiltered : ctrl.membership,
+                        dest = ( recentlyDragged.wasMemberArea ) ? ctrl.membership : ctrl.othersOperatorsFiltered;
+
+                for (var i = 0; i < from.length; i++) {
+                    if (from[i] && from[i].id === recentlyDragged.obj.id) {
+                        dest.push(from.splice(i, 1)[0]);
+                    }
+                }
+
                 $timeout(function ()
                 {
-                    ctrl.errorMessage = true;
-
-                    var from = ( recentlyDragged.wasMemberArea ) ? ctrl.othersOperatorsFiltered : ctrl.membership,
-                            dest = ( recentlyDragged.wasMemberArea ) ? ctrl.membership : ctrl.othersOperatorsFiltered;
-
-                    for (var i = 0; i < from.length; i++) {
-                        if (from[i] && from[i].id === recentlyDragged.obj.id) {
-                            dest.push(from.splice(i, 1)[0]);
-                        }
-                    }
-
-                    $timeout(function ()
-                    {
-                        ctrl.errorMessage = false;
-                    }, 6000);
-                }, 500);
+                    ctrl.errorMessage = false;
+                }, 6000);
             };
 
-            ctrl.dragged = function (obj, area)
+            var add = function ()
             {
-                recentlyDragged.obj = obj;
-                recentlyDragged.wasMemberArea = area;
-            };
-
-            ctrl.add = function ()
-            {
-                if (numb) {
-                    return;
-                }
-                else if (recentlyDragged.wasMemberArea) {
-                    return;
-                }
                 operatorMembershipDAO.create(selectedRow, recentlyDragged.obj.id)
                         .then(function ()
                         {
@@ -230,14 +203,8 @@
                         .catch(changeTeamRejection);
             };
 
-            ctrl.remove = function ()
+            var remove = function ()
             {
-                if (numb) {
-                    return;
-                }
-                else if (!recentlyDragged.wasMemberArea) {
-                    return;
-                }
                 operatorMembershipDAO.remove(selectedRow, recentlyDragged.obj.id)
                         .then(function ()
                         {
@@ -246,6 +213,34 @@
                         })
                         .catch(changeTeamRejection);
             };
+
+            var receive = function (event, ui)
+            {
+                recentlyDragged.obj = ui.item.sortable.model;
+                recentlyDragged.wasMemberArea = ui.item.sortable.source.attr( 'id' ) === 'members';
+
+                if( recentlyDragged.wasMemberArea === true ) {
+                    remove();
+                }
+                else if( recentlyDragged.wasMemberArea === false ) {
+                    add();
+                }
+            };
+
+
+
+            ctrl.sortableOptions = {
+                connectWith: '.thumbnail',
+                placeholder: 'draggable',
+                receive: receive
+            };
+
+
+            var paginationRefresh = paginationSupport(ctrl.filter, function (callback)
+            {
+                ctrl.resultCount = ctrl.othersOperatorsFiltered.length;
+                callback(ctrl.othersOperatorsFiltered.length);
+            });
 
             refresh();
 
