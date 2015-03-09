@@ -1,7 +1,7 @@
 (function ()
 {
     'use strict';
-    function DefectsController($modal, DefectsDAO, DefectsGroupDAO, StationDefectDAO)
+    function DefectsController($modal, DefectsDAO, DefectsGroupDAO, StationsDAO)
     {
         var actionsTemplate = '<span class="buttonActions"><a class="button link" ng-click="grid.appScope.defectsCtrl.editRow(row.entity)">{{\'edit\'|translate}}</a>' +
                 '<a class="button link" ng-click="grid.appScope.defectsCtrl.deleteRow(row.entity.id)">{{\'delete\'|translate}}</a>' +
@@ -138,7 +138,7 @@
         {
             if (0 < stationToSave.length) {
                 stationToSave[0].defectId = id;
-                StationDefectDAO.save(stationToSave[0]).then(function ()
+                StationsDAO.saveDefect(stationToSave[0]).then(function ()
                 {
                     stationToSave.splice(0, 1);
                     saveStation(id, stationToSave);
@@ -168,5 +168,5 @@
         refresh();
     }
 
-    angular.module('evoReports').controller('defectsController', ['$modal', 'DefectsDAO', 'DefectsGroupDAO', 'StationDefectDAO', DefectsController]);
+    angular.module('evoReports').controller('defectsController', ['$modal', 'DefectsDAO', 'DefectsGroupDAO', 'StationsDAO', DefectsController]);
 })();

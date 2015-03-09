@@ -12,7 +12,8 @@
                                                'ui.grid.pagination',
                                                'angularMoment',
                                                'ngQuickDate',
-                                               'ui.sortable']);
+                                               'ui.sortable',
+                                               'angularjs-dropdown-multiselect']);
     module.config(function ($provide, $translateProvider, $routeProvider)
     {
 

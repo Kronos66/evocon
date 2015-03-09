@@ -34,7 +34,7 @@
             columnDefs: [{
                              field: 'station',
                              displayName: 'Station',
-                             cellTemplate: '<select id="calendar" ui-select2="grid.appScope.exceptions.select2Options" data-ng-model="row.entity.stationId">\n    <option ng-repeat="station in grid.appScope.exceptions.listStations"  value="{{station.stationId}}">\n        {{station.name}}\n    </option>\n</select>'
+                             cellTemplate: '<select id="station" ui-select2="grid.appScope.exceptions.select2Options" data-ng-model="row.entity.stationId">\n    <option ng-repeat="station in grid.appScope.exceptions.listStations"  value="{{station.stationId}}">\n        {{station.name}}\n    </option>\n</select>'
                          },
                          {
                              field: 'exceptionCalendar',

@@ -30,7 +30,8 @@
             <div class="form-group">
                 <div class="col-sm-6">
                     <label for="groupId">{{'groupId'|translate}}:</label>
-                    <select id="groupId" ui-select2="modal.select2Options" data-ng-model="modal.row.stationGroup" data-placeholder="{{'chooseCategory'|translate}}">
+                    <select id="groupId" ui-select2="modal.select2Options" data-ng-model="modal.row.stationGroup"
+                            data-placeholder="{{'chooseCategory'|translate}}">
                         <option ng-selected="modal.selectedGroup(group.id)" ng-repeat="group in modal.stationGroups" value="{{group.id}}">{{group.name}}
                         </option>
                     </select>
@@ -98,18 +99,33 @@
             <div class="form-group">
                 <div class="col-sm-6">
                     <label for="onFilter">{{'onFilter'|translate}}:</label>
-                    <input type="checkbox"  id="onFilter" ng-checked="modal.row.onFilter" ng-model="modal.row.onFilter">
+                    <input type="checkbox" id="onFilter" ng-checked="modal.row.onFilter" ng-model="modal.row.onFilter">
                 </div>
                 <div class="col-sm-6">
-                    <label for="effMarkersEnabled" >{{'effMarkersEnabled'|translate}}:</label>
+                    <label for="effMarkersEnabled">{{'effMarkersEnabled'|translate}}:</label>
                     <input type="checkbox" id="effMarkersEnabled" ng-checked="modal.row.effMarkersEnabled" ng-model="modal.row.effMarkersEnabled">
                 </div>
+            </div>
+            <div class="row section-row">
+                <div class="col-xs-12">
+                    <h2 class="title">Station calendars</h2>
+
+                    <div class="buttons">
+                        <button class="button" ng-click="modal.newStation()">{{'newStation'|translate}}</button>
+                    </div>
+                </div>
+                <div class="text-center text-danger" ng-if="modal.errorNew"><h3>{{'newRecordError'|translate}}</h3></div>
+            </div>
+            <div class="form-group">
+
+                <div class="gridStyle" ui-grid="modal.gridCalendarInStation" ui-grid-pagination></div>
             </div>
         </div>
         <div class="modal-footer">
             <div class="form-group">
                 <div class="col-xs-12 text-center">
-                    <button class="btn btn-success" ng-click="$close(modal.row)"><span class="glyphicon glyphicon-ok"></span> {{'save'|translate}}</button>
+                    <div class="text-center text-danger" ng-if="modal.errorSave"><h4>{{'saveError'|translate}}</h4></div>
+                    <button class="btn btn-success" ng-click="modal.save($close)"><span class="glyphicon glyphicon-ok"></span> {{'save'|translate}}</button>
                     <button class="btn btn-danger" ng-click="$dismiss()"><span class="glyphicon glyphicon-remove"></span> {{'cancel'|translate}}
                     </button>
                 </div>
