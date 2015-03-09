@@ -128,6 +128,40 @@
             modalInstance.result.then(StationGroupDAO.save).then(refresh);
 
         };
+        function saveOrUpdateCalendarInStation(data)
+        {
+            if (!data || 0 === data.length) {
+                return;
+            }
+            var element = data[0];
+            var tmp = '';
+            element.days.map(function (day)
+            {
+                tmp += day.id;
+            });
+            element.days = tmp;
+            element.validFrom = new Date(element.validFrom).getTime();
+            element.validUntil = new Date(element.validUntil).getTime();
+            if (element.id) {
+                StationsDAO.updateCalendar(element).then(function ()
+                {
+                    data.splice(0, 1);
+                    saveOrUpdateCalendarInStation(data);
+                }).catch(function ()
+                {
+                    data.splice(0, 1);
+                    saveOrUpdateCalendarInStation(data);
+                });
+            } else {
+
+                StationsDAO.saveCalendar(element).then(function ()
+                {
+                    data.splice(0, 1);
+                    saveOrUpdateCalendarInStation(data);
+                });
+            }
+        }
+
         this.editRow = function (station)
         {
             var modalInstance = $modal.open({
@@ -144,7 +178,14 @@
                     }
                 }
             });
-            modalInstance.result.then(StationsDAO.update).then(refresh);
+            modalInstance.result.then(function (result)
+            {
+                if (result.calendarInStation) {
+                    saveOrUpdateCalendarInStation(angular.extend([], result.calendarInStation));
+                    delete result.calendarInStation;
+                }
+                return StationsDAO.update(result);
+            }).then(refresh);
         };
         this.deleteRow = function (stationId)
         {

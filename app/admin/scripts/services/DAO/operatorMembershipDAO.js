@@ -13,17 +13,17 @@
             remove: {method: 'DELETE'}
         });
         return {
-            query: function ( teamId )
+            query: function (teamId)
             {
-                return api.query( { teamId: teamId } ).$promise;
+                return api.query({teamId: teamId}).$promise;
             },
-            create: function ( teamId, operatorId )
+            create: function (teamId, operatorId)
             {
-                return api.create( { teamId: teamId, operatorId: operatorId } ).$promise;
+                return api.create({teamId: teamId, operatorId: operatorId}).$promise;
             },
-            remove: function ( teamId, operatorId )
+            remove: function (teamId, operatorId)
             {
-                return api.remove( { teamId: teamId, operatorId: operatorId } ).$promise;
+                return api.remove({teamId: teamId, operatorId: operatorId}).$promise;
             }
         };
     }

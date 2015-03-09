@@ -203,7 +203,7 @@
             modalInstance.result.then(function (result)
             {
                 saveOrCreateException(result);
-            }).then(function (result)
+            }).then(function ()
             {
                 refresh();
             });
