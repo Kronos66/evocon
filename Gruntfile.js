@@ -1,3 +1,5 @@
+// Generated on 2014-09-07 using generator-angular 0.9.7
+
 // # Globbing
 // for performance reasons we're only matching one level down:
 // 'test/spec/{,*/}*.js'
@@ -8,6 +10,8 @@ module.exports = function (grunt)
 {
 
     'use strict';
+    require('grunt-connect-proxy');
+    grunt.loadNpmTasks('grunt-connect-proxy');
     // Load grunt tasks automatically
     require('load-grunt-tasks')(grunt);
 
@@ -18,8 +22,7 @@ module.exports = function (grunt)
     var appConfig = {
         app: require('./bower.json').appPath || 'app', dist: 'dist'
     };
-    require('grunt-connect-proxy');
-    grunt.loadNpmTasks('grunt-connect-proxy');
+
     // Define the configuration for all the tasks
     grunt.initConfig({
 
@@ -31,13 +34,13 @@ module.exports = function (grunt)
             bower: {
                 files: ['bower.json'], tasks: ['wiredep']
             }, js: {
-                files: ['<%= yeoman.app %>/**/*.js'], tasks: [], options: {
+                files: ['<%= yeoman.app %>/scripts/**/*.js'], tasks: [], options: {
                     livereload: '<%= connect.options.livereload %>'
                 }
             }, jsTest: {
-                files: ['test/spec/**/*.js'], tasks: ['newer:jshint:test', 'karma']
+                files: ['test/spec/{,*/}*.js'], tasks: ['newer:jshint:test', 'karma']
             }, styles: {
-                files: ['<%= yeoman.app %>/css/**/*.css'], tasks: ['newer:copy:styles', 'autoprefixer']
+                files: ['<%= yeoman.app %>/styles/**/*.css'], tasks: ['newer:copy:styles', 'autoprefixer']
             }, gruntfile: {
                 files: ['Gruntfile.js']
             }, livereload: {
@@ -171,7 +174,7 @@ module.exports = function (grunt)
                             dest: '<%= yeoman.dist %>'
                         }]
             }, styles: {
-                expand: true, cwd: '<%= yeoman.app %>/css', dest: '.tmp/styles/', src: '{,*/}*.css'
+                expand: true, cwd: '<%= yeoman.app %>/styles', dest: '.tmp/styles/', src: '{,*/}*.css'
             }
         },
 
@@ -194,9 +197,16 @@ module.exports = function (grunt)
         if (target === 'dist') {
             return grunt.task.run(['build', 'connect:dist:keepalive', 'configureProxies:server']);
         }
-        grunt.task.run(['clean:server', 'wiredep', 'concurrent:server','configureProxies:server','autoprefixer', 'connect:livereload', 'watch']);
+        grunt.task.run(['clean:server', 'wiredep', 'concurrent:server', 'configureProxies:server', 'autoprefixer', 'connect:livereload', 'watch']);
     });
 
+    grunt.registerTask('heroku', 'Compile then start a connect web server', function (target)
+    {
+        if (target === 'dist') {
+            return grunt.task.run(['build', 'connect:dist:keepalive', 'configureProxies:server']);
+        }
+        grunt.task.run(['clean:server', 'wiredep', 'concurrent:server', 'configureProxies:server', 'autoprefixer']);
+    });
     grunt.registerTask('server', 'DEPRECATED TASK. Use the "serve" task instead', function (target)
     {
         grunt.log.warn('The `server` task has been deprecated. Use `grunt serve` to start a server.');

@@ -103,6 +103,8 @@
                     selected = row.entity;
                     ctrl.visible = true;
                     ctrl.gridOptions2 = {
+                        paginationPageSizes: [10, 20, 30],
+                        paginationPageSize: 10,
                         data: 'calendarController.lines',
                         columnDefs: [{
                                          field: 'id',
@@ -128,6 +130,8 @@
                                      }]
                     };
                     ctrl.exceptionsGrid = {
+                        paginationPageSizes: [10, 20, 30],
+                        paginationPageSize: 10,
                         data: 'calendarController.exceptionsInCalendar',
                         columnDefs: [{
                                          field: 'id',
