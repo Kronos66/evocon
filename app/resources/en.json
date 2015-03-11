@@ -106,7 +106,7 @@
   "stationDetails": "Station details",
   "stopTime": "Stop time",
   "lineNumber": "Line number",
-  "groupId": "Group ID",
+  "groupId": "Group",
   "markerQty": "Marker quantity",
   "colorMode": "Color mode",
   "offFilter": "Filter off",
@@ -128,5 +128,6 @@
   "editProduct": "Product details",
   "stationInGroup": "Station in selected group",
   "endTime": "End time",
-  "overview": "Overview"
+  "overview": "Overview",
+  "settings": "Settings"
 }
