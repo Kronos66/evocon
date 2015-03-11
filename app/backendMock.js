@@ -333,7 +333,6 @@ function setupBackendMock($httpBackend)
     });
 
 
-
     //stationGroup
     stationSeq = 1;
     var stationGroup = [{
@@ -655,7 +654,7 @@ function setupBackendMock($httpBackend)
         }
 
         if (toUpdate > -1) {
-            operators[ toUpdate ] = data;
+            operators[toUpdate] = data;
             return [200];
         } else {
             return [404];
@@ -666,7 +665,7 @@ function setupBackendMock($httpBackend)
     {
         var data = JSON.parse(jsonParams);
 
-        operators.push( angular.extend( data, { id: opSequence++ } ) );
+        operators.push(angular.extend(data, {id: opSequence++}));
 
         return [200];
     });
@@ -690,7 +689,49 @@ function setupBackendMock($httpBackend)
             return [404];
         }
     });
-
+    var deviceSeq = 1;
+    var devices = [{
+                       id: deviceSeq++, description: 'first', inputs: 2123
+                   }, {
+                       id: deviceSeq++, description: 'second', inputs: 23
+                   }, {
+                       id: deviceSeq++, description: 'third', inputs: 213
+                   }];
+    $httpBackend.whenGET('/rest/v1/device').respond(function ()
+    {
+        return [200, devices];
+    });
+    $httpBackend.whenPUT(/\/rest\/v1\/device\/(\d+)$/).respond(function (method, url, json)
+    {
+        var match = /\/rest\/v1\/device\/(\d+)$/.exec(url);
+        devices[match[1] - 1] = JSON.parse(json);
+        return [200, devices[match[1] - 1]];
+    });
+    $httpBackend.whenPOST('/rest/v1/device').respond(function (method, url, json)
+    {
+        var data = JSON.parse(json);
+        data.id = deviceSeq++;
+        devices.push(data);
+        return [200, data];
+    });
+    $httpBackend.whenDELETE(/\/rest\/v1\/device\/(\d+)$/).respond(function (method, url)
+    {
+        var match = /\/rest\/v1\/device\/(\d+)$/.exec(url);
+        var searchIndex = -1;
+        devices = devices.map(function (element, index)
+        {
+            if (element.id === parseInt(match[1], 10)) {
+                searchIndex = index;
+            }
+            return element;
+        });
+        if (-1 < searchIndex) {
+            devices.splice(searchIndex, 1);
+            return [200];
+        } else {
+            return [404];
+        }
+    });
 
     $httpBackend.whenGET(/.*\.html/).passThrough();
     $httpBackend.whenGET(/\/rest\/v1\?|\/.*/).passThrough();

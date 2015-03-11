@@ -3,7 +3,7 @@
     'use strict';
     function DeviceDAO($resource)
     {
-        var api = $resource('/EvoconReportingServer/rest/v1/device/:id', {id: '@id'}, {
+        var api = $resource('/rest/v1/device/:id', {id: '@id'}, {
             query: {isArray: true, method: 'GET'},
             update: {method: 'PUT'}
         });
