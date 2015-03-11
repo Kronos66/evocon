@@ -34,7 +34,7 @@ module.exports = function (grunt)
             bower: {
                 files: ['bower.json'], tasks: ['wiredep']
             }, js: {
-                files: ['<%= yeoman.app %>/scripts/**/*.js'], tasks: [], options: {
+                files: ['<%= yeoman.app %>/admin/**/*.js'], tasks: [], options: {
                     livereload: '<%= connect.options.livereload %>'
                 }
             }, jsTest: {

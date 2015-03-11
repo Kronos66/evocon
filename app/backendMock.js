@@ -258,37 +258,37 @@ function setupBackendMock($httpBackend)
     //stations
     var stationSeq = 1;
     var stationDefect = [{
-                             stationId: stationSeq++, name: 'first', description: 'some text', stationGroup: 1, stopTime: true
+                             stationId: stationSeq++, name: 'first', description: 'some text', groupId: 1, stopTime: true
                          }, {
-                             stationId: stationSeq++, name: 'second', description: 'second text', stationGroup: 2, enabled: true
+                             stationId: stationSeq++, name: 'second', description: 'second text', groupId: 2, enabled: true
                          }, {
-                             stationId: stationSeq++, name: 'first', description: 'some text', stationGroup: 1, stopTime: true
+                             stationId: stationSeq++, name: 'first', description: 'some text', groupId: 1, stopTime: true
                          }, {
-                             stationId: stationSeq++, name: 'second', description: 'second text', stationGroup: 2, enabled: true
+                             stationId: stationSeq++, name: 'second', description: 'second text', groupId: 2, enabled: true
                          }, {
-                             stationId: stationSeq++, name: 'first', description: 'some text', stationGroup: 1, stopTime: true
+                             stationId: stationSeq++, name: 'first', description: 'some text', groupId: 1, stopTime: true
                          }, {
-                             stationId: stationSeq++, name: 'second', description: 'second text', stationGroup: 2, enabled: true
+                             stationId: stationSeq++, name: 'second', description: 'second text', groupId: 2, enabled: true
                          }, {
-                             stationId: stationSeq++, name: 'first', description: 'some text', stationGroup: 1, stopTime: true
+                             stationId: stationSeq++, name: 'first', description: 'some text', groupId: 1, stopTime: true
                          }, {
-                             stationId: stationSeq++, name: 'second', description: 'second text', stationGroup: 2, enabled: true
+                             stationId: stationSeq++, name: 'second', description: 'second text', groupId: 2, enabled: true
                          }, {
-                             stationId: stationSeq++, name: 'first', description: 'some text', stationGroup: 1, stopTime: true
+                             stationId: stationSeq++, name: 'first', description: 'some text', groupId: 1, stopTime: true
                          }, {
-                             stationId: stationSeq++, name: 'second', description: 'second text', stationGroup: 2, enabled: true
+                             stationId: stationSeq++, name: 'second', description: 'second text', groupId: 2, enabled: true
                          }, {
-                             stationId: stationSeq++, name: 'first', description: 'some text', stationGroup: 1, stopTime: true
+                             stationId: stationSeq++, name: 'first', description: 'some text', groupId: 1, stopTime: true
                          }, {
-                             stationId: stationSeq++, name: 'second', description: 'second text', stationGroup: 2, enabled: true
+                             stationId: stationSeq++, name: 'second', description: 'second text', groupId: 2, enabled: true
                          }, {
-                             stationId: stationSeq++, name: 'first', description: 'some text', stationGroup: 1, stopTime: true
+                             stationId: stationSeq++, name: 'first', description: 'some text', groupId: 1, stopTime: true
                          }, {
-                             stationId: stationSeq++, name: 'second', description: 'second text', stationGroup: 2, enabled: true
+                             stationId: stationSeq++, name: 'second', description: 'second text', groupId: 2, enabled: true
                          }, {
-                             stationId: stationSeq++, name: 'first', description: 'some text', stationGroup: 1, stopTime: true
+                             stationId: stationSeq++, name: 'first', description: 'some text', groupId: 1, stopTime: true
                          }, {
-                             stationId: stationSeq++, name: 'second', description: 'second text', stationGroup: 2, enabled: true
+                             stationId: stationSeq++, name: 'second', description: 'second text', groupId: 2, enabled: true
                          }];
     $httpBackend.whenGET('/rest/v1/stations').respond(function ()
     {

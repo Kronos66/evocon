@@ -6,109 +6,115 @@
     </div>
     <form class="form-horizontal station-disabled" role="form">
         <div class="modal-body">
-            <div class="form-group">
-                <div class="col-sm-6">
-                    <label for="name">{{'name'|translate}}:</label>
-                    <input type="text" id="name" ng-model="modal.row.name">
-                </div>
-                <div class="col-sm-6">
-                    <label for="description">{{'description'|translate}}:</label>
-                    <input type="text" id="description" ng-model="modal.row.description">
-                </div>
-            </div>
-            <div class="form-group">
-                <div class="col-sm-6">
-                    <label for="speedSlowLimit">{{'speedSlowLimit'|translate}}:</label>
-                    <input type="number" min="0" id="speedSlowLimit" ng-model="modal.row.speedSlowLimit">
-                </div>
-                <div class="col-sm-6">
-                    <label for="lineNumber">{{'lineNumber'|translate}}:</label>
-                    <input type="number" min="0" id="lineNumber" ng-model="modal.row.lineNumber">
-                </div>
-            </div>
+            <section class="no-bordered">
+                <div class="form-group">
+                    <div class="col-sm-6">
+                        <label for="name">{{'name'|translate}}:</label>
+                        <input type="text" id="name" ng-model="modal.row.name">
+                    </div>
+                    <div class="col-sm-6">
+                        <label for="speedTooSlowLimit">{{'speedTooSlowLimit'|translate}}:</label>
+                        <input type="number" min="0" id="speedTooSlowLimit" ng-model="modal.row.speedTooSlowLimit">
+                    </div>
 
-            <div class="form-group">
-                <div class="col-sm-6">
-                    <label for="groupId">{{'groupId'|translate}}:</label>
-                    <select id="groupId" ui-select2="modal.select2Options" data-ng-model="modal.row.stationGroup"
-                            data-placeholder="{{'chooseCategory'|translate}}">
-                        <option ng-selected="modal.selectedGroup(group.id)" ng-repeat="group in modal.stationGroups" value="{{group.id}}">{{group.name}}
-                        </option>
-                    </select>
                 </div>
-                <div class="col-sm-6">
-                    <label for="markerQty">{{'markerQty'|translate}}:</label>
-                    <input type="number" min="0" id="markerQty" ng-model="modal.row.markerQty">
-                </div>
-            </div>
+                <div class="form-group">
+                    <div class="col-sm-6">
+                        <label for="description">{{'description'|translate}}:</label>
+                        <input type="text" id="description" ng-model="modal.row.description">
+                    </div>
+                    <div class="col-sm-6">
+                        <label for="speedSlowLimit">{{'speedSlowLimit'|translate}}:</label>
+                        <input type="number" min="0" id="speedSlowLimit" ng-model="modal.row.speedSlowLimit">
+                    </div>
 
-            <div class="form-group">
-                <div class="col-sm-6">
-                    <label for="colorMode">{{'colorMode'|translate}}:</label>
-                    <input type="number" min="0" id="colorMode" ng-model="modal.row.colorMode">
                 </div>
-                <div class="col-sm-6">
-                    <label for="speedNormalLimit">{{'speedNormalLimit'|translate}}:</label>
-                    <input type="number" min="0" id="speedNormalLimit" ng-model="modal.row.speedNormalLimit">
-                </div>
-            </div>
-            <div class="form-group">
-                <div class="col-sm-6">
-                    <label for="speedTooSlowLimit">{{'speedTooSlowLimit'|translate}}:</label>
-                    <input type="number" min="0" id="speedTooSlowLimit" ng-model="modal.row.speedTooSlowLimit">
-                </div>
-                <div class="col-sm-6">
-                    <label for="unit">{{'unit'|translate}}:</label>
-                    <input type="text" id="unit" ng-model="modal.row.unit">
-                </div>
-            </div>
+                <div class="form-group">
+                    <div class="col-sm-6">
+                        <label for="groupId">{{'group'|translate}}:</label>
+                        <select id="groupId" ui-select2="modal.select2Options" data-ng-model="modal.row.stationGroup"
+                                data-placeholder="{{'chooseCategory'|translate}}">
+                            <option ng-selected="modal.selectedGroup(group.id)" ng-repeat="group in modal.stationGroups" value="{{group.id}}">{{group.name}}
+                            </option>
+                        </select>
+                    </div>
+                    <div class="col-sm-6">
+                        <label for="speedNormalLimit">{{'speedNormalLimit'|translate}}:</label>
+                        <input type="number" min="0" id="speedNormalLimit" ng-model="modal.row.speedNormalLimit">
+                    </div>
 
-            <div class="form-group">
-                <div class="col-sm-6">
-                    <label for="autoStanby">{{'autoStanby'|translate}}:</label>
-                    <input type="number" min="0" id="autoStanby" ng-model="modal.row.autoStanby">
                 </div>
-                <div class="col-sm-6 station-checkbox-top-margined">
-                    <label for="offFilter">{{'offFilter'|translate}}:</label>
-                    <input type="checkbox" id="offFilter" ng-checked="modal.row.offFilter" ng-model="modal.row.offFilter">
-                </div>
-            </div>
+                <div class="form-group">
+                    <div class="col-sm-6">
+                        <label for="lineNumber">{{'lineNumber'|translate}}:</label>
+                        <input type="number" min="0" id="lineNumber" ng-model="modal.row.lineNumber">
+                    </div>
+                    <div class="col-sm-6">
+                        <label for="markerQty">{{'markerQty'|translate}}:</label>
+                        <input type="number" min="0" id="markerQty" ng-model="modal.row.markerQty">
+                    </div>
 
-            <div class="form-group">
-                <div class="col-sm-6">
-                    <label for="signalInversion">{{'signalInversion'|translate}}:</label>
-                    <input type="checkbox" id="signalInversion" ng-checked="modal.row.signalInversion" ng-model="modal.row.signalInversion">
                 </div>
-                <div class="col-sm-6">
-                    <label for="stopTime">{{'stopTime'|translate}}:</label>
-                    <input type="checkbox" id="stopTime" ng-checked="modal.row.stopTime" ng-model="modal.row.stopTime">
+                <div class="form-group">
+                    <div class="col-sm-6">
+                        <label for="unit">{{'unit'|translate}}:</label>
+                        <input type="text" id="unit" ng-model="modal.row.unit">
+                    </div>
+                    <div class="col-sm-6">
+                        <label for="autoStanby">{{'autoStanby'|translate}}:</label>
+                        <input type="number" min="0" id="autoStanby" ng-model="modal.row.autoStanby">
+                    </div>
                 </div>
-            </div>
 
-            <div class="form-group">
-                <div class="col-sm-6">
-                    <label for="enabled">{{'enabled'|translate}}:</label>
-                    <input type="checkbox" id="enabled" ng-checked="modal.row.enabled" ng-model="modal.row.enabled">
+                <div class="form-group">
+                    <div class="col-sm-6">
+                        <label for="colorMode">{{'colorMode'|translate}}:</label>
+                        <input type="number" min="0" id="colorMode" ng-model="modal.row.colorMode">
+                    </div>
                 </div>
-                <div class="col-sm-6">
-                    <label for="standbyEnabled">{{'standbyEnabled'|translate}}:</label>
-                    <input type="checkbox" id="standbyEnabled" ng-checked="modal.row.standbyEnabled" ng-model="modal.row.standbyEnabled">
-                </div>
-            </div>
 
-            <div class="form-group">
-                <div class="col-sm-6">
-                    <label for="onFilter">{{'onFilter'|translate}}:</label>
-                    <input type="checkbox" id="onFilter" ng-checked="modal.row.onFilter" ng-model="modal.row.onFilter">
+
+                <div class="form-group">
+                    <div class="col-sm-6">
+                        <label for="signalInversion">{{'signalInversion'|translate}}:</label>
+                        <input type="checkbox" id="signalInversion" ng-checked="modal.row.signalInversion" ng-model="modal.row.signalInversion">
+                    </div>
+                    <div class="col-sm-6">
+                        <label for="stopTime">{{'stopTime'|translate}}:</label>
+                        <input type="checkbox" id="stopTime" ng-checked="modal.row.stopTime" ng-model="modal.row.stopTime">
+                    </div>
                 </div>
-                <div class="col-sm-6">
-                    <label for="effMarkersEnabled">{{'effMarkersEnabled'|translate}}:</label>
-                    <input type="checkbox" id="effMarkersEnabled" ng-checked="modal.row.effMarkersEnabled" ng-model="modal.row.effMarkersEnabled">
+
+                <div class="form-group">
+                    <div class="col-sm-6">
+                        <label for="enabled">{{'enabled'|translate}}:</label>
+                        <input type="checkbox" id="enabled" ng-checked="modal.row.enabled" ng-model="modal.row.enabled">
+                    </div>
+                    <div class="col-sm-6">
+                        <label for="standbyEnabled">{{'standbyEnabled'|translate}}:</label>
+                        <input type="checkbox" id="standbyEnabled" ng-checked="modal.row.standbyEnabled" ng-model="modal.row.standbyEnabled">
+                    </div>
                 </div>
-            </div>
+                <div class="form-group">
+                    <div class="col-sm-6">
+                        <label for="onFilter">{{'onFilter'|translate}}:</label>
+                        <input type="checkbox" id="onFilter" ng-checked="modal.row.onFilter" ng-model="modal.row.onFilter">
+                    </div>
+                    <div class="col-sm-6">
+                        <label for="effMarkersEnabled">{{'effMarkersEnabled'|translate}}:</label>
+                        <input type="checkbox" id="effMarkersEnabled" ng-checked="modal.row.effMarkersEnabled" ng-model="modal.row.effMarkersEnabled">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-6">
+                        <label for="offFilter">{{'offFilter'|translate}}:</label>
+                        <input type="checkbox" id="offFilter" ng-checked="modal.row.offFilter" ng-model="modal.row.offFilter">
+                    </div>
+                </div>
+            </section>
             <div class="row section-row">
                 <div class="col-xs-12">
-                    <h2 class="title">Station calendars</h2>
+                    <h2 class="title">{{'stationCalendars'|translate}}</h2>
 
                     <div class="buttons">
                         <button class="button" ng-click="modal.newStation()">{{'newStation'|translate}}</button>
@@ -117,9 +123,9 @@
                 <div class="text-center text-danger" ng-if="modal.errorNew"><h3>{{'newRecordError'|translate}}</h3></div>
             </div>
             <div class="form-group">
-
                 <div class="gridStyle" ui-grid="modal.gridCalendarInStation" ui-grid-pagination></div>
             </div>
+
         </div>
         <div class="modal-footer">
             <div class="form-group">

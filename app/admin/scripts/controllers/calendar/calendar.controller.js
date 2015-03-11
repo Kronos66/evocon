@@ -26,33 +26,6 @@
                 ctrl.lines = result;
             });
         };
-        var refreshExceptions = function (id)
-        {
-            CalendarExceptionDAO.query(id).then(function (result)
-            {
-                angular.forEach(result, function (exception)
-                {
-                    exception.startDate = moment(exception.startDate).format('DD.MM.YYYY');
-                    exception.endDate = moment(exception.endDate).format('DD.MM.YYYY');
-                    ctrl.dataCalendar.map(function (calendar)
-                    {
-                        if (exception.exceptionCalendar === calendar.id) {
-                            exception.calendarName = calendar.name;
-                        }
-                    });
-                    StationsDAO.query().then(function (result)
-                    {
-                        result.map(function (element)
-                        {
-                            if (exception.stationId === element.stationId) {
-                                exception.stationName = element.name;
-                            }
-                        });
-                    });
-                });
-                ctrl.exceptionsInCalendar = result;
-            });
-        };
         var actionsTemplate = '<span class="buttonActions"><a class="button link" ng-click="$event.stopPropagation();grid.appScope.calendarController.editRow(row.entity)">' +
                 '{{\'edit\'|translate}}</a>' +
                 '<a class="button link" ng-click="$event.stopPropagation();grid.appScope.calendarController.deleteRow(row.entity.id)">' +
@@ -93,7 +66,6 @@
             gridApi.selection.on.rowSelectionChanged($scope, function (row)
             {
                 refreshLine(row.entity.id);
-                refreshExceptions(row.entity.id);
                 var actionsTemplate2 = '<span class="buttonActions"><a class="button link" ng-click="$event.stopPropagation();grid.appScope.calendarController.editLine(row.entity)">' +
                         '{{\'edit\'|translate}}</a>' +
                         '<a class="button link" ng-click="$event.stopPropagation();grid.appScope.calendarController.deleteLine(row.entity.id)">' +
@@ -127,30 +99,6 @@
                                          cellTemplate: actionsTemplate2,
                                          enableSorting: false,
                                          enableHiding: false
-                                     }]
-                    };
-                    ctrl.exceptionsGrid = {
-                        paginationPageSizes: [10, 20, 30],
-                        paginationPageSize: 10,
-                        data: 'calendarController.exceptionsInCalendar',
-                        columnDefs: [{
-                                         field: 'id',
-                                         displayName: 'Id'
-                                     },
-                                     {
-                                         field: 'stationName',
-                                         displayName: 'Station'
-                                     },
-                                     {
-                                         field: 'calendarName',
-                                         displayName: 'Exception Calendar'
-                                     },
-                                     {
-                                         field: 'startDate',
-                                         displayName: 'Start Date'
-                                     }, {
-                                         field: 'endDate',
-                                         displayName: 'End date'
                                      }]
                     };
                 } else {

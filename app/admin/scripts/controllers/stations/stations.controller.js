@@ -2,7 +2,7 @@
 {
     'use strict';
 
-    function StationsController($modal, $scope, StationsDAO, StationGroupDAO)
+    function StationsController($modal,  StationsDAO, StationGroupDAO)
     {
         var ctrl = this;
         this.selected = null;
@@ -22,7 +22,7 @@
                 ctrl.data = ctrl.data.map(function (element)
                 {
                     for (var i = 0; i < result.length; i++) {
-                        if (parseInt(element.stationGroup) === result[i].id) {
+                        if (parseInt(element.groupId) === result[i].id) {
                             element.groupName = result[i].name;
                         }
                     }
@@ -30,7 +30,6 @@
                 });
             });
         };
-
         var actionsTemplate = '<span class="buttonActions"><a class="button link" ng-click="$event.stopPropagation();grid.appScope.stationsController.editRow(row.entity)">' +
                 '{{\'edit\'|translate}}</a>' +
                 '<a class="button link" ng-click="$event.stopPropagation();grid.appScope.stationsController.deleteRow(row.entity.stationId)">' +
@@ -70,30 +69,6 @@
                              enableSorting: false,
                              enableHiding: false
                          }]
-        };
-
-        this.gridOptions.onRegisterApi = function (gridApi)
-        {
-            ctrl.gridApi = gridApi;
-            gridApi.selection.on.rowSelectionChanged($scope, function (row)
-            {
-                if (ctrl.selected !== row.entity.stationId) {
-                    ctrl.selected = row.entity.stationId;
-                    StationsDAO.get(row.entity.stationId).then(function (result)
-                    {
-                        angular.forEach(ctrl.listStationGroups, function (element)
-                        {
-                            if (parseInt(result.stationGroup) === element.id) {
-                                result.groupName = element.name;
-                            }
-                        });
-                        ctrl.detailsStation = result;
-                    });
-                } else {
-                    ctrl.detailsStation = null;
-                    ctrl.selected = null;
-                }
-            });
         };
         this.addStation = function ()
         {
@@ -195,7 +170,6 @@
             modalInstance.result.then(function ()
             {
                 ctrl.selected = null;
-                ctrl.gridApi.selection.clearSelectedRows();
                 StationsDAO.remove(stationId).then(refresh);
             });
 
@@ -203,5 +177,5 @@
         refresh();
     }
 
-    angular.module('evoReports').controller('stationsController', ['$modal', '$scope', 'StationsDAO', 'StationGroupDAO', StationsController]);
+    angular.module('evoReports').controller('stationsController', ['$modal', 'StationsDAO', 'StationGroupDAO', StationsController]);
 })();

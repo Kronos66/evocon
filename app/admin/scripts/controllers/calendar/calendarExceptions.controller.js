@@ -81,7 +81,7 @@
                     $timeout(function ()
                     {
                         ctrl.errorNew = false;
-                    }, 500);
+                    }, 3000);
                     ctrl.errorNew = true;
                 }
             }
@@ -100,7 +100,7 @@
             $timeout(function ()
             {
                 ctrl.errorSave = false;
-            }, 500);
+            }, 3000);
             if (!ctrl.errorSave) {
                 $close(ctrl.listExceptions);
             }
