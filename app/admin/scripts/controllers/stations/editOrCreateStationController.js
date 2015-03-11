@@ -149,7 +149,7 @@
                          {
                              headerCellClass: 'actions-header',
                              cellClass: 'actions-column',
-                             maxWidth: 120,
+                             maxWidth: 80,
                              enableSorting: false,
                              enableHiding: false,
                              field: 'remove',
