@@ -178,7 +178,7 @@
                 ctrl.errorMessage = true;
 
                 var from = ( recentlyDragged.wasMemberArea ) ? ctrl.othersOperatorsFiltered : ctrl.membership,
-                        dest = ( recentlyDragged.wasMemberArea ) ? ctrl.membership : ctrl.othersOperatorsFiltered;
+                    dest = ( recentlyDragged.wasMemberArea ) ? ctrl.membership : ctrl.othersOperatorsFiltered;
 
                 for (var i = 0; i < from.length; i++) {
                     if (from[i] && from[i].id === recentlyDragged.obj.id) {
