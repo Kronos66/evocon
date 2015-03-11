@@ -20,13 +20,13 @@
             paginationPageSize: 10,
             columnDefs: [
                 {
-                    field: 'description',
-                    displayName: 'Description'
-                }, {
                     field: 'id',
                     displayName: 'Id',
                     maxWidth: 100,
                     minWidth: 100
+                },{
+                    field: 'description',
+                    displayName: 'Description'
                 }, {
                     field: 'inputs',
                     displayName: 'Inputs'

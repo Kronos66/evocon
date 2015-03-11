@@ -1,7 +1,7 @@
 (function ()
 {
     'use strict';
-    angular.module('evoReports').controller('overviewController', [ 'StationsDAO', function ( StationsDAO )
+    angular.module('evoReports').controller('overviewController', [ 'StationsDAO', 'StationGroupDAO', function ( StationsDAO, StationGroupDAO )
     {
         var ctrl = this,
             refresh = function() {
@@ -20,7 +20,23 @@
                             } );
                         } );
                 } );
-
+                getNamesOfGroups();
+            },
+            getNamesOfGroups = function() {
+                StationGroupDAO.query()
+                    .then( function( data ) {
+                            ctrl.data.groupName = ctrl.data.groupId.map( function( elem ) {
+                                if( elem === '' ) {
+                                    return elem;
+                                }
+                                for( var i=0; i<data.length; i++ ) {
+                                    if( elem === data[ i ].id ) {
+                                        return data[ i ].name;
+                                    }
+                                }
+                                return '';
+                            } );
+                        } );
             },
             trueFalseOrValue = function( val )
             {
@@ -41,6 +57,7 @@
             speedSlowLimit: [],
             lineNumber: [],
             groupId: [],
+            groupName: [],
             markerQty: [],
             colorMode: [],
             speedNormalLimit: [],
