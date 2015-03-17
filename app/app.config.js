@@ -13,7 +13,8 @@
                                                'angularMoment',
                                                'ngQuickDate',
                                                'ui.sortable',
-                                               'angularjs-dropdown-multiselect']);
+                                               'angularjs-dropdown-multiselect',
+                                               'ui.grid.infiniteScroll']);
     module.config(function ($provide, $translateProvider, $routeProvider)
     {
 

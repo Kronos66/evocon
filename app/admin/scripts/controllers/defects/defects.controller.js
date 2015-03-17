@@ -1,21 +1,45 @@
 (function ()
 {
     'use strict';
-    function DefectsController($modal, DefectsDAO, DefectsGroupDAO, StationsDAO)
+    function DefectsController($modal,$scope, DefectsDAO, DefectsGroupDAO, StationsDAO)
     {
         var actionsTemplate = '<span class="buttonActions"><a class="button link" ng-click="grid.appScope.defectsCtrl.editRow(row.entity)">{{\'edit\'|translate}}</a>' +
                 '<a class="button link" ng-click="grid.appScope.defectsCtrl.deleteRow(row.entity.id)">{{\'delete\'|translate}}</a>' +
                 '<a class="button link" ng-click="grid.appScope.defectsCtrl.stationRow(row.entity.id)">{{\'stations\'|translate}}</a></span>';
         var ctrl = this;
+        var data=[];
+        var page = 0;
+        var pageUp = 0;
+        var getData = function (data, page)
+        {
+            var res = [];
+            for (var i = (page * 20); i < (page + 1) * 20 && i < data.length; ++i) {
+                res.push(data[i]);
+            }
+            return res;
+        };
+
+        var getDataUp = function (data, page)
+        {
+            var res = [];
+            for (var i = data.length - (page * 20) - 1; (data.length - i) < ((page + 1) * 20) && (data.length - i) > 0; --i) {
+                if (data[i]) {
+                    res.push(data[i]);
+                }
+            }
+            return res;
+        };
         var refresh = function ()
         {
+            page = 0;
+            pageUp = 0;
             DefectsDAO.query().then(function (result)
             {
-                ctrl.defects = result;
+               data = result;
                 return DefectsGroupDAO.query();
             }).then(function (result)
             {
-                ctrl.defects = ctrl.defects.map(function (element)
+                data = data.map(function (element)
                 {
                     for (var i = 0; i < result.length; i++) {
                         if (element.groupId === result[i].id) {
@@ -24,13 +48,13 @@
                     }
                     return element;
                 });
+                ctrl.gridOptions.data = getData(data, page);
+                ++page;
             });
         };
         this.gridOptions = {
+            infiniteScrollPercentage: 10,
             enableRowHashing: false,
-            data: 'defectsCtrl.defects',
-            paginationPageSizes: [10, 20, 30],
-            paginationPageSize: 10,
             enableRowHeaderSelection: false,
             columnDefs: [{
                              field: 'name',
@@ -49,6 +73,55 @@
                              enableSorting: false,
                              enableHiding: false
                          }]
+        };
+        this.gridOptions.onRegisterApi = function (gridApi)
+        {
+            gridApi.infiniteScroll.on.needLoadMoreData($scope, function ()
+            {
+                var data = [];
+                DefectsDAO.query().then(function (result)
+                {
+                    data = result;
+                    return DefectsGroupDAO.query();
+                }).then(function (result)
+                {
+                    data = data.map(function (element)
+                    {
+                        for (var i = 0; i < result.length; i++) {
+                            if (element.groupId === result[i].id) {
+                                element.nameGroup = result[i].name;
+                            }
+                        }
+                        return element;
+                    });
+                    ctrl.gridOptions.data = ctrl.gridOptions.data.concat(getData(data, page));
+                    ++page;
+                    gridApi.infiniteScroll.dataLoaded();
+                });
+            });
+            gridApi.infiniteScroll.on.needLoadMoreDataTop($scope, function ()
+            {
+                var data = [];
+                DefectsDAO.query().then(function (result)
+                {
+                    data = result;
+                    return DefectsGroupDAO.query();
+                }).then(function (result)
+                {
+                    data = data.map(function (element)
+                    {
+                        for (var i = 0; i < result.length; i++) {
+                            if (element.groupId === result[i].id) {
+                                element.nameGroup = result[i].name;
+                            }
+                        }
+                        return element;
+                    });
+                    ctrl.gridOptions.data = getDataUp(data, pageUp).reverse().concat(ctrl.gridOptions.data);
+                    ++pageUp;
+                    gridApi.infiniteScroll.dataLoaded();
+                });
+            });
         };
         this.newGroup = function ()
         {
@@ -168,5 +241,5 @@
         refresh();
     }
 
-    angular.module('evoReports').controller('defectsController', ['$modal', 'DefectsDAO', 'DefectsGroupDAO', 'StationsDAO', DefectsController]);
+    angular.module('evoReports').controller('defectsController', ['$modal','$scope', 'DefectsDAO', 'DefectsGroupDAO', 'StationsDAO', DefectsController]);
 })();

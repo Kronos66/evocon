@@ -3,19 +3,48 @@
 {
     'use strict';
 
-    function CalendarController($modal, $scope, CalendarDAO, CalendarExceptionDAO, CalendarLineDAO, StationsDAO)
+    function CalendarController($modal, $scope, CalendarDAO, CalendarExceptionDAO, CalendarLineDAO)
     {
         var ctrl = this;
         var selected;
+        var pageCalendar = 0;
+        var pageLine = 0;
+        var pageUpCalendar = 0;
+        var pageUpLine = 0;
+        var getData = function (data, page)
+        {
+            var res = [];
+            for (var i = (page * 20); i < (page + 1) * 20 && i < data.length; ++i) {
+                res.push(data[i]);
+            }
+            return res;
+        };
+
+        var getDataUp = function (data, page)
+        {
+            var res = [];
+            for (var i = data.length - (page * 20) - 1; (data.length - i) < ((page + 1) * 20) && (data.length - i) > 0; --i) {
+                if (data[i]) {
+                    res.push(data[i]);
+                }
+            }
+            return res;
+        };
         var refresh = function ()
         {
+            pageCalendar = 0;
+            pageUpCalendar = 0;
             CalendarDAO.query().then(function (result)
             {
-                ctrl.dataCalendar = result;
+                ctrl.calendarGrid.data = getData(result, pageCalendar);
+                ++pageCalendar;
             });
         };
+
         var refreshLine = function (id)
         {
+            pageLine = 0;
+            pageUpLine = 0;
             CalendarLineDAO.query(id).then(function (result)
             {
                 angular.forEach(result, function (calendarLine)
@@ -23,7 +52,8 @@
                     calendarLine.startTime = moment('1970-01-01 ' + calendarLine.startTime).format('HH:mm');
                     calendarLine.endTime = moment('1970-01-01 ' + calendarLine.endTime).format('HH:mm');
                 });
-                ctrl.lines = result;
+                ctrl.linesGrid.data = getData(result, pageLine);
+                ++pageLine;
             });
         };
         var actionsTemplate = '<span class="buttonActions"><a class="button link" ng-click="$event.stopPropagation();grid.appScope.calendarController.editRow(row.entity)">' +
@@ -31,13 +61,11 @@
                 '<a class="button link" ng-click="$event.stopPropagation();grid.appScope.calendarController.deleteRow(row.entity.id)">' +
                 '{{\'delete\'|translate}}</a>' +
                 '<a class="button link" ng-click="$event.stopPropagation();grid.appScope.calendarController.addException(row.entity)">Exceptions</a></span>';
-        this.gridOptions = {
+        this.calendarGrid = {
             enableRowHeaderSelection: false,
             enableRowSelection: true,
+            infiniteScrollPercentage: 10,
             multiSelect: false,
-            data: 'calendarController.dataCalendar',
-            paginationPageSizes: [10, 20, 30],
-            paginationPageSize: 10,
             columnDefs: [{
                              field: 'name',
                              displayName: 'Name'
@@ -60,11 +88,12 @@
                              enableHiding: false
                          }]
         };
-        this.gridOptions.onRegisterApi = function (gridApi)
+        this.calendarGrid.onRegisterApi = function (calendarApi)
         {
-            var data;
-            gridApi.selection.on.rowSelectionChanged($scope, function (row)
+            var data = null;
+            calendarApi.selection.on.rowSelectionChanged($scope, function (row)
             {
+
                 refreshLine(row.entity.id);
                 var actionsTemplate2 = '<span class="buttonActions"><a class="button link" ng-click="$event.stopPropagation();grid.appScope.calendarController.editLine(row.entity)">' +
                         '{{\'edit\'|translate}}</a>' +
@@ -72,12 +101,11 @@
                         '{{\'delete\'|translate}}</a></span>';
                 if (data !== row) {
                     data = row;
+                    pageLine = 0;
+                    pageUpLine = 0;
                     selected = row.entity;
                     ctrl.visible = true;
-                    ctrl.gridOptions2 = {
-                        paginationPageSizes: [10, 20, 30],
-                        paginationPageSize: 10,
-                        data: 'calendarController.lines',
+                    ctrl.linesGrid = {
                         columnDefs: [{
                                          field: 'id',
                                          displayName: 'ID'
@@ -101,11 +129,69 @@
                                          enableHiding: false
                                      }]
                     };
+                    ctrl.linesGrid.onRegisterApi = function (lineApi)
+                    {
+                        lineApi.infiniteScroll.on.needLoadMoreData($scope, function ()
+                        {
+                            CalendarLineDAO.query(row.entity.id).then(function (result)
+                            {
+                                angular.forEach(result, function (calendarLine)
+                                {
+                                    calendarLine.startTime = moment('1970-01-01 ' + calendarLine.startTime).format('HH:mm');
+                                    calendarLine.endTime = moment('1970-01-01 ' + calendarLine.endTime).format('HH:mm');
+                                });
+                                ctrl.linesGrid.data = ctrl.linesGrid.data.concat(getData(result, pageLine));
+                                ++pageLine;
+                                calendarApi.infiniteScroll.dataLoaded();
+                            });
+                        });
+                        lineApi.infiniteScroll.on.needLoadMoreDataTop($scope, function ()
+                        {
+                            CalendarLineDAO.query(row.entity.id).then(function (result)
+                            {
+                                angular.forEach(result, function (calendarLine)
+                                {
+                                    calendarLine.startTime = moment('1970-01-01 ' + calendarLine.startTime).format('HH:mm');
+                                    calendarLine.endTime = moment('1970-01-01 ' + calendarLine.endTime).format('HH:mm');
+                                });
+                                ctrl.linesGrid.data = getDataUp(result, pageUpLine).reverse().concat(ctrl.linesGrid.data);
+                                ++pageUpLine;
+                                lineApi.infiniteScroll.dataLoaded();
+                            });
+                        });
+                    };
                 } else {
                     ctrl.visible = false;
                     data = null;
                 }
             });
+            calendarApi.infiniteScroll.on.needLoadMoreData($scope, function ()
+            {
+                CalendarDAO.query().then(function (result)
+                {
+                    ctrl.calendarGrid.data = ctrl.calendarGrid.data.concat(getData(result, pageCalendar));
+                    ++pageCalendar;
+                    calendarApi.infiniteScroll.dataLoaded();
+                }).catch(function ()
+                {
+                    calendarApi.infiniteScroll.dataLoaded();
+                });
+
+            });
+            calendarApi.infiniteScroll.on.needLoadMoreDataTop($scope, function ()
+            {
+                CalendarDAO.query().then(function (result)
+                {
+                    ctrl.calendarGrid.data = getDataUp(result, pageUpCalendar).reverse().concat(ctrl.calendarGrid.data);
+                    ++pageUpCalendar;
+                    calendarApi.infiniteScroll.dataLoaded();
+                }).catch(function ()
+                {
+                    calendarApi.infiniteScroll.dataLoaded();
+                });
+
+            });
+
         };
 
         function saveOrCreateException(exceptions)
@@ -123,7 +209,7 @@
                     saveOrCreateException(exceptions);
                 }).catch(function ()
                 {
-                    //    temporary because back-edn respond 405.....
+                    // TODO   temporary because back-edn respond 405.....
                     exceptions.splice(0, 1);
                     saveOrCreateException(exceptions);
                 });
@@ -289,5 +375,5 @@
     }
 
     angular.module('evoReports').controller('calendarController',
-            ['$modal', '$scope', 'CalendarDAO', 'CalendarExceptionDAO', 'CalendarLineDAO', 'StationsDAO', CalendarController]);
+            ['$modal', '$scope', 'CalendarDAO', 'CalendarExceptionDAO', 'CalendarLineDAO', CalendarController]);
 })();

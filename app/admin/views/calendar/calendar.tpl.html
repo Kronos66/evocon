@@ -10,7 +10,7 @@
                 </div>
             </div>
         </div>
-        <div class="grid-style" ui-grid="calendarController.gridOptions" ui-grid-pagination ui-grid-selection></div>
+        <div class="grid-style" ui-grid="calendarController.calendarGrid"  ui-grid-infinite-scroll ui-grid-selection></div>
     </section>
     <section class="no-bordered">
         <div ng-if="calendarController.visible">
@@ -22,7 +22,7 @@
                     </div>
                 </div>
             </div>
-            <div class="grid-style" ui-grid="calendarController.gridOptions2" ui-grid-pagination></div>
+            <div class="grid-style" ui-grid="calendarController.linesGrid" ui-grid-infinite-scroll></div>
         </div>
         <div class="row section-row"></div>
         <div class="row section-row"></div>

@@ -114,17 +114,17 @@ function setupBackendMock($httpBackend)
                     }, {
                         id: sequence++, name: 'Adam', groupId: 2, category: 'Productive', color: 'Pause'
                     }, {
-                        id: sequence++, name: 'Cat', groupId: 1, category: 'Productive', color: 'Pause'
+                        id: sequence++, name: 'Simple', groupId: 1, category: 'Productive', color: 'Pause'
                     }, {
                         id: sequence++, name: 'Cat', groupId: 1, category: 'Productive', color: 'Pause'
                     }, {
-                        id: sequence++, name: 'Cat', groupId: 1, category: 'Productive', color: 'Pause'
+                        id: sequence++, name: 'Broken', groupId: 1, category: 'Productive', color: 'Pause'
                     }, {
-                        id: sequence++, name: 'Cat', groupId: 1, category: 'Productive', color: 'Pause'
+                        id: sequence++, name: 'Phone', groupId: 1, category: 'Productive', color: 'Pause'
                     }, {
-                        id: sequence++, name: 'Cat', groupId: 1, category: 'Productive', color: 'Pause'
+                        id: sequence++, name: 'Mock', groupId: 1, category: 'Productive', color: 'Pause'
                     }, {
-                        id: sequence++, name: 'Cat', groupId: 1, category: 'Productive', color: 'Pause'
+                        id: sequence++, name: 'Backend', groupId: 1, category: 'Productive', color: 'Pause'
                     }, {
                         id: sequence++, name: 'Cat', groupId: 1, category: 'Productive', color: 'Pause'
                     }, {

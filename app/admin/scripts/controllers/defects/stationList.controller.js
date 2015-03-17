@@ -5,15 +5,30 @@
     {
         var ctrl = this;
         ctrl.addStations = [];
-        StationsDAO.query().then(function (result)
+        var page = 0;
+        var pageUp = 0;
+        var getData = function (data, page)
         {
-            ctrl.listStations = result;
-        });
+            var res = [];
+            for (var i = (page * 20); i < (page + 1) * 20 && i < data.length; ++i) {
+                res.push(data[i]);
+            }
+            return res;
+        };
+
+        var getDataUp = function (data, page)
+        {
+            var res = [];
+            for (var i = data.length - (page * 20) - 1; (data.length - i) < ((page + 1) * 20) && (data.length - i) > 0; --i) {
+                if (data[i]) {
+                    res.push(data[i]);
+                }
+            }
+            return res;
+        };
+
         this.gridOptions = {
             enableRowSelection: true,
-            paginationPageSizes: [10, 20, 30],
-            paginationPageSize: 10,
-            data: 'modal.listStations',
             columnDefs: [{
                              field: 'stationId', displayName: 'ID'
                          }, {
@@ -34,7 +49,31 @@
                     ctrl.addStations.splice(indexOf, 1);
                 }
             });
+            gridApi.infiniteScroll.on.needLoadMoreData($scope, function ()
+            {
+                StationsDAO.query().then(function (result)
+                {
+                    ctrl.gridOptions.data = ctrl.gridOptions.data.concat(getData(result, page));
+                    ++page;
+                    gridApi.infiniteScroll.dataLoaded();
+                });
+            });
+            gridApi.infiniteScroll.on.needLoadMoreDataTop($scope, function ()
+            {
+                StationsDAO.query().then(function (result)
+                {
+                    ctrl.gridOptions.data = getDataUp(result, pageUp).reverse().concat(ctrl.gridOptions.data);
+                    ++pageUp;
+                    gridApi.infiniteScroll.dataLoaded();
+                });
+            });
         };
+
+        StationsDAO.query().then(function (result)
+        {
+            ctrl.gridOptions.data = getData(result, page);
+            ++page;
+        });
     }
 
     angular.module('evoReports').controller('stationListController', ['$scope', 'StationsDAO', StationListController]);

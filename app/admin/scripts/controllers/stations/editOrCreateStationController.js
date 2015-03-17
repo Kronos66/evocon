@@ -1,10 +1,32 @@
 (function ()
 {
     'use strict';
-    function EditOrCreateStationController($timeout, CalendarDAO, station, StationsDAO, StationGroupDAO)
+    function EditOrCreateStationController($timeout, $scope, CalendarDAO, station, StationsDAO, StationGroupDAO)
     {
         station.enabled = (station.enabled === 'Yes');
         var ctrl = this;
+        var data = [];
+        var page = 0;
+        var pageUp = 0;
+        var getData = function (data, page)
+        {
+            var res = [];
+            for (var i = (page * 20); i < (page + 1) * 20 && i < data.length; ++i) {
+                res.push(data[i]);
+            }
+            return res;
+        };
+
+        var getDataUp = function (data, page)
+        {
+            var res = [];
+            for (var i = data.length - (page * 20) - 1; (data.length - i) < ((page + 1) * 20) && (data.length - i) > 0; --i) {
+                if (data[i]) {
+                    res.push(data[i]);
+                }
+            }
+            return res;
+        };
         this.row = station;
         ctrl.days = [
             {
@@ -37,6 +59,8 @@
             }];
         var refreshCalendar = function ()
         {
+            page = 0;
+            pageUp = 0;
             StationsDAO.queryCalendar(station.stationId).then(function (result)
             {
                 ctrl.row.calendarInStation = result || [];
@@ -62,6 +86,8 @@
                     element.days = days;
                     return element;
                 });
+                ctrl.gridCalendarInStation.data = getData(ctrl.row.calendarInStation, page);
+                ++page;
             });
         };
         StationGroupDAO.query().then(function (result)
@@ -75,6 +101,7 @@
         };
         this.newStation = function ()
         {
+            ctrl.row.calendarInStation = ctrl.gridCalendarInStation.data;
             if (!ctrl.row.calendarInStation || 0 === ctrl.row.calendarInStation.length) {
                 ctrl.row.calendarInStation = [];
                 ctrl.row.calendarInStation.push({stationId: station.stationId, days: []});
@@ -95,6 +122,7 @@
         };
         this.save = function ($close)
         {
+            ctrl.row.calendarInStation = ctrl.gridCalendarInStation.data;
             if (0 !== ctrl.row.calendarInStation.length) {
                 for (var i = 0; i < ctrl.row.calendarInStation.length; i++) {
                     var calendar = ctrl.row.calendarInStation[i];
@@ -122,9 +150,6 @@
             buttonDefaultText: 'Days'
         };
         this.gridCalendarInStation = {
-            paginationPageSizes: [10, 20, 30],
-            paginationPageSize: 10,
-            data: 'modal.row.calendarInStation',
             columnDefs: [{
                              field: 'calendarName',
                              displayName: 'Calendar',
@@ -133,7 +158,6 @@
                          {
                              field: 'days',
                              displayName: 'Days',
-                             //cellTemplate: '<select multiple id="calendar" ui-select2="grid.appScope.modal.select2OptionsDays" data-ng-model="row.entity.days">\n    <option ng-selected="grid.appScope.modal.checkSelectedDays($index,row.entity.id)" ng-repeat="day in grid.appScope.modal.days" value="{{day.id}}">\n        {{day.label}}\n    </option>\n</select>'
                              cellTemplate: '<div ng-dropdown-multiselect options="grid.appScope.modal.days" selected-model="row.entity.days" extra-settings="grid.appScope.modal.daysSettings"  translation-texts="grid.appScope.modal.placeholderDays"></div>'
                          },
                          {
@@ -157,8 +181,78 @@
                              cellTemplate: '<span class="buttonActions">\n    <a class="button link" ng-click="$event.stopPropagation();grid.appScope.modal.deleteCalendar(row.entity)">\n        {{\'delete\'|translate}}</a>\n</span>'
                          }]
         };
+        this.gridCalendarInStation.onRegisterApi = function (gridApi)
+        {
+            gridApi.infiniteScroll.on.needLoadMoreData($scope, function ()
+            {
+                var localData = [];
+                StationsDAO.queryCalendar(station.stationId).then(function (result)
+                {
+                    localData = result || [];
+                    return CalendarDAO.query();
+                }).then(function (result)
+                {
+                    ctrl.listCalendars = result;
+                    localData.map(function (element)
+                    {
+                        var days = [];
+                        for (var i = 0; i < result.length; i++) {
+                            if (element.calendarId === result[i].id) {
+                                element.calendarName = result[i].name;
+                            }
+                        }
+                        for (var j = 0; j < element.days.length; j++) {
+                            for (var k = 0; k < ctrl.days.length; k++) {
+                                if (parseInt(element.days.substring(j, j + 1)) === ctrl.days[k].id) {
+                                    days.push({id: parseInt(element.days.substring(j, j + 1)), label: ctrl.days[k].label});
+                                }
+                            }
+                        }
+                        element.days = days;
+                        return element;
+                    });
+                    ctrl.gridCalendarInStation.data = ctrl.gridCalendarInStation.data.concat(getData(localData, page));
+                    ++page;
+                    gridApi.infiniteScroll.dataLoaded();
+                });
+            });
+            gridApi.infiniteScroll.on.needLoadMoreDataTop($scope, function ()
+            {
+                var localData = [];
+                StationsDAO.queryCalendar(station.stationId).then(function (result)
+                {
+                    localData = result || [];
+                    return CalendarDAO.query();
+                }).then(function (result)
+                {
+                    ctrl.listCalendars = result;
+                    localData.map(function (element)
+                    {
+                        var days = [];
+                        for (var i = 0; i < result.length; i++) {
+                            if (element.calendarId === result[i].id) {
+                                element.calendarName = result[i].name;
+                            }
+                        }
+                        for (var j = 0; j < element.days.length; j++) {
+                            for (var k = 0; k < ctrl.days.length; k++) {
+                                if (parseInt(element.days.substring(j, j + 1)) === ctrl.days[k].id) {
+                                    days.push({id: parseInt(element.days.substring(j, j + 1)), label: ctrl.days[k].label});
+                                }
+                            }
+                        }
+                        element.days = days;
+                        return element;
+                    });
+                    ctrl.gridCalendarInStation.data = getDataUp(localData, pageUp).reverse().concat(ctrl.gridCalendarInStation.data);
+                    ++pageUp;
+                    gridApi.infiniteScroll.dataLoaded();
+                });
+            });
+        };
         this.deleteCalendar = function (calendar)
         {
+            ctrl.row.calendarInStation = data;
             if (calendar.id) {
                 StationsDAO.removeCalendar({stationId: station.stationId, removeId: calendar.id}).then(refreshCalendar);
             } else {
@@ -180,5 +274,5 @@
     }
 
     angular.module('evoReports').controller('editOrCreateStationController',
-            ['$timeout', 'CalendarDAO', 'station', 'StationsDAO', 'StationGroupDAO', EditOrCreateStationController]);
+            ['$timeout', '$scope', 'CalendarDAO', 'station', 'StationsDAO', 'StationGroupDAO', EditOrCreateStationController]);
 })();

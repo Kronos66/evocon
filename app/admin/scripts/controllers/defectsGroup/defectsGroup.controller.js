@@ -6,11 +6,40 @@
     {
         var ctrl = this;
         var selectedGroup;
+
+        var pageGroupDefect = 0;
+        var pageUpGroupDefect = 0;
+
+        var pageDefects = 0;
+        var pageUpDefects = 0;
+
+        var getData = function (data, page)
+        {
+            var res = [];
+            for (var i = (page * 20); i < (page + 1) * 20 && i < data.length; ++i) {
+                res.push(data[i]);
+            }
+            return res;
+        };
+
+        var getDataUp = function (data, page)
+        {
+            var res = [];
+            for (var i = data.length - (page * 20) - 1; (data.length - i) < ((page + 1) * 20) && (data.length - i) > 0; --i) {
+                if (data[i]) {
+                    res.push(data[i]);
+                }
+            }
+            return res;
+        };
         var refresh = function ()
         {
+            pageGroupDefect = 0;
+            pageUpGroupDefect = 0;
             DefectsGroupDAO.query().then(function (result)
             {
-                ctrl.defectsGroup = result;
+                ctrl.gridOptions.data = getData(result, pageGroupDefect);
+                ++pageGroupDefect;
             });
         };
         var actionsTemplate = '<span class="buttonActions"><a class="button link" ng-click="$event.stopPropagation();grid.appScope.groupCtrl.editRow(row.entity)">' +
@@ -19,12 +48,10 @@
                 '{{\'delete\'|translate}}</a></span>';
 
         this.gridOptions = {
+            infiniteScrollPercentage: 10,
             enableRowHeaderSelection: false,
             enableRowSelection: true,
             multiSelect: false,
-            data: 'groupCtrl.defectsGroup',
-            paginationPageSizes: [10, 20, 30],
-            paginationPageSize: 10,
             columnDefs: [{
                              field: 'name', displayName: 'Name'
                          }, {
@@ -39,6 +66,8 @@
             {
                 if (selectedGroup !== row.entity.id) {
                     selectedGroup = row.entity.id;
+                    pageDefects = 0;
+                    pageUpDefects = 0;
                     DefectsGroupDAO.getDefects(row.entity.id).then(function (result)
                     {
                         ctrl.visibled = true;
@@ -49,14 +78,29 @@
                     selectedGroup = '';
                 }
             });
+            gridApi.infiniteScroll.on.needLoadMoreData($scope, function ()
+            {
+                DefectsGroupDAO.query().then(function (result)
+                {
+                    ctrl.gridOptions.data = ctrl.gridOptions.data.concat(getData(result, pageGroupDefect));
+                    ++pageGroupDefect;
+                    gridApi.infiniteScroll.dataLoaded();
+                });
+            });
+            gridApi.infiniteScroll.on.needLoadMoreDataTop($scope, function ()
+            {
+                DefectsGroupDAO.query().then(function (result)
+                {
+                    ctrl.gridOptions.data = getDataUp(result, pageUpGroupDefect).reverse().concat(ctrl.gridOptions.data);
+                    ++pageUpGroupDefect;
+                    gridApi.infiniteScroll.dataLoaded();
+                });
+            });
         };
         this.gridOptions2 = {
             enableRowHeaderSelection: false,
             enableRowSelection: false,
             multiSelect: false,
-            data: 'groupCtrl.defectsInGroup',
-            paginationPageSizes: [10, 20, 30],
-            paginationPageSize: 10,
             columnDefs: [{
                              field: 'name', displayName: 'Name'
                          }, {
@@ -66,6 +110,27 @@
                          }, {
                              field: 'createdDate', displayName: 'Created'
                          }]
+        };
+        this.gridOptions2.onRegisterApi = function (gridApi)
+        {
+            gridApi.infiniteScroll.on.needLoadMoreData($scope, function ()
+            {
+                DefectsGroupDAO.getDefects(selectedGroup).then(function (result)
+                {
+                    ctrl.gridOptions2.data = ctrl.gridOptions2.data.concat(getData(result, pageDefects));
+                    ++pageDefects;
+                    gridApi.infiniteScroll.dataLoaded();
+                });
+            });
+            gridApi.infiniteScroll.on.needLoadMoreDataTop($scope, function ()
+            {
+                DefectsGroupDAO.getDefects(selectedGroup).then(function (result)
+                {
+                    ctrl.gridOptions2.data = getDataUp(result, pageUpDefects).reverse().concat(ctrl.gridOptions2.data);
+                    ++pageUpDefects;
+                    gridApi.infiniteScroll.dataLoaded();
+                });
+            });
         };
         this.editRow = function (row)
         {

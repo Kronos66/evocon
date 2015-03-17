@@ -10,7 +10,27 @@
                     recentlyDragged = [],
                     selectedRow;
 
+            var page = 0;
+            var pageUp = 0;
+            var getData = function (data, page)
+            {
+                var res = [];
+                for (var i = (page * 20); i < (page + 1) * 20 && i < data.length; ++i) {
+                    res.push(data[i]);
+                }
+                return res;
+            };
 
+            var getDataUp = function (data, page)
+            {
+                var res = [];
+                for (var i = data.length - (page * 20) - 1; (data.length - i) < ((page + 1) * 20) && (data.length - i) > 0; --i) {
+                    if (data[i]) {
+                        res.push(data[i]);
+                    }
+                }
+                return res;
+            };
             ctrl.errorMessage = false;
 
             ctrl.filter = {query: null, size: 10};
@@ -23,25 +43,24 @@
             };
 
 
-
-
             var refresh = function ()
             {
-                teamsDAO.query()
-                    .then(function (data)
-                    {
-                        ctrl.gridOptions.data = data;
-                    });
+                page = 0;
+                pageUp = 0;
+                teamsDAO.query().then(function (data)
+                {
+                    ctrl.gridOptions.data = getData(data, page);
+                    ++page;
+                });
             };
 
             ctrl.othersOperatorsFiltered = [];
             ctrl.showDDArea = false;
             ctrl.gridOptions = {
                 enableRowSelection: true,
+                infiniteScrollPercentage: 10,
                 enableRowHeaderSelection: false,
                 multiSelect: false,
-                paginationPageSizes: [10, 20, 30],
-                paginationPageSize: 10,
                 columnDefs: [
                     {
                         field: 'name',
@@ -118,6 +137,24 @@
                                 paginationRefresh();
                             });
                 });
+                gridApi.infiniteScroll.on.needLoadMoreData($scope, function ()
+                {
+                    teamsDAO.query().then(function (data)
+                    {
+                        ctrl.gridOptions.data = ctrl.gridOptions.data.concat(getData(data, page));
+                        ++page;
+                        gridApi.infiniteScroll.dataLoaded();
+                    });
+                });
+                gridApi.infiniteScroll.on.needLoadMoreDataTop($scope, function ()
+                {
+                    teamsDAO.query().then(function (data)
+                    {
+                        ctrl.gridOptions.data = getDataUp(data, pageUp).reverse().concat(ctrl.gridOptions.data);
+                        ++pageUp;
+                        gridApi.infiniteScroll.dataLoaded();
+                    });
+                });
             };
 
             ctrl.newTeam = function ()
@@ -178,7 +215,7 @@
                 ctrl.errorMessage = true;
 
                 var from = ( recentlyDragged.wasMemberArea ) ? ctrl.othersOperatorsFiltered : ctrl.membership,
-                    dest = ( recentlyDragged.wasMemberArea ) ? ctrl.membership : ctrl.othersOperatorsFiltered;
+                        dest = ( recentlyDragged.wasMemberArea ) ? ctrl.membership : ctrl.othersOperatorsFiltered;
 
                 for (var i = 0; i < from.length; i++) {
                     if (from[i] && from[i].id === recentlyDragged.obj.id) {
@@ -217,16 +254,15 @@
             var receive = function (event, ui)
             {
                 recentlyDragged.obj = ui.item.sortable.model;
-                recentlyDragged.wasMemberArea = ui.item.sortable.source.attr( 'id' ) === 'members';
+                recentlyDragged.wasMemberArea = ui.item.sortable.source.attr('id') === 'members';
 
-                if( recentlyDragged.wasMemberArea === true ) {
+                if (recentlyDragged.wasMemberArea === true) {
                     remove();
                 }
-                else if( recentlyDragged.wasMemberArea === false ) {
+                else if (recentlyDragged.wasMemberArea === false) {
                     add();
                 }
             };
-
 
 
             ctrl.sortableOptions = {

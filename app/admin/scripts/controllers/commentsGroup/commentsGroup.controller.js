@@ -5,11 +5,37 @@
     {
         var ctrl = this;
         var selectedGroup;
+        var pageCommentsGroup = 0;
+        var pageUpCommentGroup = 0;
+        var pageComments = 0;
+        var pageUpComments = 0;
+        var getData = function (data, page)
+        {
+            var res = [];
+            for (var i = (page * 20); i < (page + 1) * 20 && i < data.length; ++i) {
+                res.push(data[i]);
+            }
+            return res;
+        };
+
+        var getDataUp = function (data, page)
+        {
+            var res = [];
+            for (var i = data.length - (page * 20) - 1; (data.length - i) < ((page + 1) * 20) && (data.length - i) > 0; --i) {
+                if (data[i]) {
+                    res.push(data[i]);
+                }
+            }
+            return res;
+        };
         var refresh = function ()
         {
+            pageCommentsGroup = 0;
+            pageUpCommentGroup = 0;
             CommentsGroupDAO.query().then(function (result)
             {
-                ctrl.commentsGroup = result;
+                ctrl.gridOptions.data = getData(result, pageCommentsGroup);
+                ++pageCommentsGroup;
             });
         };
         var actionsTemplate = '<span class="buttonActions"><a class="button link" ng-click="$event.stopPropagation();grid.appScope.groupCtrl.editRow(row.entity)">' +
@@ -20,9 +46,7 @@
             enableRowHeaderSelection: false,
             enableRowSelection: true,
             multiSelect: false,
-            data: 'groupCtrl.commentsGroup',
-            paginationPageSizes: [10, 20, 30],
-            paginationPageSize: 10,
+            infiniteScrollPercentage: 10,
             columnDefs: [{
                              field: 'name', displayName: 'Name'
                          }, {
@@ -33,9 +57,36 @@
                              maxWidth: 100, field: ' ', cellTemplate: actionsTemplate, enableSorting: false, enableHiding: false
                          }]
         };
-        this.gridOptions.onRegisterApi = function (gridApi)
+        this.gridOptions2 = {};
+        this.gridOptions2.onRegisterApi = function (commentsApi)
         {
-            gridApi.selection.on.rowSelectionChanged($scope, function (row)
+            commentsApi.infiniteScroll.on.needLoadMoreData($scope, function ()
+            {
+                CommentsGroupDAO.getComments(selectedGroup).then(function (result)
+                {
+                    pageComments = 0;
+                    pageUpComments = 0;
+                    ctrl.visibled = true;
+                    ctrl.gridOptions2.data = ctrl.gridOptions2.data.concat(getData(result, pageComments));
+                    ++pageComments;
+                    commentsApi.infiniteScroll.dataLoaded();
+                });
+            });
+            commentsApi.infiniteScroll.on.needLoadMoreDataTop($scope, function ()
+            {
+                CommentsGroupDAO.getComments(selectedGroup).then(function (result)
+                {
+                    ctrl.visibled = true;
+                    ctrl.gridOptions2.data = getDataUp(result, pageUpComments).reverse().concat(ctrl.gridOptions2.data);
+                    ++pageUpComments;
+                    commentsApi.infiniteScroll.dataLoaded();
+                });
+            });
+
+        };
+        this.gridOptions.onRegisterApi = function (groupCommentsApi)
+        {
+            groupCommentsApi.selection.on.rowSelectionChanged($scope, function (row)
             {
                 if (selectedGroup !== row.entity.id) {
                     selectedGroup = row.entity.id;
@@ -49,12 +100,26 @@
                     selectedGroup = '';
                 }
             });
+            groupCommentsApi.infiniteScroll.on.needLoadMoreData($scope, function ()
+            {
+                CommentsGroupDAO.query().then(function (result)
+                {
+                    ctrl.gridOptions.data = ctrl.gridOptions.data.concat(getData(result, pageCommentsGroup));
+                    ++pageCommentsGroup;
+                    groupCommentsApi.infiniteScroll.dataLoaded();
+                });
+            });
+            groupCommentsApi.infiniteScroll.on.needLoadMoreDataTop($scope, function ()
+            {
+                CommentsGroupDAO.query().then(function (result)
+                {
+                    ctrl.gridOptions.data = getDataUp(result, pageUpCommentGroup).reverse().concat(ctrl.gridOptions.data);
+                    ++pageUpCommentGroup;
+                    groupCommentsApi.infiniteScroll.dataLoaded();
+                });
+            });
         };
-        this.gridOptions2 = {
-            data: 'groupCtrl.commentsInGroup',
-            paginationPageSizes: [10, 20, 30],
-            paginationPageSize: 10
-        };
+
 
         this.editRow = function (row)
         {

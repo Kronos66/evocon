@@ -1,15 +1,39 @@
 (function ()
 {
     'use strict';
-    function CalendarExceptionController($timeout, calendar, CalendarDAO, CalendarExceptionDAO, StationsDAO)
+    function CalendarExceptionController($timeout,$scope, calendar, CalendarDAO, CalendarExceptionDAO, StationsDAO)
     {
         var ctrl = this;
         this.calendar = calendar;
+        var page = 0;
+        var pageUp = 0;
+        var data=[];
+        var getData = function (data, page)
+        {
+            var res = [];
+            for (var i = (page * 20); i < (page + 1) * 20 && i < data.length; ++i) {
+                res.push(data[i]);
+            }
+            return res;
+        };
+
+        var getDataUp = function (data, page)
+        {
+            var res = [];
+            for (var i = data.length - (page * 20) - 1; (data.length - i) < ((page + 1) * 20) && (data.length - i) > 0; --i) {
+                if (data[i]) {
+                    res.push(data[i]);
+                }
+            }
+            return res;
+        };
         var refresh = function ()
         {
+            page = 0;
+            pageUp = 0;
             CalendarExceptionDAO.query(calendar.id).then(function (result)
             {
-                ctrl.listExceptions = result.map(function (element)
+                data=result.map(function (element)
                 {
                     for (var i = 0; i < ctrl.listCalendars.length; i++) {
                         if (element.id === ctrl.listCalendars[i].id) {
@@ -18,6 +42,8 @@
                     }
                     return element;
                 });
+                ctrl.gridOptions.data = getData(result, page);
+                ++page;
             });
         };
         StationsDAO.query().then(function (result)
@@ -30,7 +56,7 @@
             return ctrl.listCalendars;
         }).then(refresh);
         this.gridOptions = {
-            data: 'exceptions.listExceptions',
+            infiniteScrollPercentage: 10,
             columnDefs: [{
                              field: 'station',
                              displayName: 'Station',
@@ -58,25 +84,66 @@
                              cellTemplate: '<span class="buttonActions"><a class="button link" ng-click="$event.stopPropagation(); grid.appScope.exceptions.deleteException(row.entity)">{{\'delete\'|translate}}</a></span>'
                          }]
         };
+        this.gridOptions.onRegisterApi = function (gridApi)
+        {
+            gridApi.infiniteScroll.on.needLoadMoreData($scope, function ()
+            {
+                var up=[];
+                CalendarExceptionDAO.query(calendar.id).then(function (result)
+                {
+                    up=result.map(function (element)
+                    {
+                        for (var i = 0; i < ctrl.listCalendars.length; i++) {
+                            if (element.id === ctrl.listCalendars[i].id) {
+                                element.calendarName = ctrl.listCalendars[i].name;
+                            }
+                        }
+                        return element;
+                    });
+                    ctrl.gridOptions.data = ctrl.gridOptions.data.concat(getData(up, page));
+                    ++page;
+                    gridApi.infiniteScroll.dataLoaded();
+                });
+            });
+            gridApi.infiniteScroll.on.needLoadMoreDataTop($scope, function ()
+            {
+                var up=[];
+                CalendarExceptionDAO.query(calendar.id).then(function (result)
+                {
+                    up=result.map(function (element)
+                    {
+                        for (var i = 0; i < ctrl.listCalendars.length; i++) {
+                            if (element.id === ctrl.listCalendars[i].id) {
+                                element.calendarName = ctrl.listCalendars[i].name;
+                            }
+                        }
+                        return element;
+                    });
+                    ++pageUp;
+                    ctrl.gridOptions.data = getDataUp(up, pageUp).reverse().concat(ctrl.gridOptions.data);
+                    gridApi.infiniteScroll.dataLoaded();
+                });
+            });
+        };
         this.deleteException = function (entity)
         {
             if (entity.id) {
                 CalendarExceptionDAO.remove(calendar.id, entity.id).then(refresh);
             } else {
-                ctrl.listExceptions.indexOf(entity);
-                ctrl.listExceptions.splice(entity, 1);
+                data.indexOf(entity);
+                data.splice(entity, 1);
                 refresh();
             }
         };
         this.newException = function ()
         {
-            if (0 === ctrl.listExceptions.length) {
-                ctrl.listExceptions.push({calendarId: calendar.id});
+            if (0 === data.length) {
+                data.push({calendarId: calendar.id});
             } else {
-                var exception = ctrl.listExceptions[ctrl.listExceptions.length - 1];
+                var exception = data[data.length - 1];
                 if (exception.exceptionCalendar && exception.stationId && exception.startDate && exception.endDate) {
                     ctrl.errorNew = false;
-                    ctrl.listExceptions.push({calendarId: calendar.id});
+                    data.push({calendarId: calendar.id});
                 } else {
                     $timeout(function ()
                     {
@@ -88,12 +155,12 @@
         };
         this.validations = function ($close)
         {
-            for (var i = 0; i < ctrl.listExceptions.length; i++) {
-                if (!(ctrl.listExceptions[i].calendarId &&
-                        ctrl.listExceptions[i].stationId &&
-                        ctrl.listExceptions[i].exceptionCalendar &&
-                        ctrl.listExceptions[i].startDate &&
-                        ctrl.listExceptions[i].endDate)) {
+            for (var i = 0; i < data.length; i++) {
+                if (!(data[i].calendarId &&
+                        data[i].stationId &&
+                        data[i].exceptionCalendar &&
+                        data[i].startDate &&
+                        data[i].endDate)) {
                     ctrl.errorSave = true;
                 }
             }
@@ -102,7 +169,7 @@
                 ctrl.errorSave = false;
             }, 3000);
             if (!ctrl.errorSave) {
-                $close(ctrl.listExceptions);
+                $close(data);
             }
         };
         this.selectedCalendar = function (id)
@@ -125,5 +192,5 @@
     }
 
     angular.module('evoReports').controller('calendarExceptionController',
-            ['$timeout', 'calendar', 'CalendarDAO', 'CalendarExceptionDAO', 'StationsDAO', CalendarExceptionController]);
+            ['$timeout','$scope', 'calendar', 'CalendarDAO', 'CalendarExceptionDAO', 'StationsDAO', CalendarExceptionController]);
 })();

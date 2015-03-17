@@ -1,18 +1,42 @@
 (function ()
 {
     'use strict';
-    function CommentsController($modal, CommentsDAO, CommentsGroupDAO)
+    function CommentsController($modal, $scope, CommentsDAO, CommentsGroupDAO)
     {
         var ctrl = this;
+        var page = 0;
+        var pageUp = 0;
+        var getData = function (data, page)
+        {
+            var res = [];
+            for (var i = (page * 20); i < (page + 1) * 20 && i < data.length; ++i) {
+                res.push(data[i]);
+            }
+            return res;
+        };
+
+        var getDataUp = function (data, page)
+        {
+            var res = [];
+            for (var i = data.length - (page * 20) - 1; (data.length - i) < ((page + 1) * 20) && (data.length - i) > 0; --i) {
+                if (data[i]) {
+                    res.push(data[i]);
+                }
+            }
+            return res;
+        };
         var refresh = function ()
         {
+            var data = [];
+            page = 0;
+            pageUp = 0;
             CommentsDAO.query().then(function (result)
             {
-                ctrl.comments = result;
+                data = result;
                 return CommentsGroupDAO.query();
             }).then(function (result)
             {
-                ctrl.comments = ctrl.comments.map(function (element)
+                data = data.map(function (element)
                 {
                     for (var i = 0; i < result.length; i++) {
                         if (parseInt(element.groupId) === result[i].id) {
@@ -21,9 +45,9 @@
                     }
                     return element;
                 });
+                ctrl.gridOptions.data = getData(data, page);
+                ++page;
             });
-
-
         };
         var actionsTemplate = '<span class="buttonActions">' +
                 '<a class="button link" ng-click="grid.appScope.commentsController.editRow(row.entity)">{{\'edit\'|translate}}</a>' +
@@ -32,9 +56,7 @@
 
         this.gridOptions = {
             enableRowHashing: false,
-            data: 'commentsController.comments',
-            paginationPageSizes: [10, 20, 30],
-            paginationPageSize: 10,
+            infiniteScrollPercentage: 10,
             enableRowHeaderSelection: false,
             columnDefs: [{
                              field: 'name',
@@ -61,6 +83,56 @@
                              field: ' ',
                              cellTemplate: actionsTemplate
                          }]
+        };
+
+        this.gridOptions.onRegisterApi = function (gridApi)
+        {
+            gridApi.infiniteScroll.on.needLoadMoreData($scope, function ()
+            {
+                var data = [];
+                CommentsDAO.query().then(function (result)
+                {
+                    data = result;
+                    return CommentsGroupDAO.query();
+                }).then(function (result)
+                {
+                    data = data.map(function (element)
+                    {
+                        for (var i = 0; i < result.length; i++) {
+                            if (parseInt(element.groupId) === result[i].id) {
+                                element.nameGroup = result[i].name;
+                            }
+                        }
+                        return element;
+                    });
+                    ctrl.gridOptions.data = ctrl.gridOptions.data.concat(getData(data, page));
+                    ++page;
+                    gridApi.infiniteScroll.dataLoaded();
+                });
+            });
+            gridApi.infiniteScroll.on.needLoadMoreDataTop($scope, function ()
+            {
+                var data = [];
+                CommentsDAO.query().then(function (result)
+                {
+                    data = result;
+                    return CommentsGroupDAO.query();
+                }).then(function (result)
+                {
+                    data = data.map(function (element)
+                    {
+                        for (var i = 0; i < result.length; i++) {
+                            if (parseInt(element.groupId) === result[i].id) {
+                                element.nameGroup = result[i].name;
+                            }
+                        }
+                        return element;
+                    });
+                    ctrl.gridOptions.data = getDataUp(data, pageUp).reverse().concat(ctrl.gridOptions.data);
+                    ++pageUp;
+                    gridApi.infiniteScroll.dataLoaded();
+                });
+            });
         };
         this.newGroup = function ()
         {
@@ -123,6 +195,7 @@
             modalInstance.result.then(function ()
             {
                 CommentsDAO.remove(id).then(refresh);
+
             });
 
         };
@@ -143,5 +216,6 @@
     }
 
 
-    angular.module('evoReports').controller('commentsController', ['$modal', 'CommentsDAO', 'CommentsGroupDAO', CommentsController]);
-})();
+    angular.module('evoReports').controller('commentsController', ['$modal', '$scope', 'CommentsDAO', 'CommentsGroupDAO', CommentsController]);
+})
+();

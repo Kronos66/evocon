@@ -1,30 +1,52 @@
 (function ()
 {
     'use strict';
-    angular.module('evoReports').controller('deviceController', ['$modal', 'deviceDAO', function ($modal, deviceDAO)
+    angular.module('evoReports').controller('deviceController', ['$modal','$scope', 'deviceDAO', function ($modal,$scope, deviceDAO)
     {
 
-        var ctrl = this,
-                refresh = function ()
-                {
-                    deviceDAO.query().then(function (data)
-                    {
-                        ctrl.gridOptions.data = data;
-                    });
-                };
+        var ctrl = this;
+        var page = 0;
+        var pageUp = 0;
+        var getData = function (data, page)
+        {
+            var res = [];
+            for (var i = (page * 20); i < (page + 1) * 20 && i < data.length; ++i) {
+                res.push(data[i]);
+            }
+            return res;
+        };
 
+        var getDataUp = function (data, page)
+        {
+            var res = [];
+            for (var i = data.length - (page * 20) - 1; (data.length - i) < ((page + 1) * 20) && (data.length - i) > 0; --i) {
+                if (data[i]) {
+                    res.push(data[i]);
+                }
+            }
+            return res;
+        };
+        var refresh = function ()
+        {
+            page = 0;
+            pageUp = 0;
+            deviceDAO.query().then(function (data)
+            {
+                ctrl.gridOptions.data = getData(data, page);
+                ++page;
+            });
+        };
         ctrl.gridOptions = {
             enableRowSelection: false,
+            infiniteScrollPercentage: 10,
             enableRowHeaderSelection: false,
-            paginationPageSizes: [10, 20, 30],
-            paginationPageSize: 10,
             columnDefs: [
                 {
                     field: 'id',
                     displayName: 'Id',
                     maxWidth: 100,
                     minWidth: 100
-                },{
+                }, {
                     field: 'description',
                     displayName: 'Description'
                 }, {
@@ -46,7 +68,27 @@
                     '</span>'
                 }]
         };
-
+        this.gridOptions.onRegisterApi = function (gridApi)
+        {
+            gridApi.infiniteScroll.on.needLoadMoreData($scope, function ()
+            {
+                deviceDAO.query().then(function (data)
+                {
+                    ctrl.gridOptions.data = ctrl.gridOptions.data.concat(getData(data, page));
+                    ++page;
+                    gridApi.infiniteScroll.dataLoaded();
+                });
+            });
+            gridApi.infiniteScroll.on.needLoadMoreDataTop($scope, function ()
+            {
+                deviceDAO.query().then(function (data)
+                {
+                    ctrl.gridOptions.data = getDataUp(data, pageUp).reverse().concat(ctrl.gridOptions.data);
+                    ++pageUp;
+                    gridApi.infiniteScroll.dataLoaded();
+                });
+            });
+        };
         ctrl.newDev = function ()
         {
             var row = {};

@@ -2,12 +2,35 @@
 {
     'use strict';
 
-    function StationsController($modal,  StationsDAO, StationGroupDAO)
+    function StationsController($modal,$scope,  StationsDAO, StationGroupDAO)
     {
         var ctrl = this;
         this.selected = null;
+        var page = 0;
+        var pageUp = 0;
+        var getData = function (data, page)
+        {
+            var res = [];
+            for (var i = (page * 15); i < (page + 1) * 15 && i < data.length; ++i) {
+                res.push(data[i]);
+            }
+            return res;
+        };
+
+        var getDataUp = function (data, page)
+        {
+            var res = [];
+            for (var i = data.length - (page * 15) - 1; (data.length - i) < ((page + 1) * 15) && (data.length - i) > 0; --i) {
+                if (data[i]) {
+                    res.push(data[i]);
+                }
+            }
+            return res;
+        };
         var refresh = function ()
         {
+            page = 0;
+            pageUp = 0;
             StationsDAO.query().then(function (result)
             {
                 angular.forEach(result, function (station)
@@ -28,6 +51,8 @@
                     }
                     return element;
                 });
+                ctrl.gridOptions.data = getData(ctrl.data, page);
+                ++page;
             });
         };
         var actionsTemplate = '<span class="buttonActions"><a class="button link" ng-click="$event.stopPropagation();grid.appScope.stationsController.editRow(row.entity)">' +
@@ -37,10 +62,8 @@
         this.gridOptions = {
             enableRowHeaderSelection: false,
             enableRowSelection: true,
+            infiniteScrollPercentage: 10,
             multiSelect: false,
-            paginationPageSizes: [10, 20, 30],
-            paginationPageSize: 10,
-            data: 'stationsController.data',
             columnDefs: [{
                              field: 'stationId',
                              displayName: 'Station ID'
@@ -69,6 +92,63 @@
                              enableSorting: false,
                              enableHiding: false
                          }]
+        };
+        this.gridOptions.onRegisterApi = function (gridApi)
+        {
+            gridApi.infiniteScroll.on.needLoadMoreData($scope, function ()
+            {
+                StationsDAO.query().then(function (result)
+                {
+                    angular.forEach(result, function (station)
+                    {
+                        station.enabled = station.enabled ? 'Yes' : 'No';
+                    });
+                    ctrl.data = result;
+                    return StationGroupDAO.query();
+                }).then(function (result)
+                {
+                    ctrl.listStationGroups = result;
+                    ctrl.data = ctrl.data.map(function (element)
+                    {
+                        for (var i = 0; i < result.length; i++) {
+                            if (parseInt(element.groupId) === result[i].id) {
+                                element.groupName = result[i].name;
+                            }
+                        }
+                        return element;
+                    });
+                    ctrl.gridOptions.data = ctrl.gridOptions.data.concat(getData(ctrl.data, page));
+                    ++page;
+                    gridApi.infiniteScroll.dataLoaded();
+                });
+            });
+            gridApi.infiniteScroll.on.needLoadMoreDataTop($scope, function ()
+            {
+                StationsDAO.query().then(function (result)
+                {
+                    angular.forEach(result, function (station)
+                    {
+                        station.enabled = station.enabled ? 'Yes' : 'No';
+                    });
+                    ctrl.data = result;
+                    return StationGroupDAO.query();
+                }).then(function (result)
+                {
+                    ctrl.listStationGroups = result;
+                    ctrl.data = ctrl.data.map(function (element)
+                    {
+                        for (var i = 0; i < result.length; i++) {
+                            if (parseInt(element.groupId) === result[i].id) {
+                                element.groupName = result[i].name;
+                            }
+                        }
+                        return element;
+                    });
+                    ctrl.gridOptions.data = getDataUp(ctrl.data, pageUp).reverse().concat(ctrl.gridOptions.data);
+                    ++pageUp;
+                    gridApi.infiniteScroll.dataLoaded();
+                });
+            });
         };
         this.addStation = function ()
         {
@@ -177,5 +257,5 @@
         refresh();
     }
 
-    angular.module('evoReports').controller('stationsController', ['$modal', 'StationsDAO', 'StationGroupDAO', StationsController]);
+    angular.module('evoReports').controller('stationsController', ['$modal','$scope', 'StationsDAO', 'StationGroupDAO', StationsController]);
 })();

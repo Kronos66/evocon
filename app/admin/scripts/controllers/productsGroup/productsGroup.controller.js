@@ -9,17 +9,45 @@
         this.resultCount = null;
         var selectedGroup;
 
+        var pageGroup = 0;
+        var pageUpGroup = 0;
+
+        var pageProduct = 0;
+        var pageUpProduct = 0;
+        var refresh = function ()
+        {
+            ProductsGroupDAO.query().then(function (result)
+            {
+                ctrl.gridOptionsGroups.data = getData(result, pageGroup);
+                ++pageGroup;
+            });
+        };
         var actionsTemplate = '<span class="buttonActions"><a class="button link" ng-click="$event.stopPropagation();grid.appScope.groupCtrl.edit(row.entity)">{{\'edit\'|translate}}</a>' +
                 '<a class="button link" ng-click="$event.stopPropagation();grid.appScope.groupCtrl.delete(row.entity.id)">{{\'delete\'|translate}}</a></span>';
+        var getData = function (data, page)
+        {
+            var res = [];
+            for (var i = (page * 20); i < (page + 1) * 20 && i < data.length; ++i) {
+                res.push(data[i]);
+            }
+            return res;
+        };
 
-
+        var getDataUp = function (data, page)
+        {
+            var res = [];
+            for (var i = data.length - (page * 20) - 1; (data.length - i) < ((page + 1) * 20) && (data.length - i) > 0; --i) {
+                if (data[i]) {
+                    res.push(data[i]);
+                }
+            }
+            return res;
+        };
         this.gridOptionsGroups = {
+            infiniteScrollPercentage: 10,
             enableRowHeaderSelection: false,
             enableRowSelection: true,
             multiSelect: false,
-            data: 'groupCtrl.group',
-            paginationPageSizes: [10, 20, 30],
-            paginationPageSize: 10,
             columnDefs: [{
                              field: 'name',
                              displayName: 'Name'
@@ -41,27 +69,65 @@
             {
                 if (selectedGroup !== row.entity.id) {
                     selectedGroup = row.entity.id;
+                    pageProduct = 0;
+                    pageUpProduct = 0;
                     ProductsGroupDAO.getProducts(row.entity.id).then(function (result)
                     {
+                        ctrl.gridOptionsProducts.data = getData(result, pageGroup);
+                        ++pageProduct;
                         ctrl.visible = true;
-                        ctrl.productsInGroup = result;
                     });
                 } else {
                     ctrl.visible = false;
                     selectedGroup = '';
                 }
             });
+            gridApi.infiniteScroll.on.needLoadMoreData($scope, function ()
+            {
+                ProductsGroupDAO.query().then(function (result)
+                {
+                    ctrl.gridOptionsGroups.data = ctrl.gridOptionsGroups.data.concat(getData(result, pageGroup));
+                    ++pageGroup;
+                    gridApi.infiniteScroll.dataLoaded();
+                });
+            });
+            gridApi.infiniteScroll.on.needLoadMoreDataTop($scope, function ()
+            {
+                ProductsGroupDAO.query().then(function (result)
+                {
+                    ctrl.gridOptionsGroups.data = getDataUp(result, pageUpGroup).reverse().concat(ctrl.gridOptionsGroups.data);
+                    ++pageUpGroup;
+                    gridApi.infiniteScroll.dataLoaded();
+                });
+            });
         };
 
         this.gridOptionsProducts = {
-            data: 'groupCtrl.productsInGroup',
-            paginationPageSizes: [10, 20, 30],
-            paginationPageSize: 10,
             columnDefs: [{field: 'name', displayName: 'Name'}, {field: 'barcode', displayName: 'Barcode'}, {field: 'enabled', displayName: 'Enabled'}, {
                 field: 'groupId', displayName: 'Group', headerCellClass: 'actions-header', cellClass: 'actions-column'
             }]
         };
-
+        this.gridOptionsProducts.onRegisterApi = function (gridApi)
+        {
+            gridApi.infiniteScroll.on.needLoadMoreData($scope, function ()
+            {
+                ProductsGroupDAO.getProducts(selectedGroup).then(function (result)
+                {
+                    ctrl.gridOptionsProducts.data = ctrl.gridOptionsProducts.data.concat(getData(result, pageProduct));
+                    ++pageProduct;
+                    gridApi.infiniteScroll.dataLoaded();
+                });
+            });
+            gridApi.infiniteScroll.on.needLoadMoreDataTop($scope, function ()
+            {
+                ProductsGroupDAO.getProducts(selectedGroup).then(function (result)
+                {
+                    ctrl.gridOptionsProducts.data = getDataUp(result, pageUpProduct).reverse().concat(ctrl.gridOptionsProducts.data);
+                    ++pageUpProduct;
+                    gridApi.infiniteScroll.dataLoaded();
+                });
+            });
+        };
         this.newGroup = function ()
         {
             var row = {};
@@ -109,16 +175,6 @@
                 ProductsGroupDAO.remove(id).then(refresh);
             });
         };
-
-        var refresh = function ()
-        {
-            ProductsGroupDAO.query().then(function (result)
-            {
-                ctrl.group = result;
-                ctrl.resultCount = result.length;
-            });
-        };
-
         refresh();
     }
 

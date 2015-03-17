@@ -5,11 +5,39 @@
     {
         var ctrl = this;
         var selectedGroup;
+
+        var pageStationGroup = 0;
+        var pageUpStationGroup = 0;
+
+        var pageStations = 0;
+        var pageUpStations = 0;
+
+        var getData = function (data, page)
+        {
+            var res = [];
+            for (var i = (page * 20); i < (page + 1) * 20 && i < data.length; ++i) {
+                res.push(data[i]);
+            }
+            return res;
+        };
+
+        var getDataUp = function (data, page)
+        {
+            var res = [];
+            for (var i = data.length - (page * 20) - 1; (data.length - i) < ((page + 1) * 20) && (data.length - i) > 0; --i) {
+                if (data[i]) {
+                    res.push(data[i]);
+                }
+            }
+            return res;
+        };
+
         var refresh = function ()
         {
             StationGroupDAO.query().then(function (result)
             {
-                ctrl.stationGroups = result;
+                ctrl.gridOptions.data = getData(result, pageStationGroup);
+                ++pageStationGroup;
             });
         };
         var actionsTemplate = '<span class="buttonActions"><a class="button link" ng-click="$event.stopPropagation();grid.appScope.stationGroupController.editRow(row.entity)">' +
@@ -17,12 +45,10 @@
                 '<a class="button link" ng-click="$event.stopPropagation();grid.appScope.stationGroupController.deleteRow(row.entity.id)">' +
                 '{{\'delete\'|translate}}</a></span>';
         this.gridOptions = {
+            infiniteScrollPercentage: 10,
             enableRowHeaderSelection: false,
             enableRowSelection: true,
             multiSelect: false,
-            paginationPageSizes: [10, 20, 30],
-            paginationPageSize: 10,
-            data: 'stationGroupController.stationGroups',
             columnDefs: [{
                              field: 'name', displayName: 'Name'
                          }, {
@@ -38,6 +64,8 @@
             gridApi.selection.on.rowSelectionChanged($scope, function (row)
             {
                 if (selectedGroup !== row.entity.id) {
+                    pageStations = 0;
+                    pageUpStations = 0;
                     selectedGroup = row.entity.id;
                     StationGroupDAO.get(row.entity.id).then(function (result)
                     {
@@ -49,11 +77,48 @@
                     selectedGroup = '';
                 }
             });
+            gridApi.infiniteScroll.on.needLoadMoreData($scope, function ()
+            {
+                StationGroupDAO.query().then(function (result)
+                {
+                    ctrl.gridOptions.data = ctrl.gridOptions.data.concat(getData(result, pageStationGroup));
+                    ++pageStationGroup;
+                    gridApi.infiniteScroll.dataLoaded();
+                });
+            });
+            gridApi.infiniteScroll.on.needLoadMoreDataTop($scope, function ()
+            {
+                StationGroupDAO.query().then(function (result)
+                {
+                    ctrl.gridOptions.data = getDataUp(result, pageUpStationGroup).reverse().concat(ctrl.gridOptions.data);
+                    ++pageUpStationGroup;
+                    gridApi.infiniteScroll.dataLoaded();
+                });
+            });
         };
         this.gridOptions2 = {
-            data: 'stationGroupController.station',
-            paginationPageSizes: [10, 20, 30],
-            paginationPageSize: 10
+            infiniteScrollPercentage: 10
+        };
+        this.gridOptions2.onRegisterApi = function (gridApi)
+        {
+            gridApi.infiniteScroll.on.needLoadMoreData($scope, function ()
+            {
+                StationGroupDAO.get(selectedGroup).then(function (result)
+                {
+                    ctrl.gridOptions.data = ctrl.gridOptions.data.concat(getData(result, pageStations));
+                    ++pageStations;
+                    gridApi.infiniteScroll.dataLoaded();
+                });
+            });
+            gridApi.infiniteScroll.on.needLoadMoreDataTop($scope, function ()
+            {
+                StationGroupDAO.get(selectedGroup).then(function (result)
+                {
+                    ctrl.gridOptions.data = getDataUp(result, pageUpStations).reverse().concat(ctrl.gridOptions.data);
+                    ++pageUpStations;
+                    gridApi.infiniteScroll.dataLoaded();
+                });
+            });
         };
         this.editRow = function (row)
         {
